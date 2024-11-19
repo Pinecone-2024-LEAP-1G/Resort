@@ -2,7 +2,7 @@ import { ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
-  console.log("hi");
+
   try {
     const reservations = await ReservationModel.find();
 

@@ -2,7 +2,6 @@ import { AvailableListModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
-  console.log("hi");
   try {
     const AvailableLists = await AvailableListModel.find();
 
@@ -14,14 +13,13 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { name, email, password, phone_number } = await request.json();
+  const { reservation_id, start_date, end_date } = await request.json();
 
   try {
     const availableList = await AvailableListModel.create({
-      name,
-      email,
-      password,
-      phone_number,
+      reservation_id,
+      start_date,
+      end_date,
     });
     return Response.json({ message: "success", availableList });
   } catch (error) {

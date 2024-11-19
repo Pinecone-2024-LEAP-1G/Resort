@@ -2,7 +2,6 @@ import { UserModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
-  console.log("hi");
   try {
     const users = await UserModel.find();
 
@@ -14,7 +13,8 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { name, email, password, phone_number } = await request.json();
+  const { name, email, password, phone_number, profile_picture } =
+    await request.json();
 
   try {
     const user = await UserModel.create({
@@ -22,6 +22,7 @@ export const POST = async (request: NextRequest) => {
       email,
       password,
       phone_number,
+      profile_picture,
     });
     return Response.json({ message: "success", user });
   } catch (error) {
