@@ -1,30 +1,44 @@
+"use client"
 import { Castle } from "lucide-react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import categoryIcon from "@/util/findCategoryIcon";
+import { mockdata } from "@/util/findCategoryIcon";
+import { Category } from "./Category";
+type CategoriesState=Category[]
+type Category={
+  name: string;
+  icon?: JSX.Element;
+}
 
-const mockdata = [
-  { name: "castle", icon: <Castle></Castle> },
-  { name: "yurts", icon: <Castle></Castle> },
-  { name: "rooms", icon: <Castle></Castle> },
-  { name: "amazing views", icon: <Castle></Castle> },
-  { name: "tiny homes", icon: <Castle></Castle> },
-  { name: "cabins", icon: <Castle></Castle> },
-  { name: "a-frames", icon: <Castle></Castle> },
-];
 
 export const Categories = () => {
+  
+  const [categories, setCategories]=useState<CategoriesState>([])
+  const getCategories=async()=>{
+
+    try { const response= await axios.get("http://localhost:3000/api/categories")
+       Response.json({categories})
+       setCategories(response.data)
+
+    } catch (error) 
+    {Response.json({error:error});     
+    }
+  }
+
+  useEffect(()=>{
+    getCategories()
+  }, [])
+
   return (
     <ScrollArea className="w-screen">
-      <div className="flex flex-row justify-around border">
+      <div className="flex flex-row gap-8 border">
         {" "}
-        {mockdata.map((data, index) => {
-          return (
-            <div key={index} className="flex flex-col items-center gap-1">
-              <div className="items-center">{data.icon}</div>
-              <p className="m-0 p-0">{data.name}</p>
-            </div>
-          );
+        {categories.map((data, index) => {
+          return <Category key={index} text={data.name}/>
         })}
-      </div>{" "}
+      </div>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );

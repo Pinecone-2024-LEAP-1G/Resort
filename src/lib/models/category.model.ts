@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { model, Model, models, Schema } from "mongoose";
 
 type Category = {
   name: string;
@@ -7,6 +7,7 @@ type Category = {
 const categorySchema = new Schema<Category>({
   name: { type: String },
   createdAt: { type: Date, default: Date.now },
-});
-const CategoryModel = mongoose.model("Category", categorySchema);
-export default CategoryModel;
+},  { timestamps: true });
+export const CategoryModel:Model<Category>=
+models.categories || model<Category>("categories", categorySchema)
+

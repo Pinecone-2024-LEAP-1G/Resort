@@ -1,3 +1,4 @@
+import { connectToMongoDB } from "@/lib/db";
 import "./globals.css";
 export const metadata = {
   title: "Next.js",
@@ -9,6 +10,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  connectToMongoDB();
   return (
     <html lang="en">
       <body>{children}</body>
