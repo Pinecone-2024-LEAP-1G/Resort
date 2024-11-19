@@ -1,6 +1,6 @@
 export * from "./user.model";
 
-// export * from "./reviews.model";
+export * from "./review.model";
 
 // export * from "./properties.model";
 

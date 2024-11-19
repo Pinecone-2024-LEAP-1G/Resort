@@ -2,8 +2,6 @@ import { UserModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
-  console.log("hi");
-
   try {
     const users = await UserModel.find();
 
