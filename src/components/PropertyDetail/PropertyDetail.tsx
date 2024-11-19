@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const image = [
+const images = [
   "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
   "https://www.cud.ac.ae/external/student-work/fcas/communication/safina-furniture-jrn-420-fall-2018/images/popular-modern-home-decor-innovative-living-room-japanese-home-decor-design-ideas-and-and-contemporary-%20(1)-crop-u776_2x.jpg?crc=329220138",
   "https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/image/2021-10/hotel%20room%20with%20beachfront%20view.webp?h=662a4f7c&itok=7Laa3LkQ",
@@ -21,8 +21,6 @@ export const PropertyDetail = () => {
   );
 };
 
-const item = image.map((i)=> i)
-
 
 
 const Header = () => {
@@ -32,26 +30,46 @@ const Header = () => {
     <div >
    
       <div className="flex justify-between py-4">
-        <div className="grid h-8 w-8 place-items-center rounded-full bg-white">
+        <div className="grid  place-items-center rounded-full bg-white">
           <FaArrowLeft />
+          
         </div>
         <div className="flex gap-2">
-          <div className="grid h-8 w-8 place-items-center rounded-full bg-white">
+          <div className="gri  lg:flex lg:gap-2 place-items-center rounded-full bg-white">
             <LuShare />
+            <p className="hidden  lg:block">share</p>
           </div>
-          <div className="grid h-8 w-8 place-items-center rounded-full bg-white">
+          <div className="grid lg:flex lg:gap-2 place-items-center rounded-full bg-white">
             <FaRegHeart className="flex items-center justify-center" />
+            <p className="hidden lg:block">like</p>
           </div>
         </div>
       </div>
-      <div className="w-full h-64 sm:h-[400px] md:h-[484px] bg-cover bg-center lg:grid lg:grid-rows-2"  style={{ backgroundImage: `url(${image[0]})` }}  >
-        <div className="lg:grid lg:grid-4 md:hidden sm:hidden xs:hidden lg-block ">
-          <p className="w-full h-64 sm:h-[400px] md:h-[484px] bg-cover bg-center lg:grid lg:grid-rows-2"  style={{ backgroundImage: `url(${image[1]})` }} ></p>
-          <p className="w-full h-64 sm:h-[400px] md:h-[484px] bg-cover bg-center lg:grid lg:grid-rows-2"  style={{ backgroundImage: `url(${image[2]})` }} > </p>
-          <p className="w-full h-64 sm:h-[400px] md:h-[484px] bg-cover bg-center lg:grid lg:grid-rows-2"  style={{ backgroundImage: `url(${image[0]})` }} ></p>
-          <p className="w-full h-64 sm:h-[400px] md:h-[484px] bg-cover bg-center lg:grid lg:grid-rows-2"  style={{ backgroundImage: `url(${image[0]})` }} ></p>
+      <div className="p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="col-span-1 sm:col-span-2 lg:col-span-2">
+          <Image
+            src={images[0]}
+            alt="Main Image"
+            width={1200}
+            height={800}
+            className="rounded-lg  w-full h-full"
+          />
         </div>
+
+        {images.map((image, index) => (
+          <div key={index} className="col-span-1 sm:hidden lg:block">
+            <Image
+              src={image}
+              alt=""
+              width={400}
+              height={400}
+              className="rounded-lg  w-full h-full"
+            />
+          </div>
+        ))}
       </div>
+    </div>
       
       <div className=" flex flex-col  mt-10">
         <h1 className="font-semibold text-3xl">Description</h1>
