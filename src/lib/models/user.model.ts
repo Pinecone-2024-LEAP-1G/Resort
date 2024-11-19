@@ -6,7 +6,6 @@ type User = {
   email: string;
   password: string;
   phone_number: string;
-  profile_image: string;
 };
 
 const userSchema = new Schema<User>(
@@ -15,7 +14,6 @@ const userSchema = new Schema<User>(
     email: { type: String, required: true },
     password: { type: String, required: true },
     phone_number: { type: String, required: true },
-    profile_image: { type: String },
   },
   { timestamps: true }
 );

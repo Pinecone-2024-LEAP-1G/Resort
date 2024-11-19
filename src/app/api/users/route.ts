@@ -12,16 +12,15 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { firstName, lastName, email, password } = await request.json();
+  const { name, email, password, phone_number } = await request.json();
 
   try {
     const user = await UserModel.create({
-      firstName,
-      lastName,
+      name,
       email,
       password,
+      phone_number,
     });
-
     return Response.json({ message: "success", user });
   } catch (error) {
     return Response.json({ message: error });
