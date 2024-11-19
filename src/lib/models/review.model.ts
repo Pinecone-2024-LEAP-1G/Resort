@@ -2,7 +2,7 @@ import { Model, Schema, model, models } from "mongoose";
 
 type Review = {
   _id: string;
-  reservation_id: string;
+  property_id: string;
   user_id: string;
   rating: string;
   comment: string;
@@ -10,7 +10,7 @@ type Review = {
 
 const reviewSchema = new Schema<Review>(
   {
-    reservation_id: { type: String, required: true },
+    property_id: { type: String, required: true },
     user_id: { type: String, required: true },
     rating: { type: String, required: true },
     comment: { type: String, required: true },

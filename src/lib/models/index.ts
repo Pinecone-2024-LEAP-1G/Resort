@@ -2,10 +2,10 @@ export * from "./user.model";
 
 export * from "./review.model";
 
-// export * from "./properties.model";
+export * from "./property.model";
 
-// export * from "./categories.model";
+export * from "./category.model";
 
-// export * from "./reservations.model";
+export * from "./reservation.model";
 
-// export * from "./availableLists.model";
+export * from "./availableList.model";
