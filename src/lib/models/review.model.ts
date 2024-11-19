@@ -10,8 +10,8 @@ type Review = {
 
 const reviewSchema = new Schema<Review>(
   {
-    property_id: { type: String, required: true },
-    user_id: { type: String, required: true },
+    property_id: { type: String, ref: "properties" },
+    user_id: { type: String, ref: "users" },
     rating: { type: String, required: true },
     comment: { type: String, required: true },
   },
