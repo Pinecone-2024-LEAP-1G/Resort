@@ -1,3 +1,9 @@
+import { Categories } from "@/components/Categories";
+
 export default async function Home() {
-  return <div>Home page</div>;
+  return (
+    <div>
+      <Categories />
+    </div>
+  );
 }
