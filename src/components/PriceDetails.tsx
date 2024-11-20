@@ -49,7 +49,7 @@ export function PriceDetails() {
               <HoverCardTrigger asChild>
                 <p className="underline underline-offset-1">Cleaning fee</p>
               </HoverCardTrigger>
-              <HoverCardContent className="w-80">
+              <HoverCardContent className="w-80 bg-white">
                 <div className="flex justify-between space-x-4">
                   <div className="space-y-1">
                     <p className="text-sm">
