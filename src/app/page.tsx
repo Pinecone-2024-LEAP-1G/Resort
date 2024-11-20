@@ -1,5 +1,10 @@
-import { PriceDetails } from "components/PriceDetails";
+// import { auth } from "@/lib/auth";
+"use client"
 
-export default async function Home() {
-  return <div></div>;
-}
+import { PropertyDetail } from "@/components/PropertyDetail/PropertyDetail";
+
+const Home = () => {
+ return <div><PropertyDetail/></div>
+};
+
+export default Home
