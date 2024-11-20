@@ -1,4 +1,4 @@
-import { connectToMongoDB } from "@/lib/db";
+import { connectToMongoDB } from "lib/db";
 import "./globals.css";
 export const metadata = {
   title: "Next.js",
