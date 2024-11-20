@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "components/ui/alert";
 import { ChevronLeft } from "lucide-react";
 import { Gem } from "lucide-react";
 import { PriceDetails } from "./PriceDetails";
