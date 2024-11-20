@@ -1,10 +1,10 @@
-// import { auth } from "@/lib/auth";
+import Hostview from "./Hostview/Hostview";
 
-export default async function Home() {
-  //   const session = await auth();
-  //   if (session) {
-  //     return <p>Signed in as {session?.user?.email}</p>;
-  //   }
 
-  return <div>Home page</div>;
+const Page = ()=> {
+  return ( 
+  <div>
+       <Hostview/>
+  </div>)
 }
+export default Page
