@@ -14,30 +14,30 @@ export const GET = async () => {
 
 export const POST = async (request: NextRequest) => {
   const {
-    name,
     address,
     description,
+    guests,
     price,
-    category_id,
-    property_pictures,
-    total_rooms,
-    total_bedrooms,
-    total_occupancy,
-    total_bathrooms,
+    userId,
+    categoryId,
+    propertyPictures,
+    totalBedrooms,
+    totalOccupancy,
+    totalBathrooms,
   } = await request.json();
 
   try {
     const review = await PropertyModel.create({
-      name,
       address,
       description,
+      guests,
       price,
-      category_id,
-      property_pictures,
-      total_rooms,
-      total_bedrooms,
-      total_occupancy,
-      total_bathrooms,
+      userId,
+      categoryId,
+      propertyPictures,
+      totalBedrooms,
+      totalOccupancy,
+      totalBathrooms,
     });
     return Response.json({ message: "success", review });
   } catch (error) {

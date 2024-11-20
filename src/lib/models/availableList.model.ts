@@ -2,20 +2,22 @@ import { Model, Schema, model, models } from "mongoose";
 
 type AvailableList = {
   _id: string;
-  reservation_id: string;
-  start_date: string;
-  end_date: string;
+  propertyId: string;
+  reservationId: string;
+  checkInDate: Date;
+  checkOutDate: Date;
 };
 
-const availableListSchema = new Schema<AvailableList>(
+const AvailableListSchema = new Schema<AvailableList>(
   {
-    reservation_id: { type: String, required: true },
-    start_date: { type: String, required: true },
-    end_date: { type: String, required: true },
+    propertyId: { type: String, ref: "Property" },
+    reservationId: { type: String, ref: "Reservation" },
+    checkInDate: { type: Date, required: true },
+    checkOutDate: { type: Date, required: true },
   },
   { timestamps: true }
 );
 
 export const AvailableListModel: Model<AvailableList> =
-  models.availableLists ||
-  model<AvailableList>("availableLists", availableListSchema);
+  models.AvailableList ||
+  model<AvailableList>("AvailableList", AvailableListSchema);

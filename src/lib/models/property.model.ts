@@ -1,34 +1,34 @@
-import { Model, Schema, model, models } from "mongoose";
+import mongoose, { Model, Schema, model, models } from "mongoose";
 
 type Property = {
   _id: string;
-  name: string;
+  price: number;
+  guests: Number;
   address: string;
   description: string;
-  price: number;
-  category_id: string;
-  property_pictures: string;
-  total_rooms: string;
-  total_bedrooms: string;
-  total_occupancy: string;
-  total_bathrooms: string;
+  propertyPictures: string;
+  userId: mongoose.Schema.Types.ObjectId;
+  categoryId: string;
+  totalBedrooms: string;
+  totalOccupancy: string;
+  totalBathrooms: string;
 };
 
 const PropertySchema = new Schema<Property>(
   {
-    name: { type: String, required: true },
     address: { type: String, required: true },
     description: { type: String, required: true },
-    price: { type: Number, min: 0, required: true },
-    category_id: { type: String, required: true },
-    property_pictures: { type: String, required: true },
-    total_rooms: { type: String, required: true },
-    total_bedrooms: { type: String, required: true },
-    total_occupancy: { type: String, required: true },
-    total_bathrooms: { type: String, required: true },
+    guests: { type: Number, required: true },
+    price: { type: Number, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    categoryId: { type: String, ref: "Category" },
+    propertyPictures: [{ type: String, required: true }],
+    totalBedrooms: { type: String, required: true },
+    totalOccupancy: { type: String, required: true },
+    totalBathrooms: { type: String, required: true },
   },
   { timestamps: true }
 );
 
 export const PropertyModel: Model<Property> =
-  models.properties || model<Property>("properties", PropertySchema);
+  models.Property || model<Property>("Property", PropertySchema);

@@ -13,13 +13,15 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { reservation_id, start_date, end_date } = await request.json();
+  const { propertyId, reservationId, checkInDate, checkOutDate } =
+    await request.json();
 
   try {
     const availableList = await AvailableListModel.create({
-      reservation_id,
-      start_date,
-      end_date,
+      propertyId,
+      reservationId,
+      checkInDate,
+      checkOutDate,
     });
     return Response.json({ message: "success", availableList });
   } catch (error) {

@@ -1,5 +1,4 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
-import { Children } from "react";
 
 type Reservation = {
   _id: string;

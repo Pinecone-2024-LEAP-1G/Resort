@@ -12,4 +12,4 @@ const categorySchema = new Schema<Category>(
   { timestamps: true }
 );
 export const CategoryModel: Model<Category> =
-  models.categories || model<Category>("categories", categorySchema);
+  models.Category || model<Category>("Category", CategorySchema);

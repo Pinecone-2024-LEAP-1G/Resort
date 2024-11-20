@@ -2,7 +2,6 @@ import { ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
-
   try {
     const reservations = await ReservationModel.find();
 
@@ -14,14 +13,17 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { name, email, password, phone_number } = await request.json();
+  const { userId, propertyId, checkIn, checkOut, guest, totalPrice } =
+    await request.json();
 
   try {
     const reservation = await ReservationModel.create({
-      name,
-      email,
-      password,
-      phone_number,
+      userId,
+      propertyId,
+      checkIn,
+      checkOut,
+      guest,
+      totalPrice,
     });
     return Response.json({ message: "success", reservation });
   } catch (error) {

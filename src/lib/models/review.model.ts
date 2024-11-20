@@ -1,17 +1,17 @@
-import { Model, Schema, model, models } from "mongoose";
+import mongoose, { Model, Schema, model, models } from "mongoose";
 
 type Review = {
   _id: string;
-  property_id: string;
-  user_id: string;
+  userId: mongoose.Schema.Types.ObjectId;
+  propertyId: string;
   rating: string;
   comment: string;
 };
 
-const reviewSchema = new Schema<Review>(
+const ReviewSchema = new Schema<Review>(
   {
-    property_id: { type: String, ref: "properties" },
-    user_id: { type: String, ref: "users" },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    propertyId: { type: String, ref: "Property" },
     rating: { type: String, required: true },
     comment: { type: String, required: true },
   },
@@ -19,4 +19,4 @@ const reviewSchema = new Schema<Review>(
 );
 
 export const ReviewModel: Model<Review> =
-  models.reviews || model<Review>("reviews", reviewSchema);
+  models.Review || model<Review>("Review", ReviewSchema);
