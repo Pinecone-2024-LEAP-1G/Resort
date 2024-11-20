@@ -12,7 +12,6 @@ type Category = {
 
 export const Categories = () => {
   const [categories, setCategories] = useState<CategoriesState>([]);
-
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -32,7 +31,7 @@ export const Categories = () => {
     <div className="flex items-center ">
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
-        <div className="flex flex-row gap-8">
+        <div className="flex flex-row gap-9">
           {" "}
           {categories.map((data, index) => {
             return <Category key={index} text={data.name} />;
