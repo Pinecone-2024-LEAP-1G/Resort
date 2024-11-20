@@ -1,6 +1,6 @@
 "use client";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "components/ui/scroll-area";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "./Category";
@@ -17,7 +17,7 @@ export const Categories = () => {
     const getCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/categories"
+          "http://localhost:3000/api/categories",
         );
         Response.json({ categories });
         setCategories(response.data);
@@ -29,7 +29,7 @@ export const Categories = () => {
   }, [categories]);
 
   return (
-    <div className="flex items-center ">
+    <div className="flex items-center">
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">

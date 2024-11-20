@@ -11,34 +11,32 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "components/ui/dropdown-menu";
-import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
 export function PriceDetails() {
   return (
-    <div className="p-6 border rounded-2xl gap-4 h-[360px] w-[456px]">
-      <div className="flex flex-row mb-4 gap-4">
-        <div className="h-[104px] w-[104px] bg-gray-600 rounded-xl items-center"></div>
-        <div className=" flex flex-col gap-1 justify-center ">
+    <div className="h-[360px] w-[456px] gap-4 rounded-2xl border p-6">
+      <div className="mb-4 flex flex-row gap-4">
+        <div className="h-[104px] w-[104px] items-center rounded-xl bg-gray-600"></div>
+        <div className="flex flex-col justify-center gap-1">
           <p className="text-lg font-medium">
             Ba hao Residence x SANTIPHAP ROOM
           </p>
           <p>Room in townhouse</p>
-          <div className="flex flex-row text-sm items-center gap-1">
-            <Star className="w-3 h-3 fill-black" />
+          <div className="flex flex-row items-center gap-1 text-sm">
+            <Star className="h-3 w-3 fill-black" />
             <p className="font-semibold">4.94</p>
             <p>(434 reviews)</p>
-            <Dot className="w-5 h-5 fill-black" />
-            <Medal className="w-3 h-3 fill-black" />
+            <Dot className="h-5 w-5 fill-black" />
+            <Medal className="h-3 w-3 fill-black" />
             <p>Superhost</p>
           </div>
         </div>
       </div>
       <div className="border-y py-4">
-        <h3 className="text-xl font-medium pb-3">Price details</h3>
+        <h3 className="pb-3 text-xl font-medium">Price details</h3>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between">
             <p>$137.61 x 1 night</p>

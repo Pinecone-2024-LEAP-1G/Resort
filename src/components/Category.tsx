@@ -1,5 +1,5 @@
 "use client";
-import categoryIcon from "@/util/findCategoryIcon";
+import categoryIcon from "util/findCategoryIcon";
 import React from "react";
 
 type Category = {
