@@ -1,6 +1,5 @@
-import {CategoryModel} from "@/lib/models/category.model";
+import { CategoryModel } from "@/lib/models/category.model";
 import { NextRequest } from "next/server";
-
 
 export const POST = async (request: NextRequest) => {
   const { name } = await request.json();
@@ -12,11 +11,11 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
-
- export const GET =async ()=>{
-  try { const categories= await CategoryModel.find()
-     return Response.json(categories)
+export const GET = async () => {
+  try {
+    const categories = await CategoryModel.find();
+    return Response.json(categories);
   } catch (error) {
-    return  Response.json({error:error})
+    return Response.json({ error: error });
   }
- }
+};
