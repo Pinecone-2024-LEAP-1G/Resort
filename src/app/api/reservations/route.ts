@@ -13,8 +13,16 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { userId, propertyId, checkIn, checkOut, guest, totalPrice } =
-    await request.json();
+  const {
+    userId,
+    propertyId,
+    checkIn,
+    adults,
+    children,
+    infants,
+    checkOut,
+    totalPrice,
+  } = await request.json();
 
   try {
     const reservation = await ReservationModel.create({
@@ -22,7 +30,9 @@ export const POST = async (request: NextRequest) => {
       propertyId,
       checkIn,
       checkOut,
-      guest,
+      adults,
+      children,
+      infants,
       totalPrice,
     });
     return Response.json({ message: "success", reservation });
