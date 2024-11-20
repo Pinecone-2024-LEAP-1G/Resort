@@ -4,7 +4,7 @@ type Category = {
   name: string;
   createdAt: Date;
 };
-const categorySchema = new Schema<Category>(
+const CategorySchema = new Schema<Category>(
   {
     name: { type: String },
     createdAt: { type: Date, default: Date.now },
