@@ -39,11 +39,6 @@ export const Categories = () => {
               <Category
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(null)}
-                // style={{
-                //   backgroundColor:
-                //     hover === index ? "text-gray-700" : "text-gray-400",
-                //   transition: "0.2s",
-                // }}
                 hover={hover === index ? "text-gray-800" : "text-gray-500"}
                 key={index}
                 text={data.name}
