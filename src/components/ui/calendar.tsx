@@ -64,16 +64,8 @@ function Calendar({
       }}
       {...props}
     />
-<<<<<<< HEAD
   );
 }
 Calendar.displayName = "Calendar";
 
 export { Calendar };
-=======
-  )
-}
-Calendar.displayName = "Calendar"
-
-export { Calendar }
->>>>>>> 818fb1d (reserve card uldev)
