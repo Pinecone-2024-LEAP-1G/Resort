@@ -1,5 +1,4 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
-import { Children } from "react";
 
 type Reservation = {
   _id: string;
@@ -9,12 +8,12 @@ type Reservation = {
   checkOut: Date;
   guest: [
     {
-      Adult: Number;
-      Children: Number;
-      Infants: Number;
+      Adult: number;
+      Children: number;
+      Infants: number;
     }
   ];
-  totalPrice: Number;
+  totalPrice: number;
 };
 
 const ReservationSchema = new Schema<Reservation>(
@@ -36,4 +35,4 @@ const ReservationSchema = new Schema<Reservation>(
 );
 
 export const ReservationModel: Model<Reservation> =
-  models.Reservation || model<Reservation>("Reservation", ReservationSchema);
+  models.Reservations || model<Reservation>("Reservations", ReservationSchema);
