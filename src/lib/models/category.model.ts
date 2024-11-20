@@ -1,13 +1,15 @@
-import mongoose, { model, Model, models, Schema } from "mongoose";
+import { model, Model, models, Schema } from "mongoose";
 
 type Category = {
   name: string;
   createdAt: Date;
 };
-const categorySchema = new Schema<Category>({
-  name: { type: String },
-  createdAt: { type: Date, default: Date.now },
-},  { timestamps: true });
-export const CategoryModel:Model<Category>=
-models.categories || model<Category>("categories", categorySchema)
-
+const categorySchema = new Schema<Category>(
+  {
+    name: { type: String },
+    createdAt: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
+export const CategoryModel: Model<Category> =
+  models.categories || model<Category>("categories", categorySchema);
