@@ -6,29 +6,31 @@ type Reservation = {
   propertyId: mongoose.Schema.Types.ObjectId;
   checkIn: Date;
   checkOut: Date;
-  guest: 
-   [ {
+  guest: [
+    {
       Adult: number;
       Children: number;
       Infants: number;
-    }]
-  
+    }
+  ];
+
   totalPrice: number;
 };
 
 const ReservationSchema = new Schema<Reservation>(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     propertyId: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
     checkIn: { type: Date, required: true },
     checkOut: { type: Date, required: true },
-    guest: 
-     [ {
+    guest: [
+      {
         Adults: { Type: Number },
         Children: { Type: Number },
         Infants: { Type: Number },
-      }],
-    
+      },
+    ],
+
     totalPrice: { type: Number, required: true },
   },
   { timestamps: true }

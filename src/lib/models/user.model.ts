@@ -7,7 +7,7 @@ type User = {
   email: string;
   avatar: string;
   password: string;
-  phoneNumber: Number;
+  phoneNumber: number;
   role: "User" | "Admin";
 };
 
@@ -25,4 +25,4 @@ const UserSchema = new Schema<User>(
 );
 
 export const UserModel: Model<User> =
-  models.User || model<User>("User", UserSchema);
+  models.Users || model<User>("Users", UserSchema);
