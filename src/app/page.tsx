@@ -1,14 +1,13 @@
-// import { auth } from "@/lib/auth";
-"use client";
+'use client'
 
-import { PropertyDetail } from "components/PropertyDetail/PropertyDetail";
+import HostView from "./hostView/page"
+
 
 const Home = () => {
-  return (
+  return(
     <div>
-      <PropertyDetail />
+      <HostView/>
     </div>
-  );
-};
-
-export default Home;
+  )
+} 
+export default Home
