@@ -14,7 +14,7 @@ type Property = {
   total_bathrooms: string;
 };
 
-const propertySchema = new Schema<Property>(
+const PropertySchema = new Schema<Property>(
   {
     name: { type: String, required: true },
     address: { type: String, required: true },
@@ -31,4 +31,4 @@ const propertySchema = new Schema<Property>(
 );
 
 export const PropertyModel: Model<Property> =
-  models.properties || model<Property>("properties", propertySchema);
+  models.properties || model<Property>("properties", PropertySchema);
