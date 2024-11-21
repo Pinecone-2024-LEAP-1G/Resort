@@ -13,7 +13,9 @@ export default function RootLayout({
   connectToMongoDB();
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="p-20">{children}</div>
+      </body>
     </html>
   );
 }
