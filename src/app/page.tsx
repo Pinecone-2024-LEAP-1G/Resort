@@ -1,5 +1,5 @@
-import { PropertyDetail } from "components/PropertyDetail/PropertyDetail";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 import { Categories } from "@/components/Categories";
@@ -53,3 +53,5 @@ const Home = () => {
   );
 };
 >>>>>>> d5f28d0 (a)
+=======
+>>>>>>> 1558652 (rebase)
