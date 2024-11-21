@@ -3,19 +3,30 @@ import mongoose from "mongoose";
 import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-  const { checkIn, checkOut, totalPrice, userId, quest, propertyId } =
-    await request.json();
-  console.log(quest);
+  const {
+    checkIn,
+    checkOut,
+    totalPrice,
+    userId,
+    // adult,
+    // children,
+    // infants,
+    propertyId,
+  } = await request.json();
+
   try {
-    const formattedQuest = Array.isArray(quest) ? quest : [quest];
-    console.log(formattedQuest);
+    const objectUserId = mongoose.Types.ObjectId.createFromHexString(userId);
+    const objectPropertyId =
+      mongoose.Types.ObjectId.createFromHexString(propertyId);
     const reservation = await ReservationModel.create({
-      propertyId: propertyId,
-      userId: userId,
+      propertyId: objectPropertyId,
+      userId: objectUserId,
       checkIn: checkIn,
       checkOut: checkOut,
       totalPrice: totalPrice,
-      quest: [formattedQuest],
+      adult: 5,
+      children: 7,
+      infants: 8,
     });
     return Response.json({ reservation: reservation });
   } catch (error) {
@@ -24,27 +35,29 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
-export const GET = async (request: NextRequest) => {
-  const url = new URL(request.url);
-  const userId = url.searchParams.get("userId");
-  try {
-    const objectId = mongoose.Types.ObjectId.createFromHexString(userId);
-    const reservations = await ReservationModel.find({
-      userId: objectId,
-    });
+// export const GET = async (request: NextRequest) => {
+//   // const id = await request.json();
 
-    console.log(reservations);
-    return Response.json(reservations);
-  } catch (error) {
-    return Response.json({ error: error });
-  }
-};
-
-// export const GET = async () => {
+//   // const url = new URL(request.url);
+//   // const reservationId = url.searchParams.get("reservationId");
 //   try {
-//     const reservations = await ReservationModel.find();
-//     return Response.json({ reservations: reservations });
+//     const objectId = mongoose.Types.ObjectId.createFromHexString(id);
+//     const reservations = await ReservationModel.find({
+//       _id: objectId,
+//     });
+
+//     console.log(reservations);
+//     return Response.json(reservations);
 //   } catch (error) {
 //     return Response.json({ error: error });
 //   }
 // };
+
+export const GET = async () => {
+  try {
+    const reservations = await ReservationModel.find();
+    return Response.json({ reservations: reservations });
+  } catch (error) {
+    return Response.json({ error: error });
+  }
+};
