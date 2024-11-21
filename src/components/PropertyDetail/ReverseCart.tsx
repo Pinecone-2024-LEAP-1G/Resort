@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 
+
 export const ReverseCart = () => {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 20),
@@ -16,9 +17,9 @@ export const ReverseCart = () => {
   const [infants, setInfants] = useState(0);
   const [pets, setPets] = useState(0);
 
-  const createReserve = async ({}) => {
+  const createReserve = async () => {
     try {
-      await axios.post("http://localhost:3000/", {
+     const response =  await axios.post("http://localhost:3000/api/reservations", {
         checkIn: date?.to,
         checkOut: date?.from,
         userId: "673c5d112ca9c198fd86568b",
@@ -26,8 +27,11 @@ export const ReverseCart = () => {
         adult: adult,
         children: child,
         infants: infants,
-        totalPrice: pets,
+        pets:  pets,
+        totalPrice: 120,
       });
+      console.log(response);
+      
     } catch (error) {
       console.log(error);
     }
@@ -60,21 +64,21 @@ export const ReverseCart = () => {
       </Button>
       <div className="mt-8 flex h-28 flex-col gap-2 border-b">
         <div className="flex justify-between">
-          <p className="border-b border-black">price * 0</p>
+          <p className="border-b border-black">price * 0₮</p>
           <p>total price</p>
         </div>
         <div className="flex justify-between">
           <p className="border-b border-black">tsewelgenii une</p>
-          <p>0</p>
+          <p>0₮</p>
         </div>
         <div className="flex justify-between">
           <p className="border-b border-black">zuuchlaliin une</p>
-          <p>0</p>
+          <p>0₮</p>
         </div>
       </div>
       <div className="text-md flex h-12 justify-between font-bold">
         <p>niit une</p>
-        <p>0$</p>
+        <p>0₮</p>
       </div>
     </div>
   );

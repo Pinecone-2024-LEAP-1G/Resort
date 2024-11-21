@@ -7,6 +7,7 @@ export const GET = async () => {
 
     return Response.json({ properties });
   } catch (error) {
+    console.log(error);
     return Response.json({ message: error });
   }
 };

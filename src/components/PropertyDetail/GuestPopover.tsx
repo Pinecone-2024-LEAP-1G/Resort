@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Guest } from "./Guest";
-import { BottomArrow } from "components/icons/BottomArrow";
+import { ImArrowDown2 } from "react-icons/im";
 
 interface Props {
   adult: number;
@@ -40,7 +40,7 @@ export const GustPopover = ({
             <p>Зочдын тоо</p>
             <p>0 zochin</p>
           </div>
-          <BottomArrow />
+          <ImArrowDown2 />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-gray-400">
