@@ -2,17 +2,13 @@
 
 import * as React from "react";
 import { addDays, format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { cn } from "../../lib/utils";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { GustPopover } from "./GuestPopover";
 
 export const DatePickerWithRange = ({
   className,
@@ -25,7 +21,7 @@ export const DatePickerWithRange = ({
   return (
     <div
       className={cn(
-        "ml-auto grid h-[276px] w-[372px] gap-2 rounded-lg border p-8 shadow-md",
+        "ml-auto grid h-[495px] w-[372px] gap-2 rounded-lg border p-8 shadow-lg",
         className,
       )}
     >
@@ -37,7 +33,7 @@ export const DatePickerWithRange = ({
               id="date"
               variant={"outline"}
               className={cn(
-                "h-16 w-[300px] justify-between border-2 font-normal",
+                "h-16 w-[300px] items-start justify-start border-2 font-normal",
                 !date && "text-muted-foreground",
               )}
             >
@@ -49,7 +45,7 @@ export const DatePickerWithRange = ({
                       {format(date.from, "LLL dd, y")}
                     </div>
 
-                    <div className="flex-1 flex-col justify-center">
+                    <div className="flex-1 flex-col justify-start">
                       <p>CheckOut</p>
                       {format(date.to, "LLL dd, y")}
                     </div>
@@ -58,9 +54,29 @@ export const DatePickerWithRange = ({
                   format(date.from, "LLL dd, y")
                 )
               ) : (
-                <span>Амрах өдөр ба үнийн сонголт</span>
+                <span></span>
               )}
             </Button>
+            <Button className="mt-4 h-10 w-[300px] bg-gray-400">reserve</Button>
+            <GustPopover />
+            <div className="mt-12 flex h-28 flex-col gap-2 border-b">
+              <div className="flex justify-between">
+                <p className="border-b border-black">price * 0</p>
+                <p>total price</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="border-b border-black">tsewelgenii une</p>
+                <p>0</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="border-b border-black">zuuchlaliin une</p>
+                <p>0</p>
+              </div>
+            </div>
+            <div className="text-md mt-6 flex h-12 justify-between font-bold">
+              <p>niit une</p>
+              <p>0$</p>
+            </div>
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
