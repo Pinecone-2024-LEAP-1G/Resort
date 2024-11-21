@@ -15,6 +15,7 @@ interface Props {
   setInfants: (adult: number) => void;
   pets: number;
   setPets: (adult: number) => void;
+  people?: number
 }
 
 export const GustPopover = ({
@@ -26,6 +27,7 @@ export const GustPopover = ({
   setPets,
   infants,
   pets,
+  people
 }: Props) => {
   return (
     <Popover>
@@ -38,7 +40,7 @@ export const GustPopover = ({
         >
           <div>
             <p>Зочдын тоо</p>
-            <p>0 zochin</p>
+            <p>{people} zochin</p>
           </div>
           <ImArrowDown2 />
         </Button>

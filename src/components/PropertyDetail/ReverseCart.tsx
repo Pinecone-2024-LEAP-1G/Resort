@@ -5,9 +5,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
+import { Property } from "app/rooms/[propertyId]/page";
 
-
-export const ReverseCart = () => {
+interface Props{
+  property?: Property
+}
+export const ReverseCart = ({property}: Props) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
@@ -39,7 +42,7 @@ export const ReverseCart = () => {
 
   return (
     <div className="ml-auto grid h-[495px] w-[372px] justify-center gap-2 rounded-lg border p-8 shadow-lg">
-      <p className="mb-4">Үнэ 0$</p>
+      <p className="mb-4">Үнэ: {property?.price}₮</p>
       <DatePickerWithRange
         selected={date}
         onSelect={setDate}
@@ -55,6 +58,7 @@ export const ReverseCart = () => {
         setInfants={setInfants}
         pets={pets}
         setPets={setPets}
+        people={property?.guests}
       />
       <Button
         onClick={createReserve}
@@ -64,7 +68,7 @@ export const ReverseCart = () => {
       </Button>
       <div className="mt-8 flex h-28 flex-col gap-2 border-b">
         <div className="flex justify-between">
-          <p className="border-b border-black">price * 0₮</p>
+          <p className="border-b border-black">{property?.price} * ₮</p>
           <p>total price</p>
         </div>
         <div className="flex justify-between">

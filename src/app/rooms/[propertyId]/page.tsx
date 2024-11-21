@@ -9,7 +9,7 @@ import { FullOption } from "components/PropertyDetail/FullOption";
 import { ReverseCart } from "components/PropertyDetail/ReverseCart";
 import { useParams } from "next/navigation";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const images = [
   "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
@@ -17,16 +17,30 @@ const images = [
   "https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/image/2021-10/hotel%20room%20with%20beachfront%20view.webp?h=662a4f7c&itok=7Laa3LkQ",
   "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=800",
 ];
+export type Property = {
+  _id: string;
+  price: number;
+  guests: number;
+  address: string;
+  description: string;
+  propertyPictures: string;
+  userId: string
+  categoryId: string;
+  totalBedrooms: string;
+  totalOccupancy: string;
+  totalBathrooms: string;
+};
 
 const PropertyDetail = () => {
+  const [property, setProperty] = useState<Property>()
   const params= useParams()
-  const {id} = params
+  const {productId} = params
+console.log(property);
 
   const getPropertyById = async()=>{
 try {
-  const response= await axios.get(`http://localhost:3000/api/properties/673eb06358c0a684b6b3c1df`)
-  console.log(response);
-  
+  const response= await axios.get<{property: Property}>(`http://localhost:3000/api/properties/673eb06358c0a684b6b3c1df`)
+  setProperty(response.data.property)
 } catch (error) {
   console.log(error);
   
@@ -37,7 +51,7 @@ try {
   return (
     <div className="">
     <div className="flex justify-between py-4">
-      <h1 className="text-3xl font-semibold">Description</h1>
+      <h1 className="text-3xl font-semibold">{property?.address}</h1>
       <div className="flex gap-2">
         <div className="grid place-items-center rounded-full bg-white lg:flex lg:gap-2">
           <LuShare />
@@ -77,12 +91,11 @@ try {
 
       <div className="mt-10 flex justify-between">
         <div className="h-[225px] w-[600px] flex-1 border-b-2">
-          <p className="mb-2 text-xl font-normal">adress</p>
+          <p className="mb-2 text-xl font-normal">{property?.address}</p>
           <div className="flex gap-2">
-            <p>hunii too</p>
-            <p>~ uruunii too</p>
-            <p>~ ornii too</p>
-            <p>~ ugaalgin uruunii too</p>
+            <p>{property?.guests} hun</p>
+            <p>~ {property?.totalBedrooms} untlagiin uruu</p>
+            <p>~ {property?.totalBathrooms} ugaalgiin uruu</p>
           </div>
           <div className="mt-8 flex h-20 w-[539] justify-between rounded-lg border p-4">
             <div className="flex flex-col items-center justify-center">
@@ -110,7 +123,7 @@ try {
           </div>
         </div>
         <div className="flex-1 rounded-lg">
-          <ReverseCart />
+          <ReverseCart property={property} />
         </div>
       </div>
     </div>
