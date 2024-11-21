@@ -12,7 +12,6 @@ export const POST = async (request: NextRequest) => {
     infants,
     totalPrice,
   } = await request.json();
-
   try {
     const reservation = await ReservationModel.create({
       propertyId,

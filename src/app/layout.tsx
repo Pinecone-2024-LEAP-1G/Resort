@@ -7,7 +7,7 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  connectToMongoDB()
+  connectToMongoDB
   return (
     <html lang="en">
       <body>
