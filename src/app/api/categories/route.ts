@@ -3,12 +3,10 @@ import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
   const { name } = await request.json();
-  console.log(name);
   try {
     const category = await CategoryModel.create({ name });
     return Response.json({ category });
   } catch (error) {
-    console.log(error);
     return Response.json({ error: error });
   }
 };
