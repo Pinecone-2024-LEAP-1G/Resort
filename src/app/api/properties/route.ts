@@ -7,7 +7,6 @@ export const GET = async () => {
 
     return Response.json({ properties });
   } catch (error) {
-    console.log(error);
     return Response.json({ message: error });
   }
 };
@@ -25,7 +24,7 @@ export const POST = async (request: NextRequest) => {
     totalOccupancy,
     totalBathrooms,
   } = await request.json();
-  console.log(address);
+
   try {
     const review = await PropertyModel.create({
       address,
