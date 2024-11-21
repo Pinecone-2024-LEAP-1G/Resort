@@ -1,6 +1,5 @@
 import { ChevronLeft, Gem } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { PriceDetails } from "./PriceDetails";
 
 export function PaymentDetail() {
   return (
@@ -28,6 +27,13 @@ export function PaymentDetail() {
               <div>
                 <p className="font-medium">Dates</p>
                 <p>Jan 16 – 17, 2025</p>
+              </div>
+              <p className="">Edit</p>
+            </div>
+            <div className="flex flex-row justify-between">
+              <div>
+                <p className="font-medium">Check-in time</p>
+                <p>10:00 AM – 12:00 PM</p>
               </div>
               <p className="">Edit</p>
             </div>
