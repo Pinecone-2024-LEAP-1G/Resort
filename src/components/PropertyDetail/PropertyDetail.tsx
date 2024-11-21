@@ -7,6 +7,7 @@ import { DatePickerWithRange } from "./Calendar";
 import { RightArrow } from "../icons";
 import { ReviewStar } from "../icons/ReviewStar";
 import { FullOption } from "./FullOption";
+import { ReverseCart } from "./ReverseCart";
 
 const images = [
   "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
@@ -25,11 +26,11 @@ export const PropertyDetail = () => {
 
 const Header = () => {
   return (
-    <div>
+    <div className="">
       <div className="flex justify-between py-4">
         <h1 className="text-3xl font-semibold">Description</h1>
         <div className="flex gap-2">
-          <div className="gri place-items-center rounded-full bg-white lg:flex lg:gap-2">
+          <div className="grid place-items-center rounded-full bg-white lg:flex lg:gap-2">
             <LuShare />
             <p className="hidden lg:block">share</p>
           </div>
@@ -64,46 +65,44 @@ const Header = () => {
           ))}
         </div>
         <div></div>
-        <div className="flex1">
-          <div className="mt-10 flex justify-between">
-            <div className="h-[225px] w-[600px] flex-1 border-b-2">
-              <p className="mb-2 text-xl font-normal">adress</p>
-              <div className="flex gap-2">
-                <p>hunii too</p>
-                <p>~ uruunii too</p>
-                <p>~ ornii too</p>
-                <p>~ ugaalgin uruunii too</p>
-              </div>
-              <div className="mt-8 flex h-20 w-[539] justify-between rounded-lg border p-4">
-                <div className="flex flex-col items-center justify-center">
-                  <p className="flex-cols-reverse">Үнэлгээ</p>
-                  <ReviewStar />
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <p>rating</p>
-                  stars
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <p>0</p>
-                  <p className="border-b border-black">reviews</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex-1"></div>
-          </div>
-          <div className="mt-4 h-[80px] border-b-2">
-            <p>discription</p>
+
+        <div className="mt-10 flex justify-between">
+          <div className="h-[225px] w-[600px] flex-1 border-b-2">
+            <p className="mb-2 text-xl font-normal">adress</p>
             <div className="flex gap-2">
-              <h1 className="border-b-2 border-black font-bold">Show more</h1>
-              <RightArrow />
+              <p>hunii too</p>
+              <p>~ uruunii too</p>
+              <p>~ ornii too</p>
+              <p>~ ugaalgin uruunii too</p>
+            </div>
+            <div className="mt-8 flex h-20 w-[539] justify-between rounded-lg border p-4">
+              <div className="flex flex-col items-center justify-center">
+                <p className="flex-cols-reverse">Үнэлгээ</p>
+                <ReviewStar />
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <p>rating</p>
+                stars
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <p>0</p>
+                <p className="border-b border-black">reviews</p>
+              </div>
+            </div>
+            <div className="mt-24 h-[80px] border-b-2">
+              <p>discription</p>
+              <div className="flex gap-2">
+                <h1 className="border-b-2 border-black font-bold">Show more</h1>
+                <RightArrow />
+              </div>
+            </div>
+            <div className="botto-4 right-4 z-50 flex">
+              <FullOption />
             </div>
           </div>
-          <div className="botto-4 right-4 z-50 flex ">
-            <FullOption />
+          <div className="flex-1 rounded-lg">
+            <ReverseCart />
           </div>
-        </div>
-        <div className="flex-1">
-          <DatePickerWithRange />
         </div>
       </div>
     </div>
