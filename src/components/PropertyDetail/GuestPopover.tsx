@@ -6,12 +6,27 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Guest } from "./Guest";
 import { BottomArrow } from "components/icons/BottomArrow";
 
-export const GustPopover = () => {
-  const [quanity, setQuantity] = useState(0);
+interface Props {
+  adult: number;
+  setAdult: (adult: number) => void;
+  child: number;
+  setChild: (adult: number) => void;
+  infants: number;
+  setInfants: (adult: number) => void;
+  pets: number;
+  setPets: (adult: number) => void;
+}
 
-  const updateQuantity = (newQuantity: number) => {
-    setQuantity(newQuantity);
-  };
+export const GustPopover = ({
+  adult,
+  setAdult,
+  child,
+  setChild,
+  setInfants,
+  setPets,
+  infants,
+  pets,
+}: Props) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -33,19 +48,35 @@ export const GustPopover = () => {
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
               <Label htmlFor="width">Tom hun</Label>
-              <Guest quantity={quanity} setQuantity={updateQuantity} />
+              <Guest
+                name={adult}
+                onclick={() => setAdult(adult + 1)}
+                plusonclick={() => setAdult(adult - 1)}
+              />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
               <Label htmlFor="maxWidth">Huuhed</Label>
-              <Guest quantity={quanity} setQuantity={updateQuantity} />
+              <Guest
+                name={child}
+                onclick={() => setChild(child + 1)}
+                plusonclick={() => setChild(child - 1)}
+              />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
               <Label htmlFor="height">Baga nasnii huuhed</Label>
-              <Guest quantity={quanity} setQuantity={updateQuantity} />
+              <Guest
+                name={infants}
+                onclick={() => setInfants(adult + 1)}
+                plusonclick={() => setInfants(infants - 1)}
+              />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
               <Label htmlFor="maxHeight">Amitan</Label>
-              <Guest quantity={quanity} setQuantity={updateQuantity} />
+              <Guest
+                name={pets}
+                onclick={() => setPets(pets + 1)}
+                plusonclick={() => setPets(pets - 1)}
+              />
             </div>
           </div>
         </div>
