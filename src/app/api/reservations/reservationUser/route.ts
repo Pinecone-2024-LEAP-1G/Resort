@@ -20,7 +20,7 @@ export const GET= async(request:NextRequest)=>{
         }}
       if (userId)
       {try {
-        const userreservation=await ReservationModel.find({userId:userId})
+        const userreservation=await ReservationModel.find({userId:userId}).populate("propertyId").populate("userId")
           return Response.json({userReservations:userreservation})
       } catch (error) {
         return Response.json({error:error})
