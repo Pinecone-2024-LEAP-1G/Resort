@@ -1,5 +1,4 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
-import { Children } from "react";
 
 type Reservation = {
   _id: string;
@@ -7,33 +6,32 @@ type Reservation = {
   propertyId: mongoose.Schema.Types.ObjectId;
   checkIn: Date;
   checkOut: Date;
-  guest: [
-    {
-      Adult: Number;
-      Children: Number;
-      Infants: Number;
-    }
-  ];
-  totalPrice: Number;
+  adult: number;
+  children: number;
+  infants: number;
+  totalPrice: number;
 };
 
 const ReservationSchema = new Schema<Reservation>(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    propertyId: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+      required: true,
+    },
+    propertyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Property",
+    },
     checkIn: { type: Date, required: true },
     checkOut: { type: Date, required: true },
-    guest: [
-      {
-        Adults: { Type: Number },
-        Children: { Type: Number },
-        Infants: { Type: Number },
-      },
-    ],
+    adult: { type: Number },
+    children: { type: Number },
+    infants: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
   },
   { timestamps: true }
 );
 
 export const ReservationModel: Model<Reservation> =
-  models.Reservation || model<Reservation>("Reservation", ReservationSchema);
+  models.Reservations || model<Reservation>("Reservations", ReservationSchema);

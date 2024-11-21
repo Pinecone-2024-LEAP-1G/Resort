@@ -3,7 +3,7 @@ import mongoose, { Model, Schema, model, models } from "mongoose";
 type Property = {
   _id: string;
   price: number;
-  guests: Number;
+  guests: number;
   address: string;
   description: string;
   propertyPictures: string;
@@ -17,10 +17,10 @@ type Property = {
 const PropertySchema = new Schema<Property>(
   {
     address: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     guests: { type: Number, required: true },
     price: { type: Number, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     categoryId: { type: String, ref: "Category" },
     propertyPictures: [{ type: String, required: true }],
     totalBedrooms: { type: String, required: true },

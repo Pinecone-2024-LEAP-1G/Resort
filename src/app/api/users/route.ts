@@ -6,7 +6,6 @@ export const GET = async () => {
     const users = await UserModel.find();
     return Response.json({ users });
   } catch (error) {
-    console.log(error);
     return Response.json({ message: error });
   }
 };

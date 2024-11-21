@@ -7,9 +7,8 @@ type Category = {
 const CategorySchema = new Schema<Category>(
   {
     name: { type: String },
-    createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );
 export const CategoryModel: Model<Category> =
-  models.Category || model<Category>("Category", CategorySchema);
+  models.Categories || model<Category>("Categories", CategorySchema);
