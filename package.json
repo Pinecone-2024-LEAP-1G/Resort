@@ -15,7 +15,11 @@
     "@radix-ui/react-avatar": "^1.1.1",
 =======
     "@radix-ui/react-alert-dialog": "^1.1.2",
+<<<<<<< HEAD
 >>>>>>> be7b861 (update)
+=======
+    "@radix-ui/react-dialog": "^1.1.2",
+>>>>>>> 6712359 (a)
     "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-hover-card": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -31,7 +35,6 @@
 >>>>>>> be7b861 (update)
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-select": "^2.1.2",
-    "@radix-ui/react-slot": "^1.1.0",
     "@types/bcrypt": "^5.0.2",
     "add": "^2.0.6",
     "axios": "^1.7.7",
