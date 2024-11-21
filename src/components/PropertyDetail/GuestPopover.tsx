@@ -4,6 +4,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Guest } from "./Guest";
+import { BottomArrow } from "components/icons/BottomArrow";
 
 export const GustPopover = () => {
   const [quanity, setQuantity] = useState(0);
@@ -16,12 +17,15 @@ export const GustPopover = () => {
       <PopoverTrigger asChild>
         <Button
           className={
-            "mt-4 flex h-14 w-[300px] flex-col items-start justify-start px-4 py-1 pl-3 text-left font-normal"
+            "h-16 w-[300px] items-center justify-between border-2 px-4 py-2 pl-3 text-left font-normal"
           }
           variant="outline"
         >
-          <p>Зочдын тоо</p>
-          <p>0 zochin</p>
+          <div>
+            <p>Зочдын тоо</p>
+            <p>0 zochin</p>
+          </div>
+          <BottomArrow />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-gray-400">
@@ -32,28 +36,16 @@ export const GustPopover = () => {
               <Guest quantity={quanity} setQuantity={updateQuantity} />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="maxWidth">Max. width</Label>
-              <Input
-                id="maxWidth"
-                defaultValue="300px"
-                className="col-span-2 h-8"
-              />
+              <Label htmlFor="maxWidth">Huuhed</Label>
+              <Guest quantity={quanity} setQuantity={updateQuantity} />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="height">Height</Label>
-              <Input
-                id="height"
-                defaultValue="25px"
-                className="col-span-2 h-8"
-              />
+              <Label htmlFor="height">Baga nasnii huuhed</Label>
+              <Guest quantity={quanity} setQuantity={updateQuantity} />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="maxHeight">Max. height</Label>
-              <Input
-                id="maxHeight"
-                defaultValue="none"
-                className="col-span-2 h-8"
-              />
+              <Label htmlFor="maxHeight">Amitan</Label>
+              <Guest quantity={quanity} setQuantity={updateQuantity} />
             </div>
           </div>
         </div>

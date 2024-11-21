@@ -11,7 +11,7 @@ export const Guest = ({ quantity, setQuantity, className }: QuantityProps) => {
   return (
     <div className={cn(`flex items-center`, className)}>
       <Button
-        className="rounded-pull h-6 w-6 bg-white"
+        className="h-8 w-8 rounded-full bg-white"
         aria-label="Decrease quantity"
         onClick={() => setQuantity(quantity > 0 ? quantity - 1 : 0)}
       >
@@ -21,7 +21,7 @@ export const Guest = ({ quantity, setQuantity, className }: QuantityProps) => {
         {quantity}
       </p>
       <Button
-        className="rounded-pull h-6 w-6 bg-white"
+        className="h-8 w-8 rounded-full bg-white"
         aria-label="Increase quantity"
         onClick={() => setQuantity(quantity + 1)}
       >
