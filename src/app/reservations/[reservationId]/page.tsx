@@ -1,41 +1,58 @@
 "use client"
 
 import { ChevronLeft, Gem } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Calendar } from "../ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Button } from "../ui/button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Keyboard } from 'lucide-react';
-import { CheckInTime } from "./CheckInTime";
 import { GuestPopover } from "components/PropertyDetail/GuestPopover";
-import { useParams } from "next/navigation";
 import axios from "axios";
+import { Alert, AlertDescription, AlertTitle } from "components/ui/alert";
+import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "components/ui/calendar";
+import { CheckInTime } from "components/PaymentDetail/CheckInTime";
+import { format } from "path";
+import moment from "moment";
 
-export const PaymentDetail = ({
+    export type Reservations = {
+  _id: string;
+        userId: string;
+        propertyId: string;
+  checkIn: Date;
+  checkOut: Date;
+  adult: number;
+  children: number;
+  infants: number;
+  totalPrice: number;
+    }
+
+ const PaymentDetail = ({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2024, 0, 20),
     to: addDays(new Date(2024, 0, 20), 20),
   });
-
-   const getPropertyById = async()=>{
+     const [reservations, setReservations] = useState<Reservations>()
+    
+   const getReservationsById = async()=>{
 try {
-  const response= await axios.get(`http://localhost:3000/api/reservations/673e983ac632a5783036e6fd`)
-  console.log(response);
-  
+    const response = await axios.get <{reservation: Reservations}>(`http://localhost:3000/api/reservations/673ee36a11e7953321c22739`)
+      setReservations(response?.data?.reservation)  
 } catch (error) {
   console.log(error);
   
 }
-  }
-  useEffect(()=>{getPropertyById()},[])
+   }
+ 
+    useEffect(() => { getReservationsById() }, [])
+     console.log(reservations);
+     
+
 
   return (
-    <div className="w-full px-20">
+    <div className="px-20  border-gray-200">
       <div className="flex flex-row items-center mr-8">
         <ChevronLeft className="w-8 justify-center" />
         <h3 className="text-3xl font-medium px-12">Confirm and pay</h3>
@@ -55,11 +72,12 @@ try {
           </Alert>
           <div>
             <h2 className="text-xl font-semibold">Your trip</h2>
-            <div className="my-6 flex flex-col gap-6">
+            <div className="py-6 flex flex-col gap-6 border-b">
             <div className="flex flex-row justify-between">
               <div>
                 <p className="font-medium">Dates</p>
-                <p>Jan 16 – 17, 2025</p>
+                                  <p>{moment(reservations?.checkIn).format("MMMM DD")}-{moment(reservations?.checkOut).format("DD")}</p>
+
               </div>
               <div>
 <Popover>
@@ -95,7 +113,9 @@ try {
       </PopoverContent>
 </Popover>
 </div>
-            </div>
+                          </div>
+                          
+                          
             <div className="flex flex-row justify-between">
               <div>
                 <p className="font-medium">Check-in time</p>
@@ -111,8 +131,7 @@ try {
             <div className="flex flex-row justify-between">
               <div>
                 <p className="font-medium">Guests</p>
-                <p>3 guests</p>
-                <div />
+                <p>{reservations?.totalPrice}</p>
               </div>
               <Popover>
                   <PopoverTrigger>
@@ -130,3 +149,5 @@ try {
     </div>
   );
 }
+
+export default PaymentDetail;

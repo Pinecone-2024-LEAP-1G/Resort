@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -58,3 +59,8 @@ const Home = () => {
 >>>>>>> 1558652 (rebase)
 =======
 >>>>>>> c335b2a (a)
+=======
+export default async function Home() {
+  return <div></div>;
+}
+>>>>>>> 9a130bd (a)
