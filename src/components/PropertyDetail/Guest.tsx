@@ -16,9 +16,9 @@ export const Guest = ({
   className,
 }: QuantityProps) => {
   return (
-    <div className={cn(`flex items-center`, className)}>
+    <div className={cn(`flex items-center gap-4`, className)}>
       <Button
-        className="h-8 w-8 rounded-full bg-white"
+        className="h-8 w-8 rounded-full text-black bg-white"
         aria-label="Decrease quantity"
         onClick={plusonclick}
       >
@@ -28,7 +28,7 @@ export const Guest = ({
         {name}
       </p>
       <Button
-        className="h-8 w-8 rounded-full bg-white"
+        className="h-8 w-8 rounded-full text-black bg-white "
         aria-label="Increase quantity"
         onClick={onclick}
       >

@@ -35,7 +35,6 @@ const PropertyDetail = () => {
   const [property, setProperty] = useState<Property>()
   const params= useParams()
   const {productId} = params
-console.log(property);
 
   const getPropertyById = async()=>{
 try {
@@ -112,7 +111,7 @@ try {
             </div>
           </div>
           <div className="mt-24 h-[80px] border-b-2">
-            <p>discription</p>
+            <p>{property?.description}</p>
             <div className="flex gap-2">
               <h1 className="border-b-2 border-black font-bold">Show more</h1>
               <RightArrow />
