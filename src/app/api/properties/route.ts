@@ -25,7 +25,7 @@ export const POST = async (request: NextRequest) => {
     totalOccupancy,
     totalBathrooms,
   } = await request.json();
-
+  console.log(address);
   try {
     const review = await PropertyModel.create({
       address,

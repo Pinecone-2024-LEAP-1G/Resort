@@ -25,9 +25,9 @@ const ReservationSchema = new Schema<Reservation>(
     },
     checkIn: { type: Date, required: true },
     checkOut: { type: Date, required: true },
-    adult: { Type: Number },
-    children: { Type: Number },
-    infants: { Type: Number },
+    adult: { type: Number },
+    children: { type: Number },
+    infants: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
   },
   { timestamps: true }

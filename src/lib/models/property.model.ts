@@ -17,7 +17,7 @@ type Property = {
 const PropertySchema = new Schema<Property>(
   {
     address: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     guests: { type: Number, required: true },
     price: { type: Number, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
