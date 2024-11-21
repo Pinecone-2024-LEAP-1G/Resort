@@ -98,7 +98,9 @@ const Header = () => {
               <RightArrow />
             </div>
           </div>
-          <FullOption />
+          <div className="botto-4 right-4 z-50 flex ">
+            <FullOption />
+          </div>
         </div>
         <div className="flex-1">
           <DatePickerWithRange />
