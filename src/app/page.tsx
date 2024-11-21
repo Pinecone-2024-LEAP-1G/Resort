@@ -1,13 +1,12 @@
-'use client'
+"use client";
 
-import HostView from "./hostView/page"
-
+import HostView from "./hostView/page";
 
 const Home = () => {
-  return(
+  return (
     <div>
-      <HostView/>
+      <HostView />
     </div>
-  )
-} 
-export default Home
+  );
+};
+export default Home;

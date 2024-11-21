@@ -1,4 +1,4 @@
-import { UserModel } from "@/lib/models";
+import { UserModel } from "lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {

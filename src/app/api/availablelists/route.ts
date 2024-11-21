@@ -7,7 +7,6 @@ export const GET = async () => {
 
     return Response.json({ AvailableLists });
   } catch (error) {
-    console.log(error);
     return Response.json({ message: error });
   }
 };
