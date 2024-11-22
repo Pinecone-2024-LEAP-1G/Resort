@@ -3,10 +3,10 @@
 import { LuShare } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import Image from "next/image";
-import { ReviewStar } from "components/icons/ReviewStar";
-import { RightArrow } from "components/icons";
-import { FullOption } from "components/PropertyDetail/FullOption";
-import { ReverseCart } from "components/PropertyDetail/ReverseCart";
+import { ReviewStar } from "@/components/icons/ReviewStar";
+import { RightArrow } from "@/components/icons";
+import { FullOption } from "@/components/PropertyDetail/FullOption";
+import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
