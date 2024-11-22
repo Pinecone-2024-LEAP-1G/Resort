@@ -26,12 +26,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-<<<<<<< HEAD
     "embla-carousel-react": "^8.4.0",
     "format": "^0.2.2",
-=======
-    "embla-carousel-react": "^8.5.1",
->>>>>>> 06a4360 (HostViewPagehtml)
     "lucide-react": "^0.460.0",
     "moment": "^2.30.1",
     "mongodb": "^6.10.0",
