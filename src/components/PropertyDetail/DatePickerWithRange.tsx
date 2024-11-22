@@ -1,5 +1,6 @@
 // "use client";
 
+<<<<<<< HEAD:src/components/PropertyDetail/Calendar.tsx
 import * as React from "react";
 import { format } from "date-fns";
 import { DateRange, SelectRangeEventHandler } from "react-day-picker";
@@ -7,6 +8,17 @@ import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+=======
+// import * as React from "react";
+// import { addDays, format } from "date-fns";
+// import { DateRange } from "react-day-picker";
+
+
+import { cn } from "lib/utils";
+import { Button } from "components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
+import { Calendar } from "components/ui/calendar";
+>>>>>>> 2475dc1 (update):src/components/PropertyDetail/DatePickerWithRange.tsx
 
 interface Props {
   defaultMonth?: Date;
