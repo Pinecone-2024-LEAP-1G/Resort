@@ -1,7 +1,6 @@
 "use client";
-
-import categoryIcon from "@/util/findCategoryIcon";
 import React from "react";
+import categoryIcon from "@/util/findCategoryIcon";
 
 type Category = {
   text: string;
