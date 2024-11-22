@@ -1,10 +1,6 @@
 "use server";
 
-<<<<<<< HEAD
 import { connectToMongoDB } from "@/lib/db";
-=======
-import { connectToMongoDB } from "lib/db";
->>>>>>> 9a130bd (a)
 import "./globals.css";
 const RootLayout = ({
   children,
