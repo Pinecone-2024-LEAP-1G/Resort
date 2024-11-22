@@ -1,7 +1,7 @@
 "use client";
 import { TiMessages } from "react-icons/ti";
-import HostViewCard from "components/HostViewCard";
-import { Button } from "components/ui/button";
+import HostViewCard from "@/components/HostViewCard";
+import { Button } from "@/components/ui/button";
 import { GiBackpack } from "react-icons/gi";
 
 const HostViewFull = () => {

@@ -1,4 +1,4 @@
-import { ReviewModel } from "../../../lib/models";
+import { ReviewModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
