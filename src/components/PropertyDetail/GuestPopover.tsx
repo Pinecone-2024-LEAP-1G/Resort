@@ -34,17 +34,6 @@ export const GustPopover = ({
   const [isDisable, setIsDisable] = useState(false);
   const guests = adult + child + infants + pets;
 
-  // const limitButton = () => {
-  //   if (guests === limitGuest) {
-  //     setIsDisable(true);
-  //   } else {
-  //     setAdult(adult + 1);
-  //     setChild(child + 1);
-  //     setInfants(infants + 1);
-  //     setPets(pets + 1);
-  //   }
-  // };
-
   return (
     <Popover>
       <PopoverTrigger asChild>

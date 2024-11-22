@@ -24,22 +24,17 @@ export const ReverseCart = ({ property }: Props) => {
 
   const createReserve = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/reservations",
-        {
-          checkIn: date?.to,
-          checkOut: date?.from,
-          userId: "673c5d112ca9c198fd86568b",
-          propertyId: "673eb06358c0a684b6b3c1df",
-          adult: adult,
-          children: child,
-          infants: infants,
-          pets: pets,
-          totalPrice: 120,
-        },
-      );
-
-      console.log(response);
+      await axios.post("http://localhost:3000/api/reservations", {
+        checkIn: date?.to,
+        checkOut: date?.from,
+        userId: "673c5d112ca9c198fd86568b",
+        propertyId: "673eb06358c0a684b6b3c1df",
+        adult: adult,
+        children: child,
+        infants: infants,
+        pets: pets,
+        totalPrice: 120,
+      });
     } catch (error) {
       console.log(error);
     }
