@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import categoryIcon from "util/findCategoryIcon";
+import categoryIcon from "@/util/findCategoryIcon";
 
 type Category = {
   text: string;

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Categories } from "@/components/Categories";
 import HomeCard from "@/components/HomeCard";
 import { useState, useEffect } from "react";
@@ -43,24 +37,3 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
-=======
->>>>>>> 38dc395 (a)
-=======
-const Home = () => {
-  return (
-    <div>
-      <PropertyDetail />
-    </div>
-  );
-};
->>>>>>> d5f28d0 (a)
-=======
->>>>>>> 1558652 (rebase)
-=======
->>>>>>> c335b2a (a)
-=======
-export default async function Home() {
-  return <div></div>;
-}
->>>>>>> 9a130bd (a)
