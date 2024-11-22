@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "components/ui/button";
+import { Button } from "@/components/ui/button";
 import { GrStatusGood } from "react-icons/gr";
 
 const HostViewCardSecond = () => {

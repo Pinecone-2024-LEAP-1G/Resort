@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/carousel";
 
 type HomeCardProps = {
-  _id: number;
+  propertyId?: string;
   price?: object;
   address?: string[];
   distance?: string;
@@ -21,12 +21,13 @@ type HomeCardProps = {
 };
 
 export default function HomeCard(props: HomeCardProps) {
-  const { _id, address, rating, distance, price, propertyPictures } = props;
+  const { propertyId, address, rating, distance, price, propertyPictures } =
+    props;
   const router = useRouter();
   return (
     <div>
       <Carousel className="w-full">
-        <CarouselContent onClick={() => router.push(`/property/${_id}`)}>
+        <CarouselContent onClick={() => router.push(`/property/${propertyId}`)}>
           {propertyPictures?.map((propertyPicture, index) => {
             return (
               <CarouselItem key={index}>

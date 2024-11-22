@@ -29,7 +29,7 @@ const Home = () => {
         {properties?.map((property) => {
           return (
             <HomeCard
-              _id={property._id}
+              propertyId={property._id}
               key={property._id}
               propertyPictures={property.propertyPictures}
             />

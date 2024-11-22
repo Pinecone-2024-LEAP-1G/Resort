@@ -26,7 +26,7 @@ export const Categories = () => {
       }
     };
     getCategories();
-  }, [categories]);
+  }, []);
 
   return (
     <div className="flex items-center">

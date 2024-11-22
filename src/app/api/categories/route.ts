@@ -1,4 +1,4 @@
-import { CategoryModel } from "lib/models/category.model";
+import { CategoryModel } from "@/lib/models/category.model";
 import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {

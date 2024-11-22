@@ -3,14 +3,15 @@
 import { LuShare } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import Image from "next/image";
-import { ReviewStar } from "components/icons/ReviewStar";
-import { RightArrow } from "components/icons";
-import { FullOption } from "components/PropertyDetail/FullOption";
-import { ReverseCart } from "components/PropertyDetail/ReverseCart";
+import { ReviewStar } from "@/components/icons/ReviewStar";
+import { RightArrow } from "@/components/icons";
+import { FullOption } from "@/components/PropertyDetail/FullOption";
+import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
+import HostViewFull from "@/components/HostView/PropertyDetailHostViewFull";
 
 const images = [
   "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
@@ -35,13 +36,14 @@ export type Property = {
 const PropertyDetail = () => {
   const [property, setProperty] = useState<Property>();
   const params = useParams();
-  const { productId } = params;
+  const { propertyId } = params;
 
   const getPropertyById = async () => {
     try {
       const response = await axios.get<{ property: Property }>(
-        `http://localhost:3000/api/properties/${productId}`,
+        `http://localhost:3000/api/properties/${propertyId}`,
       );
+
       setProperty(response.data.property);
     } catch (error) {
       console.log(error);
@@ -52,7 +54,7 @@ const PropertyDetail = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">
         <h1 className="text-3xl font-semibold">{property?.address}</h1>
         <div className="flex gap-2">
@@ -129,6 +131,9 @@ const PropertyDetail = () => {
             <ReverseCart property={property} />
           </div>
         </div>
+      </div>
+      <div className="mt-20">
+        <HostViewFull />
       </div>
     </div>
   );

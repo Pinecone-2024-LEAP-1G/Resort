@@ -1,10 +1,10 @@
 "use client";
 import { TiMessages } from "react-icons/ti";
-import { Button } from "components/ui/button";
+import { Button } from "@/components/ui/button";
 import { AiFillFlag } from "react-icons/ai";
-import HostViewCard from "components/HostView/HostViewCard";
-import HostViewCardSecond from "components/HostView/HostViewCardSecond";
-import HostReviewCard from "components/HostView/HostReviewCard";
+import HostViewCard from "@/components/HostView/HostViewCard";
+import HostViewCardSecond from "@/components/HostView/HostViewCardSecond";
+import HostReviewCard from "@/components/HostView/HostReviewCard";
 
 const HostView = () => {
   return (

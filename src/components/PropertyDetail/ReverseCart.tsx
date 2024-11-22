@@ -1,11 +1,11 @@
-import { Button } from "components/ui/button";
+import { Button } from "@/components/ui/button";
 import { GustPopover } from "./GuestPopover";
 import { DatePickerWithRange } from "./Calendar";
 import axios from "axios";
 import React, { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { addDays, differenceInDays, formatDistance } from "date-fns";
-import { Property } from "app/property/[propertyId]/page";
+import { Property } from "@/app/property/[propertyId]/page";
 import moment from "moment";
 import { format } from "date-fns";
 
@@ -24,7 +24,7 @@ export const ReverseCart = ({ property }: Props) => {
 
   const createReserve = async () => {
     try {
-      await axios.post("http://localhost:3000/api/reservations", {
+     const response=  await axios.post("http://localhost:3000/api/reservations", {
         checkIn: date?.to,
         checkOut: date?.from,
         userId: "673c5d112ca9c198fd86568b",
@@ -35,6 +35,7 @@ export const ReverseCart = ({ property }: Props) => {
         pets: pets,
         totalPrice: 120,
       });
+      
     } catch (error) {
       console.log(error);
     }
