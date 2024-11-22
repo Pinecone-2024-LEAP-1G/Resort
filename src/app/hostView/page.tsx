@@ -1,8 +1,8 @@
 "use client";
-import { TiMessages } from "react-icons/ti";
+// import { TiMessages } from "react-icons/ti";
 // import HostViewCard from "@/components/HostViewCard"
 // import { Button } from "@/components/ui/button"
-import { GiBackpack } from "react-icons/gi";
+// import { GiBackpack } from "react-icons/gi";
 
 const HostView = () => {
   return (
@@ -12,7 +12,7 @@ const HostView = () => {
         <div className="h-[230px] w-[320px]">{/* <HostViewCard /> */}</div>
         <div className="mb-5 mt-5 flex items-center">
           <div>
-            <TiMessages className="ml-[10px] h-[30px] w-[30px]" />
+            {/* <TiMessages className="ml-[10px] h-[30px] w-[30px]" /> */}
           </div>
           <p className="ml-[19px] text-[17px]">Speaks English and Greek</p>
         </div>
@@ -27,7 +27,7 @@ const HostView = () => {
       <div className="mt-[100px] w-[500px]">
         <p className="font-bold">Co-hosts</p>
         <div className="flex">
-          <GiBackpack className="h-[35px] w-[35px]" />
+          {/* <GiBackpack className="h-[35px] w-[35px]" /> */}
           <p>Holihouse</p>
         </div>
         <p className="mt-5 font-bold">Host details</p>
