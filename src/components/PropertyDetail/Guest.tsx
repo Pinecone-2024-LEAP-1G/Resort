@@ -20,7 +20,7 @@ export const Guest = ({
   return (
     <div className={cn(`flex items-center gap-4`, className)}>
       <Button
-        disabled={disabled}
+        
         className="h-8 w-8 rounded-full border bg-white text-black"
         aria-label="Decrease quantity"
         onClick={plusonclick}
@@ -31,6 +31,7 @@ export const Guest = ({
         {name}
       </p>
       <Button
+      disabled={disabled}
         className="h-8 w-8 rounded-full border bg-white text-black"
         aria-label="Increase quantity"
         onClick={onclick}

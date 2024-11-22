@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Guest } from "./Guest";
@@ -12,13 +11,13 @@ interface Props {
   adult: number;
   setAdult: (adult: number) => void;
   child: number;
-  setChild: (adult: number) => void;
+  setChild: (child: number) => void;
   infants: number;
-  setInfants: (adult: number) => void;
+  setInfants: (infants: number) => void;
   pets: number;
-  setPets: (adult: number) => void;
+  setPets: (pets: number) => void;
   people?: number;
-  limitGuest?: number;
+  limitGuest?: number; // limitGuest can be undefined
 }
 
 export const GuestPopover = ({
@@ -26,10 +25,10 @@ export const GuestPopover = ({
   setAdult,
   child,
   setChild,
-  setInfants,
-  setPets,
   infants,
+  setInfants,
   pets,
+  setPets,
   people,
   limitGuest,
 }: Props) => {
@@ -55,36 +54,39 @@ export const GuestPopover = ({
         <div className="grid gap-4">
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4 border-b">
-              <Label htmlFor="width">Том хүн</Label>
+              <Label htmlFor="adult">Том хүн</Label>
               <Guest
-                disabled={isDisable}
+                disabled={guests === maxGuests}
                 name={adult}
                 onclick={() => setAdult(adult + 1)}
-                plusonclick={() => setAdult(adult - 1)}
+                plusonclick={() => setAdult(guests > 0 ? adult - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4 border-b">
-              <Label htmlFor="maxWidth">Хүүхэд</Label>
+              <Label htmlFor="child">Хүүхэд</Label>
               <Guest
+                disabled={guests === maxGuests}
                 name={child}
                 onclick={() => setChild(child + 1)}
-                plusonclick={() => setChild(child - 1)}
+                plusonclick={() => setChild(guests > 0 ? child - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4 border-b">
-              <Label htmlFor="height">Нялх мама</Label>
+              <Label htmlFor="infants">Нялх мама</Label>
               <Guest
+                disabled={guests === maxGuests}
                 name={infants}
                 onclick={() => setInfants(infants + 1)}
-                plusonclick={() => setInfants(infants - 1)}
+                plusonclick={() => setInfants(guests > 0 ? infants - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="maxHeight">Амьтан</Label>
+              <Label htmlFor="pets">Амьтан</Label>
               <Guest
+                disabled={guests === maxGuests}
                 name={pets}
                 onclick={() => setPets(pets + 1)}
-                plusonclick={() => setPets(pets - 1)}
+                plusonclick={() => setPets(guests > 0 ? pets - 1 : 0)}
               />
             </div>
           </div>
