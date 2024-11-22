@@ -22,7 +22,6 @@ const Home = () => {
     };
     getProducts();
   }, []);
-  console.log(properties);
   return (
     <div>
       <Categories />
