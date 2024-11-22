@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import { TiStar } from "react-icons/ti";
 
@@ -11,6 +12,7 @@ import {
 } from "components/ui/carousel";
 
 type HomeCardProps = {
+  _id: number;
   images: string[];
   price: number;
   address?: string[];
@@ -19,9 +21,10 @@ type HomeCardProps = {
 };
 
 export default function HomeCard(props: HomeCardProps) {
-  const { images, address, rating, distance, price } = props;
+  const { _id, images, address, rating, distance, price } = props;
+  const router = useRouter();
   return (
-    <div>
+    <div onClick={() => router.push(`/${_id}`)}>
       <Carousel className="w-full">
         <CarouselContent>
           {images?.map((image, index) => {
@@ -45,14 +48,14 @@ export default function HomeCard(props: HomeCardProps) {
       </Carousel>
       <div className="grid grid-cols-2">
         <div>{/* <span>state, city</span> */}</div>
-        <div className="flex ml-auto items-center">
+        <div className="ml-auto flex items-center">
           <TiStar />
           <p>rate</p>
         </div>
       </div>
       {/* <p>distance</p> */}
       <div>
-        <span className="text-[15px] font-bold mr-[2px]">${price}</span>
+        <span className="mr-[2px] text-[15px] font-bold">${price}</span>
         <span>night</span>
       </div>
     </div>

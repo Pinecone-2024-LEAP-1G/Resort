@@ -55,6 +55,7 @@ const Home = () => {
         {Properties.map((property) => {
           return (
             <HomeCard
+              _id={property._id}
               key={property._id}
               price={property.price}
               images={property.images}
