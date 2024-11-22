@@ -7,7 +7,6 @@ import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import axios from "axios";
 
 interface Props {
   defaultMonth?: Date;

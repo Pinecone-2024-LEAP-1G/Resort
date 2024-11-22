@@ -7,6 +7,7 @@ export type QuantityProps = {
   className?: string;
   onclick: () => void;
   plusonclick: () => void;
+  disabled?: boolean;
 };
 
 export const Guest = ({
@@ -14,11 +15,13 @@ export const Guest = ({
   onclick,
   name,
   className,
+  disabled,
 }: QuantityProps) => {
   return (
     <div className={cn(`flex items-center gap-4`, className)}>
       <Button
-        className="h-8 w-8 rounded-full text-black bg-white"
+        disabled={disabled}
+        className="h-8 w-8 rounded-full border bg-white text-black"
         aria-label="Decrease quantity"
         onClick={plusonclick}
       >
@@ -28,7 +31,7 @@ export const Guest = ({
         {name}
       </p>
       <Button
-        className="h-8 w-8 rounded-full text-black bg-white "
+        className="h-8 w-8 rounded-full border bg-white text-black"
         aria-label="Increase quantity"
         onClick={onclick}
       >
