@@ -25,9 +25,9 @@ export const PaymentDetail = ({
         <ChevronLeft className="w-8 justify-start" />
         <h3 className="text-3xl font-medium">Confirm and pay</h3>
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row px-20">
         <div className="flex flex-col">
-          <Alert className="flex flex-row  h-[98px] w-[556px] rounded-2xl justify-between items-center text-base">
+          <Alert className="flex flex-row my-6 h-[98px] w-[556px] rounded-2xl justify-between items-center text-base">
             <div className="flex flex-col">
               <AlertTitle>This is a rare find.</AlertTitle>
               <AlertDescription>
@@ -39,7 +39,8 @@ export const PaymentDetail = ({
             </div>
           </Alert>
           <div>
-            <h2 className="text-xl font-medium">Your trip</h2>
+            <h2 className="text-xl font-semibold">Your trip</h2>
+            <div className="my-6 flex flex-col gap-6">
             <div className="flex flex-row justify-between">
               <div>
                 <p className="font-medium">Dates</p>
@@ -48,7 +49,7 @@ export const PaymentDetail = ({
               <div>
 <Popover>
   <PopoverTrigger>
-    <p className="underline underline-offset-1">Edit</p>
+    <p className="underline underline-offset-1 font-semibold">Edit</p>
   </PopoverTrigger>
   <PopoverContent className="bg-white w-[662px] h-[554px] flex flex-col justify-center p-8 gap-4">
     <div className="flex flex-row justify-between">
@@ -87,18 +88,19 @@ export const PaymentDetail = ({
               </div>
               <Popover>
   <PopoverTrigger>              
-    <p className="underline underline-offset-1">Edit</p>
+    <p className="underline underline-offset-1 font-semibold">Edit</p>
   </PopoverTrigger>
   <PopoverContent className="bg-white max-w-full h-full flex border-0 shadow-transparent p-8"><CheckInTime/></PopoverContent>
 </Popover>
             </div>
             <div className="flex flex-row justify-between">
               <div>
-                <p>Guests</p>
+                <p className="font-medium">Guests</p>
                 <p>3 guests</p>
                 <div />
               </div>
-              <p>Edit</p>
+              <p className="font-semibold">Edit</p>
+            </div>
             </div>
           </div>
         </div>
