@@ -1,4 +1,4 @@
-import { ReservationModel } from "lib/models";
+import { PropertyModel, ReservationModel } from "lib/models";
 import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
@@ -13,6 +13,9 @@ export const POST = async (request: NextRequest) => {
     totalPrice,
   } = await request.json();
   try {
+    const propertyLimit = await PropertyModel.find({
+      _id: propertyId,
+    }).populate("propertyId");
     const reservation = await ReservationModel.create({
       propertyId,
       userId,
@@ -24,6 +27,7 @@ export const POST = async (request: NextRequest) => {
       totalPrice,
     });
     return Response.json({ reservation: reservation });
+    return Response.json({ propertyLimit: propertyLimit });
   } catch (error) {
     return Response.json({ message: error });
   }
