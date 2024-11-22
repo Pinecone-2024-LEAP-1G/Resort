@@ -1,5 +1,3 @@
-"use server";
-
 import { connectToMongoDB } from "@/lib/db";
 import "./globals.css";
 import Header from "@/components/Header";
