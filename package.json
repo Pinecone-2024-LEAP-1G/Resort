@@ -22,18 +22,16 @@
     "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-scroll-area": "^1.2.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 9206340 (a)
     "@radix-ui/react-avatar": "^1.1.1",
 >>>>>>> be7b861 (update)
     "@radix-ui/react-slot": "^1.1.0",
-=======
-<<<<<<< HEAD
-=======
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
->>>>>>> 0ca041b (a)
->>>>>>> b4ccdc6 (a)
     "@types/bcrypt": "^5.0.2",
     "add": "^2.0.6",
     "axios": "^1.7.7",
