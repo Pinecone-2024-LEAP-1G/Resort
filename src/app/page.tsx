@@ -1,5 +1,5 @@
-"use client";
 
+<<<<<<< HEAD
 import { Categories } from "@/components/Categories";
 import HomeCard from "@/components/HomeCard";
 import { useState, useEffect } from "react";
@@ -40,3 +40,5 @@ const Home = () => {
   );
 };
 export default Home;
+=======
+>>>>>>> 38dc395 (a)
