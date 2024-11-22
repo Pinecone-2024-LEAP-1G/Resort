@@ -1,4 +1,6 @@
+import { PropertyDetail } from "components/PropertyDetail/PropertyDetail";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 import { Categories } from "@/components/Categories";
 import HomeCard from "@/components/HomeCard";
@@ -42,3 +44,12 @@ const Home = () => {
 export default Home;
 =======
 >>>>>>> 38dc395 (a)
+=======
+const Home = () => {
+  return (
+    <div>
+      <PropertyDetail />
+    </div>
+  );
+};
+>>>>>>> d5f28d0 (a)

@@ -19,7 +19,7 @@ const tags = Array.from({ length: 12 }).map((_, i) => {
 
 export function CheckInTime () {
     return (
-    <div className="w-[200px] flex flex-col justify-start p-4 space-y-4">
+    <div className="w-[250px] flex flex-col justify-start p-1 space-y-2">
         <div className="">
         <Select>
         <SelectTrigger className="my-4">
