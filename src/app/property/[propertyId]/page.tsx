@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import HostViewFull from "@/components/HostView/PropertyDetailHostViewFull";
-import Review from "@/components/Review";
 
 const images = [
   "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
@@ -104,7 +103,7 @@ const PropertyDetail = () => {
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
             <div className="mt-8 flex h-fit w-fit justify-between rounded-lg border p-4">
-              <Review/>
+              <Review />
             </div>
             <div className="mt-24 h-[80px] border-b-2">
               <p>{property?.description}</p>
