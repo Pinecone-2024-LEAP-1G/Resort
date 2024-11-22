@@ -1,24 +1,28 @@
 // "use client";
 
-// import * as React from "react";
-// import { addDays, format } from "date-fns";
-// import { DateRange } from "react-day-picker";
-
+import * as React from "react";
+import { format } from "date-fns";
+import { DateRange, SelectRangeEventHandler } from "react-day-picker";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
-// export const DatePickerWithRange = ({
-//   className,
-// }: React.HTMLAttributes<HTMLDivElement>) => {
-//   const [date, setDate] = React.useState<DateRange | undefined>({
-//     from: new Date(2022, 0, 20),
-//     to: addDays(new Date(2022, 0, 20), 20),
-//   });
+interface Props {
+  defaultMonth?: Date;
+  selected: DateRange | undefined;
+  onSelect?: SelectRangeEventHandler;
+  date: DateRange | undefined;
+}
 
+export const DatePickerWithRange = ({
+  defaultMonth,
+  selected,
+  onSelect,
+  date,
+}: Props) => {
   return (
-    <div className={cn("ml-auto grid", className)}>
+    <div>
       <Popover>
         <PopoverTrigger asChild>
           <div className="">
@@ -27,7 +31,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
               variant={"outline"}
               className={cn(
                 "h-16 w-[300px] items-start justify-start border-2 font-normal",
-                !date &&
+                !onSelect &&
                   "day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground",
               )}
             >
@@ -57,9 +61,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
+            defaultMonth={defaultMonth}
+            selected={selected}
+            onSelect={onSelect}
             numberOfMonths={2}
           />
         </PopoverContent>
