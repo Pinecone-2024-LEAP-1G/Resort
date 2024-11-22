@@ -3,7 +3,7 @@
 import { LuShare } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import Image from "next/image";
-import { DatePickerWithRange } from "./Calendar";
+import { DatePickerWithRange } from "./DatePickerWithRange";
 import { RightArrow } from "../icons";
 import { ReviewStar } from "../icons/ReviewStar";
 import { FullOption } from "./FullOption";
