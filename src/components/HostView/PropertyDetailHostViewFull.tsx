@@ -1,6 +1,6 @@
 "use client";
 import { TiMessages } from "react-icons/ti";
-
+import { Link } from "lucide-react";
 import { Button } from "components/ui/button";
 import { GiBackpack } from "react-icons/gi";
 import HostViewCard from "./HostViewCard";
@@ -24,12 +24,14 @@ const HostViewFull = () => {
             Speaks English and Greek Speaks English and Greek Speaks English and
             Greek Speaks English and Greek..
           </p>
-          <Button
-            className="h-[48px] w-[154px] text-[19px] font-extrabold"
-            variant="link"
-          >
-            Show more
-          </Button>
+          <Link href={"HostView"}>
+            <Button
+              className="h-[48px] w-[154px] text-[19px] font-extrabold"
+              variant="link"
+            >
+              Show more
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="mt-[100px] w-[500px]">
