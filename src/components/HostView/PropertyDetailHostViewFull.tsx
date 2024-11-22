@@ -24,7 +24,7 @@ const HostViewFull = () => {
             Speaks English and Greek Speaks English and Greek Speaks English and
             Greek Speaks English and Greek..
           </p>
-          <Link href={"HostView"}>
+          <Link href={"hostView"}>
             <Button
               className="h-[48px] w-[154px] text-[19px] font-extrabold"
               variant="link"
