@@ -1,8 +1,4 @@
 "use client";
-<<<<<<< HEAD
-import categoryIcon from "util/findCategoryIcon";
-=======
->>>>>>> 3d7a1dc (update)
 import React from "react";
 import categoryIcon from "util/findCategoryIcon";
 
