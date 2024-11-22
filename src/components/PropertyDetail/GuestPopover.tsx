@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -8,7 +8,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Guest } from "./Guest";
 import { ImArrowDown2 } from "react-icons/im";
 
-<<<<<<< HEAD
 interface Props {
   adult: number;
   setAdult: (adult: number) => void;
@@ -36,10 +35,6 @@ export const GustPopover = ({
 }: Props) => {
   const [isDisable, setIsDisable] = useState(false);
   const guests = adult + child + infants + pets;
-=======
-export const GuestPopover = () => {
-  const [quanity, setQuantity] = useState(0);
->>>>>>> 9a130bd (a)
 
   return (
     <Popover>
