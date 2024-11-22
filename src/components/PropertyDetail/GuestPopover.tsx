@@ -21,7 +21,7 @@ interface Props {
   limitGuest?: number;
 }
 
-export const GustPopover = ({
+export const GuestPopover = ({
   adult,
   setAdult,
   child,
