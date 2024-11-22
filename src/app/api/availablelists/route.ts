@@ -1,4 +1,4 @@
-import { AvailableListModel } from "@/lib/models";
+import { AvailableListModel } from "lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
