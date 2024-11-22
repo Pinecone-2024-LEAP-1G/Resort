@@ -1,64 +1,67 @@
 "use client";
 
-import { Categories } from "components/Categories";
-import HomeCard from "components/HomeCard";
+import { Categories } from "@/components/Categories";
+import HomeCard from "@/components/HomeCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Category } from "components/Category";
+import { Category } from "@/components/Category";
 type CategoriesState = Category[];
 type Category = {
   name: string;
   icon?: JSX.Element;
 };
 
-const Properties = [
-  {
-    _id: 1,
-    price: 10,
-    images: [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
-    ],
-    location: {
-      address: { street: "", state: "", city: "", zipcode: "" },
-      geo: { type: "Point", coordinates: ["37.119560", "-113.409010"] },
-    },
-  },
-];
+// const properties = [
+//   {
+//     _id: 1,
+//     price: { perNight: 10, cleaningFee: 10, airbnbFee: 10 },
+//     propertyPictures: [
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPyluMYN48KYcTZavIMbMFum3WIhsQccmrA&s",
+//     ],
+//     location: {
+//       address: { street: "", state: "", city: "", zipcode: "" },
+//       geo: { type: "Point", coordinates: ["37.119560", "-113.409010"] },
+//     },
+//     description:
+//       "Exercitation consectetur esse anim aliquip eu veniam nulla commodo, Nostrud ipsum proident nulla proident.",
+//     guests: 2,
+//     userId: "673d2f3a37267d5d6f2569ab",
+//     categoryId: "",
+//     totalBedrooms: 3,
+//     totalOccupancy: 7,
+//     totalBathrooms: 3,
+//   },
+// ];
 
-// const Properties = () => {
-//   const [categories, setCategories] = useState([]);
-//   useEffect(() => {
-//     const getCategories = async () => {
-//       try {
-//         const response = await axios.get(
-//           "http://localhost:3000/api/properties"
-//         );
-//         Response.json({ categories });
-//         setCategories(response.data);
-//       } catch (error) {
-//         Response.json({ error: error });
-//       }
-//     };
-//     getCategories();
-//   }, [categories]);
+// Fetch URL
 
 const Home = () => {
+  const [properties, setProperties] = useState<any[]>([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const response = await fetch("http://localhost:3000/api/properties");
+      const data = await response.json();
+      setProperties(data.properties);
+    };
+    getProducts();
+  }, []);
+  console.log(properties);
   return (
     <div>
-      <Categories />
+      {/* <Categories /> */}
       <div className="grid grid-cols-6 gap-5">
-        {Properties.map((property) => {
+        {properties?.map((property) => {
           return (
             <HomeCard
               _id={property._id}
               key={property._id}
-              price={property.price}
-              images={property.images}
+              propertyPictures={property.propertyPictures}
             />
           );
         })}

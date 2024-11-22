@@ -1,6 +1,6 @@
 "use client";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
-import { ScrollArea, ScrollBar } from "components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "./Category";

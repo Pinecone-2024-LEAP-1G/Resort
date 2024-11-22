@@ -1,21 +1,22 @@
-"use client";
+"use server";
 
+import { connectToMongoDB } from "@/lib/db";
 import "./globals.css";
-import { connectToMongoDB } from "lib/db";
 const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  connectToMongoDB()
+  connectToMongoDB();
   return (
     <html lang="en">
       <body>
         <main>
-          <div className="mx-auto max-w-[1200px] px-4 text-base font-normal sm:px-8 md:px-8">
-            {/* <div><Header/></div> */}
-            <div>{children}</div>
-            {/* <div><Footer/></div> */}
+          <div className="text-base font-normal">
+            <div className="mx-5 px-20">{/* <Header /> */}</div>
+            <br />
+            <div className="mx-5 px-20">{children}</div>
+            <div className="mx-5 px-20">{/* <Footer /> */}</div>
           </div>
         </main>
       </body>
