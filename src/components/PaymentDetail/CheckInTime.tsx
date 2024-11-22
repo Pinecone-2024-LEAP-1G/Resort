@@ -1,12 +1,13 @@
 "use client";
+
+import { Button } from "../ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "components/ui/button";
+} from "../ui/select";
 
 const getTimeFormat = (hour: number) => {
   const isPM = hour >= 12;

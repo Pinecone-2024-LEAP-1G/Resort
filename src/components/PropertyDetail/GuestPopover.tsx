@@ -35,7 +35,6 @@ export const GustPopover = ({
 }: Props) => {
   const [isDisable, setIsDisable] = useState(false);
   const guests = adult + child + infants + pets;
-
   return (
     <Popover>
       <PopoverTrigger asChild>
