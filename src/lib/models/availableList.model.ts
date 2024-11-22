@@ -11,11 +11,11 @@ type AvailableList = {
 const AvailableListSchema = new Schema<AvailableList>(
   {
     propertyId: { type: String, ref: "Property" },
-    reservationId: { type: String, ref: "Reservation" },
+    reservationId: { type: String, ref: "Reservations" },
     checkInDate: { type: Date, required: true },
     checkOutDate: { type: Date, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const AvailableListModel: Model<AvailableList> =

@@ -1,4 +1,8 @@
-import { PropertyModel, ReservationModel } from "lib/models";
+import {
+  AvailableListModel,
+  PropertyModel,
+  ReservationModel,
+} from "lib/models";
 import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
@@ -12,10 +16,41 @@ export const POST = async (request: NextRequest) => {
     infants,
     totalPrice,
   } = await request.json();
+
   try {
+    const checkindate = await AvailableListModel.find({
+      propertyId: propertyId,
+    });
+    const datecheckIn = checkindate.map((date) => {
+      return date.checkInDate;
+    });
+
+    if (datecheckIn === checkIn && datecheckIn === checkOut) {
+      return Response.json({
+        message: "tanii songoson udur zahialgatai baina ",
+      });
+    }
+    const datecheckOut = checkindate.map((date) => {
+      return date.checkOutDate;
+    });
+    if (datecheckOut === checkOut) {
+      return Response.json({
+        message: "tanii garah udur zahialgatai tul dahin sonsolt hiine vvv",
+      });
+    }
+
     const propertyLimit = await PropertyModel.find({
       _id: propertyId,
-    }).populate("propertyId");
+    });
+
+    const quests = propertyLimit.map((property) => {
+      return property.guests;
+    });
+    console.log(quests);
+    if (quests <= adult + children + infants) {
+      return Response.json({ message: "Oh sorry  exceeded limit" });
+    }
+
     const reservation = await ReservationModel.create({
       propertyId,
       userId,
@@ -27,7 +62,6 @@ export const POST = async (request: NextRequest) => {
       totalPrice,
     });
     return Response.json({ reservation: reservation });
-    return Response.json({ propertyLimit: propertyLimit });
   } catch (error) {
     return Response.json({ message: error });
   }
