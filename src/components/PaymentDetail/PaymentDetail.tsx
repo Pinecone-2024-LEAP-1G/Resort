@@ -10,7 +10,7 @@ import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
-import { GuestPopover } from "components/PropertyDetail/GuestPopover";
+import { GuestPopover } from "../PropertyDetail/GuestPopover";
 
 export const PaymentDetail = ({
   className,
@@ -21,13 +21,13 @@ export const PaymentDetail = ({
   });
   return (
     <div className="w-full px-20">
-      <div className="flex flex-row items-center mr-8">
+      <div className="mr-8 flex flex-row items-center">
         <ChevronLeft className="w-8 justify-center" />
-        <h3 className="text-3xl font-medium px-12">Confirm and pay</h3>
+        <h3 className="px-12 text-3xl font-medium">Confirm and pay</h3>
       </div>
       <div className="flex flex-row px-20">
         <div className="flex flex-col">
-          <Alert className="flex flex-row my-6 h-[98px] w-[556px] rounded-2xl justify-between items-center text-base">
+          <Alert className="my-6 flex h-[98px] w-[556px] flex-row items-center justify-between rounded-2xl text-base">
             <div className="flex flex-col">
               <AlertTitle>This is a rare find.</AlertTitle>
               <AlertDescription>
@@ -35,7 +35,7 @@ export const PaymentDetail = ({
               </AlertDescription>
             </div>
             <div>
-              <Gem className="fill-pink-700 justify-end" />
+              <Gem className="justify-end fill-pink-700" />
             </div>
           </Alert>
           <div>
@@ -49,15 +49,15 @@ export const PaymentDetail = ({
                 <div>
                   <Popover>
                     <PopoverTrigger>
-                      <p className="underline underline-offset-1 font-semibold">
+                      <p className="font-semibold underline underline-offset-1">
                         Edit
                       </p>
                     </PopoverTrigger>
-                    <PopoverContent className="bg-white w-[662px] h-[554px] flex flex-col justify-center p-8 gap-4">
+                    <PopoverContent className="flex h-[554px] w-[662px] flex-col justify-center gap-4 bg-white p-8">
                       <div className="flex flex-row justify-between">
                         <div>
                           <h2 className="text-xl font-medium">2 nights</h2>
-                          <p className="text-gray-600 text-sm">
+                          <p className="text-sm text-gray-600">
                             4 beds 0 baths
                           </p>
                         </div>
@@ -75,7 +75,7 @@ export const PaymentDetail = ({
                         numberOfMonths={2}
                       />
                       <div className="flex justify-between">
-                        <Keyboard className="justify-center items-center" />
+                        <Keyboard className="items-center justify-center" />
                         <div className="flex items-center gap-4">
                           <p className="underline underline-offset-1">
                             Clear dates
@@ -94,11 +94,11 @@ export const PaymentDetail = ({
                 </div>
                 <Popover>
                   <PopoverTrigger>
-                    <p className="underline underline-offset-1 font-semibold">
+                    <p className="font-semibold underline underline-offset-1">
                       Edit
                     </p>
                   </PopoverTrigger>
-                  <PopoverContent className="bg-white max-w-full h-full flex border-0 shadow-transparent p-8">
+                  <PopoverContent className="flex h-full max-w-full border-0 bg-white p-8 shadow-transparent">
                     <CheckInTime />
                   </PopoverContent>
                 </Popover>
@@ -115,7 +115,7 @@ export const PaymentDetail = ({
                       Edit
                     </p>
                   </PopoverTrigger>
-                  <PopoverContent className="border-0 shadow-transparent  bg-white ">
+                  <PopoverContent className="border-0 bg-white shadow-transparent">
                     <GuestPopover />
                   </PopoverContent>
                 </Popover>

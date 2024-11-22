@@ -1,13 +1,14 @@
-import { Button } from "components/ui/button";
-import { GustPopover } from "./GuestPopover";
-import { DatePickerWithRange } from "./Calendar";
+import { Button } from "@/components/ui/button";
+import { GuestPopover } from "./GuestPopover";
+
 import axios from "axios";
 import React, { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { addDays, differenceInDays, formatDistance } from "date-fns";
-import { Property } from "app/property/[propertyId]/page";
+import { Property } from "@/app/property/[propertyId]/page";
 import moment from "moment";
 import { format } from "date-fns";
+import { DatePickerWithRange } from "./DatePickerWithRange";
 
 interface Props {
   property?: Property;
@@ -49,7 +50,7 @@ export const ReverseCart = ({ property }: Props) => {
         defaultMonth={date?.from}
         date={date}
       />
-      <GustPopover
+      <GuestPopover
         adult={adult}
         setAdult={setAdult}
         child={child}

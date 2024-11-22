@@ -1,3 +1,5 @@
+"use server";
+
 import { connectToMongoDB } from "@/lib/db";
 import "./globals.css";
 const RootLayout = ({
