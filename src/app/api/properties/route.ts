@@ -1,4 +1,4 @@
-import { PropertyModel } from "@/lib/models";
+import { PropertyModel } from "lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {

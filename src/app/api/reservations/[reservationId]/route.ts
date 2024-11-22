@@ -1,18 +1,21 @@
-import { ReservationModel } from "@/lib/models";
+import { ReservationModel } from "lib/models";
+import { NextRequest } from "next/server";
 
 export const GET = async (
-  request: Request,
-  { params }: { params: Promise<{ reservationId: string }> }
+  request: NextRequest,
+  {
+    params,
+  }: {
+    params: Promise<{ reservationId: string }>;
+  },
 ) => {
   const reservationId = (await params).reservationId;
-
   try {
     const reservation = await ReservationModel.find({
       _id: reservationId,
     })
-      .populate("propertyId")
-      .populate("userId");
-
+      .populate("userId")
+      .populate("propertyId");
     return Response.json({ reservation: reservation });
   } catch (error) {
     return Response.json({ error: error });

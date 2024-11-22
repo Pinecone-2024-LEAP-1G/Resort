@@ -1,4 +1,4 @@
-"use client";
+// // "use client";
 
 import { LuShare } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
@@ -9,20 +9,20 @@ import { ReviewStar } from "../icons/ReviewStar";
 import { FullOption } from "./FullOption";
 import { ReverseCart } from "./ReverseCart";
 
-const images = [
-  "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
-  "https://www.cud.ac.ae/external/student-work/fcas/communication/safina-furniture-jrn-420-fall-2018/images/popular-modern-home-decor-innovative-living-room-japanese-home-decor-design-ideas-and-and-contemporary-%20(1)-crop-u776_2x.jpg?crc=329220138",
-  "https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/image/2021-10/hotel%20room%20with%20beachfront%20view.webp?h=662a4f7c&itok=7Laa3LkQ",
-  "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=800",
-];
+// const images = [
+//   "https://cdn.onekindesign.com/wp-content/uploads/2018/04/Modern-Mountain-Home-Ward-Young-Architecture-01-1-Kindesign.jpg",
+//   "https://www.cud.ac.ae/external/student-work/fcas/communication/safina-furniture-jrn-420-fall-2018/images/popular-modern-home-decor-innovative-living-room-japanese-home-decor-design-ideas-and-and-contemporary-%20(1)-crop-u776_2x.jpg?crc=329220138",
+//   "https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/image/2021-10/hotel%20room%20with%20beachfront%20view.webp?h=662a4f7c&itok=7Laa3LkQ",
+//   "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=800",
+// ];
 
-export const PropertyDetail = () => {
-  return (
-    <div>
-      <Header />
-    </div>
-  );
-};
+// export const PropertyDetail = () => {
+//   return (
+//     <div>
+//       <Header />
+//     </div>
+//   );
+// };
 
 const Header = () => {
   return (
