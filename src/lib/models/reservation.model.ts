@@ -27,10 +27,10 @@ const ReservationSchema = new Schema<Reservation>(
     checkOut: { type: Date, required: true },
     adult: { type: Number },
     children: { type: Number },
-    infants: { type: Number, required: true },
+    infants: { type: Number },
     totalPrice: { type: Number, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const ReservationModel: Model<Reservation> =

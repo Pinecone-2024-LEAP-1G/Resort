@@ -15,7 +15,7 @@ interface Props {
   pets: number;
   setPets: (pets: number) => void;
   people?: number;
-  limitGuest?: number; // limitGuest can be undefined
+  limitGuest?: number;
 }
 
 export const GustPopover = ({
@@ -30,29 +30,9 @@ export const GustPopover = ({
   people,
   limitGuest,
 }: Props) => {
-  const [isDisable, setIsDisable] = useState(false);
-
   const maxGuests = limitGuest ?? Infinity;
 
   const guests: number = adult + child + infants + pets;
-
-  // const handleIncrement = (type: 'adult' | 'child' | 'infants' | 'pets', current: number) => {
-  //   if (guests < maxGuests) {
-  //     if (type === 'adult') setAdult(current + 1);
-  //     if (type === 'child') setChild(current + 1);
-  //     if (type === 'infants') setInfants(current + 1);
-  //     if (type === 'pets') setPets(current + 1);
-  //   }
-  // };
-
-  // const handleDecrement = (type: 'adult' | 'child' | 'infants' | 'pets', current: number) => {
-  //   if (current > 0) {
-  //     if (type === 'adult') setAdult(current - 1);
-  //     if (type === 'child') setChild(current - 1);
-  //     if (type === 'infants') setInfants(current - 1);
-  //     if (type === 'pets') setPets(current - 1);
-  //   }
-  // };
 
   return (
     <Popover>
@@ -76,28 +56,28 @@ export const GustPopover = ({
             <div className="grid grid-cols-3 items-center gap-4 border-b">
               <Label htmlFor="adult">Том хүн</Label>
               <Guest
-                disabled={guests === maxGuests} 
+                disabled={guests === maxGuests}
                 name={adult}
-                onclick={() => setAdult( adult + 1)}
-                plusonclick={() => setAdult( guests >0 ? adult-1:0)}
+                onclick={() => setAdult(adult + 1)}
+                plusonclick={() => setAdult(guests > 0 ? adult - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4 border-b">
               <Label htmlFor="child">Хүүхэд</Label>
               <Guest
-                disabled={guests === maxGuests} 
+                disabled={guests === maxGuests}
                 name={child}
-                onclick={() => setChild( child + 1)}
-                plusonclick={() => setChild( guests >0 ? child-1:0)}
+                onclick={() => setChild(child + 1)}
+                plusonclick={() => setChild(guests > 0 ? child - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4 border-b">
               <Label htmlFor="infants">Нялх мама</Label>
               <Guest
-                disabled={guests === maxGuests} 
+                disabled={guests === maxGuests}
                 name={infants}
-                onclick={() => setInfants( infants + 1)}
-                plusonclick={() => setInfants( guests >0 ? infants-1:0)}
+                onclick={() => setInfants(infants + 1)}
+                plusonclick={() => setInfants(guests > 0 ? infants - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
@@ -105,8 +85,8 @@ export const GustPopover = ({
               <Guest
                 disabled={guests === maxGuests}
                 name={pets}
-                onclick={() => setPets( pets + 1)}
-                plusonclick={() => setPets( guests >0 ? pets-1:0)}
+                onclick={() => setPets(pets + 1)}
+                plusonclick={() => setPets(guests > 0 ? pets - 1 : 0)}
               />
             </div>
           </div>
