@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -17,7 +16,7 @@ interface Props {
   pets: number;
   setPets: (pets: number) => void;
   people?: number;
-  limitGuest?: number; // limitGuest can be undefined
+  limitGuest?: number;
 }
 
 export const GuestPopover = ({
@@ -32,8 +31,10 @@ export const GuestPopover = ({
   people,
   limitGuest,
 }: Props) => {
-  const [isDisable, setIsDisable] = useState(false);
-  const guests = adult + child + infants + pets;
+  const maxGuests = limitGuest ?? Infinity;
+
+  const guests: number = adult + child + infants + pets;
+
   return (
     <Popover>
       <PopoverTrigger asChild>
