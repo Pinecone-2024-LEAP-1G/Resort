@@ -34,9 +34,10 @@ export const DELETE = async (request: NextRequest) => {
     const review = await ReviewModel.findByIdAndDelete({
       _id,
     });
-    return Response.json({ message: "chi ustgachilashde" });
+    return Response.json({ message: "success" });
   } catch (error) {
     return Response.json({ message: error });
   }
 };
+
 
