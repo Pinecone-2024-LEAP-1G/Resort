@@ -1,11 +1,11 @@
+import { Star } from "lucide-react";
+import { Medal } from "lucide-react";
+import { Dot } from "lucide-react";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Star } from "lucide-react";
-import { Medal } from "lucide-react";
-import { Dot } from "lucide-react";
+} from "../ui/hover-card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,11 +13,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 
 export function PriceDetails() {
   return (
-    <div className="h-[360px] w-[456px] gap-4 rounded-2xl border p-6">
+    <div className="mb-[88px] h-[360px] w-[456px] gap-4 rounded-2xl border p-6">
       <div className="mb-4 flex flex-row gap-4">
         <div className="h-[104px] w-[104px] items-center rounded-xl bg-gray-600"></div>
         <div className="flex flex-col justify-center gap-1">
