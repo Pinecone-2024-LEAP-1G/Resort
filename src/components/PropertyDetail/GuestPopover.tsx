@@ -69,7 +69,7 @@ export const GuestPopover = ({
                 disabled={guests === maxGuests}
                 name={child}
                 onclick={() => setChild(child + 1)}
-                plusonclick={() => setChild(guests > 0 ? child - 1 : 0)}
+                plusonclick={() => setChild(child > 0 ? child - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4 border-b">
@@ -78,7 +78,7 @@ export const GuestPopover = ({
                 disabled={guests === maxGuests}
                 name={infants}
                 onclick={() => setInfants(infants + 1)}
-                plusonclick={() => setInfants(guests > 0 ? infants - 1 : 0)}
+                plusonclick={() => setInfants(infants > 0 ? infants - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
@@ -87,7 +87,7 @@ export const GuestPopover = ({
                 disabled={guests === maxGuests}
                 name={pets}
                 onclick={() => setPets(pets + 1)}
-                plusonclick={() => setPets(guests > 0 ? pets - 1 : 0)}
+                plusonclick={() => setPets(pets > 0 ? pets - 1 : 0)}
               />
             </div>
           </div>

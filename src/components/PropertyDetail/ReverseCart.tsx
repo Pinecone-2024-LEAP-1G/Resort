@@ -7,22 +7,72 @@ import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Property } from "@/app/property/[propertyId]/page";
 import { useRouter } from "next/navigation";
+import { parseAsInteger, useQueryStates } from "nuqs";
+
+const dates = [
+  {
+    _id: "673ff5e491e65705da8f84e2",
+    propertyId: "673ee32911e7953321c22737",
+    reservationId: "673ee36a11e7953321c22739",
+    checkInDate: "2024-11-19T08:45:13.954+00:00",
+    checkOutDate: "2024-11-25T08:45:13.954+00:00",
+  },
+  {
+    _id: "673ff5e491e65705da8f84e2",
+    propertyId: "673ee32911e7953321c22737",
+    reservationId: "673ee36a11e7953321c22739",
+    checkInDate: "2024-11-12T08:45:13.954+00:00",
+    checkOutDate: "2024-11-18T08:45:13.954+00:00",
+  },
+];
+type Dates = {
+  _id: string;
+  propertyId: string;
+  reservationId: string;
+  checkInDate: Date;
+  checkOutDate: Date;
+};
 
 interface Props {
   property?: Property;
 }
 export const ReverseCart = ({ property }: Props) => {
-  const [date, setDate] = React.useState<
-    DateRange | undefined | { from: Date; to: Date }
-  >({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 5),
+  const selectedCheckOutDate =
+    dates.length > 0
+      ? new Date(dates[0].checkOutDate) // Example: First checkOutDate
+      : new Date(); // Default fallback if no dates available
+
+  const today = new Date();
+
+  // Find the closest checkOutDate
+  const closestDate = dates
+    .map((d) => new Date(d.checkOutDate))
+    .reduce((prev, curr) => {
+      return Math.abs(curr.getTime() - today.getTime()) <
+        Math.abs(prev.getTime() - today.getTime())
+        ? curr
+        : prev;
+    }, today);
+
+  const [date, setDate] = React.useState<DateRange | undefined>({
+    from: closestDate,
+    to: addDays(closestDate, 5),
   });
-  const [adult, setAdult] = useState(0);
-  const [child, setChild] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [pets, setPets] = useState(0);
+  const [
+    { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
+    setQueries,
+  ] = useQueryStates({
+    numberOfAdult: parseAsInteger,
+    numberOfChild: parseAsInteger,
+    numberOfInfants: parseAsInteger,
+    numberOfPets: parseAsInteger,
+  });
+
   const router = useRouter();
+
+  // const getDays = async () => {
+  //   const dates = await axios.get("http://localhost:3000/api/reservations");
+  // };
 
   const createReserve = async () => {
     try {
@@ -56,6 +106,7 @@ export const ReverseCart = ({ property }: Props) => {
   };
 
   const daysBetween = getDaysBetweenDates(fromDate, toDate);
+  console.log(daysBetween);
 
   const priceOfDates = price * daysBetween;
 
@@ -67,18 +118,20 @@ export const ReverseCart = ({ property }: Props) => {
       <DatePickerWithRange
         selected={date}
         onSelect={setDate}
-        defaultMonth={date?.from}
+        defaultMonth={date?.from || new Date()}
         date={date}
       />
-      <GuestPopover
-        adult={adult}
-        setAdult={setAdult}
-        child={child}
-        setChild={setChild}
-        infants={infants}
-        setInfants={setInfants}
-        pets={pets}
-        setPets={setPets}
+      <GustPopover
+        adult={Number(numberOfAdult)}
+        setAdult={(adult: number) => setQueries({ numberOfAdult: adult })}
+        child={Number(numberOfChild)}
+        setChild={(child: number) => setQueries({ numberOfChild: child })}
+        infants={Number(numberOfInfants)}
+        setInfants={(infants: number) =>
+          setQueries({ numberOfInfants: infants })
+        }
+        pets={Number(numberOfPets)}
+        setPets={(pets: number) => setQueries({ numberOfPets: pets })}
         people={property?.guests}
         limitGuest={property?.guests}
       />
