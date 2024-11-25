@@ -1,18 +1,18 @@
-import { Alert, AlertDescription, AlertTitle } from "components/ui/alert";
 import { ChevronLeft } from "lucide-react";
 import { Gem } from "lucide-react";
 import { PriceDetails } from "./PriceDetails";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 
 export function RequestToBook() {
   return (
     <div className="">
-      <div className="flex flex-row ">
+      <div className="flex flex-row">
         <ChevronLeft />
         <h2>Request to book</h2>
       </div>
       <div className="flex flex-row">
         <div className="flex flex-col">
-          <Alert className="flex flex-row  h-[98px] w-[556px] rounded-2xl justify-between items-center">
+          <Alert className="flex h-[98px] w-[556px] flex-row items-center justify-between rounded-2xl">
             <div className="flex flex-col">
               <AlertTitle>This is a rare find.</AlertTitle>
               <AlertDescription>

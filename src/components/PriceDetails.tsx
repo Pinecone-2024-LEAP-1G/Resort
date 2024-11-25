@@ -1,11 +1,7 @@
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "components/ui/hover-card";
 import { Star } from "lucide-react";
 import { Medal } from "lucide-react";
 import { Dot } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "components/ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 
 export function PriceDetails() {
   return (
