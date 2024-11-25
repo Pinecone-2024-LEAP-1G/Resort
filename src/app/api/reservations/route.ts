@@ -21,6 +21,8 @@ export const POST = async (request: NextRequest) => {
     const checkindate = await AvailableListModel.find({
       propertyId: propertyId,
     });
+    // const checkCheck = await checkindate.find(checkIn);
+
     const datecheckIn = checkindate.map((date) => {
       return date.checkInDate;
     });
@@ -35,7 +37,7 @@ export const POST = async (request: NextRequest) => {
     });
     if (datecheckOut === checkOut) {
       return Response.json({
-        message: "tanii garah udur zahialgatai tul dahin sonsolt hiine vvv",
+        message: "tanii garah udur zahialgatai tul dahin songolt hiine vvv",
       });
     }
 
@@ -46,7 +48,6 @@ export const POST = async (request: NextRequest) => {
     const quests = propertyLimit.map((property) => {
       return property.guests;
     });
-    console.log(quests);
     if (quests <= adult + children + infants) {
       return Response.json({ message: "Oh sorry  exceeded limit" });
     }
@@ -61,7 +62,16 @@ export const POST = async (request: NextRequest) => {
       infants,
       totalPrice,
     });
-    return Response.json({ reservation: reservation });
+    const availableList = await AvailableListModel.create({
+      propertyId: reservation.propertyId,
+      reservationId: reservation._id,
+      checkInDate: reservation.checkIn,
+      checkOutDate: reservation.checkOut,
+    });
+    return Response.json({
+      reservation: reservation,
+      availableList: availableList,
+    });
   } catch (error) {
     return Response.json({ message: error });
   }
