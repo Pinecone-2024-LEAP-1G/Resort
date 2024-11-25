@@ -1,11 +1,15 @@
+<<<<<<< HEAD:src/components/PaymentDetail/PriceDetails.tsx
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+=======
+>>>>>>> 7c41fb1 (a):src/components/PriceDetails.tsx
 import { Star } from "lucide-react";
 import { Medal } from "lucide-react";
 import { Dot } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +17,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+<<<<<<< HEAD:src/components/PaymentDetail/PriceDetails.tsx
 } from "@/components/ui/dropdown-menu";
+=======
+} from "./ui/dropdown-menu";
+>>>>>>> 7c41fb1 (a):src/components/PriceDetails.tsx
 
 export function PriceDetails() {
   return (

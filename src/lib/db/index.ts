@@ -1,4 +1,4 @@
-import mongoose, { Connection } from "mongoose";
+import mongoose, { Connection, Mongoose } from "mongoose";
 
 // Declaring a variable to store the cached database connection
 let cachedConnection: Connection | null = null;
