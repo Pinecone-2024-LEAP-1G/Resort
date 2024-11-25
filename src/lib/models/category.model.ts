@@ -1,14 +1,16 @@
 import { model, Model, models, Schema } from "mongoose";
 
 type Category = {
+  _id: number;
   name: string;
-  createdAt: Date;
+  icon: string;
 };
 const CategorySchema = new Schema<Category>(
   {
-    name: { type: String },
+    name: { type: String, required: true },
+    icon: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 export const CategoryModel: Model<Category> =
   models.Categories || model<Category>("Categories", CategorySchema);

@@ -13,16 +13,14 @@ import {
 
 type HomeCardProps = {
   propertyId?: string;
-  price?: object;
   address?: string[];
-  distance?: string;
   rating?: string;
+  price: number;
   propertyPictures: string[];
 };
 
 export default function HomeCard(props: HomeCardProps) {
-  const { propertyId, address, rating, distance, price, propertyPictures } =
-    props;
+  const { propertyId, address, rating, price, propertyPictures } = props;
   const router = useRouter();
   return (
     <div>
@@ -44,21 +42,20 @@ export default function HomeCard(props: HomeCardProps) {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        {/* <CarouselPrevious />
+        <CarouselNext /> */}
       </Carousel>
       <div className="grid grid-cols-2">
         <div>
           <span>state, city</span>
         </div>
-        <div className="ml-auto flex items-center">
+        {/* <div className="ml-auto flex items-center">
           <TiStar />
           <p>rate</p>
-        </div>
+        </div> */}
       </div>
-      <p>distance</p>
       <div>
-        <span className="mr-[2px] text-[15px] font-bold">$</span>
+        <span className="mr-[2px] text-[15px] font-bold">${price}</span>
         <span>night</span>
       </div>
     </div>
