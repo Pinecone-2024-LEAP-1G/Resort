@@ -1,39 +1,39 @@
 "use client";
-import { MdOutlineStarPurple500 } from "react-icons/md";
+
+import { ImStarEmpty } from "react-icons/im";
+import { ImStarFull } from "react-icons/im";
 
 const Review = () => {
   return (
-    <div className="w-[480px]">
-      <div className="flex gap-3">
-        <img
-          className="bg-cover border rounded-3xl"
-          style={{
-            backgroundImage: `url("https://media.gettyimages.com/id/1250238624/photo/handsome-young-adult-businessman-with-stubble.jpg?s=612x612&w=gi&k=20&c=H2upefy-mU5MNlNhuXDyTboEmTMycZM-FcK4jYXx2TU=")`,
-            width: "50px",
-            height: "50px",
-          }}
-        />
-        <div>
-          <p className="">Доржоо</p>
-          <p className="">1 жилийн өмнө амьдарч байсан</p>
+    <div>
+      <div className="flex justify-between">
+        <div className="flex h-fit w-2/4 items-center gap-5">
+          <div>
+            <img
+              className="rounded-3xl border bg-cover"
+              style={{
+                backgroundImage: `url("https://media.gettyimages.com/id/1250238624/photo/handsome-young-adult-businessman-with-stubble.jpg?s=612x612&w=gi&k=20&c=H2upefy-mU5MNlNhuXDyTboEmTMycZM-FcK4jYXx2TU=")`,
+                width: "70px",
+                height: "70px",
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="size-xl font-medium">Доржоо</p>
+            <div className="flex">
+              <ImStarFull />
+              <ImStarFull />
+              <ImStarFull />
+              <ImStarEmpty />
+              <ImStarEmpty />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="flex gap-3 ">
-        <div className="flex items-center">
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
+
+        <div className="w-3/4">
+          Янзын сайхан цэвэрхэн газар байна лээ. Эзэн нь надтай пиво уусан.
+          Эелдэг найрсаг сайхан сэтгэлтэй хүн шиг санагдсан.
         </div>
-        <p>*</p>
-        <p>2 долоо хоногийн өмнө</p>
-        <p>*</p>
-        <p>1 өдөр хоносон</p>
-      </div>
-      <div>
-        Янзын сайхан цэвэрхэн газар байна лээ. Түрээслэгч нь надтай архи уусан.
-        Эелдэг найрсаг сайхан сэтгэлтэй хүн шиг санагдсан.
       </div>
     </div>
   );
