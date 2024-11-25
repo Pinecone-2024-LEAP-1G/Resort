@@ -65,6 +65,8 @@ export const DatePickerWithRange = ({
             selected={selected}
             onSelect={onSelect}
             numberOfMonths={2}
+            // fromDate={}
+            // toDate={}
           />
         </PopoverContent>
       </Popover>
