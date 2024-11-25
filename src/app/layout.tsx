@@ -4,6 +4,8 @@ import { connectToMongoDB } from "@/lib/db";
 import "./globals.css";
 import Header from "@/components/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Footer } from "@/components/layout";
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -21,7 +23,10 @@ const RootLayout = ({
               </div>
               <br />
               <div className="mx-5 px-20">{children}</div>
-              <div className="mx-5 px-20">{/* <Footer /> */}</div>
+              <div className="mx-5 px-20">
+                {" "}
+                <Footer />{" "}
+              </div>
             </div>
           </main>
         </body>
