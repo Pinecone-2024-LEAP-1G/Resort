@@ -1,7 +1,9 @@
-"use server";
+"use client";
 
 import { connectToMongoDB } from "@/lib/db";
 import "./globals.css";
+import { Footer } from "@/components/layout";
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -16,7 +18,9 @@ const RootLayout = ({
             <div className="mx-5 px-20">{/* <Header /> */}</div>
             <br />
             <div className="mx-5 px-20">{children}</div>
-            <div className="mx-5 px-20">{/* <Footer /> */}</div>
+            <div className="mx-5 px-20">
+              <Footer />
+            </div>
           </div>
         </main>
       </body>
