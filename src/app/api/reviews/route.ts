@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
 
@@ -9,10 +10,10 @@ export const GET = async () => {
   } catch (error) {
     return Response.json({ message: error });
   }
-};
+}; 
 
 export const POST = async (request: NextRequest) => {
-  const { propertyId, userId, rating, comment } = await request.json();
+  const { propertyId, userId, rating, comment } = await request.json();  
 
   try {
     const review = await ReviewModel.create({
@@ -21,8 +22,21 @@ export const POST = async (request: NextRequest) => {
       rating,
       comment,
     });
-    return Response.json({ message: "success", review });
+    return Response.json({ review });
   } catch (error) {
     return Response.json({ message: error });
   }
 };
+export const DELETE = async (request: NextRequest) => {
+  const { _id } = await request.json();
+
+  try {
+    const review = await ReviewModel.findByIdAndDelete({
+      _id,
+    });
+    return Response.json({ message: "chi ustgachilashde" });
+  } catch (error) {
+    return Response.json({ message: error });
+  }
+};
+
