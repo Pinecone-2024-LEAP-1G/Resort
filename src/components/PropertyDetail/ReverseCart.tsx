@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { GustPopover } from "./GuestPopover";
-import { DatePickerWithRange } from "./Calendar";
+import { GuestPopover } from "./GuestPopover";
+
 import axios from "axios";
 import React, { useState } from "react";
 import { DateRange } from "react-day-picker";
@@ -8,6 +8,7 @@ import { addDays, differenceInDays, formatDistance } from "date-fns";
 import { Property } from "@/app/property/[propertyId]/page";
 import moment from "moment";
 import { format } from "date-fns";
+import { DatePickerWithRange } from "./DatePickerWithRange";
 
 interface Props {
   property?: Property;
@@ -24,18 +25,20 @@ export const ReverseCart = ({ property }: Props) => {
 
   const createReserve = async () => {
     try {
-     const response=  await axios.post("http://localhost:3000/api/reservations", {
-        checkIn: date?.to,
-        checkOut: date?.from,
-        userId: "673c5d112ca9c198fd86568b",
-        propertyId: "673eb06358c0a684b6b3c1df",
-        adult: adult,
-        children: child,
-        infants: infants,
-        pets: pets,
-        totalPrice: 120,
-      });
-      
+      const response = await axios.post(
+        "http://localhost:3000/api/reservations",
+        {
+          checkIn: date?.to,
+          checkOut: date?.from,
+          userId: "673c5d112ca9c198fd86568b",
+          propertyId: "673eb06358c0a684b6b3c1df",
+          adult: adult,
+          children: child,
+          infants: infants,
+          pets: pets,
+          totalPrice: 120,
+        },
+      );
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +53,7 @@ export const ReverseCart = ({ property }: Props) => {
         defaultMonth={date?.from}
         date={date}
       />
-      <GustPopover
+      <GuestPopover
         adult={adult}
         setAdult={setAdult}
         child={child}

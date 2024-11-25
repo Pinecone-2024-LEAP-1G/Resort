@@ -1,15 +1,7 @@
 "use client";
-
 import { Categories } from "@/components/Categories";
 import HomeCard from "@/components/HomeCard";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Category } from "@/components/Category";
-type CategoriesState = Category[];
-type Category = {
-  name: string;
-  icon?: JSX.Element;
-};
 
 const Home = () => {
   const [properties, setProperties] = useState<any[]>([]);
@@ -22,6 +14,7 @@ const Home = () => {
     };
     getProducts();
   }, []);
+
   return (
     <div>
       <Categories />
@@ -39,4 +32,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;
