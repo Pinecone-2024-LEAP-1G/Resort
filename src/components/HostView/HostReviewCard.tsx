@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "components/ui/button";
-import { GrStatusGood } from "react-icons/gr";
+
+import { ImProfile } from "react-icons/im";
 
 const HostReviewCard = () => {
   return (
@@ -10,8 +10,8 @@ const HostReviewCard = () => {
         suscipit impedit velit reprehenderit sed nisi sint iure animi. Possimus,
         id?"
       </div>
-      <div className="mt-[15px] flex">
-        <GrStatusGood className="h-[30px] w-[30px]" />
+      <div className="mt-[100px] flex">
+        <ImProfile className="h-[40px] w-[40px]" />
         <div>
           <p className="ml-3 text-[16px]">Gunner</p>
           <p className="ml-3 text-[14px]">October 2024</p>
