@@ -11,6 +11,7 @@ import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
 import { GuestPopover } from "../PropertyDetail/GuestPopover";
+import { PaymentHeader } from "./PaymentHeader";
 
 export const PaymentDetail = ({
   className,
@@ -20,11 +21,7 @@ export const PaymentDetail = ({
     to: addDays(new Date(2024, 0, 20), 20),
   });
   return (
-    <div className="w-full px-20">
-      <div className="mr-8 flex flex-row items-center">
-        <ChevronLeft className="w-8 justify-center" />
-        <h3 className="px-12 text-3xl font-medium">Confirm and pay</h3>
-      </div>
+    <div className="w-full">
       <div className="flex flex-row px-20">
         <div className="flex flex-col">
           <Alert className="my-6 flex h-[98px] w-[556px] flex-row items-center justify-between rounded-2xl text-base">

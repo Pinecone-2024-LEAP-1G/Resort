@@ -1,7 +1,7 @@
 import { ChevronLeft } from "lucide-react";
 import { Gem } from "lucide-react";
-import { PriceDetails } from "./PriceDetails";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { PriceDetails } from "./PaymentDetail/PriceDetails";
 
 export function RequestToBook() {
   return (

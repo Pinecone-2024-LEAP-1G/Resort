@@ -17,7 +17,7 @@ import {
 
 export function PriceDetails() {
   return (
-    <div className="h-[360px] w-[456px] gap-4 rounded-2xl border p-6">
+    <div className="mb-[88px] h-[360px] w-[456px] gap-4 rounded-2xl border p-6">
       <div className="mb-4 flex flex-row gap-4">
         <div className="h-[104px] w-[104px] items-center rounded-xl bg-gray-600"></div>
         <div className="flex flex-col justify-center gap-1">

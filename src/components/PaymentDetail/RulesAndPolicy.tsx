@@ -17,20 +17,20 @@ import { PayButton } from "./PayButton";
 
 export function RulesAndPolicy() {
   return (
-    <div className="max-w-full w-[556px] text-xs py-8 border-t ml-40">
+    <div className="mx-20 w-[556px] max-w-full border-t py-8 text-xs">
       <div className="py-6">
         <p>
           By selecting the button below, I agree to the{" "}
           <a>
             <Dialog>
               <DialogTrigger asChild>
-                <a className="underline underline-offset-1 mt-2 mb-4 font-medium">
+                <a className="mb-4 mt-2 font-medium underline underline-offset-1">
                   Host's House Rules,
                 </a>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl mt-8">
+                  <DialogTitle className="mt-8 text-2xl">
                     House rules
                   </DialogTitle>
                   <DialogDescription className="text-base text-gray-900">
@@ -39,7 +39,7 @@ export function RulesAndPolicy() {
                   </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4">
-                  <h2 className="text-lg font-medium py-4">
+                  <h2 className="py-4 text-lg font-medium">
                     Checking in and out
                   </h2>
                   <div className="flex gap-4 py-6">
@@ -52,7 +52,7 @@ export function RulesAndPolicy() {
                     <Users />
                     <p>10 guests maximum</p>
                   </div>
-                  <div className="flex gap-4 py-6 border-y">
+                  <div className="flex gap-4 border-y py-6">
                     <PawPrint />
                     <p>Pets allowed</p>
                   </div>
@@ -66,7 +66,7 @@ export function RulesAndPolicy() {
           </a>
           <a>
             <Link
-              className="underline underline-offset-1 font-medium"
+              className="font-medium underline underline-offset-1"
               href="/rules"
             >
               Ground rules for guests,
@@ -74,12 +74,12 @@ export function RulesAndPolicy() {
           </a>
           <a>
             <Dialog>
-              <DialogTrigger className="underline underline-offset-1 font-medium">
+              <DialogTrigger className="font-medium underline underline-offset-1">
                 Airbnb's Rebooking and Refund Policy
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle className="border-b justify-center items-center p-6">
+                  <DialogTitle className="items-center justify-center border-b p-6">
                     Rebooking and Refund Policy
                   </DialogTitle>
                   <DialogDescription className="text-gray-900">
@@ -118,15 +118,15 @@ export function RulesAndPolicy() {
           </a>
           <a> and that Airbnb can </a>
           <Dialog>
-            <DialogTrigger className="underline underline-offset-1 font-medium">
+            <DialogTrigger className="font-medium underline underline-offset-1">
               charge my payment method
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="border-b p-6 justify-center">
+                <DialogTitle className="justify-center border-b p-6">
                   Getting charged for damage
                 </DialogTitle>
-                <DialogDescription className="text-gray-900 p-6 gap-4">
+                <DialogDescription className="gap-4 p-6 text-gray-900">
                   <div className="flex flex-col gap-4">
                     <p className="text-base">
                       Accidents are rare, but they happen. If you, someone you
