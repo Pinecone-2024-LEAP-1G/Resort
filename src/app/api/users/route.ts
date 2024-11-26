@@ -1,4 +1,4 @@
-import { UserModel } from "lib/models";
+import { UserModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
@@ -11,11 +11,12 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { name, email, password, phoneNumber, avatar } = await request.json();
+  const { firstName, lastName,  email, password, phoneNumber, avatar } = await request.json();
 
   try {
     const user = await UserModel.create({
-      name,
+      firstName,
+      lastName,
       email,
       password,
       phoneNumber,
