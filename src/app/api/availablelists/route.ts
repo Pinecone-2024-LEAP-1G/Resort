@@ -1,4 +1,4 @@
-import { AvailableListModel } from "lib/models";
+import { AvailableListModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -19,19 +19,6 @@ export const POST = async (request: NextRequest) => {
     await request.json();
 
   try {
-    const availableLists = await AvailableListModel.find({
-      propertyId: propertyId,
-    });
-    console.log(availableLists);
-    // const checkindate = availableLists.map((list) => {
-    //   return list.checkInDate;
-    // });
-    // const checkoutdate = availableLists.map((list) => {
-    //   return list.checkOutDate;
-    // });
-    // if (checkindate === checkInDate) {
-    //   return Response.json("");
-    // }
     const availableList = await AvailableListModel.create({
       propertyId,
       reservationId,
