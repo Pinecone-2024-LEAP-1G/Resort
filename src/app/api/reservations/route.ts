@@ -59,7 +59,6 @@ export const POST = async (request: NextRequest) => {
       infants,
       totalPrice,
     });
-<<<<<<< HEAD
 
     const availableList = await AvailableListModel.create({
       propertyId: reservation.propertyId,
@@ -71,10 +70,6 @@ export const POST = async (request: NextRequest) => {
       reservation: reservation,
       availableList: availableList,
     });
-=======
-    return Response.json({ reservation: reservation });
-    // return Response.json({ propertyLimit: propertyLimit });
->>>>>>> cb82c24 (avilable date dutuu)
   } catch (error) {
     return Response.json({ message: error });
   }
