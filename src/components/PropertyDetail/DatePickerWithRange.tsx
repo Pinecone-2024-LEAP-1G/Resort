@@ -13,6 +13,8 @@ interface Props {
   selected: DateRange | undefined;
   onSelect?: SelectRangeEventHandler;
   date: DateRange | undefined;
+  fromDate?: Date;
+  disabled?: DateRange[] | Date[];
 }
 
 export const DatePickerWithRange = ({
@@ -20,6 +22,8 @@ export const DatePickerWithRange = ({
   selected,
   onSelect,
   date,
+  fromDate,
+  disabled,
 }: Props) => {
   return (
     <div>
@@ -65,8 +69,8 @@ export const DatePickerWithRange = ({
             selected={selected}
             onSelect={onSelect}
             numberOfMonths={2}
-            // fromDate={}
-            // toDate={}
+            fromDate={fromDate}
+            disabled={disabled}
           />
         </PopoverContent>
       </Popover>

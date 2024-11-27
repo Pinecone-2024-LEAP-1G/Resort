@@ -60,7 +60,7 @@ export const GuestPopover = ({
                 disabled={guests === maxGuests}
                 name={adult}
                 onclick={() => setAdult(adult + 1)}
-                plusonclick={() => setAdult(guests > 0 ? adult - 1 : 0)}
+                plusonclick={() => setAdult(adult > 0 ? adult - 1 : 0)}
               />
             </div>
             <div className="grid grid-cols-3 items-center gap-4 border-b">

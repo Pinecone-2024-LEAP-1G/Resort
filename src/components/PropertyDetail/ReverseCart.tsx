@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { GuestPopover } from "./GuestPopover";
-
-import axios from "axios";
-import React, { useState } from "react";
+import { DatePickerWithRange } from "./Calendar";
+import React from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Property } from "@/app/property/[propertyId]/page";
-import { useRouter } from "next/navigation";
 import { parseAsInteger, useQueryStates } from "nuqs";
+import { GuestPopover } from "./GuestPopover";
+// import axios from "axios";
 
-const dates = [
+const reservation = [
   {
     _id: "673ff5e491e65705da8f84e2",
     propertyId: "673ee32911e7953321c22737",
@@ -24,39 +23,27 @@ const dates = [
     checkInDate: "2024-11-12T08:45:13.954+00:00",
     checkOutDate: "2024-11-18T08:45:13.954+00:00",
   },
+  {
+    _id: "673ff5e491e65705da8f84e2",
+    propertyId: "673ee32911e7953321c22737",
+    reservationId: "673ee36a11e7953321c22739",
+    checkInDate: "2024-12-12T08:45:13.954+00:00",
+    checkOutDate: "2024-12-14T08:45:13.954+00:00",
+  },
 ];
-type Dates = {
-  _id: string;
-  propertyId: string;
-  reservationId: string;
-  checkInDate: Date;
-  checkOutDate: Date;
-};
 
 interface Props {
   property?: Property;
 }
 export const ReverseCart = ({ property }: Props) => {
-  const selectedCheckOutDate =
-    dates.length > 0
-      ? new Date(dates[0].checkOutDate) // Example: First checkOutDate
-      : new Date(); // Default fallback if no dates available
-
-  const today = new Date();
-
-  // Find the closest checkOutDate
-  const closestDate = dates
-    .map((d) => new Date(d.checkOutDate))
-    .reduce((prev, curr) => {
-      return Math.abs(curr.getTime() - today.getTime()) <
-        Math.abs(prev.getTime() - today.getTime())
-        ? curr
-        : prev;
-    }, today);
+  const disabledRanges = reservation.map((item) => ({
+    from: new Date(item.checkInDate),
+    to: new Date(item.checkOutDate),
+  }));
 
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: closestDate,
-    to: addDays(closestDate, 5),
+    from: new Date(),
+    to: addDays(new Date(), 5),
   });
   const [
     { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
@@ -68,32 +55,6 @@ export const ReverseCart = ({ property }: Props) => {
     numberOfPets: parseAsInteger,
   });
 
-  const router = useRouter();
-
-  // const getDays = async () => {
-  //   const dates = await axios.get("http://localhost:3000/api/reservations");
-  // };
-
-  const createReserve = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/reservations",
-        {
-          checkIn: date?.to,
-          checkOut: date?.from,
-          userId: "673c5d112ca9c198fd86568b",
-          propertyId: property?._id,
-          adult: adult,
-          children: child,
-          infants: infants,
-          pets: pets,
-          totalPrice: 120,
-        },
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const price = property?.price ?? Infinity;
 
   const fromDate = date?.from ?? new Date();
@@ -106,7 +67,6 @@ export const ReverseCart = ({ property }: Props) => {
   };
 
   const daysBetween = getDaysBetweenDates(fromDate, toDate);
-  console.log(daysBetween);
 
   const priceOfDates = price * daysBetween;
 
@@ -120,8 +80,10 @@ export const ReverseCart = ({ property }: Props) => {
         onSelect={setDate}
         defaultMonth={date?.from || new Date()}
         date={date}
+        fromDate={new Date()}
+        disabled={disabledRanges}
       />
-      <GustPopover
+      <GuestPopover
         adult={Number(numberOfAdult)}
         setAdult={(adult: number) => setQueries({ numberOfAdult: adult })}
         child={Number(numberOfChild)}
@@ -135,12 +97,7 @@ export const ReverseCart = ({ property }: Props) => {
         people={property?.guests}
         limitGuest={property?.guests}
       />
-      <Button
-        onClick={createReserve}
-        className="mt-4 h-10 w-[300px] bg-gray-400"
-      >
-        reserve
-      </Button>
+      <Button className="mt-4 h-10 w-[300px] bg-gray-400">reserve</Button>
       <div className="mt-8 flex h-28 flex-col gap-2 border-b">
         <div className="flex justify-between">
           <p className="border-b border-black">
