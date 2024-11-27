@@ -1,10 +1,13 @@
 import { AvailableListModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
-export const GET = async () => {
+export const GET = async (request: NextRequest) => {
+  const searchParams = request.nextUrl.searchParams;
+  const propertyId = searchParams.get("propertyId");
   try {
-    const AvailableLists = await AvailableListModel.find();
-
+    const AvailableLists = await AvailableListModel.find({
+      propertyId: propertyId,
+    });
     return Response.json({ AvailableLists });
   } catch (error) {
     return Response.json({ message: error });

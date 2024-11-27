@@ -33,7 +33,7 @@ const HostView = () => {
         <p className="text-[30px] font-bold">About Niki </p>
         <div className="mb-5 mt-5 flex items-center">
           <div>
-            <TiMessages className="ml-[10px] h-[30px] w-[30px]" />
+            {/* <TiMessages className="ml-[10px] h-[30px] w-[30px]" /> */}
           </div>
           <p className="ml-[19px] text-[17px]">Speaks English and Greek</p>
         </div>
