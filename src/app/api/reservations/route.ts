@@ -18,26 +18,21 @@ export const POST = async (request: NextRequest) => {
   } = await request.json();
 
   try {
-    const checkindate = await AvailableListModel.find({
+    const checkindate = new Date(checkIn);
+    const checkoutdate = new Date(checkOut);
+    const overlapReservation = await AvailableListModel.find({
       propertyId: propertyId,
+      $or: [
+        {
+          checkInDate: { $lte: checkoutdate },
+          checkOutDate: { $gte: checkindate },
+        },
+      ],
     });
-    // const checkCheck = await checkindate.find(checkIn);
-
-    const datecheckIn = checkindate.map((date) => {
-      return date.checkInDate;
-    });
-
-    if (datecheckIn === checkIn && datecheckIn === checkOut) {
+    console.log(overlapReservation);
+    if (overlapReservation.length > 0) {
       return Response.json({
-        message: "tanii songoson udur zahialgatai baina ",
-      });
-    }
-    const datecheckOut = checkindate.map((date) => {
-      return date.checkOutDate;
-    });
-    if (datecheckOut === checkOut) {
-      return Response.json({
-        message: "tanii garah udur zahialgatai tul dahin songolt hiine vvv",
+        message: "oh sorry this selected date not available property",
       });
     }
 
@@ -55,8 +50,8 @@ export const POST = async (request: NextRequest) => {
     const reservation = await ReservationModel.create({
       propertyId,
       userId,
-      checkIn: checkIn,
-      checkOut: checkOut,
+      checkIn: checkindate,
+      checkOut: checkoutdate,
       adult,
       children,
       infants,
