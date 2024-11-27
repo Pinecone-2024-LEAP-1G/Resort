@@ -21,36 +21,52 @@ import {
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { PropertyLocationSearch } from "./HeaderDestination";
 type Property = {
   _id: string;
   address: string;
+  description: string;
 };
 export const HeaderSearch = () => {
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [propertiesdata, setPropertiesdata] = useState<Property[]>([]);
+  const [show, setShow] = useState(false);
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         const response = await axios.get(
           "http://localhost:3000/api/properties",
         );
-        // console.log(response.data);
-        setProperties(response?.data);
+        Response.json({ response: response });
+        setPropertiesdata(response?.data);
       } catch (error) {
-        console.log(error);
+        Response.json({ error: error });
       }
     };
     fetchProperties();
   }, []);
-  console.log(properties);
-const 
+  console.log(propertiesdata);
   return (
-    <div
-      onClick={handleSearch}
-      className="flex w-[218px] flex-col rounded-full border-2 px-6 py-1"
-    >
-      Where<input placeholder="Search destinations"></input>
+    <div>
+      <div
+        onBlur={() => setShow(false)}
+        onFocus={() => setShow(true)}
+        className="flex w-[218px] flex-col rounded-full border-2 px-6 py-1"
+      >
+        Where
+        <input placeholder="Search destinations" />
+      </div>{" "}
+      {show && (
+        <div className="fixed bottom-0 left-0 right-0 top-36 z-30 flex justify-center">
+          <div className="h-72 w-80 rounded-2xl border-2 bg-white p-10">
+            {/* <div className="flex flex-col gap-4"> */}
+            <h4 className="font-medium leading-none">Search Region</h4>
+            <PropertyLocationSearch address={"Arkhangai"} />
+            {/* </div> */}
+          </div>
+        </div>
+      )}
     </div>
     // <Popover open={open} onOpenChange={setOpen}>
     //   <PopoverTrigger asChild>

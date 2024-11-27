@@ -1,31 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import Image from "next/image";
 
-type Property = {
-  _id: string;
-  address: string;
-};
-export const PropertyLocationSearch = () => {
-  const [properties, setProperties] = useState<Property[]>([]);
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/properties",
-        );
-        // console.log(response.data);
-        setProperties(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProperties();
-  }, []);
+export const PropertyLocationSearch = ({ address }: { address: string }) => {
   return (
-    <div>
-      {properties.map((property) => {
-        return <div key={property._id}>{property.address}</div>;
-      })}
+    <div className="flex flex-col gap-1">
+      <Image src={"/"} width={500} height={500} alt="img" />
+      <p>{address}</div>
     </div>
   );
 };
