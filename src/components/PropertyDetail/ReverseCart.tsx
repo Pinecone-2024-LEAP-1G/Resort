@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { DatePickerWithRange } from "./Calendar";
 import React from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Property } from "@/app/property/[propertyId]/page";
 import { parseAsInteger, useQueryStates } from "nuqs";
 import { GuestPopover } from "./GuestPopover";
+import { DatePickerWithRange } from "./DatePickerWithRange";
 // import axios from "axios";
 
 const reservation = [
