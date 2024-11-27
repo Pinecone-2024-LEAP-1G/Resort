@@ -5,6 +5,7 @@ import { AiFillFlag } from "react-icons/ai";
 import HostViewCard from "@/components/HostView/HostViewCard";
 import HostViewCardSecond from "@/components/HostView/HostViewCardSecond";
 import HostReviewCard from "@/components/HostView/HostReviewCard";
+import { PropertyCard } from "@/components/HostView/PropertyCard";
 
 const HostView = () => {
   return (
