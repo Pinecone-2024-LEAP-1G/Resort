@@ -1,4 +1,4 @@
-import { ReservationModel } from "lib/models";
+import { ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -16,7 +16,6 @@ export const GET = async (request: NextRequest) => {
     });
     console.log(inDate, outDate);
 
-    // const newReservations = await AvailableListModel.insertMany();
     return Response.json({ propertyReservations: propertyReservations });
   } catch (error) {
     return Response.json({ error: error });

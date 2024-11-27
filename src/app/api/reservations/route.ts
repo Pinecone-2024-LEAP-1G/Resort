@@ -2,7 +2,7 @@ import {
   AvailableListModel,
   PropertyModel,
   ReservationModel,
-} from "lib/models";
+} from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
@@ -20,6 +20,7 @@ export const POST = async (request: NextRequest) => {
   try {
     const checkindate = new Date(checkIn);
     const checkoutdate = new Date(checkOut);
+
     const overlapReservation = await AvailableListModel.find({
       propertyId: propertyId,
       $or: [
@@ -29,7 +30,7 @@ export const POST = async (request: NextRequest) => {
         },
       ],
     });
-    console.log(overlapReservation);
+
     if (overlapReservation.length > 0) {
       return Response.json({
         message: "oh sorry this selected date not available property",
@@ -43,6 +44,7 @@ export const POST = async (request: NextRequest) => {
     const quests = propertyLimit.map((property) => {
       return property.guests;
     });
+
     if (quests <= adult + children + infants) {
       return Response.json({ message: "Oh sorry  exceeded limit" });
     }
@@ -57,6 +59,7 @@ export const POST = async (request: NextRequest) => {
       infants,
       totalPrice,
     });
+
     const availableList = await AvailableListModel.create({
       propertyId: reservation.propertyId,
       reservationId: reservation._id,
