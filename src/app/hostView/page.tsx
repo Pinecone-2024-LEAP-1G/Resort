@@ -1,5 +1,4 @@
 "use client";
-<<<<<<< HEAD
 import { TiMessages } from "react-icons/ti";
 import { Button } from "@/components/ui/button";
 import { AiFillFlag } from "react-icons/ai";
@@ -9,12 +8,6 @@ import HostReviewCard from "@/components/HostView/HostReviewCard";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 import { PropertyCard } from "@/components/HostView/PropertyCard";
-=======
-// import { TiMessages } from "react-icons/ti";
-// import HostViewCard from "@/components/HostViewCard"
-// import { Button } from "@/components/ui/button"
-// import { GiBackpack } from "react-icons/gi";
->>>>>>> fd69df6 (check vrgeljilne)
 
 const HostView = () => {
   return (
