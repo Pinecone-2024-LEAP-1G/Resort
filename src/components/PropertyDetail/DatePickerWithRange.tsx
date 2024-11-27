@@ -48,7 +48,7 @@ export const DatePickerWithRange = ({
                     </div>
 
                     <div className="flex-1 flex-col justify-start">
-                      <p>CheckOut</p>
+                      <p>Check-Out</p>
                       {format(date.to, "LLL dd, y")}
                     </div>
                   </>
