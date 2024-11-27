@@ -1,4 +1,5 @@
-import { PropertyModel } from "@/lib/models";
+import { PropertyModel, UserModel } from "@/lib/models";
+import { HostModel } from "@/lib/models/host.model";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
@@ -23,10 +24,22 @@ export const POST = async (request: NextRequest) => {
     totalBedrooms,
     totalOccupancy,
     totalBathrooms,
+    email,
   } = await request.json();
 
+  const hostExist = await HostModel.findOne({ email });
+
+  if (!hostExist) {
+    const user = await UserModel.findOne({ email });
+    await HostModel.create({
+      name: user?.firstName,
+      email: user?.email,
+      phoneNumber: user?.phoneNumber,
+    });
+  }
+
   try {
-    const review = await PropertyModel.create({
+    const properties = await PropertyModel.create({
       address,
       description,
       guests,
@@ -37,8 +50,9 @@ export const POST = async (request: NextRequest) => {
       totalBedrooms,
       totalOccupancy,
       totalBathrooms,
+      email,
     });
-    return Response.json({ message: "success", review });
+    return Response.json({ message: "success", properties });
   } catch (error) {
     return Response.json({ message: error });
   }

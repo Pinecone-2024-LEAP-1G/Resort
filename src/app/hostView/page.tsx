@@ -50,7 +50,7 @@ const HostView = () => {
             </div>
           </div>
 
-          <div className="mb-[32px] h-[230px] w-[700px]">
+          <div className="mb-[32px] h-[230px] w-[700px] cursor-pointer">
             <HostReviewCard />
           </div>
 

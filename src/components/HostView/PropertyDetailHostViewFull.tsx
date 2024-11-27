@@ -2,7 +2,6 @@
 import { TiMessages } from "react-icons/ti";
 import { GiBackpack } from "react-icons/gi";
 import HostViewCard from "./HostViewCard";
-import Link from "next/link";
 import { Button } from "../ui/button";
 
 const HostViewFull = () => {
@@ -24,14 +23,12 @@ const HostViewFull = () => {
             Speaks English and Greek Speaks English and Greek Speaks English and
             Greek Speaks English and Greek..
           </p>
-          <Link href={"/hostView"}>
-            <Button
-              className="h-[48px] w-[154px] text-[19px] font-extrabold"
-              variant="link"
-            >
-              Show more
-            </Button>
-          </Link>
+          <Button
+            className="h-[48px] w-[154px] text-[19px] font-extrabold"
+            variant="link"
+          >
+            Show more
+          </Button>
         </div>
       </div>
       <div className="mt-[100px] w-[500px]">
@@ -43,9 +40,11 @@ const HostViewFull = () => {
         <p className="mt-5 font-bold">Host details</p>
         <p className="mt-5 text-xs">Responce rate: 100%</p>
         <p className="mt-5 text-xs">Responds within an hour</p>
-        <Button className="mt-4 bg-black text-white" variant="outline">
-          Message Host
-        </Button>
+        <link href={"/HostContact"}>
+          <Button className="mt-4 bg-black text-white" variant="outline">
+            Message Host
+          </Button>
+        </link>
         <p className="mt-5 text-xs">Registration number:99117575</p>
         <div className="border-top-width-8px;">
           <div></div>
