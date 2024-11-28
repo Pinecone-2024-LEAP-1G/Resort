@@ -30,6 +30,13 @@ const reservation = [
     checkInDate: "2024-12-12T08:45:13.954+00:00",
     checkOutDate: "2024-12-14T08:45:13.954+00:00",
   },
+  {
+    _id: "673ff5e491e65705da8f84e2",
+    propertyId: "673ee32911e7953321c22737",
+    reservationId: "673ee36a11e7953321c22739",
+    checkInDate: "2024-11-28T08:45:13.954+00:00",
+    checkOutDate: "2024-11-31T08:45:13.954+00:00",
+  },
 ];
 
 interface Props {
@@ -41,10 +48,25 @@ export const ReverseCart = ({ property }: Props) => {
     to: new Date(item.checkOutDate),
   }));
 
+  const getDaysArray = (start: Date, end: Date) => {
+    const dates = [];
+    for (let dt = new Date(start); dt <= end; dt.setDate(dt.getDate() + 1)) {
+      dates.push(new Date(dt));
+    }
+    return dates;
+  };
+
+  const dayList = disabledRanges.map((range) =>
+    getDaysArray(range.from, range.to),
+  );
+  console.log(dayList);
+
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 5),
   });
+
+
   const [
     { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
     setQueries,
@@ -80,7 +102,6 @@ export const ReverseCart = ({ property }: Props) => {
         onSelect={setDate}
         defaultMonth={date?.from || new Date()}
         date={date}
-        fromDate={new Date()}
         disabled={disabledRanges}
       />
       <GuestPopover
