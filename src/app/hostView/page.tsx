@@ -5,18 +5,18 @@ import { AiFillFlag } from "react-icons/ai";
 import HostViewCard from "@/components/HostView/HostViewCard";
 import HostViewCardSecond from "@/components/HostView/HostViewCardSecond";
 import HostReviewCard from "@/components/HostView/HostReviewCard";
-import { FcPrevious } from "react-icons/fc";
-import { FcNext } from "react-icons/fc";
 import { PropertyCard } from "@/components/HostView/PropertyCard";
+import { FcNext } from "react-icons/fc";
+import { FcPrevious } from "react-icons/fc";
 
 const HostView = () => {
   return (
     <div className="mx-auto flex w-[1200px]">
       <div className="mt-[100px] w-full">
-        <div className="mt-[40px] h-[230px] w-[320px]">
+        <div className="mt-[40px] h-[230px] w-[320px] cursor-pointer">
           <HostViewCard />
         </div>
-        <div className="h-[230px] w-[320px] pt-[70px]">
+        <div className="h-[230px] w-[320px] cursor-pointer pt-[70px]">
           <HostViewCardSecond />
         </div>
         <div className="mt-[90px] flex items-center">
@@ -33,7 +33,7 @@ const HostView = () => {
         <p className="text-[30px] font-bold">About Niki </p>
         <div className="mb-5 mt-5 flex items-center">
           <div>
-            {/* <TiMessages className="ml-[10px] h-[30px] w-[30px]" /> */}
+            <TiMessages className="ml-[10px] h-[30px] w-[30px]" />
           </div>
           <p className="ml-[19px] text-[17px]">Speaks English and Greek</p>
         </div>
@@ -53,12 +53,12 @@ const HostView = () => {
             </div>
           </div>
 
-          <div className="mb-[32px] h-[230px] w-[700px]">
+          <div className="mb-[32px] h-[230px] w-[700px] cursor-pointer">
             <HostReviewCard />
           </div>
 
           <Button
-            className="font-semi h-[48px] w-[154px] text-[19px]"
+            className="font-semi h-[48px] w-[200px] text-[19px]"
             variant="link"
           >
             Show all 45 reviews

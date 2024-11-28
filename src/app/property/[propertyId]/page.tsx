@@ -103,7 +103,7 @@ const PropertyDetail = () => {
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
             <div className="mt-8 flex h-fit w-fit justify-between rounded-lg border p-4">
-              <Review/>
+              <Review />
             </div>
             <div className="mt-24 h-[80px] border-b-2">
               <p>{property?.description}</p>
