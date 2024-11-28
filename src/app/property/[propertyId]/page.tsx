@@ -9,7 +9,6 @@ import { FullOption } from "@/components/PropertyDetail/FullOption";
 import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import HostViewFull from "@/components/HostView/PropertyDetailHostViewFull";
 import Review from "@/components/Review";

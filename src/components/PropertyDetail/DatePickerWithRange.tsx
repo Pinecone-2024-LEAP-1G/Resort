@@ -13,6 +13,8 @@ interface Props {
   selected: DateRange | undefined;
   onSelect?: SelectRangeEventHandler;
   date: DateRange | undefined;
+  fromDate?: Date;
+  disabled?: DateRange[] | Date[];
 }
 
 export const DatePickerWithRange = ({
@@ -20,6 +22,8 @@ export const DatePickerWithRange = ({
   selected,
   onSelect,
   date,
+  fromDate,
+  disabled,
 }: Props) => {
   return (
     <div>
@@ -44,7 +48,7 @@ export const DatePickerWithRange = ({
                     </div>
 
                     <div className="flex-1 flex-col justify-start">
-                      <p>CheckOut</p>
+                      <p>Check-Out</p>
                       {format(date.to, "LLL dd, y")}
                     </div>
                   </>
@@ -65,6 +69,8 @@ export const DatePickerWithRange = ({
             selected={selected}
             onSelect={onSelect}
             numberOfMonths={2}
+            fromDate={fromDate}
+            disabled={disabled}
           />
         </PopoverContent>
       </Popover>
