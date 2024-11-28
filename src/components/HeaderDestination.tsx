@@ -1,19 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 type SearchProps = {
   address: string;
   propertyPicture: string;
-  onClick: () => void;
+  onClick: (e: React.onClick) => void;
 };
 export const PropertyLocationSearch = ({
   address,
   propertyPicture,
-  // onClick,
+  onClick,
 }: SearchProps) => {
-  const [location, setLocation] = useState("");
-  console.log(location);
+  // const [location, setLocation] = useState("");
+  // console.log(location);
   return (
-    <div className="flex flex-col gap-1" onClick={() => setLocation(address)}>
+    <div className="flex flex-col gap-1">
       <div
         style={{
           backgroundImage: `url(${propertyPicture})`,
@@ -23,7 +23,7 @@ export const PropertyLocationSearch = ({
         }}
         className="h-28 w-28 rounded-xl"
       ></div>
-      <p>{address}</p>
+      <p onClick={(e) => onClick(e)}>{address}</p>
     </div>
   );
 };

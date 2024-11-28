@@ -26,7 +26,7 @@ export const HeaderSearch = ({
   const [properties, setProperties] = useState<Property[]>([]);
   const [show, setShow] = useState(false);
   const [addressSearch, setAddressSearch] = useState("");
-  // const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("");
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -48,7 +48,7 @@ export const HeaderSearch = ({
       .includes(addressSearch?.toLocaleLowerCase());
   });
   const proProperties = searchproperties.slice(0, 6);
-  // console.log(location);
+  console.log(location);
   return (
     <div>
       <div
@@ -60,7 +60,7 @@ export const HeaderSearch = ({
       >
         Where
         <input
-          // value={location}
+          value={location}
           onChange={(e) => setAddressSearch(e.target.value)}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
@@ -78,7 +78,7 @@ export const HeaderSearch = ({
               {proProperties.map((property) => {
                 return (
                   <PropertyLocationSearch
-                    // onClick={() => setLocation(property.description)}
+                    onClick={() => setLocation(property.description)}
                     address={property?.description}
                     propertyPicture={property?.propertyPictures[0]}
                     key={property._id}
