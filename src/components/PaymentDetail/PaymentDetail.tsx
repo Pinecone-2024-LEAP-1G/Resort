@@ -11,6 +11,7 @@ import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
 import { GuestPopover } from "../PropertyDetail/GuestPopover";
+import { DatePickerWithRange } from "../PropertyDetail/DatePickerWithRange";
 
 export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
