@@ -4,16 +4,16 @@ import { NextRequest } from "next/server";
 
 export const GET = async () => {
   try {
-    const reviews = await ReviewModel.find();
+    const reviews = await ReviewModel.find().populate("properties");
 
     return Response.json({ reviews });
   } catch (error) {
     return Response.json({ message: error });
   }
-}; 
+};
 
 export const POST = async (request: NextRequest) => {
-  const { propertyId, userId, rating, comment } = await request.json();  
+  const { propertyId, userId, rating, comment } = await request.json();
 
   try {
     const review = await ReviewModel.create({
@@ -39,5 +39,3 @@ export const DELETE = async (request: NextRequest) => {
     return Response.json({ message: error });
   }
 };
-
-

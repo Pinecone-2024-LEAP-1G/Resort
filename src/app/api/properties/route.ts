@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 
 export const GET = async () => {
   try {
-    const properties = await PropertyModel.find();
+    const properties = await PropertyModel.find().populate("users");
 
     return Response.json({ properties });
   } catch (error) {

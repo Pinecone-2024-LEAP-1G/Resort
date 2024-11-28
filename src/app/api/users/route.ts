@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 
 export const GET = async () => {
   try {
-    const users = await UserModel.find();
+    const users = await UserModel.find().populate("reviews");
     return Response.json({ users });
   } catch (error) {
     return Response.json({ message: error });
