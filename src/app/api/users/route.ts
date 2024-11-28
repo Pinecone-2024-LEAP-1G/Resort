@@ -11,7 +11,8 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { firstName, lastName,  email, password, phoneNumber, avatar } = await request.json();
+  const { firstName, lastName, email, password, phoneNumber, avatar } =
+    await request.json();
 
   try {
     const user = await UserModel.create({

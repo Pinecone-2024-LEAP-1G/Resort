@@ -9,7 +9,7 @@ const HostViewFull = () => {
     <div className="mx-auto flex w-[1200px]">
       <div className="h-[230px] w-[500px]">
         <p className="mb-[30px] mt-[40px] font-bold">Meet your Host</p>
-        <div className="h-[230px] w-[320px]">
+        <div className="h-[230px] w-[320px] cursor-pointer">
           <HostViewCard />
         </div>
         <div className="mb-5 mt-5 flex items-center">
