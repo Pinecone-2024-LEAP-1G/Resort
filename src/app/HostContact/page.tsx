@@ -46,7 +46,7 @@ const ContactHost = () => {
           className="w-[600px]"
           placeholder="hey sir...Type your message here."
         />
-        <Button className="mt-[30px]" variant="outline">
+        <Button className="mt-[30px] mb-[100px]" variant="outline">
           Send message
         </Button>
       </div>

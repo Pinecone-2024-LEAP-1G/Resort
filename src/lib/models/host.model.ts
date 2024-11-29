@@ -11,7 +11,7 @@ type HostType = {
   email: string;
 };
 
-const hostSchema = new Schema<HostType>(
+const Host = new Schema<HostType>(
   {
     experience: { type: String, required: true },
     Address: { type: String, required: true },
@@ -28,4 +28,4 @@ const hostSchema = new Schema<HostType>(
 );
 
 export const HostModel: Model<HostType> =
-  models.Host || model<HostType>("Host", hostSchema);
+  models.Host || model<HostType>("Host", Host);

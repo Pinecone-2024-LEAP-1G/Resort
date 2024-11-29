@@ -27,6 +27,7 @@ export const POST = async (request: NextRequest) => {
     return Response.json({ message: error });
   }
 };
+
 export const DELETE = async (request: NextRequest) => {
   const { _id } = await request.json();
 
