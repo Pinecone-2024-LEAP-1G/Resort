@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { PropertyOverview } from "./PropertyOverView";
 import { PrivacyType } from "./PrivacyType";
 import { PropertyHeader } from "./PropertyHeader";
@@ -23,6 +24,12 @@ export const AboutYourPlace = () => {
     return <PrivacyType />;
   }
 
+=======
+import { PropertyFooter } from "./PropertyFooter";
+import { PropertyHeader } from "./PropertyHeader";
+
+export const AboutYourPlace = () => {
+>>>>>>> 7891b27 (HostSetup first commit)
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
@@ -48,6 +55,7 @@ export const AboutYourPlace = () => {
           </video>
         </div>
       </div>
+<<<<<<< HEAD
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}
@@ -64,6 +72,9 @@ export const AboutYourPlace = () => {
           Next
         </Button>
       </div>
+=======
+      <PropertyFooter />
+>>>>>>> 7891b27 (HostSetup first commit)
     </div>
   );
 };

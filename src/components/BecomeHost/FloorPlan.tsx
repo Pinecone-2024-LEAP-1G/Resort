@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Plus, Minus } from "lucide-react";
@@ -148,4 +149,8 @@ export const FloorPlan = () => {
       </div>
     </div>
   );
+=======
+export const FloorPlan = () => {
+  return;
+>>>>>>> 7891b27 (HostSetup first commit)
 };
