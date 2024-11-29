@@ -1,13 +1,11 @@
 "use client";
 
-import { PropertyOverView } from "@/components/BecomeHost/PropertyOverView";
-import { PropertyStructure } from "@/components/BecomeHost/PropertyStructure";
+import { PropertyOverview } from "@/components/BecomeHost/PropertyOverView";
 
 const BecomeHost = () => {
   return (
     <div>
-      <PropertyOverView />
-      <PropertyStructure />
+      <PropertyOverview />
     </div>
   );
 };
