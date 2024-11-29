@@ -59,12 +59,13 @@ export const ReverseCart = ({ property }: Props) => {
   const dayList = disabledRanges.map((range) =>
     getDaysArray(range.from, range.to),
   );
-  console.log(dayList);
 
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 5),
   });
+
+
 
 
   const [
