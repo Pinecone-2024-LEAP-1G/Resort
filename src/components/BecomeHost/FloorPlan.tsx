@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 870f41b (BecomeHost)
 import { useState } from "react";
@@ -302,4 +303,8 @@ export const FloorPlan = () => {
     </div>
   );
 >>>>>>> 870f41b (BecomeHost)
+=======
+export const FloorPlan = () => {
+  return;
+>>>>>>> 7891b27 (HostSetup first commit)
 };
