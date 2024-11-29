@@ -11,6 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { parseAsFloat, useQueryState, useQueryStates } from "nuqs";
 
 type SearchProps = {
   onMouseEnter: () => void;
@@ -24,10 +25,27 @@ export function DatePickerWithRange({
   onMouseLeave,
   hover,
 }: SearchProps) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
+  // const [check, setCheck] = React.useState<DateRange | undefined>({
+  //   from: new Date(2022, 0, 20),
+  //   to: addDays(new Date(2022, 0, 20), 20),
+  // });
+  // const [date, setDate] = useQueryState(
+  //   {
+  //     lat: parseAsFloat.withDefault(45.18),
+  //     lng: parseAsFloat.withDefault(5.72),
+  //   },
+  //   {
+  //     history: "push",
+  //   },
+  // );
+
+  const [{ from, to }, setDate] = useQueryStates<DateRange | undefined>({
+    // Use variable names that make sense in your codebase
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
+
+  console.log("datae", from, to);
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -65,8 +83,8 @@ export function DatePickerWithRange({
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
+            defaultMonth={from}
+            selected={to}
             onSelect={setDate}
             numberOfMonths={2}
           />

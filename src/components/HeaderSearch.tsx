@@ -1,12 +1,10 @@
 "use client";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import * as React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { PropertyLocationSearch } from "./HeaderDestination";
-
+import { useQueryState } from "nuqs";
 type Property = {
   _id: string;
   address: string;
@@ -25,8 +23,23 @@ export const HeaderSearch = ({
 }: SearchProps) => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [show, setShow] = useState(false);
-  const [addressSearch, setAddressSearch] = useState("");
-  const [location, setLocation] = useState("");
+  const [addressSearch, setAddressSearch] = useQueryState("aimag");
+  // const params = useParams();
+  // const { address } = params;
+  useEffect(() => {
+    const getAddress = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/properties/getAddress?address=${addressSearch}`,
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAddress();
+  }, []);
+
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -43,12 +56,11 @@ export const HeaderSearch = ({
   }, []);
   const searchproperties = properties?.filter((property) => {
     if (!addressSearch) return true;
-    return property.description
+    return property.address
       .toLocaleLowerCase()
       .includes(addressSearch?.toLocaleLowerCase());
   });
-  const proProperties = searchproperties.slice(0, 6);
-  console.log(location);
+
   return (
     <div>
       <div
@@ -60,7 +72,7 @@ export const HeaderSearch = ({
       >
         Where
         <input
-          value={location}
+          value={addressSearch || ""}
           onChange={(e) => setAddressSearch(e.target.value)}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
@@ -75,11 +87,11 @@ export const HeaderSearch = ({
           <div className="h-fit w-[450px] rounded-3xl border-2 bg-white p-10 px-5 py-7">
             <h4 className="font-medium leading-none">Search Region</h4>
             <div className="grid grid-flow-col grid-rows-2 gap-4 px-5 py-5">
-              {proProperties.map((property) => {
+              {searchproperties.slice(0, 6).map((property) => {
                 return (
                   <PropertyLocationSearch
-                    onClick={() => setLocation(property.description)}
-                    address={property?.description}
+                    // onClick={() => setLocation(property.description)}
+                    address={property?.address}
                     propertyPicture={property?.propertyPictures[0]}
                     key={property._id}
                   />

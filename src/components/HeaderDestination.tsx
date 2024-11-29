@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 type SearchProps = {
   address: string;
   propertyPicture: string;
-  onClick: (e: React.onClick) => void;
+  // onClick: (e: React.onClick) => void;
 };
 export const PropertyLocationSearch = ({
   address,
   propertyPicture,
-  onClick,
+  // onClick,
 }: SearchProps) => {
   // const [location, setLocation] = useState("");
   // console.log(location);
@@ -23,7 +23,7 @@ export const PropertyLocationSearch = ({
         }}
         className="h-28 w-28 rounded-xl"
       ></div>
-      <p onClick={(e) => onClick(e)}>{address}</p>
+      <p>{address}</p>
     </div>
   );
 };
