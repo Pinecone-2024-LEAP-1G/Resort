@@ -74,6 +74,8 @@ export const ReverseCart = ({ property, propertyId, images }: Props) => {
     },
   );
 
+
+
   const [
     { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
     setQueries,

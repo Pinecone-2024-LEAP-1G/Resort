@@ -54,6 +54,7 @@ const PropertyDetail = () => {
     getPropertyById();
   }, []);
 
+
   return (
     <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">
