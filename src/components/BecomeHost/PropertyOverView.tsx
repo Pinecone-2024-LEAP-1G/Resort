@@ -1,7 +1,21 @@
 import { Button } from "../ui/button";
+import { PropertyHeader } from "./PropertyHeader";
+import { useState } from "react";
+import { AboutYourPlace } from "./AboutYourPlace";
 
-export const PropertyOverView = () => {
-  const steps = [
+interface Step {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export const PropertyOverview = () => {
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+
+  const handleClick = () => setIsClicked(true);
+
+  const steps: Step[] = [
     {
       id: 1,
       title: "Tell us about your place",
@@ -28,42 +42,76 @@ export const PropertyOverView = () => {
     },
   ];
 
+  if (isClicked) {
+    return <AboutYourPlace />;
+  }
+
   return (
-    <div className="m-0 p-0">
-      <div className="flex flex-row justify-between">
-        <div>
-          <h1 className="h-32 w-[514px] text-[56px] text-[#222222]">
-            {"It's easy to get started on Airbnb"}
+    <div className="flex flex-col">
+      <PropertyHeader />
+      <div className="mx-6 mt-12 flex flex-col space-y-12 md:flex-row md:space-y-0">
+        <div className="flex-1">
+          <h1 className="text-5xl font-bold leading-[1.2] text-gray-900">
+            It’s easy to get started on Airbnb
           </h1>
         </div>
-        <div className="grid grid-cols-1 items-center md:grid-cols-2">
-          <ol className="space-y-6">
+        <div className="grid flex-1 gap-8 md:grid-cols-3">
+          <ol className="space-y-8">
             {steps.map((step) => (
-              <li key={step.id} className="flex items-start space-x-4">
-                <div className="text-2xl font-bold text-gray-800">
-                  {step.id}
-                </div>
-                <div>
-                  <h3 className="text-[22px] font-medium">{step.title}</h3>
-                  <p className="text-lg text-[#6a6a6a]">{step.description}</p>
-                </div>
-              </li>
+              <StepItem
+                key={step.id}
+                id={step.id}
+                title={step.title}
+                description={step.description}
+              />
             ))}
           </ol>
-          <div>
+          <div className="flex flex-col space-y-8">
             {steps.map((step) => (
-              <div key={step.id} className="h-[120px] w-[120px]">
-                <img
-                  src={step.image}
-                  alt={`Step ${step.id}`}
-                  className="h-[120px] w-[120px] object-contain"
-                />
-              </div>
+              <StepImage
+                key={step.id}
+                image={step.image}
+                alt={`Step ${step.id}`}
+              />
             ))}
           </div>
         </div>
       </div>
-      <Button className="flex justify-end">Get Started</Button>
+      <div className="mx-6 mt-12 flex justify-end border-t pt-6">
+        <Button
+          className="rounded-lg bg-pink-600 px-6 py-3 text-lg font-semibold text-white hover:bg-pink-500"
+          onClick={handleClick}
+        >
+          Get started
+        </Button>
+      </div>
     </div>
   );
 };
+
+interface StepItemProps {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const StepItem = ({ id, title, description }: StepItemProps) => (
+  <li className="flex items-start space-x-4 border-b pb-6 last:border-b-0">
+    <div className="text-2xl font-bold text-gray-800">{id}</div>
+    <div>
+      <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+      <p className="mt-2 text-base text-gray-600">{description}</p>
+    </div>
+  </li>
+);
+
+interface StepImageProps {
+  image: string;
+  alt: string;
+}
+
+const StepImage = ({ image, alt }: StepImageProps) => (
+  <div className="flex h-[120px] w-[120px] justify-center md:justify-start">
+    <img src={image} alt={alt} className="h-[120px] w-[120px] object-contain" />
+  </div>
+);
