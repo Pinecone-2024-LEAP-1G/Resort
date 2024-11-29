@@ -12,7 +12,7 @@ interface Props {
   defaultMonth?: Date;
   selected: DateRange | undefined;
   onSelect?: SelectRangeEventHandler;
-  date: DateRange | undefined;
+  date?: DateRange | undefined;
   fromDate?: Date;
   disabled?: DateRange[] | Date[];
   onclick?: () => void;
