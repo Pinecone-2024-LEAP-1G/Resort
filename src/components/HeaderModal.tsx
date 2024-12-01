@@ -19,29 +19,27 @@ import Image from "next/image";
 
 export function HeaderModal() {
   const [profile, setProfile] = useState(false);
-  // const [user, setUser] = useState<null | string>("");
-  // const authSession = async () => {
-  //   const session = await auth();
-  //   if (session) {
-  //     setProfile(true);
-  //   }
-  //   console.log(session);
-  //   // setUser(session);
-  // };
-  // authSession();
-  // console.log(user);
+  const [user, setUser] = useState<string | null>("");
+  const authSession = async () => {
+    const session = await auth();
+    if (session?.user?.email) {
+      setProfile(true);
+    }
+    console.log(session);
+    setUser(session?.user?.image || null);
+  };
+  authSession();
+  console.log(profile);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <button className="flex items-center gap-3 rounded-full border-2 px-4 py-2">
           <Kebab />
           {profile ? (
-            <Image src={""} width={50} height={50} alt="img" />
+            <Image src={user || ""} width={50} height={50} alt="img" />
           ) : (
             <Profile />
           )}
-          {/* {profile && <Profile />}
-          {!profile && <Profile />} */}
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
