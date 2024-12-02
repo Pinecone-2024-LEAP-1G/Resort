@@ -19,7 +19,7 @@ const HostView = () => {
         <div className="h-[230px] w-[320px] cursor-pointer pt-[70px]">
           <HostViewCardSecond />
         </div>
-        <div className="mt-[90px] flex items-center">
+        {/* <div className="mt-[90px] flex items-center">
           <AiFillFlag />
           <Button
             className="font-semi ml-[10px] h-[48px] w-[154px] text-[19px]"
@@ -27,7 +27,7 @@ const HostView = () => {
           >
             Report this profile
           </Button>
-        </div>
+        </div> */}
       </div>
       <div className="mt-[100px] w-[720px]">
         <p className="text-[30px] font-bold">Илүү дэлгэрэнгүй</p>

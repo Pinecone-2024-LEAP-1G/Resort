@@ -13,7 +13,7 @@ const HostViewCard = () => {
       <div className="mx-auto mt-[15px]">
         <div>
           <p className="mt-[10px] text-2xl font-bold">48</p>
-          <p className="text-xs">Cэтгэгдэл</p>
+          <p className="text-xs">Cэтrэrдэл</p>
         </div>
         <div>
           <p className="mt-[10px] text-2xl font-bold">4.91</p>
