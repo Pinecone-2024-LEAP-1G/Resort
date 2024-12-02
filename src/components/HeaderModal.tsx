@@ -13,44 +13,39 @@ import Profile from "./icons/Profile";
 import Kebab from "./icons/Kebab";
 import { SignIn } from "./SignIn";
 import { SignOut } from "./SignOut";
-import { auth } from "@/auth";
-import { useState } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export function HeaderModal() {
-  const [profile, setProfile] = useState(false);
-  const [user, setUser] = useState<string | null>("");
-  const authSession = async () => {
-    const session = await auth();
-    if (session?.user?.email) {
-      setProfile(true);
+  const { data: session } = useSession();
+
+  const renderUserProfile = () => {
+    if (session) {
+      return (
+        <Image
+          src={session?.user?.image || ""}
+          width={40}
+          height={40}
+          alt="img"
+          className="rounded-full"
+        />
+      );
     }
-    console.log(session);
-    setUser(session?.user?.image || null);
+
+    return <Profile />;
   };
-  authSession();
-  console.log(profile);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <button className="flex items-center gap-3 rounded-full border-2 px-4 py-2">
+        <div className="flex items-center gap-3 rounded-full border-2 px-4 py-2">
           <Kebab />
-          {profile ? (
-            <Image src={user || ""} width={50} height={50} alt="img" />
-          ) : (
-            <Profile />
-          )}
-        </button>
+          {renderUserProfile()}
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
-        <DropdownMenuLabel>Sign Up</DropdownMenuLabel>
-        <DropdownMenuItem></DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <span>Gift cards</span>
-        </DropdownMenuItem>
         <form action={SignIn}>
-          <button className="ml-2 text-sm font-normal" type="submit">
+          <button type="submit" className="ml-2 text-sm font-normal">
             Log in
           </button>
         </form>
@@ -66,7 +61,7 @@ export function HeaderModal() {
         <DropdownMenuItem>
           <LogOut />
           <form action={SignOut}>
-            <button className="ml-2 text-sm font-normal" type="submit">
+            <button type="submit" className="ml-2 text-sm font-normal">
               Log out
             </button>
           </form>

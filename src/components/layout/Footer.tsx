@@ -64,19 +64,19 @@ export const Footer = () => {
         </div>
 
         <div className="text-center text-xs text-gray-500 md:text-right">
-          © 2024 Airbnb, Inc. ·{" "}
+          © 2024 Airbnb, Inc. ·
           <a href="#" className="hover:underline">
             Terms
-          </a>{" "}
-          ·{" "}
+          </a>
+          ·
           <a href="#" className="hover:underline">
             Sitemap
-          </a>{" "}
-          ·{" "}
+          </a>
+          ·
           <a href="#" className="hover:underline">
             Privacy
-          </a>{" "}
-          ·{" "}
+          </a>
+          ·
           <a href="#" className="hover:underline">
             Your Privacy Choices
           </a>

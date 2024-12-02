@@ -1,12 +1,12 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
 
-type Property = {
+export type Property = {
   _id: string;
   price: number;
   guests: number;
   address: string;
   description: string;
-  propertyPictures: string;
+  propertyPictures: string[];
   userId: mongoose.Schema.Types.ObjectId;
   categoryId: string;
   totalBedrooms: string;
@@ -27,7 +27,7 @@ const PropertySchema = new Schema<Property>(
     totalOccupancy: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const PropertyModel: Model<Property> =

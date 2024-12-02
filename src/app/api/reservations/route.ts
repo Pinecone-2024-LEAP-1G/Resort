@@ -1,3 +1,4 @@
+import { connectToMongoDB } from "@/lib/db";
 import {
   AvailableListModel,
   PropertyModel,
@@ -5,6 +6,7 @@ import {
 } from "@/lib/models";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const POST = async (request: NextRequest) => {
   const {
     checkIn,

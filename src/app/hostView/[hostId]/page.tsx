@@ -8,12 +8,6 @@ import HostReviewCard from "@/components/HostView/HostReviewCard";
 import { PropertyCard } from "@/components/HostView/PropertyCard";
 import { FcNext } from "react-icons/fc";
 import { FcPrevious } from "react-icons/fc";
-import { useState, useEffect } from "react";
-import mongoose from "mongoose";
-import axios from "axios";
-
-
-
 
 const HostView = () => {
   return (
@@ -45,11 +39,14 @@ const HostView = () => {
         </div>
         <div className="">
           <p className="text-s mb-[32px] w-[700px]">
-          Горхи Тэрэлжийн Байгалын Цогцолбор газарт уул ус ой модныхоо хаяанд байрладаг, цэвэрхэн тохилог манай амралтанд та бүхэн байгууллага, анги хамт олон, найз нөхөд, гэр бүлээрээ ирж үзэсгэлэнт байгалын сайханд, эрүүл цэвэр агаарт тав тухтай амрахыг урьж байна.
+            Горхи Тэрэлжийн Байгалын Цогцолбор газарт уул ус ой модныхоо хаяанд
+            байрладаг, цэвэрхэн тохилог манай амралтанд та бүхэн байгууллага,
+            анги хамт олон, найз нөхөд, гэр бүлээрээ ирж үзэсгэлэнт байгалын
+            сайханд, эрүүл цэвэр агаарт тав тухтай амрахыг урьж байна.
           </p>
           <div className="mb-[32px] border-b-2 border-black"></div>
           <div className="mb-[32px] flex justify-between">
-            <p className="font-bold">Red Rock resort талаар  </p>
+            <p className="font-bold">Red Rock resort талаар </p>
             <div className="flex cursor-pointer gap-2">
               <FcPrevious className="rounded-sm hover:bg-slate-400" />
               <FcNext className="rounded-sm hover:bg-slate-400" />
@@ -79,13 +76,13 @@ const HostView = () => {
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
         <div className="flex justify-between">
-          <p className="text-[30px] font-bold">Hans's listings</p>
+          <p className="text-[30px] font-bold">Hanss listings</p>
           <div className="mt-2 flex cursor-pointer gap-2">
             <FcPrevious className="rounded-sm hover:bg-slate-400" />
             <FcNext className="rounded-sm hover:bg-slate-400" />
           </div>
         </div>
-        <div className="mt-[40px] mb-[180px] flex gap-3">
+        <div className="mb-[180px] mt-[40px] flex gap-3">
           <PropertyCard />
           <PropertyCard />
           <PropertyCard />

@@ -21,8 +21,7 @@ type HomeCardProps = {
 };
 
 export default function HomeCard(props: HomeCardProps) {
-  const { propertyId, address, rating, distance, price, propertyPictures } =
-    props;
+  const { propertyId, propertyPictures } = props;
   const router = useRouter();
   return (
     <div>
