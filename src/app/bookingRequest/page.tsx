@@ -1,7 +1,6 @@
 "use client";
 
 import { PaymentDetail } from "@/components/PaymentDetail/PaymentDetail";
-import { PriceDetails } from "@/components/PaymentDetail/PriceDetails";
 import { RulesAndPolicy } from "@/components/PaymentDetail/RulesAndPolicy";
 import {
   DropdownMenu,
@@ -43,13 +42,16 @@ const BookingRequest = () => {
   const getProperty = async () => {
     try {
       const { data } = await axios.get(
-        "/api/properties/6743fe1c07aa683f44437fa1",
+        "/api/properties/673eaff858c0a684b6b3c1d9",
       );
+      console.log(data);
+
       setProperty(data.property);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getProperty();
   }, []);
