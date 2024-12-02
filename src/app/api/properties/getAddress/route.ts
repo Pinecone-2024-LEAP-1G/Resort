@@ -9,9 +9,10 @@ export const GET = async (request: NextRequest) => {
   if (!from || !to) {
     throw new Error("Missing 'from' or 'to' query parameters.");
   }
-  const checkindate = new Date(from);
-  const checkoutdate = new Date(to);
+  const possibleday = [];
   try {
+    const checkindate = new Date(from);
+    const checkoutdate = new Date(to);
     const getAddressProperty = await PropertyModel.find({ address: address });
     const result = await Promise.all(
       getAddressProperty.map(async (property) => {
@@ -24,12 +25,13 @@ export const GET = async (request: NextRequest) => {
             },
           ],
         });
-        return { possibleProperty };
+
+        if (possibleProperty.length === 0) return { property };
+        else return { possibleProperty };
       }),
     );
 
     const data = result.filter((res) => res.possibleProperty.length === 0);
-
     return Response.json({ possibleProperty: data });
   } catch (error) {
     return Response.json({ error: error });

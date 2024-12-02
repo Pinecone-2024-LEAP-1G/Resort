@@ -9,21 +9,31 @@ import { DatePickerWithRange } from "./HeaderDate";
 import { PopoverDemo } from "./SearchGuests";
 import React, { useEffect } from "react";
 import axios from "axios";
+import { useQueryStates, useQueryState } from "nuqs";
+import { addDays } from "date-fns";
+import { DateRange } from "react-day-picker";
 
 const Header = () => {
   const router = useRouter();
   const [hover, setHover] = React.useState<number>();
-  // const searchdata = async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:3000/api/properties/getaddress?address=${}`);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   searchdata();
-  // }, []);
+  const [addressSearch] = useQueryState("");
+  const [date] = useQueryStates<DateRange | undefined>({
+    from: new Date(2022, 0, 20),
+    to: addDays(new Date(2022, 0, 20), 20),
+  });
+  const searchProperty = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/properties/getAddress?address=${addressSearch}&from=${date?.from}&to=${date?.to}`,
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    searchProperty();
+  }, []);
   return (
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
@@ -44,7 +54,7 @@ const Header = () => {
           onMouseLeave={() => setHover(0)}
         />
         <PopoverDemo
-          // onClick={}
+          onClick={searchProperty}
           hover={hover === 3 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => setHover(3)}
           onMouseLeave={() => setHover(0)}

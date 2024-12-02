@@ -23,21 +23,21 @@ export const HeaderSearch = ({
 }: SearchProps) => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [show, setShow] = useState(false);
-  const [addressSearch, setAddressSearch] = useQueryState("aimag");
+  const [addressSearch, setAddressSearch] = useQueryState("address");
 
-  useEffect(() => {
-    const getAddress = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/properties/getAddress?address=${addressSearch}`,
-        );
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAddress();
-  }, []);
+  // useEffect(() => {
+  //   const getAddress = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:3000/api/properties/getAddress?address=${addressSearch}`,
+  //       );
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAddress();
+  // }, []);
 
   useEffect(() => {
     const fetchProperties = async () => {

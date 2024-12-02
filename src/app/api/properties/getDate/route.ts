@@ -5,7 +5,6 @@ export const GET = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
   const from = searchParams.get("from");
   const to = searchParams.get("to");
-  console.log(from, to);
   try {
     const searchDate = await AvailableListModel.find({
       $or: [

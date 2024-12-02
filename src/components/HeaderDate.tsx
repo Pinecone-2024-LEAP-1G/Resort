@@ -30,20 +30,19 @@ export function DatePickerWithRange({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
-  React.useEffect(() => {
-    const getAddress = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/properties/getAddress?from=${date?.from}&to=${date?.to}`,
-        );
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAddress();
-  }, []);
-  console.log(date);
+
+  // const getAddress = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3000/api/properties/getAddress?from=${date?.from}&to=${date?.to}`,
+  //     );
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // React.useEffect(()=>{ getAddress()},[])
+
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
