@@ -1,14 +1,15 @@
 "use client";
 import { Categories } from "@/components/Categories";
 import HomeCard from "@/components/HomeCard";
+import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
 
 const Home = () => {
-  const [properties, setProperties] = useState<any[]>([]);
+  const [properties, setProperties] = useState<Property[]>([]);
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await fetch("http://localhost:3000/api/properties");
+      const response = await fetch("/api/properties");
       const data = await response.json();
       setProperties(data.properties);
     };

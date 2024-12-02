@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { CategoryModel } from "@/lib/models/category.model";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const POST = async (request: NextRequest) => {
   const { name } = await request.json();
   try {

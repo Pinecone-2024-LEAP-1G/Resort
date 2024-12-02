@@ -1,5 +1,7 @@
+import { connectToMongoDB } from "@/lib/db";
 import { PropertyModel } from "@/lib/models";
 
+connectToMongoDB();
 export const GET = async (
   request: Request,
   { params }: { params: Promise<{ propertyId: string }> },

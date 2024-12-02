@@ -8,10 +8,10 @@ const Profile = () => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
         color="gray"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       >
         <path d="M18 20a6 6 0 0 0-12 0" />
         <circle cx="12" cy="10" r="4" />

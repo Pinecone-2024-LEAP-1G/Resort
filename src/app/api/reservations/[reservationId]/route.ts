@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const GET = async (
   request: NextRequest,
   {

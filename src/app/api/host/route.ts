@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { HostModel } from "@/lib/models/host.model";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const GET = async () => {
   try {
     const host = await HostModel.find().populate("properties");

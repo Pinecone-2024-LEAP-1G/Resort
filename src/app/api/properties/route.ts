@@ -1,6 +1,9 @@
+import { connectToMongoDB } from "@/lib/db";
 import { PropertyModel, UserModel } from "@/lib/models";
 import { HostModel } from "@/lib/models/host.model";
 import { NextRequest } from "next/server";
+
+connectToMongoDB();
 
 export const GET = async () => {
   try {
