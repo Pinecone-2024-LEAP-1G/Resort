@@ -4,15 +4,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Profile from "./icons/Profile";
 import Kebab from "./icons/Kebab";
-import { SignIn } from "./SignIn";
-import { SignOut } from "./SignOut";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
@@ -44,11 +41,16 @@ export function HeaderModal() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
-        <form action={SignIn}>
-          <button type="submit" className="ml-2 text-sm font-normal">
+        <DropdownMenuItem>
+          {" "}
+          <button
+            type="submit"
+            className="text-sm font-normal"
+            onClick={() => signIn("google")}
+          >
             Log in
-          </button>
-        </form>
+          </button>{" "}
+        </DropdownMenuItem>
         <DropdownMenuItem>
           <span>Airbnb your home</span>
         </DropdownMenuItem>
@@ -60,11 +62,13 @@ export function HeaderModal() {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LogOut />
-          <form action={SignOut}>
-            <button type="submit" className="ml-2 text-sm font-normal">
-              Log out
-            </button>
-          </form>
+
+          <button
+            className="ml-2 text-sm font-normal"
+            onClick={() => signOut()}
+          >
+            Log Out
+          </button>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
