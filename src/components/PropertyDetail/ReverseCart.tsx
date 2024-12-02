@@ -1,50 +1,79 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
-import { DateRange } from "react-day-picker";
+import React, { useEffect, useState } from "react";
 import { addDays } from "date-fns";
 import { Property } from "@/app/property/[propertyId]/page";
-import { parseAsInteger, useQueryStates } from "nuqs";
+import { parseAsInteger, parseAsIsoDate, useQueryStates } from "nuqs";
 import { GuestPopover } from "./GuestPopover";
 import { DatePickerWithRange } from "./DatePickerWithRange";
-// import axios from "axios";
-
-const reservation = [
-  {
-    _id: "673ff5e491e65705da8f84e2",
-    propertyId: "673ee32911e7953321c22737",
-    reservationId: "673ee36a11e7953321c22739",
-    checkInDate: "2024-11-19T08:45:13.954+00:00",
-    checkOutDate: "2024-11-25T08:45:13.954+00:00",
-  },
-  {
-    _id: "673ff5e491e65705da8f84e2",
-    propertyId: "673ee32911e7953321c22737",
-    reservationId: "673ee36a11e7953321c22739",
-    checkInDate: "2024-11-12T08:45:13.954+00:00",
-    checkOutDate: "2024-11-18T08:45:13.954+00:00",
-  },
-  {
-    _id: "673ff5e491e65705da8f84e2",
-    propertyId: "673ee32911e7953321c22737",
-    reservationId: "673ee36a11e7953321c22739",
-    checkInDate: "2024-12-12T08:45:13.954+00:00",
-    checkOutDate: "2024-12-14T08:45:13.954+00:00",
-  },
-];
+import axios from "axios";
+import { AvailableList } from "@/lib/models";
 
 interface Props {
   property?: Property;
+  propertyId?: IntrinsicAttributes & Props;
+  images?: IntrinsicAttributes[] & Props;
 }
-export const ReverseCart = ({ property }: Props) => {
-  const disabledRanges = reservation.map((item) => ({
+export const ReverseCart = ({ property, propertyId, images }: Props) => {
+  const [reservation, setReservation] = useState<AvailableList[]>([]);
+  useEffect(() => {
+    const getReservation = async () => {
+      const response = await axios.get<AvailableList[]>(
+        `http://localhost:3000/api/availablelists?propertyId=${propertyId}`,
+      );
+      setReservation(response.data.AvailableLists);
+    };
+
+    getReservation();
+  }, [propertyId]);
+  const disabledRanges = reservation?.map((item) => ({
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
   }));
 
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 5),
+  const disabledDays = reservation?.flatMap((item) => {
+    const days = [];
+    const current = new Date(item.checkInDate);
+    while (current <= new Date(item.checkOutDate)) {
+      days.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
+    return days;
   });
+
+  const findNearestValidDate = (startDate: Date) => {
+    const date = new Date(startDate);
+    while (
+      disabledDays.some(
+        (disabledDay) =>
+          disabledDay.getFullYear() === date.getFullYear() &&
+          disabledDay.getMonth() === date.getMonth() &&
+          disabledDay.getDate() === date.getDate(),
+      )
+    )
+      date.setDate(date.getDate() + 1);
+    return date;
+  };
+
+  const today = new Date();
+  const isCurrentYear2024 = today.getFullYear() === 2024;
+  const baseDate = isCurrentYear2024 ? today : new Date(2024, 0, 1);
+  const nearestValidFromDate = findNearestValidDate(baseDate);
+
+  const nearestValidToDate = addDays(nearestValidFromDate, 3);
+
+  const [{ from, to }, setDate] = useQueryStates(
+    {
+      from: parseAsIsoDate.withDefault(nearestValidFromDate),
+      to: parseAsIsoDate.withDefault(nearestValidToDate),
+    },
+    {
+      urlKeys: {
+        from: "start",
+        to: "end",
+      },
+    },
+  );
+
   const [
     { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
     setQueries,
@@ -57,16 +86,16 @@ export const ReverseCart = ({ property }: Props) => {
 
   const price = property?.price ?? Infinity;
 
-  const fromDate = date?.from ?? new Date();
-  const toDate = date?.to ?? new Date();
-
   const getDaysBetweenDates = (from: Date, to: Date) => {
     const oneDayInMilliseconds = 1000 * 60 * 60 * 24;
     const timeDifference = to.getTime() - from.getTime();
     return Math.abs(timeDifference) / oneDayInMilliseconds;
   };
 
-  const daysBetween = getDaysBetweenDates(fromDate, toDate);
+  const daysBetween = getDaysBetweenDates(
+    nearestValidFromDate,
+    nearestValidToDate,
+  );
 
   const priceOfDates = price * daysBetween;
 
@@ -76,12 +105,11 @@ export const ReverseCart = ({ property }: Props) => {
     <div className="ml-auto grid h-[495px] w-[372px] justify-center gap-2 rounded-lg border p-8 shadow-lg">
       <p className="mb-4">Үнэ: {property?.price}₮</p>
       <DatePickerWithRange
-        selected={date}
+        selected={{ from, to }}
         onSelect={setDate}
-        defaultMonth={date?.from || new Date()}
-        date={date}
-        fromDate={new Date()}
+        defaultMonth={from || new Date()}
         disabled={disabledRanges}
+        date={{ from, to }}
       />
       <GuestPopover
         adult={Number(numberOfAdult)}

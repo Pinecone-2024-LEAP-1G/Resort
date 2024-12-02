@@ -25,7 +25,6 @@ export const POST = async (request: NextRequest) => {
     categoryId,
     propertyPictures,
     totalBedrooms,
-    totalOccupancy,
     totalBathrooms,
     email,
   } = await request.json();
@@ -51,7 +50,6 @@ export const POST = async (request: NextRequest) => {
       categoryId,
       propertyPictures,
       totalBedrooms,
-      totalOccupancy,
       totalBathrooms,
       email,
     });

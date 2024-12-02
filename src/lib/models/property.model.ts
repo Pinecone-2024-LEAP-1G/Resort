@@ -10,7 +10,6 @@ export type Property = {
   userId: mongoose.Schema.Types.ObjectId;
   categoryId: string;
   totalBedrooms: string;
-  totalOccupancy: string;
   totalBathrooms: string;
 };
 
@@ -24,7 +23,6 @@ const PropertySchema = new Schema<Property>(
     categoryId: { type: String, ref: "Category" },
     propertyPictures: [{ type: String, required: true }],
     totalBedrooms: { type: String, required: true },
-    totalOccupancy: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
   },
   { timestamps: true },

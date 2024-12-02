@@ -2,11 +2,13 @@ import Logo from "./icons/Logo";
 
 import Search from "./icons/Search";
 import { HeaderModal } from "./HeaderModal";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter()
   return (
     <div className="flex items-center justify-between px-2 py-8">
-      <div>
+      <div onClick={()=>router.push("/")}>
         <Logo />
       </div>
       <div className="relative">

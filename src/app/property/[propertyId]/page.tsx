@@ -3,7 +3,6 @@
 import { LuShare } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import Image from "next/image";
-import { ReviewStar } from "@/components/icons/ReviewStar";
 import { RightArrow } from "@/components/icons";
 import { FullOption } from "@/components/PropertyDetail/FullOption";
 import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
@@ -25,7 +24,7 @@ export type Property = {
   guests: number;
   address: string;
   description: string;
-  propertyPictures: string;
+  propertyPictures: string[];
   userId: string;
   categoryId: string;
   totalBedrooms: string;
@@ -37,6 +36,7 @@ const PropertyDetail = () => {
   const [property, setProperty] = useState<Property>();
   const params = useParams();
   const { propertyId } = params;
+  const [isLoading, setIsLoading] = useState(false);
 
   const getPropertyById = async () => {
     try {
@@ -45,6 +45,7 @@ const PropertyDetail = () => {
       );
 
       setProperty(response.data.property);
+      setIsLoading(true);
     } catch (error) {
       console.log(error);
     }
@@ -71,13 +72,15 @@ const PropertyDetail = () => {
       <div className="mt-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="col-span-1 sm:col-span-2 lg:col-span-2">
-            <Image
-              src={images[0]}
-              alt="Main Image"
-              width={1200}
-              height={800}
-              className="h-full w-full rounded-lg"
-            />
+            {isLoading && (
+              <Image
+                src={images[0]}
+                alt="Main Image"
+                width={1200}
+                height={800}
+                className="h-full w-full rounded-lg"
+              />
+            )}
           </div>
 
           {images.map((image, index) => (
@@ -117,7 +120,7 @@ const PropertyDetail = () => {
             </div>
           </div>
           <div className="flex-1 rounded-lg">
-            <ReverseCart property={property} />
+            <ReverseCart property={property} propertyId={propertyId} />
           </div>
         </div>
       </div>

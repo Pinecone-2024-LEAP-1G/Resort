@@ -12,9 +12,10 @@ interface Props {
   defaultMonth?: Date;
   selected: DateRange | undefined;
   onSelect?: SelectRangeEventHandler;
-  date: DateRange | undefined;
+  date?: DateRange | undefined;
   fromDate?: Date;
   disabled?: DateRange[] | Date[];
+  onclick?: () => void;
 }
 
 export const DatePickerWithRange = ({
@@ -24,6 +25,7 @@ export const DatePickerWithRange = ({
   date,
   fromDate,
   disabled,
+  onclick,
 }: Props) => {
   return (
     <div>
@@ -38,6 +40,7 @@ export const DatePickerWithRange = ({
                 !onSelect &&
                   "day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground",
               )}
+              onClick={onclick}
             >
               {date?.from ? (
                 date.to ? (
