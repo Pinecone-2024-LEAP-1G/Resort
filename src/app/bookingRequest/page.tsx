@@ -3,21 +3,13 @@
 import { PaymentDetail } from "@/components/PaymentDetail/PaymentDetail";
 import { RulesAndPolicy } from "@/components/PaymentDetail/RulesAndPolicy";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import axios from "axios";
 import { Dot, Medal, Star } from "lucide-react";
-import { useParams } from "next/navigation";
+import mongoose from "mongoose";
 import { useEffect, useState } from "react";
 
 export type Property = {
@@ -34,19 +26,40 @@ export type Property = {
   totalBathrooms: string;
 };
 
+type Reservation = {
+  _id: string;
+  userId: mongoose.Schema.Types.ObjectId;
+  propertyId: mongoose.Schema.Types.ObjectId;
+  checkIn: Date;
+  checkOut: Date;
+  adult: number;
+  children: number;
+  infants: number;
+  totalPrice: number;
+};
+
 const BookingRequest = () => {
   const [property, setProperty] = useState<Property>();
-  const params = useParams();
-  const { propertyId } = params;
+  const [reservation, setReservation] = useState<Reservation>();
+  // const params = useParams();
+  // const { propertyId } = params;
 
   const getProperty = async () => {
     try {
       const { data } = await axios.get(
-        "/api/properties/673eaff858c0a684b6b3c1d9",
+        "/api/properties/67492dc3073b29779b03c105",
       );
-      console.log(data);
-
       setProperty(data.property);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getReservation = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:3000/api/reservations/6743f6dfd5e3c0e3bd9f50f1",
+      );
+      setReservation(data.reservation);
     } catch (error) {
       console.log(error);
     }
@@ -55,14 +68,18 @@ const BookingRequest = () => {
   useEffect(() => {
     getProperty();
   }, []);
-  console.log(property);
+  // console.log(property);
+
+  useEffect(() => {
+    getReservation();
+  }, []);
+  console.log(reservation);
 
   return (
     <div>
-      <div className="mx-20 grid grid-cols-2">
+      <div className="w-full mx-20 grid grid-cols-2">
         <PaymentDetail />
         <div className="sticky top-10 ml-[92px]">
-          {/* <PriceDetails /> */}
           <div className="mb-[88px] h-[360px] w-[456px] gap-4 rounded-2xl border p-6">
             <div className="mb-4 flex flex-row gap-4">
               <div
@@ -72,10 +89,7 @@ const BookingRequest = () => {
                 }}
               ></div>
               <div className="flex flex-col justify-center gap-1">
-                <p className="text-lg font-medium">
-                  Ba hao Residence x SANTIPHAP ROOM
-                </p>
-                <p>Room in townhouse</p>
+                <p className="text-lg font-medium">{property?.address}</p>
                 <div className="flex flex-row items-center gap-1 text-sm">
                   <Star className="h-3 w-3 fill-black" />
                   <p className="font-semibold">4.94</p>
@@ -91,7 +105,7 @@ const BookingRequest = () => {
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between">
                   <p>${property?.price}</p>
-                  <p>$137.61</p>
+                  <p>${property?.price}</p>
                 </div>
                 <div className="flex justify-between">
                   <HoverCard>
@@ -116,24 +130,9 @@ const BookingRequest = () => {
               </div>
             </div>
             <div className="flex justify-between pt-4">
-              <p>
-                Total
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="underline underline-offset-1">
-                    (USD)
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-[]">
-                    <DropdownMenuLabel>Choose a currency</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Australian dollar - $</DropdownMenuItem>
-                    <DropdownMenuItem>Brazilian real - R$</DropdownMenuItem>
-                    <DropdownMenuItem>Bulgarian lev - лв.</DropdownMenuItem>
-                    <DropdownMenuItem>Canadian dollar - $</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </p>
+              <p>Total</p>
 
-              <p>$137.61</p>
+              <p>{reservation[0]?.totalPrice}</p>
             </div>
           </div>
         </div>
