@@ -11,8 +11,11 @@ import { AvailableList } from "@/lib/models";
 interface Props {
   property?: Property;
   propertyId?: IntrinsicAttributes & Props;
+  images?: IntrinsicAttributes[] & Props;
 }
-export const ReverseCart = ({ property, propertyId }: Props) => {
+export const ReverseCart = ({ property, propertyId, images }: Props) => {
+  console.log(images);
+
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   useEffect(() => {
     const getReservation = async () => {
@@ -95,9 +98,6 @@ export const ReverseCart = ({ property, propertyId }: Props) => {
     nearestValidFromDate,
     nearestValidToDate,
   );
-  console.log(nearestValidFromDate);
-
-  console.log(nearestValidToDate);
 
   const priceOfDates = price * daysBetween;
 

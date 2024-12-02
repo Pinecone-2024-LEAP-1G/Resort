@@ -120,7 +120,11 @@ const PropertyDetail = () => {
             </div>
           </div>
           <div className="flex-1 rounded-lg">
-            <ReverseCart property={property} propertyId={propertyId} />
+            <ReverseCart
+              property={property}
+              propertyId={propertyId}
+              images={property?.propertyPictures}
+            />
           </div>
         </div>
       </div>
