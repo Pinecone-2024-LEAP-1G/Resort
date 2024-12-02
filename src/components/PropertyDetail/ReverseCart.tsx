@@ -14,8 +14,6 @@ interface Props {
   images?: IntrinsicAttributes[] & Props;
 }
 export const ReverseCart = ({ property, propertyId, images }: Props) => {
-  console.log(images);
-
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   useEffect(() => {
     const getReservation = async () => {
