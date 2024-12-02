@@ -1,19 +1,22 @@
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type SearchProps = {
   address: string;
   propertyPicture: string;
-  // onClick: (e: React.onClick) => void;
+  propertyId: string;
 };
 export const PropertyLocationSearch = ({
   address,
   propertyPicture,
-  // onClick,
+  propertyId,
 }: SearchProps) => {
-  // const [location, setLocation] = useState("");
-  // console.log(location);
+  const router = useRouter();
   return (
-    <div className="flex flex-col gap-1">
+    <div
+      className="flex flex-col gap-1"
+      onClick={() => router.push(`/property/${propertyId}`)}
+    >
       <div
         style={{
           backgroundImage: `url(${propertyPicture})`,

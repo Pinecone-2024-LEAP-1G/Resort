@@ -10,11 +10,13 @@ type SearchProps = {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   hover: string;
+  // onClick: () => void;
 };
 export function PopoverDemo({
   onMouseEnter,
   onMouseLeave,
   hover,
+  // onClick,
 }: SearchProps) {
   const [adultNumber, setAdultNumber] = useState(0);
   const [childrenNumber, setChildrenNumber] = useState(0);
@@ -100,7 +102,10 @@ export function PopoverDemo({
           </div>
         </PopoverContent>
       </Popover>
-      <div className="mr-1 flex gap-1 rounded-full bg-pink-600 px-4 py-3 text-white">
+      <div
+        // onClick={onClick}
+        className="mr-1 flex gap-1 rounded-full bg-pink-600 px-4 py-3 text-white"
+      >
         <Search /> Search
       </div>
     </div>

@@ -24,8 +24,7 @@ export const HeaderSearch = ({
   const [properties, setProperties] = useState<Property[]>([]);
   const [show, setShow] = useState(false);
   const [addressSearch, setAddressSearch] = useQueryState("aimag");
-  // const params = useParams();
-  // const { address } = params;
+
   useEffect(() => {
     const getAddress = async () => {
       try {
@@ -90,7 +89,7 @@ export const HeaderSearch = ({
               {searchproperties.slice(0, 6).map((property) => {
                 return (
                   <PropertyLocationSearch
-                    // onClick={() => setLocation(property.description)}
+                    propertyId={property._id}
                     address={property?.address}
                     propertyPicture={property?.propertyPictures[0]}
                     key={property._id}
