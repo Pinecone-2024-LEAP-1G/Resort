@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from "mongoose";
 
-type AvailableList = {
+export type AvailableList = {
   _id: string;
   propertyId: string;
   reservationId: string;

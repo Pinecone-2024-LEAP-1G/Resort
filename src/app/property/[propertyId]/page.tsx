@@ -36,9 +36,7 @@ const PropertyDetail = () => {
   const [property, setProperty] = useState<Property>();
   const params = useParams();
   const { propertyId } = params;
-const [isLoading, setIsLoading] = useState(false)
-  
-  
+  const [isLoading, setIsLoading] = useState(false);
 
   const getPropertyById = async () => {
     try {
@@ -47,7 +45,7 @@ const [isLoading, setIsLoading] = useState(false)
       );
 
       setProperty(response.data.property);
-      setIsLoading(true)
+      setIsLoading(true);
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +53,6 @@ const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     getPropertyById();
   }, []);
-
 
   return (
     <div className="mx-auto w-[1200px]">
@@ -75,13 +72,15 @@ const [isLoading, setIsLoading] = useState(false)
       <div className="mt-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="col-span-1 sm:col-span-2 lg:col-span-2">
-            {isLoading && <Image
-              src={images[0]}
-              alt="Main Image"
-              width={1200}
-              height={800}
-              className="h-full w-full rounded-lg"
-            />}
+            {isLoading && (
+              <Image
+                src={images[0]}
+                alt="Main Image"
+                width={1200}
+                height={800}
+                className="h-full w-full rounded-lg"
+              />
+            )}
           </div>
 
           {images.map((image, index) => (
@@ -121,7 +120,7 @@ const [isLoading, setIsLoading] = useState(false)
             </div>
           </div>
           <div className="flex-1 rounded-lg">
-            <ReverseCart property={property} />
+            <ReverseCart property={property} propertyId={propertyId} />
           </div>
         </div>
       </div>
