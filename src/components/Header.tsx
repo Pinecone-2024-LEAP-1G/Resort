@@ -17,36 +17,19 @@ const Header = () => {
   const router = useRouter();
   const [hover, setHover] = React.useState<number>();
   const [addressSearch, setAddressSearch] = useQueryState("address");
-  const [guests] = useQueryState("");
+  const [adultNumber, setAdultNumber] = useState(0);
+  const [childrenNumber, setChildrenNumber] = useState(0);
+  const [infantsNumber, setInfantsNumber] = useState(0);
+  const [petNumber, setPetNumber] = useState(0);
+  const [guestsValue, setGuestsValue] = useState(false);
+  const [guests, setGuests] = useQueryState<number | undefined>("guests");
   const [date, setDate] = useQueryStates<DateRange | undefined>({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
 
-  const [adultNumber, setAdultNumber] = useState(0);
-  const [childrenNumber, setChildrenNumber] = useState(0);
-  const [infantsNumber, setInfantsNumber] = useState(0);
-  const [petNumber, setPetNumber] = useState(0);
-  const [guests, setGuests] = useQueryState<number | undefined>("guests");
-  const minusAdult = () => {
-    if (adultNumber > 0) setAdultNumber((prev) => prev - 1);
-  };
-  const minusChildren = () => {
-    if (childrenNumber > 0) setChildrenNumber((prev) => prev - 1);
-  };
-  const minusPet = () => {
-    if (petNumber > 0) setPetNumber((prev) => prev - 1);
-  };
-  const minusInfants = () => {
-    if (infantsNumber > 0) setInfantsNumber((prev) => prev - 1);
-  };
-
-  const allGuests = () => {
-    const number = adultNumber + childrenNumber + petNumber + infantsNumber;
-    setGuests(number);
-  };
-
   const searchProperty = async () => {
+    console.log(addressSearch, date, guests);
     try {
       const response = await axios.get(
         `http://localhost:3000/api/properties/getAddress?address=${addressSearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
@@ -54,6 +37,11 @@ const Header = () => {
       console.log(response.data);
       setAddressSearch("");
       setDate(null);
+      setAdultNumber(0);
+      setChildrenNumber(0);
+      setPetNumber(0);
+      setInfantsNumber(0);
+      setGuests(0);
     } catch (error) {
       console.error(error);
     }
@@ -61,6 +49,7 @@ const Header = () => {
   useEffect(() => {
     searchProperty();
   }, []);
+
   return (
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
@@ -85,11 +74,17 @@ const Header = () => {
           childrenNumber={childrenNumber}
           infantsNumber={infantsNumber}
           petNumber={petNumber}
-          minusAdult={minusAdult}
-          minusChildren={minusChildren}
-          minusInfants={minusInfants}
+          decreaseAdult={() =>
+            adultNumber > 0 && setAdultNumber((prev) => prev - 1)
+          }
+          decreaseChildren={() =>
+            childrenNumber > 0 && setChildrenNumber((prev) => prev - 1)
+          }
+          decreaseInfants={() =>
+            infantsNumber > 0 && setInfantsNumber((prev) => prev - 1)
+          }
           onClick={searchProperty}
-          minusPet={minusPet}
+          decreasePet={() => petNumber > 0 && setPetNumber((prev) => prev - 1)}
           plusAdult={() => setAdultNumber((prev) => prev + 1)}
           plusChildren={() => setChildrenNumber((prev) => prev + 1)}
           plusInfants={() => setInfantsNumber((prev) => prev + 1)}
@@ -97,6 +92,11 @@ const Header = () => {
           hover={hover === 3 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => setHover(3)}
           onMouseLeave={() => setHover(0)}
+          submit={() =>
+            setGuests(
+              adultNumber + childrenNumber + petNumber + infantsNumber,
+            ) || setGuestsValue(true)
+          }
         />
       </div>
       <div>

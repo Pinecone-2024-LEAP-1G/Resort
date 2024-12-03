@@ -80,7 +80,7 @@ export const HeaderSearch = ({
           className={`flex flex-col rounded-full text-black ${hover}`}
           placeholder="               Search "
         />
-      </div>{" "}
+      </div>
       {show && (
         <div className="fixed bottom-0 left-0 right-0 top-24 z-30 flex justify-center">
           <div className="h-fit w-[450px] rounded-3xl border-2 bg-white p-10 px-5 py-7">

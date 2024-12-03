@@ -3,28 +3,28 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { strict } from "assert";
 import { CircleMinus, CirclePlus, Search } from "lucide-react";
-import { useQueryState } from "nuqs";
-import { useState } from "react";
+import { Button } from "./ui/button";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 type SearchProps = {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   hover: string;
   onClick: () => void;
-  infantsNumber: string;
-  childrenNumber: string;
-  adultNumber: string;
-  petNumber: string;
-  minusAdult: () => void;
-  minusChildren: () => void;
-  minusInfants: () => void;
-  minusPet: () => void;
+  infantsNumber: number;
+  childrenNumber: number;
+  adultNumber: number;
+  petNumber: number;
+  decreaseAdult: () => void;
+  decreaseChildren: () => void;
+  decreaseInfants: () => void;
+  decreasePet: () => void;
   plusAdult: () => void;
   plusChildren: () => void;
   plusInfants: () => void;
   plusPet: () => void;
+  submit: () => void;
 };
 
 export function PopoverDemo({
@@ -36,51 +36,29 @@ export function PopoverDemo({
   childrenNumber,
   adultNumber,
   petNumber,
-  minusAdult,
-  minusChildren,
-  minusInfants,
-  minusPet,
+  decreaseAdult,
+  decreaseChildren,
+  decreaseInfants,
+  decreasePet,
   plusAdult,
   plusChildren,
   plusInfants,
   plusPet,
+  submit,
 }: SearchProps) {
-  // const [adultNumber, setAdultNumber] = useState(0);
-  // const [childrenNumber, setChildrenNumber] = useState(0);
-  // const [infantsNumber, setInfantsNumber] = useState(0);
-  // const [petNumber, setPetNumber] = useState(0);
-  // const [guests, setGuests] = useQueryState<number | undefined>("guests");
-  // const minusAdult = () => {
-  //   if (adultNumber > 0) setAdultNumber((prev) => prev - 1);
-  // };
-  // const minusChildren = () => {
-  //   if (childrenNumber > 0) setChildrenNumber((prev) => prev - 1);
-  // };
-  // const minusPet = () => {
-  //   if (petNumber > 0) setPetNumber((prev) => prev - 1);
-  // };
-  // const minusInfants = () => {
-  //   if (infantsNumber > 0) setInfantsNumber((prev) => prev - 1);
-  // };
-
-  // const allGuests = () => {
-  //   const number = adultNumber + childrenNumber + petNumber + infantsNumber;
-  //   setGuests(number);
-  // };
-
   return (
     <div
       className={`flex w-[218px] flex-row items-center justify-center rounded-full ${hover}`}
     >
       <Popover>
         <PopoverTrigger asChild>
-          <div
+          <button
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             className={`ml-4 flex w-[234px] flex-col items-start justify-center rounded-full ${hover}`}
           >
             Add guests
-          </div>
+          </button>
         </PopoverTrigger>
         <PopoverContent className="flex w-[380px] flex-col rounded-2xl px-7 py-8">
           <div className="flex items-center justify-between py-5">
@@ -91,7 +69,7 @@ export function PopoverDemo({
             <div className="flex flex-row justify-between gap-5">
               <CirclePlus onClick={plusAdult} />
               {adultNumber}
-              <CircleMinus onClick={minusAdult} />
+              <CircleMinus onClick={decreaseAdult} />
             </div>
           </div>
           <div className="flex items-center justify-between py-5">
@@ -102,7 +80,7 @@ export function PopoverDemo({
             <div className="flex flex-row justify-between gap-5">
               <CirclePlus onClick={plusChildren} />
               {childrenNumber}
-              <CircleMinus onClick={minusChildren} />
+              <CircleMinus onClick={decreaseChildren} />
             </div>
           </div>
           <div className="flex items-center justify-between py-5">
@@ -113,7 +91,7 @@ export function PopoverDemo({
             <div className="flex flex-row justify-between gap-5">
               <CirclePlus onClick={plusInfants} />
               {infantsNumber}
-              <CircleMinus onClick={minusInfants} />
+              <CircleMinus onClick={decreaseInfants} />
             </div>
           </div>
           <div className="flex items-center justify-between py-5">
@@ -126,14 +104,19 @@ export function PopoverDemo({
             <div className="flex flex-row justify-between gap-5">
               <CirclePlus onClick={plusPet} />
               {petNumber}
-              <CircleMinus onClick={minusPet} />
+              <CircleMinus onClick={decreasePet} />
             </div>
           </div>
+          <PopoverClose>
+            {" "}
+            <Button onClick={submit} className="bg-pink-600 px-20">
+              Submit
+            </Button>
+          </PopoverClose>
         </PopoverContent>
       </Popover>
       <div
         onClick={onClick}
-        // onMouseEnter={allGuests}
         className="mr-1 flex gap-1 rounded-full bg-pink-600 px-4 py-3 text-white"
       >
         <Search /> Search

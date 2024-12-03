@@ -7,32 +7,35 @@ export const GET = async (request: NextRequest) => {
   const from = searchParams.get("from");
   const to = searchParams.get("to");
   const guests = searchParams.get("guests");
-  if (!from || !to) {
-    throw new Error("Missing 'from' or 'to' query parameters.");
-  }
-  // const possibleday = [];
+  const guestNumber = Number(guests);
   try {
     const checkindate = new Date(from);
     const checkoutdate = new Date(to);
-    const getAddressProperty = await PropertyModel.find({ address: address });
+    const getAddressProperty = await PropertyModel.find({
+      address: address,
+    });
+
+    const getGuests = getAddressProperty.filter(
+      (property) => property.guests >= guestNumber,
+    );
     const result = await Promise.all(
-      getAddressProperty.map(async (property) => {
+      getGuests.map(async (property) => {
         const possibleProperty = await AvailableListModel.find({
           propertyId: property._id,
           $or: [
             {
-              checkInDate: { $lte: checkoutdate },
-              checkOutDate: { $gte: checkindate },
+              checkInDate: { $lte: to },
+              checkOutDate: { $gte: from },
             },
           ],
-        });
-        console.log(possibleProperty);
+        }).populate("propertyId");
+        // console.log(property);
         if (possibleProperty.length === 0) return { property };
+        // const sortProperty=getGuests.filter(())
         else return { possibleProperty };
       }),
     );
-
-    // const data = result.filter((res) => res.possibleProperty.length === 0);
+    // console.log(result);
     return Response.json({ possibleProperty: result });
   } catch (error) {
     return Response.json({ error: error });
