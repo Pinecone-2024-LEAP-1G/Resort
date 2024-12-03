@@ -2,6 +2,7 @@
 
 import { PaymentDetail } from "@/components/PaymentDetail/PaymentDetail";
 import { RulesAndPolicy } from "@/components/PaymentDetail/RulesAndPolicy";
+import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 import {
   HoverCard,
   HoverCardContent,
@@ -41,8 +42,6 @@ type Reservation = {
 const BookingRequest = () => {
   const [property, setProperty] = useState<Property>();
   const [reservation, setReservation] = useState<Reservation>();
-  // const params = useParams();
-  // const { propertyId } = params;
 
   const getProperty = async () => {
     try {
@@ -68,12 +67,11 @@ const BookingRequest = () => {
   useEffect(() => {
     getProperty();
   }, []);
-  // console.log(property);
 
   useEffect(() => {
     getReservation();
   }, []);
-  console.log(reservation);
+  // console.log(reservation);
 
   return (
     <div>
@@ -104,7 +102,7 @@ const BookingRequest = () => {
               <h3 className="pb-3 text-xl font-medium">Price details</h3>
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between">
-                  <p>${property?.price}</p>
+                  <p>${property?.price} * udur </p>
                   <p>${property?.price}</p>
                 </div>
                 <div className="flex justify-between">
@@ -131,8 +129,7 @@ const BookingRequest = () => {
             </div>
             <div className="flex justify-between pt-4">
               <p>Total</p>
-
-              <p>{reservation[0]?.totalPrice}</p>
+              <p>{reservation?.[0].totalPrice}</p>
             </div>
           </div>
         </div>
@@ -141,5 +138,7 @@ const BookingRequest = () => {
     </div>
   );
 };
+
+const getDate = () => {};
 
 export default BookingRequest;

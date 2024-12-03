@@ -5,19 +5,67 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 7d87849 (a)
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
 import { GuestPopover } from "../PropertyDetail/GuestPopover";
-import { DatePickerWithRange } from "../PropertyDetail/DatePickerWithRange";
+import mongoose from "mongoose";
+import axios from "axios";
+import moment from "moment";
+
+type Reservation = {
+  _id: string;
+  userId: mongoose.Schema.Types.ObjectId;
+  propertyId: mongoose.Schema.Types.ObjectId;
+  checkIn: Date;
+  checkOut: Date;
+  adult: number;
+  children: number;
+  infants: number;
+  totalPrice: number;
+};
 
 export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2024, 0, 20),
     to: addDays(new Date(2024, 0, 20), 20),
   });
+  const [reservation, setReservation] = useState<Reservation>();
+
+  const getReservation = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:3000/api/reservations/6743f6dfd5e3c0e3bd9f50f1",
+      );
+      setReservation(data.reservation);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getReservation();
+  }, []);
+  console.log(reservation);
+
+  const checkDates = reservation?.map((days) => ({
+    from: new Date(days.checkIn),
+    to: new Date(days.checkOut),
+  }));
+
+  const calculateDate = (from: Date, to: Date) => {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const timeDiff = to.getTime() - from.getTime();
+    const diffDays = Math.round(Math.abs(timeDiff / oneDay));
+    console.log(diffDays);
+  };
+
   return (
     <div className="w-full px-20">
       <div className="mr-8 flex flex-row items-center">
@@ -43,7 +91,15 @@ export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
               <div className="flex flex-row justify-between">
                 <div>
                   <p className="font-medium">Dates</p>
-                  <p>Jan 16 – 17, 2025</p>
+                  <p>
+                    {reservation?.[0]?.checkIn
+                      ? moment(reservation[0].checkIn).format("ll")
+                      : "No check-out date available"}{" "}
+                    -{" "}
+                    {reservation?.[0]?.checkOut
+                      ? moment(reservation[0].checkOut).format("ll")
+                      : "No check-out date available"}
+                  </p>
                 </div>
                 <div>
                   <Popover>
