@@ -19,13 +19,14 @@ const Home = () => {
   return (
     <div>
       <Categories />
-      <div className="grid grid-cols-6 gap-8">
+      <div className="grid grow grid-cols-6 gap-8">
         {properties?.map((property) => {
           return (
             <HomeCard
               propertyId={property._id}
               key={property._id}
               propertyPictures={property.propertyPictures}
+              property={property}
             />
           );
         })}

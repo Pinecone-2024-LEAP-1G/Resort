@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
 import { connectToMongoDB } from "@/lib/db";
@@ -37,7 +36,7 @@ export const DELETE = async (request: NextRequest) => {
     const review = await ReviewModel.findByIdAndDelete({
       _id,
     });
-    return Response.json({ message: "success" });
+    return Response.json({ message: "success", review });
   } catch (error) {
     return Response.json({ message: error });
   }

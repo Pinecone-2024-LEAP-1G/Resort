@@ -5,16 +5,14 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
-import React, { useEffect } from "react";
+import React from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
 import { GuestPopover } from "../PropertyDetail/GuestPopover";
 
-export const PaymentDetail = ({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) => {
+export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2024, 0, 20),
     to: addDays(new Date(2024, 0, 20), 20),
@@ -31,7 +29,7 @@ export const PaymentDetail = ({
             <div className="flex flex-col">
               <AlertTitle>This is a rare find.</AlertTitle>
               <AlertDescription>
-                <p> Bua's place is usually booked.</p>
+                <p> </p>
               </AlertDescription>
             </div>
             <div>
