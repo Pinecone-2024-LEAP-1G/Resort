@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { PropertyOverview } from "./PropertyOverView";
 import { PrivacyType } from "./PrivacyType";
 import { PropertyHeader } from "./PropertyHeader";
@@ -26,10 +27,37 @@ export const AboutYourPlace = () => {
 
 =======
 import { PropertyFooter } from "./PropertyFooter";
+=======
+import { PropertyOverview } from "./PropertyOverView";
+import { PrivacyType } from "./PrivacyType";
+>>>>>>> 870f41b (BecomeHost)
 import { PropertyHeader } from "./PropertyHeader";
+import { Button } from "../ui/button";
+import { useState } from "react";
 
 export const AboutYourPlace = () => {
+<<<<<<< HEAD
 >>>>>>> 7891b27 (HostSetup first commit)
+=======
+  const [step, setStep] = useState<string>("about");
+
+  const handleNext = () => {
+    setStep("next");
+  };
+
+  const handleBack = () => {
+    setStep("back");
+  };
+
+  if (step === "back") {
+    return <PropertyOverview />;
+  }
+
+  if (step === "next") {
+    return <PrivacyType />;
+  }
+
+>>>>>>> 870f41b (BecomeHost)
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
@@ -56,6 +84,9 @@ export const AboutYourPlace = () => {
         </div>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 870f41b (BecomeHost)
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}
@@ -72,9 +103,12 @@ export const AboutYourPlace = () => {
           Next
         </Button>
       </div>
+<<<<<<< HEAD
 =======
       <PropertyFooter />
 >>>>>>> 7891b27 (HostSetup first commit)
+=======
+>>>>>>> 870f41b (BecomeHost)
     </div>
   );
 };
