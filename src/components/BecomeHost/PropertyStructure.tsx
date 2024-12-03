@@ -7,9 +7,12 @@ import { FaCaravan } from "react-icons/fa";
 import { CasaParticular } from "../icons/PropertyIcons/CasaParticular";
 import { Castle } from "../icons/PropertyIcons/Castle";
 import { PropertyHeader } from "./PropertyHeader";
+import { PrivacyType } from "./PrivacyType";
+import { FloorPlan } from "./FloorPlan";
 
 export const PropertyStructure = () => {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
+  const [step, setStep] = useState<string>("about");
 
   const places = [
     {
@@ -60,6 +63,22 @@ export const PropertyStructure = () => {
 
   const isNextButtonDisabled = !selectedPlace;
 
+  const handleNext = () => {
+    setStep("next");
+  };
+
+  const handleBack = () => {
+    setStep("previous");
+  };
+
+  if (step === "next") {
+    return <FloorPlan />;
+  }
+
+  if (step === "previous") {
+    return <PrivacyType />;
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <PropertyHeader />
@@ -91,6 +110,7 @@ export const PropertyStructure = () => {
         <button
           className="text-gray-500 hover:underline"
           aria-label="Go back to the previous step"
+          onClick={handleBack}
         >
           Back
         </button>
@@ -103,6 +123,7 @@ export const PropertyStructure = () => {
           disabled={isNextButtonDisabled}
           aria-disabled={isNextButtonDisabled}
           aria-label="Proceed to the next step"
+          onClick={handleNext}
         >
           Next
         </button>

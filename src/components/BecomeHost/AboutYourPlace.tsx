@@ -1,7 +1,28 @@
-import { PropertyFooter } from "./PropertyFooter";
+import { PropertyOverview } from "./PropertyOverView";
+import { PrivacyType } from "./PrivacyType";
 import { PropertyHeader } from "./PropertyHeader";
+import { Button } from "../ui/button";
+import { useState } from "react";
 
 export const AboutYourPlace = () => {
+  const [step, setStep] = useState<string>("about");
+
+  const handleNext = () => {
+    setStep("next");
+  };
+
+  const handleBack = () => {
+    setStep("back");
+  };
+
+  if (step === "back") {
+    return <PropertyOverview />;
+  }
+
+  if (step === "next") {
+    return <PrivacyType />;
+  }
+
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
@@ -27,7 +48,22 @@ export const AboutYourPlace = () => {
           </video>
         </div>
       </div>
-      <PropertyFooter />
+      <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
+        <button
+          onClick={handleBack}
+          aria-label="Go back to the previous step"
+          className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
+        >
+          Back
+        </button>
+        <Button
+          onClick={handleNext}
+          aria-label="Proceed to the next step"
+          className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };
