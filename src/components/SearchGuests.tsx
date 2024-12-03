@@ -3,7 +3,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { strict } from "assert";
 import { CircleMinus, CirclePlus, Search } from "lucide-react";
+import { useQueryState } from "nuqs";
 import { useState } from "react";
 
 type SearchProps = {
@@ -11,30 +13,61 @@ type SearchProps = {
   onMouseLeave: () => void;
   hover: string;
   onClick: () => void;
+  infantsNumber: string;
+  childrenNumber: string;
+  adultNumber: string;
+  petNumber: string;
+  minusAdult: () => void;
+  minusChildren: () => void;
+  minusInfants: () => void;
+  minusPet: () => void;
+  plusAdult: () => void;
+  plusChildren: () => void;
+  plusInfants: () => void;
+  plusPet: () => void;
 };
+
 export function PopoverDemo({
   onMouseEnter,
   onMouseLeave,
   hover,
   onClick,
+  infantsNumber,
+  childrenNumber,
+  adultNumber,
+  petNumber,
+  minusAdult,
+  minusChildren,
+  minusInfants,
+  minusPet,
+  plusAdult,
+  plusChildren,
+  plusInfants,
+  plusPet,
 }: SearchProps) {
-  const [adultNumber, setAdultNumber] = useState(0);
-  const [childrenNumber, setChildrenNumber] = useState(0);
-  const [infantsNumber, setInfantsNumber] = useState(0);
-  const [petNumber, setPetNumber] = useState(0);
+  // const [adultNumber, setAdultNumber] = useState(0);
+  // const [childrenNumber, setChildrenNumber] = useState(0);
+  // const [infantsNumber, setInfantsNumber] = useState(0);
+  // const [petNumber, setPetNumber] = useState(0);
+  // const [guests, setGuests] = useQueryState<number | undefined>("guests");
+  // const minusAdult = () => {
+  //   if (adultNumber > 0) setAdultNumber((prev) => prev - 1);
+  // };
+  // const minusChildren = () => {
+  //   if (childrenNumber > 0) setChildrenNumber((prev) => prev - 1);
+  // };
+  // const minusPet = () => {
+  //   if (petNumber > 0) setPetNumber((prev) => prev - 1);
+  // };
+  // const minusInfants = () => {
+  //   if (infantsNumber > 0) setInfantsNumber((prev) => prev - 1);
+  // };
 
-  const minusAdult = () => {
-    if (adultNumber > 0) setAdultNumber((prev) => prev - 1);
-  };
-  const minusChildren = () => {
-    if (childrenNumber > 0) setChildrenNumber((prev) => prev - 1);
-  };
-  const minusPet = () => {
-    if (petNumber > 0) setPetNumber((prev) => prev - 1);
-  };
-  const minusInfants = () => {
-    if (infantsNumber > 0) setInfantsNumber((prev) => prev - 1);
-  };
+  // const allGuests = () => {
+  //   const number = adultNumber + childrenNumber + petNumber + infantsNumber;
+  //   setGuests(number);
+  // };
+
   return (
     <div
       className={`flex w-[218px] flex-row items-center justify-center rounded-full ${hover}`}
@@ -56,7 +89,7 @@ export function PopoverDemo({
               <p className="text-sm text-gray-400">Ages 13 or above</p>
             </div>
             <div className="flex flex-row justify-between gap-5">
-              <CirclePlus onClick={() => setAdultNumber((prev) => prev + 1)} />
+              <CirclePlus onClick={plusAdult} />
               {adultNumber}
               <CircleMinus onClick={minusAdult} />
             </div>
@@ -67,9 +100,7 @@ export function PopoverDemo({
               <p className="text-sm text-gray-400">Ages 2-12</p>
             </div>
             <div className="flex flex-row justify-between gap-5">
-              <CirclePlus
-                onClick={() => setChildrenNumber((prev) => prev + 1)}
-              />
+              <CirclePlus onClick={plusChildren} />
               {childrenNumber}
               <CircleMinus onClick={minusChildren} />
             </div>
@@ -80,9 +111,7 @@ export function PopoverDemo({
               <p className="text-sm text-gray-400">Under-2</p>
             </div>
             <div className="flex flex-row justify-between gap-5">
-              <CirclePlus
-                onClick={() => setInfantsNumber((prev) => prev + 1)}
-              />
+              <CirclePlus onClick={plusInfants} />
               {infantsNumber}
               <CircleMinus onClick={minusInfants} />
             </div>
@@ -95,7 +124,7 @@ export function PopoverDemo({
               </p>
             </div>
             <div className="flex flex-row justify-between gap-5">
-              <CirclePlus onClick={() => setPetNumber((prev) => prev + 1)} />
+              <CirclePlus onClick={plusPet} />
               {petNumber}
               <CircleMinus onClick={minusPet} />
             </div>
@@ -104,6 +133,7 @@ export function PopoverDemo({
       </Popover>
       <div
         onClick={onClick}
+        // onMouseEnter={allGuests}
         className="mr-1 flex gap-1 rounded-full bg-pink-600 px-4 py-3 text-white"
       >
         <Search /> Search

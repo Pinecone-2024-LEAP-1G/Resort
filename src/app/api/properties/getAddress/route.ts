@@ -6,10 +6,11 @@ export const GET = async (request: NextRequest) => {
   const address = searchParams.get("address");
   const from = searchParams.get("from");
   const to = searchParams.get("to");
+  const guests = searchParams.get("guests");
   if (!from || !to) {
     throw new Error("Missing 'from' or 'to' query parameters.");
   }
-  const possibleday = [];
+  // const possibleday = [];
   try {
     const checkindate = new Date(from);
     const checkoutdate = new Date(to);
@@ -25,14 +26,14 @@ export const GET = async (request: NextRequest) => {
             },
           ],
         });
-
+        console.log(possibleProperty);
         if (possibleProperty.length === 0) return { property };
         else return { possibleProperty };
       }),
     );
 
-    const data = result.filter((res) => res.possibleProperty.length === 0);
-    return Response.json({ possibleProperty: data });
+    // const data = result.filter((res) => res.possibleProperty.length === 0);
+    return Response.json({ possibleProperty: result });
   } catch (error) {
     return Response.json({ error: error });
   }

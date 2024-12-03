@@ -2,7 +2,15 @@
 
 import * as React from "react";
 import { addDays } from "date-fns";
-import { DateRange } from "react-day-picker";
+import {
+  DateRange,
+  DayPickerDefaultProps,
+  DayPickerMultipleProps,
+  DayPickerRangeProps,
+  DayPickerSingleProps,
+  Matcher,
+  SelectRangeEventHandler,
+} from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -25,11 +33,16 @@ export function DatePickerWithRange({
   onMouseEnter,
   onMouseLeave,
   hover,
+  
 }: SearchProps) {
-  const [date, setDate] = useQueryStates<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
-  });
+  const [date, setDate] = useQueryStates< DateRange | undefined>({
+  from: new Date(2022, 0, 20),
+  to: addDays(new Date(2022, 0, 20), 20),
+});
+  // const [date, setDate] = useQueryStates<DateRange | undefined>({
+  //   from: new Date(2022, 0, 20),
+  //   to: addDays(new Date(2022, 0, 20), 20),
+  // });
 
   // const getAddress = async () => {
   //   try {
