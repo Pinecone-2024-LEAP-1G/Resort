@@ -11,6 +11,7 @@ export type Property = {
   categoryId: string;
   totalBedrooms: string;
   totalBathrooms: string;
+  cleaningFee: number;
 };
 
 const PropertySchema = new Schema<Property>(
@@ -24,6 +25,7 @@ const PropertySchema = new Schema<Property>(
     propertyPictures: [{ type: String, required: true }],
     totalBedrooms: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
+    cleaningFee: { type: Number },
   },
   { timestamps: true },
 );

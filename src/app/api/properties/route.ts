@@ -27,6 +27,7 @@ export const POST = async (request: NextRequest) => {
     totalBedrooms,
     totalBathrooms,
     email,
+    cleaningFee,
   } = await request.json();
 
   const hostExist = await HostModel.findOne({ email });
@@ -52,8 +53,18 @@ export const POST = async (request: NextRequest) => {
       totalBedrooms,
       totalBathrooms,
       email,
+      cleaningFee,
     });
-    return Response.json({ message: "success", properties });
+    const { _id } = properties;
+
+    const updateHost = await HostModel.findOneAndUpdate(
+      {
+        email: email,
+      },
+      { $push: { propertyId: _id } },
+      { new: true },
+    );
+    return Response.json({ message: "success", properties, updateHost });
   } catch (error) {
     return Response.json({ message: error });
   }

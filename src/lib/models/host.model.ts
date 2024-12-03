@@ -5,7 +5,7 @@ type HostType = {
   experience: string;
   Address: string;
   description: string;
-  properties: mongoose.Schema.Types.ObjectId;
+  propertyId: mongoose.Schema.Types.ObjectId;
   name: string;
   phoneNumber: string;
   email: string;
@@ -13,10 +13,10 @@ type HostType = {
 
 const Host = new Schema<HostType>(
   {
-    experience: { type: String, required: true },
-    Address: { type: String, required: true },
-    description: { type: String, required: true },
-    properties: {
+    experience: { type: String },
+    Address: { type: String },
+    description: { type: String },
+    propertyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Property",
     },

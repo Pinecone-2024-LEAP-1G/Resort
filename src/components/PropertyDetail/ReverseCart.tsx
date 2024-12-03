@@ -1,30 +1,34 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { addDays } from "date-fns";
-import { Property } from "@/app/property/[propertyId]/page";
 import { parseAsInteger, parseAsIsoDate, useQueryStates } from "nuqs";
 import { GuestPopover } from "./GuestPopover";
 import { DatePickerWithRange } from "./DatePickerWithRange";
 import axios from "axios";
 import { AvailableList } from "@/lib/models";
+import { Property } from "./PropertyDetail";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   property?: Property;
-  propertyId?: IntrinsicAttributes & Props;
-  images?: IntrinsicAttributes[] & Props;
+  propertyId?: string;
 }
-export const ReverseCart = ({ property, propertyId, images }: Props) => {
-  const [reservation, setReservation] = useState<AvailableList[]>([]);
+export const ReverseCart = ({ property, propertyId }: Props) => {
+  const [reservation, setReservation] = useState<AvailableList[] | []>([]);
+  const router = useRouter();
   useEffect(() => {
     const getReservation = async () => {
-      const response = await axios.get<AvailableList[]>(
+      const response = await axios.get<AvailableList[] | []>(
         `http://localhost:3000/api/availablelists?propertyId=${propertyId}`,
       );
       setReservation(response.data.AvailableLists);
     };
 
     getReservation();
-  }, [propertyId]);
+  }, []);
   const disabledRanges = reservation?.map((item) => ({
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
@@ -101,6 +105,14 @@ export const ReverseCart = ({ property, propertyId, images }: Props) => {
 
   const totalPrice = priceOfDates + 20000 + 20000;
 
+  const navigateToNextPage = () => {
+    router.push(
+      `/bookingRequest?from=${from.toISOString()}&to=${(
+        to?.toISOString(),
+      )}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+    );
+  };
+
   return (
     <div className="ml-auto grid h-[495px] w-[372px] justify-center gap-2 rounded-lg border p-8 shadow-lg">
       <p className="mb-4">Үнэ: {property?.price}₮</p>
@@ -125,7 +137,12 @@ export const ReverseCart = ({ property, propertyId, images }: Props) => {
         people={property?.guests}
         limitGuest={property?.guests}
       />
-      <Button className="mt-4 h-10 w-[300px] bg-gray-400">reserve</Button>
+      <Button
+        onClick={navigateToNextPage}
+        className="mt-4 h-10 w-[300px] bg-gray-400"
+      >
+        reserve
+      </Button>
       <div className="mt-8 flex h-28 flex-col gap-2 border-b">
         <div className="flex justify-between">
           <p className="border-b border-black">

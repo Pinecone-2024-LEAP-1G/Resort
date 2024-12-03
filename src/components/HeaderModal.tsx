@@ -24,7 +24,7 @@ export function HeaderModal() {
           width={40}
           height={40}
           alt="img"
-          className="rounded-full"
+          className="h-[40px] w-[40px] rounded-full"
         />
       );
     }
