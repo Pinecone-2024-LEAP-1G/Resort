@@ -19,6 +19,8 @@ import {
   Warehouse,
   Waves,
 } from "lucide-react";
+import { CasaParticular } from "@/components/icons/PropertyIcons/CasaParticular";
+
 type Props = {
   text: string;
 };
@@ -44,6 +46,7 @@ export const mockdata = [
   { name: "TV", icon: <Tv /> },
   { name: "Theater", icon: <Theater /> },
   { name: "Gem", icon: <Dumbbell /> },
+  { name: "CasaParticular", icon: <CasaParticular /> },
 ];
 const categoryIcon = (props: Props) => {
   const { text } = props;
