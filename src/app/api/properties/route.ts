@@ -8,7 +8,6 @@ connectToMongoDB();
 export const GET = async () => {
   try {
     const properties = await PropertyModel.find();
-
     return Response.json({ properties });
   } catch (error) {
     return Response.json({ message: error });
