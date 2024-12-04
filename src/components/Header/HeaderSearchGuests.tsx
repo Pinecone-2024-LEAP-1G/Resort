@@ -4,8 +4,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CircleMinus, CirclePlus, Search } from "lucide-react";
-import { Button } from "./ui/button";
 import { PopoverClose } from "@radix-ui/react-popover";
+import { Button } from "../ui/button";
 
 type SearchProps = {
   onMouseEnter: () => void;

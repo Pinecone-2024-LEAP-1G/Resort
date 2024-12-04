@@ -1,21 +1,44 @@
 "use client";
-import { Categories } from "@/components/Categories";
 import HomeCard from "@/components/HomeCard";
 import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
-
+import axios from "axios";
+import { useQueryState, useQueryStates } from "nuqs";
+import { addDays, constructNow } from "date-fns";
+import { DateRange } from "react-day-picker";
+import { Categories } from "@/components/Category/Categories";
+import { Property } from "./property/[propertyId]/page";
+import { NextRequest } from "next/server";
+import { useSearchParams } from "next/navigation";
 const Home = () => {
+  // const [addressSearch, setAddressSearch] = useQueryState("address");
+  // const [setDate] = useQueryStates<DateRange | undefined>({
+  //   from: new Date(2022, 0, 20),
+  //   to: addDays(new Date(2022, 0, 20), 20),
+  // });
+  const searchParams = useSearchParams();
+
+  const addressSearch = searchParams.get("address");
+  const from = searchParams.get("from");
+  const to = searchParams.get("to");
+  const guests = searchParams.get("guests");
   const [properties, setProperties] = useState<Property[]>([]);
+  const searchProperty = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/properties/getAddress?address=${addressSearch}&from=${from}&to=${to}&guests=${guests}`,
+      );
+      setProperties(response?.data.searchProperty);
+      console.log(response?.data.searchProperty);
+      setAddressSearch("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch("/api/properties");
-      const data = await response.json();
-      setProperties(data.properties);
-    };
-    getProducts();
+    searchProperty();
   }, []);
-
   return (
     <div>
       <Categories />

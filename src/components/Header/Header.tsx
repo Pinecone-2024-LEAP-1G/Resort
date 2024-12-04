@@ -4,14 +4,18 @@ import Logo from "./icons/Logo";
 
 import { HeaderModal } from "./HeaderModal";
 import { useRouter } from "next/navigation";
+("use client");
+import Logo from "../icons/Logo";
 import { HeaderSearch } from "./HeaderSearch";
 import { DatePickerWithRange } from "./HeaderDate";
-import { PopoverDemo } from "./SearchGuests";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useQueryStates, useQueryState } from "nuqs";
 import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
+import { HeaderModal } from "./HeaderModal";
+import { PopoverDemo } from "./HeaderSearchGuests";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const router = useRouter();
@@ -27,29 +31,33 @@ const Header = () => {
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
-
-  const searchProperty = async () => {
-    console.log(addressSearch, date, guests);
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/api/properties/getAddress?address=${addressSearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
-      );
-      console.log(response.data);
-      setAddressSearch("");
-      setDate(null);
-      setAdultNumber(0);
-      setChildrenNumber(0);
-      setPetNumber(0);
-      setInfantsNumber(0);
-      setGuests(0);
-    } catch (error) {
-      console.error(error);
-    }
+  const router = useRouter();
+  // const searchProperty = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3000/api/properties/getAddress?address=${addressSearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
+  //     );
+  //     console.log(response.data);
+  //     setSearchProperties(response?.data);
+  //     setAddressSearch("");
+  //     setDate(null);
+  //     setAdultNumber(0);
+  //     setChildrenNumber(0);
+  //     setPetNumber(0);
+  //     setInfantsNumber(0);
+  //     setGuests(0);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   searchProperty();
+  // }, []);
+  const searchProperty = () => {
+    router.push(
+      `/?address=${addressSearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
+    );
   };
-  useEffect(() => {
-    searchProperty();
-  }, []);
-
   return (
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
