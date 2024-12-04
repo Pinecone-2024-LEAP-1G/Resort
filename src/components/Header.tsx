@@ -1,4 +1,3 @@
-import Logo from "./icons/Logo";
 import { DiCodeigniter } from "react-icons/di";
 
 import Search from "./icons/Search";

@@ -109,7 +109,7 @@ export const ReverseCart = ({ property, propertyId }: Props) => {
     router.push(
       `/bookingRequest?from=${from.toISOString()}&to=${(
         to?.toISOString(),
-      )}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+      )}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}$propertyId=${propertyId}`,
     );
   };
 

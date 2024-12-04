@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 connectToMongoDB();
 export const GET = async () => {
   try {
-    const host = await HostModel.find().populate("propertyId");
+    const host = await HostModel.find();
     return Response.json({ host });
   } catch (error) {
     return Response.json({ message: error });
@@ -13,21 +13,13 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const {
-    experience,
-    Address,
-    description,
-    properties,
-    name,
-    phoneNumber,
-    email,
-  } = await request.json();
+  const { experience, Address, description, name, phoneNumber, email } =
+    await request.json();
   try {
     const Host = await HostModel.create({
       experience,
       Address,
       description,
-      properties,
       name,
       phoneNumber,
       email,
