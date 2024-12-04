@@ -6,7 +6,7 @@ connectToMongoDB();
 export const GET = async () => {
   try {
     const host = await HostModel.find();
-    return Response.json({ host });
+    return Response.json({ host: host });
   } catch (error) {
     return Response.json({ message: error });
   }

@@ -10,7 +10,6 @@ import axios from "axios";
 import { AvailableList } from "@/lib/models";
 import { Property } from "./PropertyDetail";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 interface Props {
   property?: Property;
@@ -29,7 +28,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     };
 
     getReservation();
-  }, []);
+  }, [propertyId]);
   const disabledRanges = reservation?.map((item) => ({
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
@@ -108,7 +107,11 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const navigateToNextPage = () => {
     router.push(
+<<<<<<< HEAD
       `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+=======
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+>>>>>>> 9059e06 (a)
     );
   };
 

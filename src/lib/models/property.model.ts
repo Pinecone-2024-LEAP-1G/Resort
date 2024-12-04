@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 export type Property = {
   _id: string;
@@ -7,11 +7,11 @@ export type Property = {
   address: string;
   description: string;
   propertyPictures: string[];
-  userId: mongoose.Schema.Types.ObjectId;
   categoryId: string;
   totalBedrooms: string;
   totalBathrooms: string;
   cleaningFee: number;
+  email: string;
 };
 
 const PropertySchema = new Schema<Property>(
@@ -20,12 +20,12 @@ const PropertySchema = new Schema<Property>(
     description: { type: String },
     guests: { type: Number, required: true },
     price: { type: Number, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     categoryId: { type: String, ref: "Category" },
     propertyPictures: [{ type: String, required: true }],
     totalBedrooms: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },
+    email: { type: String, required: true, ref: "Host" },
   },
   { timestamps: true },
 );

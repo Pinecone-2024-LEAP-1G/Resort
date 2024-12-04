@@ -33,7 +33,9 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         );
 
         setProperty(response.data.property);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getPropertyById();
@@ -87,7 +89,11 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             <div className="botto-4 right-4 z-50 flex"></div>
           </div>
           <div className="flex-1 rounded-lg">
-            <ReverseCart property={property} propertyId={propertyId} />
+            <ReverseCart
+              property={property}
+              propertyId={propertyId}
+              text="reserve"
+            />
           </div>
         </div>
       </div>
