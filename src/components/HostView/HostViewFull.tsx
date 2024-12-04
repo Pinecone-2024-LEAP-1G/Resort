@@ -5,7 +5,6 @@ import { PropertyCard } from "./PropertyCard";
 import HostReviewCard from "./HostReviewCard";
 
 const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
-  console.log(hostId);
   return (
     <div className="mx-auto flex w-[1200px]">
       <div className="mt-[100px] w-[720px]">

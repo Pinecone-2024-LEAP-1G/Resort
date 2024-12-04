@@ -7,7 +7,6 @@ export const GET = async (request: NextRequest) => {
 
   try {
     const reviews = await ReviewModel.find(propertyId);
-    console.log(reviews);
     return Response.json({ reviews });
   } catch (error) {
     return Response.json({ message: error });
