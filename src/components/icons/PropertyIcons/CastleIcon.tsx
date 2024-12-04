@@ -1,4 +1,4 @@
-export const Castle = () => {
+export const CastleIcon = () => {
   return (
     <svg
       width="48px"

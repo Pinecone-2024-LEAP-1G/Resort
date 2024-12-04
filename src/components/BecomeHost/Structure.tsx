@@ -5,7 +5,7 @@ import { GiCoffeeCup } from "react-icons/gi";
 import { TbSailboat } from "react-icons/tb";
 import { FaCaravan } from "react-icons/fa";
 import { CasaParticular } from "../icons/PropertyIcons/CasaParticular";
-import { Castle } from "../icons/PropertyIcons/Castle";
+import { CastleIcon } from "../icons/PropertyIcons/CastleIcon";
 import { PropertyHeader } from "./PropertyHeader";
 import { FloorPlan } from "./FloorPlan";
 import { Address } from "./Address";
@@ -39,7 +39,7 @@ export const Structure = () => {
       label: "Casa particular",
       icon: <CasaParticular />,
     },
-    { id: "castle", label: "Castle", icon: <Castle /> },
+    { id: "castle", label: "Castle", icon: <CastleIcon /> },
     {
       id: "cave",
       label: "Cave",

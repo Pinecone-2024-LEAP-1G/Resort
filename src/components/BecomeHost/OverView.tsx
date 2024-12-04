@@ -50,38 +50,23 @@ export const Overview = () => {
   return (
     <div className="flex flex-col">
       <PropertyHeader />
-      <div className="mx-6 mt-12 flex flex-col space-y-12 md:flex-row md:space-y-0">
+      <div className="mx-6 mt-12 flex flex-col space-y-12 md:flex-row md:space-x-8 md:space-y-0">
         <div className="flex-1">
           <h1 className="text-5xl font-bold leading-[1.2] text-gray-900">
             It’s easy to get started on Airbnb
           </h1>
         </div>
-        <div className="grid flex-1 gap-8 md:grid-cols-3">
-          <ol className="space-y-8">
-            {steps.map((step) => (
-              <StepItem
-                key={step.id}
-                id={step.id}
-                title={step.title}
-                description={step.description}
-              />
-            ))}
-          </ol>
-          <div className="flex flex-col space-y-8">
-            {steps.map((step) => (
-              <StepImage
-                key={step.id}
-                image={step.image}
-                alt={`Step ${step.id}`}
-              />
-            ))}
-          </div>
+        <div className="grid flex-1 gap-8 md:grid-cols-2">
+          {steps.map((step) => (
+            <StepCard key={step.id} step={step} />
+          ))}
         </div>
       </div>
       <div className="mx-6 mt-12 flex justify-end border-t pt-6">
         <Button
           className="rounded-lg bg-pink-600 px-6 py-3 text-lg font-semibold text-white hover:bg-pink-500"
           onClick={handleClick}
+          aria-label="Get started"
         >
           Get started
         </Button>
@@ -90,29 +75,22 @@ export const Overview = () => {
   );
 };
 
-interface StepItemProps {
-  id: number;
-  title: string;
-  description: string;
+interface StepCardProps {
+  step: Step;
 }
 
-const StepItem = ({ id, title, description }: StepItemProps) => (
-  <li className="flex items-start space-x-4 border-b pb-6 last:border-b-0">
-    <div className="text-2xl font-bold text-gray-800">{id}</div>
-    <div>
-      <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-base text-gray-600">{description}</p>
+const StepCard = ({ step }: StepCardProps) => (
+  <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-6">
+    <Image
+      src={step.image}
+      alt={step.title}
+      width={120}
+      height={120}
+      className="rounded-md"
+    />
+    <div className="mt-4 flex flex-col md:mt-0">
+      <h3 className="text-xl font-semibold text-gray-900">{step.title}</h3>
+      <p className="mt-2 text-base text-gray-600">{step.description}</p>
     </div>
-  </li>
-);
-
-interface StepImageProps {
-  image: string;
-  alt: string;
-}
-
-const StepImage = ({ image, alt }: StepImageProps) => (
-  <div className="flex h-[120px] w-[120px] justify-center md:justify-start">
-    <Image src={image} alt={alt} width={120} height={120} objectFit="contain" />
   </div>
 );
