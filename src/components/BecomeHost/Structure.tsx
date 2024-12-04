@@ -7,10 +7,10 @@ import { FaCaravan } from "react-icons/fa";
 import { CasaParticular } from "../icons/PropertyIcons/CasaParticular";
 import { Castle } from "../icons/PropertyIcons/Castle";
 import { PropertyHeader } from "./PropertyHeader";
-import { PrivacyType } from "./PrivacyType";
 import { FloorPlan } from "./FloorPlan";
+import { Address } from "./Address";
 
-export const PropertyStructure = () => {
+export const Structure = () => {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
   const [step, setStep] = useState<string>("about");
 
@@ -76,7 +76,7 @@ export const PropertyStructure = () => {
   }
 
   if (step === "previous") {
-    return <PrivacyType />;
+    return <Address />;
   }
 
   return (

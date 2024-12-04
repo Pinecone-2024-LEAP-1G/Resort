@@ -13,24 +13,29 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  connectToMongoDB();
   const pathName = usePathname();
   const BecomeHostPage = pathName.startsWith("/become-host");
   return (
-    <NuqsAdapter>
-      <html lang="en">
-        <body>
-          <main>
-            <div className="text-base font-normal">
-              <div className="mx-5 px-20">{!BecomeHostPage && <Header />}</div>
-              <br />
-              <div className="mx-5 px-20">{children}</div>
-              <div className="mx-5 px-20">{!BecomeHostPage && <Footer />}</div>
-            </div>
-          </main>
-        </body>
-      </html>
-    </NuqsAdapter>
+    <SessionProvider>
+      <NuqsAdapter>
+        <html lang="en">
+          <body>
+            <main>
+              <div className="text-base font-normal">
+                <div className="mx-5 px-20">
+                  {!BecomeHostPage && <Header />}
+                </div>
+                <br />
+                <div className="mx-5 px-20">{children}</div>
+                <div className="mx-5 px-20">
+                  {!BecomeHostPage && <Footer />}
+                </div>
+              </div>
+            </main>
+          </body>
+        </html>
+      </NuqsAdapter>
+    </SessionProvider>
   );
 };
 

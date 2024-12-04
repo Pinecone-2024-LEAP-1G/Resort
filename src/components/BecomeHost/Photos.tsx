@@ -12,8 +12,10 @@ import { DragPhoto } from "../icons/DragPhoto";
 import { useState, useRef } from "react";
 import { Input } from "../ui/input";
 import { PropertyHeader } from "./PropertyHeader";
+import Image from "next/image";
+import { FloorPlan } from "./FloorPlan";
 
-export const PropertyPhotos = () => {
+export const Photos = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [step, setStep] = useState<string>("about");
@@ -63,7 +65,7 @@ export const PropertyPhotos = () => {
   }
 
   if (step === "back") {
-    return;
+    return <FloorPlan />;
   }
 
   return (
@@ -80,15 +82,19 @@ export const PropertyPhotos = () => {
           </p>
         </div>
         <div className="flex h-[417px] w-[640px] flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[#f7f7f7]">
-          <img
+          <Image
+            alt="Photo"
+            width={182}
+            height={182}
             src="https://a0.muscache.com/im/pictures/mediaverse/mys-amenities-n8/original/c83b2a87-3be4-43c9-ad47-12dd2aee24c4.jpeg"
-            className="h-[182px] w-[182px]"
           />
           {selectedFile && (
-            <img
+            <Image
               src={URL.createObjectURL(selectedFile)}
               alt="Preview"
-              className="h-24 w-24 object-cover"
+              width={120}
+              height={120}
+              objectFit="cover"
             />
           )}
           <DialogTrigger asChild>

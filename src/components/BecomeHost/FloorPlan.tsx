@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Plus, Minus } from "lucide-react";
 import { PropertyHeader } from "./PropertyHeader";
-import { PropertyStructure } from "./PropertyStructure";
-import { PropertyPhotos } from "./PropertyPhotos";
+import { Structure } from "./Structure";
+import { Photos } from "./Photos";
 
 export const FloorPlan = () => {
   const [guests, setGuests] = useState<number>(1);
@@ -53,11 +53,11 @@ export const FloorPlan = () => {
   };
 
   if (step === "next") {
-    return <PropertyPhotos />;
+    return <Photos />;
   }
 
   if (step === "previous") {
-    return <PropertyStructure />;
+    return <Structure />;
   }
 
   return (
