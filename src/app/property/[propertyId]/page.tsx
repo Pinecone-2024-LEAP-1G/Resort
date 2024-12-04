@@ -1,5 +1,3 @@
-import { PropertyDetail } from "@/components/PropertyDetail/PropertyDetail";
-
 import { LuShare } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import Image from "next/image";
@@ -10,8 +8,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Review from "@/components/Review";
-import HostView from "@/app/hostView/[hostId]/page";
 import HostViewCard from "@/components/HostView/HostViewCard";
+import { Images } from "lucide-react";
 
 const PropertyDetail = () => {
   const [property, setProperty] = useState<Property>();
@@ -54,7 +52,7 @@ const PropertyDetail = () => {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="col-span-1 sm:col-span-2 lg:col-span-2">
             <Image
-              src={images[0]}
+              src={Images[0]}
               alt="Main Image"
               width={1200}
               height={800}

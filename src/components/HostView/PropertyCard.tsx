@@ -35,13 +35,13 @@ export const PropertyCard = () => {
       </div>
       <div className="">
         <div className="flex justify-between">
-          <h2 className="font-bold">Description blablabla</h2>
+          <h2 className="w-[180px] font-bold">Name </h2>
           <div className="flex items-center">
             <TiStar />
             <p>5</p>
           </div>
         </div>
-        <p className="text-[14px]">name</p>
+        <p className="text-[14px]">Description</p>
       </div>
     </div>
   );

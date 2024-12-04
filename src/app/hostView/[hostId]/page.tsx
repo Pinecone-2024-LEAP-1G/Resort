@@ -3,6 +3,8 @@
 import HostViewCard from "@/components/HostView/HostViewCard";
 import HostViewFull from "@/components/HostView/HostViewFull";
 
+const getReviewStatisticByPropertyId = async () => {};
+
 const Page = async ({ params }: { params: Promise<{ hostId: string }> }) => {
   const hostId = (await params).hostId;
 

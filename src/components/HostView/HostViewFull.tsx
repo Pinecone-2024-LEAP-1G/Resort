@@ -1,8 +1,7 @@
 "use client";
-import { TiMessages } from "react-icons/ti";
+
 import { Button } from "../ui/button";
 import { PropertyCard } from "./PropertyCard";
-import { FcNext, FcPrevious } from "react-icons/fc";
 import HostReviewCard from "./HostReviewCard";
 
 const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
