@@ -24,6 +24,7 @@ const PropertySchema = new Schema<Property>(
     categoryId: { type: String, ref: "Category" },
     propertyPictures: [{ type: String, required: true }],
     totalBedrooms: { type: String, required: true },
+    totalOccupancy: { type: String },
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },
   },

@@ -20,12 +20,13 @@ import { useRouter } from "next/navigation";
 const Header = () => {
   const router = useRouter();
   const [hover, setHover] = React.useState<number>();
-  const [addressSearch, setAddressSearch] = useQueryState("address");
+  const [addresssearch, setAddresssearch] = useQueryState("address");
   const [adultNumber, setAdultNumber] = useState(0);
   const [childrenNumber, setChildrenNumber] = useState(0);
   const [infantsNumber, setInfantsNumber] = useState(0);
   const [petNumber, setPetNumber] = useState(0);
-  const [guestsValue, setGuestsValue] = useState(false);
+  const [guestsValue, setGuestsValue] = useState(true);
+  const [searchloc, setSearchloc] = useState(true);
   const [guests, setGuests] = useQueryState<number | undefined>("guests");
   const [date, setDate] = useQueryStates<DateRange | undefined>({
     from: new Date(2022, 0, 20),
@@ -55,7 +56,7 @@ const Header = () => {
   // }, []);
   const searchProperty = () => {
     router.push(
-      `/?address=${addressSearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
+      `/?address=${addresssearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
     );
   };
   return (

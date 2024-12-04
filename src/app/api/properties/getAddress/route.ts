@@ -1,5 +1,7 @@
 import { AvailableListModel, PropertyModel } from "@/lib/models";
+import { ReadonlyURLSearchParams } from "next/navigation";
 import { NextRequest } from "next/server";
+import { URLSearchParams } from "url";
 
 export const GET = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
@@ -8,14 +10,20 @@ export const GET = async (request: NextRequest) => {
   const to = searchParams.get("to");
   const guests = searchParams.get("guests");
   const guestNumber = Number(guests);
+  console.log(searchParams);
   try {
-    const properties = await PropertyModel.find();
-    if (address === "" && from === "null" && to === "null" && guests === "0") {
-      return Response.json({ properties: properties });
+    const property = await PropertyModel.find();
+    if (
+      address === `${address}` &&
+      from === `${from}` &&
+      to === `${to}` &&
+      guests === `${guests}`
+    ) {
+      return Response.json({ property: property });
     }
-    if (!from || !to) return Response.json(new Error("aldaa"));
-    const checkindate = new Date(from);
-    const checkoutdate = new Date(to);
+    // if (!from || !to) return Response.json(new Error("aldaa"));
+    // const checkindate = new Date(from);
+    // const checkoutdate = new Date(to);
     const getAddressProperty = await PropertyModel.find({
       address: address,
     });
@@ -29,21 +37,20 @@ export const GET = async (request: NextRequest) => {
           propertyId: property._id,
           $or: [
             {
-              checkInDate: { $lte: checkoutdate },
-              checkOutDate: { $gte: checkindate },
+              checkInDate: { $lte: from },
+              checkOutDate: { $gte: to },
             },
           ],
         }).populate("propertyId");
 
-        // console.log(conflictDay);
-        if (conflictDay.length === 0) return { property, conflictDay: false };
-        if (conflictDay.length > 0)
-          return conflictDay.map((p) => p._id), { conflictDay: true };
+        if (conflictDay.length === 0) return { property };
+        if (conflictDay.length > 0) return conflictDay.map((p) => p._id);
       }),
     );
-    const filteredProperties = result.map((property) => {
-      if (property?.conflictDay === false) return property;
-      if (!property?.conflictDay === true)
+
+    const filteredProperties = result.filter((property) => {
+      if (property?.property?.price) return property;
+      if (!property?.property?.price)
         return getGuests.filter(
           (getguestproperty) =>
             getguestproperty._id !== property?.property?._id,
@@ -55,7 +62,7 @@ export const GET = async (request: NextRequest) => {
     // property._id!==
     // });
     // const filteredProperties=result.filter((property)=>)
-    return Response.json({ searchProperty: filteredProperties });
+    return Response.json(filteredProperties);
   } catch (error) {
     return Response.json({ error: error });
   }
