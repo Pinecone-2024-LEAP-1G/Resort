@@ -2,65 +2,72 @@
 
 import { ChevronLeft, Gem } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import React, { useEffect, useState } from "react";
-import { DateRange } from "react-day-picker";
-import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
-import { GuestPopover } from "../PropertyDetail/GuestPopover";
-import mongoose from "mongoose";
 import axios from "axios";
 import moment from "moment";
+import { useSearchParams } from "next/navigation";
 
-type Reservation = {
+export type Property = {
   _id: string;
-  userId: mongoose.Schema.Types.ObjectId;
-  propertyId: mongoose.Schema.Types.ObjectId;
-  checkIn: Date;
-  checkOut: Date;
-  adult: number;
-  children: number;
-  infants: number;
-  totalPrice: number;
+  price: number;
+  guests: number;
+  address: string;
+  description: string;
+  propertyPictures: string;
+  userId: string;
+  categoryId: string;
+  totalBedrooms: string;
+  totalOccupancy: string;
+  totalBathrooms: string;
 };
 
-export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2024, 0, 20),
-    to: addDays(new Date(2024, 0, 20), 20),
-  });
-  const [reservation, setReservation] = useState<Reservation>();
+interface Props {
+  propertyId?: string;
+}
 
-  const getReservation = async () => {
-    try {
-      const { data } = await axios.get(
-        "http://localhost:3000/api/reservations/6743f6dfd5e3c0e3bd9f50f1",
-      );
-      setReservation(data.reservation);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const PaymentDetailSection = ({ propertyId }: Props) => {
+  const [property, setProperty] = useState<Property>();
+  const searchParams = useSearchParams();
+  const from = searchParams.get("from");
+  const to = searchParams.get("to");
+  const adult = searchParams.get("adult");
+  const child = searchParams.get("child");
+  const pets = searchParams.get("pets");
+  const infants = searchParams.get("infants");
+
+  let allGuests = 0;
+
+  if (adult && !isNaN(Number(adult))) {
+    allGuests += Number(adult);
+  }
+  if (child && !isNaN(Number(child))) {
+    allGuests += Number(child);
+  }
+  if (infants && !isNaN(Number(infants))) {
+    allGuests += Number(infants);
+  }
+  if (pets && !isNaN(Number(pets))) {
+    allGuests += Number(pets);
+  }
 
   useEffect(() => {
-    getReservation();
+    const getProperty = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3000/api/properties/${propertyId}`,
+        );
+        setProperty(data?.property);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProperty();
   }, []);
-  // console.log(reservation);
-
-  const checkDates = reservation?.map((days) => ({
-    from: new Date(days.checkIn),
-    to: new Date(days.checkOut),
-  }));
-
-  const calculateDate = (from: Date, to: Date) => {
-    const oneDay = 24 * 60 * 60 * 1000;
-    const timeDiff = to.getTime() - from.getTime();
-    const diffDays = Math.round(Math.abs(timeDiff / oneDay));
-    console.log(diffDays);
-  };
 
   return (
     <div className="w-full px-20">
@@ -87,15 +94,7 @@ export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
               <div className="flex flex-row justify-between">
                 <div>
                   <p className="font-medium">Dates</p>
-                  <p>
-                    {reservation?.[0]?.checkIn
-                      ? moment(reservation[0].checkIn).format("ll")
-                      : "No check-out date available"}{" "}
-                    -{" "}
-                    {reservation?.[0]?.checkOut
-                      ? moment(reservation[0].checkOut).format("ll")
-                      : "No check-out date available"}
-                  </p>
+                  {moment(from).format("ll")} - {moment(to).format("ll")}
                 </div>
                 <div>
                   <Popover>
@@ -117,14 +116,7 @@ export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
                           <Button variant="outline">CHECK-OUT</Button>
                         </div>
                       </div>
-                      <Calendar
-                        initialFocus
-                        mode="range"
-                        defaultMonth={date?.from}
-                        selected={date}
-                        onSelect={setDate}
-                        numberOfMonths={2}
-                      />
+
                       <div className="flex justify-between">
                         <Keyboard className="items-center justify-center" />
                         <div className="flex items-center gap-4">
@@ -139,37 +131,18 @@ export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
                 </div>
               </div>
               <div className="flex flex-row justify-between">
-                <div>
+                {/* <div>
                   <p className="font-medium">Check-in time</p>
                   <p>10:00 AM – 12:00 PM</p>
-                </div>
-                <Popover>
-                  <PopoverTrigger>
-                    <p className="font-semibold underline underline-offset-1">
-                      Edit
-                    </p>
-                  </PopoverTrigger>
-                  <PopoverContent className="flex h-full max-w-full border-0 bg-white p-8 shadow-transparent">
-                    <CheckInTime />
-                  </PopoverContent>
-                </Popover>
+                </div> */}
               </div>
               <div className="flex flex-row justify-between">
                 <div>
                   <p className="font-medium">Guests</p>
-                  <p>3 guests</p>
+
+                  <p>{allGuests}</p>
                   <div />
                 </div>
-                <Popover>
-                  <PopoverTrigger>
-                    <p className="font-semibold underline underline-offset-1">
-                      Edit
-                    </p>
-                  </PopoverTrigger>
-                  <PopoverContent className="border-0 bg-white shadow-transparent">
-                    <GuestPopover />
-                  </PopoverContent>
-                </Popover>
               </div>
             </div>
           </div>
