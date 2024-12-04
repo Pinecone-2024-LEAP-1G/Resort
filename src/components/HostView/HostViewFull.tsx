@@ -5,6 +5,7 @@ import { PropertyCard } from "./PropertyCard";
 import HostReviewCard from "./HostReviewCard";
 
 const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
+  const url = "http://localhost:3000/";
   return (
     <div className="mx-auto flex w-[1200px]">
       <div className="mt-[100px] w-[720px]">
