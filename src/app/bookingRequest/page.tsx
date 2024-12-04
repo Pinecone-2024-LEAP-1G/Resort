@@ -46,7 +46,7 @@ const BookingRequest = () => {
   const getProperty = async () => {
     try {
       const { data } = await axios.get(
-        "/api/properties/67492dc3073b29779b03c105",
+        "/api/properties/674eda245762ad6dd7f42631",
       );
       setProperty(data.property);
     } catch (error) {
@@ -67,11 +67,11 @@ const BookingRequest = () => {
   useEffect(() => {
     getProperty();
   }, []);
+  console.log(property);
 
   useEffect(() => {
     getReservation();
   }, []);
-  // console.log(reservation);
 
   return (
     <div>
@@ -88,6 +88,7 @@ const BookingRequest = () => {
               ></div>
               <div className="flex flex-col justify-center gap-1">
                 <p className="text-lg font-medium">{property?.address}</p>
+                <p>{property?.description}</p>
                 <div className="flex flex-row items-center gap-1 text-sm">
                   <Star className="h-3 w-3 fill-black" />
                   <p className="font-semibold">4.94</p>
@@ -98,7 +99,7 @@ const BookingRequest = () => {
                 </div>
               </div>
             </div>
-            <div className="border-y py-4">
+            {/* <div className="border-y py-4">
               <h3 className="pb-3 text-xl font-medium">Price details</h3>
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between">
@@ -126,11 +127,12 @@ const BookingRequest = () => {
                   <p>$137.61</p>
                 </div>
               </div>
-            </div>
-            <div className="flex justify-between pt-4">
+            </div> */}
+            {/* <div className="flex justify-between pt-4">
               <p>Total</p>
               <p>{reservation?.[0].totalPrice}</p>
-            </div>
+            </div> */}
+            <ReverseCart />
           </div>
         </div>
         <RulesAndPolicy />
@@ -138,7 +140,5 @@ const BookingRequest = () => {
     </div>
   );
 };
-
-const getDate = () => {};
 
 export default BookingRequest;

@@ -5,11 +5,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
-<<<<<<< HEAD
-import React from "react";
-=======
 import React, { useEffect, useState } from "react";
->>>>>>> 7d87849 (a)
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
@@ -52,7 +48,7 @@ export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
   useEffect(() => {
     getReservation();
   }, []);
-  console.log(reservation);
+  // console.log(reservation);
 
   const checkDates = reservation?.map((days) => ({
     from: new Date(days.checkIn),
