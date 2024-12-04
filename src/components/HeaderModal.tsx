@@ -7,11 +7,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Profile from "./icons/Profile";
 import Kebab from "./icons/Kebab";
+import { redirect } from "next/navigation";
+import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { signIn, signOut } from "next-auth/react";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Profile from "./icons/Profile";
 
 export function HeaderModal() {
   const { data: session } = useSession();
@@ -31,7 +33,9 @@ export function HeaderModal() {
 
     return <Profile />;
   };
-
+  const handleAirbnbHome = () => {
+    redirect("/become-host");
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -51,7 +55,12 @@ export function HeaderModal() {
             Log in
           </button>{" "}
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem>
+          <span>Gift cards</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem onClick={handleAirbnbHome}>
           <span>Airbnb your home</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
