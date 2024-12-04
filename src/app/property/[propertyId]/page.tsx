@@ -103,7 +103,7 @@ const PropertyDetail = () => {
           </div>
         </div>
       </div>
-      <div className="mt-20">
+      <div className="mb-[50px] mt-[170px]">
         <HostViewCard hostId={property?.userId} />
       </div>
     </div>

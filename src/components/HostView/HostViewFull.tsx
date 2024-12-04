@@ -11,15 +11,9 @@ const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
     <div className="mx-auto flex w-[1200px]">
       <div className="mt-[100px] w-[720px]">
         <p className="text-[30px] font-bold">Илүү дэлгэрэнгүй</p>
-        {/* <div className="mb-5 mt-5 flex items-center">
-          <div>
-            <TiMessages className="ml-[10px] h-[30px] w-[30px]" />
-          </div>
-          <p className="ml-[19px] text-[17px]">Монгол Англи хэлээр ярьдаг</p>
-        </div> */}
         <div className="mb-5 mt-5">
           <p className="text-s mb-[32px] w-[700px]">
-            Горхи Тэрэлжийн Байгалын Цогцолбор газарт уул ус ой модныхоо хаяанд
+            Горхи Тэрэлжийн Байгалын Цогцолбор газарт уул yc ой модныхоо хаяанд
             байрладаг, цэвэрхэн тохилог манай амралтанд та бүхэн байгууллага,
             анги хамт олон, найз нөхөд, гэр бүлээрээ ирж үзэсгэлэнт байгалын
             сайханд, эрүүл цэвэр агаарт тав тухтай амрахыг урьж байна.
@@ -37,7 +31,7 @@ const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
             className="font-semi mb-[30px] h-[48px] w-[400px] text-[19px]"
             variant="link"
           >
-            Бүгдийг харуулах нийт 45 сэтгэгдэл
+            Бүгдийг харуулах нийт 7 сэтгэгдэл
           </Button>
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>

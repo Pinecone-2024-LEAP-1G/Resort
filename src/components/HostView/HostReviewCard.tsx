@@ -1,6 +1,5 @@
 "use client";
 
-import { ImProfile } from "react-icons/im";
 import mongoose from "mongoose";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -27,7 +26,7 @@ type ReviewType = {
 type HostType = {
   name: string;
 };
-
+const formattedDate = "moment().format('ll')";
 const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
   const [reviewdata, setReviewdata] = useState<ReviewType[]>([]);
   const [hostdata, setHostdata] = useState<HostType[]>([]);
@@ -60,10 +59,16 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
   useEffect(() => {
     getReview();
   }, []);
-  console.log(hostdata);
   return (
     <div>
-      <Carousel className="w-full">
+      <Carousel
+        className="w-full"
+        plugins={[
+          Autoplay({
+            delay: 2000,
+          }),
+        ]}
+      >
         <CarouselContent className="px-10">
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
@@ -73,7 +78,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
                   welcome, gave us a great tour, and helped us make some
                   beautiful jewelry while there. My 90s dream of dressing like
                   Polly and being in the compact has come true. Thank you Airbnb
-                  and Polly's friends!…"
+                  and Polly's friends!{reviewdata?.comment}…"
                 </p>
                 <div className="mt-4 flex items-center gap-2">
                   <Avatar>
@@ -84,8 +89,8 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div>
-                    {/* <p>{hostId?.name}</p> */}
-                    <p>2024-12-03</p>
+                    <p className="font-semibold">Name</p>
+                    <p>2024 May</p>
                   </div>
                 </div>
               </Card>
