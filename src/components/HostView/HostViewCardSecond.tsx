@@ -4,10 +4,10 @@ import { GrStatusGood } from "react-icons/gr";
 
 const HostViewCardSecond = () => {
   return (
-    <div className="h-[230px] w-[320px] rounded-2xl border-2 p-[20px]">
+    <div className="h-[250px] w-[320px] rounded-2xl border-2 p-[20px]">
       <div className="">
         <div className="ml-[5px] text-[20px] font-semibold">
-          Niki's confirmed information
+        Болдоо's confirmed information
         </div>
       </div>
       <div className="mt-[15px] flex">

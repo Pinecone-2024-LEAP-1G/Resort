@@ -7,6 +7,7 @@ import { LuShare } from "react-icons/lu";
 import Review from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
+import HostViewCard from "../HostView/HostViewCard";
 
 export type Property = {
   _id: string;
@@ -90,7 +91,9 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
           </div>
         </div>
       </div>
-      <div className="mt-20">{/* <HostViewFull /> */}</div>
+      <div className="mt-20">
+        <HostViewCard hostId={property?.userId} />
+      </div>
     </div>
   );
 };
