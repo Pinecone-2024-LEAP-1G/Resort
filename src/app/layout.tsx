@@ -13,27 +13,23 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <SessionProvider>
-      <NuqsAdapter>
-        <html lang="en">
-          <body>
-            <main>
-              <div className="text-base font-normal">
-                <div className="mx-5 px-20">
-                  <Header />
-                </div>
-                <br />
-                <div className="mx-5 px-20">{children}</div>
-                <div className="mx-5 px-20">
-                  <Toaster />
-                  <Footer />
-                </div>
+    <NuqsAdapter>
+      <html lang="en">
+        <body>
+          <main>
+            <div className="text-base font-normal">
+              <div className="mx-5 px-20">{/* <Header /> */}</div>
+              <br />
+              <div className="mx-5 px-20">{children}</div>
+              <div className="mx-5 px-20">
+                {" "}
+                <Footer />{" "}
               </div>
-            </main>
-          </body>
-        </html>
-      </NuqsAdapter>
-    </SessionProvider>
+            </div>
+          </main>
+        </body>
+      </html>
+    </NuqsAdapter>
   );
 };
 

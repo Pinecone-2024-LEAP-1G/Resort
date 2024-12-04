@@ -2,11 +2,12 @@ import { ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
 import { connectToMongoDB } from "@/lib/db";
 
-connectToMongoDB();
-export const GET = async () => {
-  try {
-    const reviews = await ReviewModel.find();
+export const GET = async (request: NextRequest) => {
+  const { propertyId } = await request.json();
 
+  try {
+    const reviews = await ReviewModel.find(propertyId);
+    console.log(reviews);
     return Response.json({ reviews });
   } catch (error) {
     return Response.json({ message: error });
