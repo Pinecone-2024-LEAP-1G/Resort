@@ -2,6 +2,7 @@ import { Button } from "../ui/button";
 import { PropertyHeader } from "./PropertyHeader";
 import { useState } from "react";
 import { AboutYourPlace } from "./AboutYourPlace";
+import Image from "next/image";
 
 interface Step {
   id: number;
@@ -10,7 +11,7 @@ interface Step {
   image: string;
 }
 
-export const PropertyOverview = () => {
+export const Overview = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const handleClick = () => setIsClicked(true);
@@ -112,6 +113,6 @@ interface StepImageProps {
 
 const StepImage = ({ image, alt }: StepImageProps) => (
   <div className="flex h-[120px] w-[120px] justify-center md:justify-start">
-    <img src={image} alt={alt} className="h-[120px] w-[120px] object-contain" />
+    <Image src={image} alt={alt} width={120} height={120} objectFit="contain" />
   </div>
 );
