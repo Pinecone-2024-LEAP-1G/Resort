@@ -1,4 +1,4 @@
-import { ReviewModel } from "../../../lib/models";
+import { PropertyModel, ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
 import { connectToMongoDB } from "@/lib/db";
 
@@ -23,7 +23,20 @@ export const POST = async (request: NextRequest) => {
       rating,
       comment,
     });
-    return Response.json({ review });
+
+    const { _id } = review;
+    const updateProperty = await PropertyModel.findByIdAndUpdate(
+      {
+        _id: propertyId,
+      },
+      {
+        $push: { reviewId: _id },
+      },
+      {
+        new: true,
+      },
+    );
+    return Response.json({ review, updateProperty });
   } catch (error) {
     return Response.json({ message: error });
   }

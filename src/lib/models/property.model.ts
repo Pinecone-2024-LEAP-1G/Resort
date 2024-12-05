@@ -1,4 +1,4 @@
-import { Model, Schema, model, models } from "mongoose";
+import mongoose, { Model, Schema, model, models } from "mongoose";
 
 export type Property = {
   _id: string;
@@ -12,6 +12,7 @@ export type Property = {
   totalBathrooms: string;
   cleaningFee: number;
   email: string;
+  reviewId: mongoose.Schema.Types.ObjectId[];
 };
 
 const PropertySchema = new Schema<Property>(
@@ -26,6 +27,10 @@ const PropertySchema = new Schema<Property>(
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },
     email: { type: String, required: true, ref: "Host" },
+    reviewId: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Review",
+    },
   },
   { timestamps: true },
 );

@@ -73,7 +73,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         <div></div>
 
         <div className="mt-10 flex justify-between">
-          <div className="h-[225px] w-[600px] flex-1 border-b-2">
+          <div className="h-[225px] w-[600px] flex-1">
             <p className="mb-2 text-xl font-normal">{property?.description}</p>
             <div className="flex gap-2">
               <p>{property?.guests} хүн</p>
@@ -83,10 +83,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             <div className="mt-8 flex h-fit w-fit justify-between rounded-lg border p-4">
               <Review propertyId={propertyId} />
             </div>
-            <div className="mt-24 h-[80px] border-b-2">
-              <div className="flex gap-2"></div>
-            </div>
-            <div className="botto-4 right-4 z-50 flex"></div>
+            <div className="mt-24 h-[80px]"></div>
           </div>
           <div className="flex-1 rounded-lg">
             <ReverseCart

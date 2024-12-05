@@ -2,8 +2,6 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ImStarEmpty } from "react-icons/im";
-import { ImStarFull } from "react-icons/im";
 
 interface Props {
   propertyId?: string;
