@@ -38,8 +38,8 @@ const GetProperty = ({ propertyId }: Props) => {
     getProperty();
   }, []);
   return (
-    <div className="sticky top-10 ml-[92px]">
-      <div className="h-[150px] w-[456px] gap-4 rounded-2xl border p-6">
+    <div className="ml-auto">
+      <div className="h-[150px] w-[372px] gap-4 rounded-2xl border p-6 shadow-lg">
         <div className="mb-4 flex flex-row gap-4">
           <div
             className="h-[104px] w-[104px] items-center rounded-xl"

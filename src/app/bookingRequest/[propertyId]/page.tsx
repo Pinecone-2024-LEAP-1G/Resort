@@ -12,9 +12,9 @@ const BookingRequest = async ({
 
   return (
     <div>
-      <div className="w-full mx-20 grid grid-cols-2">
+      <div className="w-full grid grid-cols-2 mx-40 gap-4">
         <PaymentDetailSection propertyId={propertyId} />
-        <div>
+        <div className="flex flex-col mr-auto p-5 justify-start items-center sticky top-10 gap-8">
           <GetProperty propertyId={propertyId} />
           <ReverseCart text="Edit" />
         </div>

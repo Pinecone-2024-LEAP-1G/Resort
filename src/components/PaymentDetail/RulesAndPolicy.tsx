@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import {
   Dialog,
   DialogContent,
@@ -13,11 +14,11 @@ import { Users } from "lucide-react";
 import { PawPrint } from "lucide-react";
 import { Cigarette } from "lucide-react";
 import Link from "next/link";
-import { PayButton } from "./PayButton";
+import ToastWithAction from "./ToastWithAction";
 
 export function RulesAndPolicy() {
   return (
-    <div className="mx-20 w-[556px] max-w-full border-t py-8 text-xs">
+    <div className="w-[556px] max-w-full border-t py-8 text-xs">
       <div className="py-6">
         <p>
           By selecting the button below, I agree to the{" "}
@@ -158,7 +159,7 @@ export function RulesAndPolicy() {
           if I’m responsible for damage.
         </p>
       </div>
-      <PayButton />
+      <ToastWithAction />
     </div>
   );
 }
