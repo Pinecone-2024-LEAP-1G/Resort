@@ -15,8 +15,9 @@ import Link from "next/link";
 interface Props {
   property?: Property;
   propertyId?: string;
+  text: string;
 }
-export const ReverseCart = ({ property, propertyId }: Props) => {
+export const ReverseCart = ({ property, propertyId, text }: Props) => {
   const [reservation, setReservation] = useState<AvailableList[] | []>([]);
   const router = useRouter();
   useEffect(() => {
@@ -107,9 +108,7 @@ export const ReverseCart = ({ property, propertyId }: Props) => {
 
   const navigateToNextPage = () => {
     router.push(
-      `/bookingRequest?from=${from.toISOString()}&to=${(
-        to?.toISOString(),
-      )}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}$propertyId=${propertyId}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
     );
   };
 
@@ -141,7 +140,7 @@ export const ReverseCart = ({ property, propertyId }: Props) => {
         onClick={navigateToNextPage}
         className="mt-4 h-10 w-[300px] bg-gray-400"
       >
-        reserve
+        {text}
       </Button>
       <div className="mt-8 flex h-28 flex-col gap-2 border-b">
         <div className="flex justify-between">
