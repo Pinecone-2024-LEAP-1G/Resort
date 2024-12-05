@@ -4,8 +4,6 @@ import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
-import { Property } from "./property/[propertyId]/page";
-
 import { parseAsIsoDate, parseAsString, useQueryStates } from "nuqs";
 
 const Home = () => {
@@ -40,6 +38,7 @@ const Home = () => {
       <Categories />
       <div className="grid grow grid-cols-6 gap-8">
         {properties?.map((property) => {
+          console.log(property);
           return (
             <HomeCard
               propertyId={property?._id}

@@ -1,11 +1,5 @@
+"use client";
 import { DiCodeigniter } from "react-icons/di";
-("use client");
-import Logo from "./icons/Logo";
-
-import { HeaderModal } from "./HeaderModal";
-import { useRouter } from "next/navigation";
-("use client");
-import Logo from "../icons/Logo";
 import { HeaderSearch } from "./HeaderSearchAddress";
 import { DatePickerWithRange } from "./HeaderDate";
 import React, { useState } from "react";
@@ -16,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { SelectRangeEventHandler } from "react-day-picker";
 
 const Header = () => {
-  const router = useRouter();
   const [hover, setHover] = React.useState<number>();
   const [addresssearch, setAddresssearch] = useState("");
   const [adultNumber, setAdultNumber] = useState(0);
