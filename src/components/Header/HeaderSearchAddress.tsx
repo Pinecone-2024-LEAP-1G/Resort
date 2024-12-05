@@ -32,15 +32,8 @@ export const HeaderSearch = ({
 
   useEffect(() => {
     const fetchProperties = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/properties",
-        );
-        Response.json({ response: response });
-        setProperties(response.data?.properties);
-      } catch (error) {
-        Response.json({ error: error });
-      }
+      const response = await axios.get("http://localhost:3000/api/properties");
+      setProperties(response.data?.properties);
     };
     fetchProperties();
   }, []);
@@ -62,6 +55,7 @@ export const HeaderSearch = ({
       >
         Where
         <input
+          value={addresssearch || ""}
           onChange={(e) => addresssearchClick(e)}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}

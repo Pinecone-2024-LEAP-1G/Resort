@@ -15,16 +15,13 @@ const Home = () => {
   });
   const { from, to, guests, address } = queryParams;
 
-  console.log(queryParams, address);
   const [properties, setProperties] = useState<Property[]>([]);
   useEffect(() => {
     const getProperties = async () => {
-      console.log(queryParams.address);
       try {
         const response = await axios.get(
           `http://localhost:3000/api/properties/getAddress?address=${address}&from=${from}&to=${to}&guests=${guests}`,
         );
-        console.log(response);
         setProperties(response?.data.property);
       } catch (error) {
         console.log(error);
@@ -38,7 +35,6 @@ const Home = () => {
       <Categories />
       <div className="grid grow grid-cols-6 gap-8">
         {properties?.map((property) => {
-          console.log(property);
           return (
             <HomeCard
               propertyId={property?._id}

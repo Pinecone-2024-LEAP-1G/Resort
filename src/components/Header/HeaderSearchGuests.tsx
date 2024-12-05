@@ -55,7 +55,7 @@ export function PopoverDemo({
           <button
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className={`ml-4 flex w-[234px] flex-col items-start justify-center rounded-full ${hover}`}
+            className={`ml-7 flex w-[234px] flex-col items-start justify-center rounded-full ${hover}`}
           >
             Add guests
           </button>
@@ -108,8 +108,7 @@ export function PopoverDemo({
             </div>
           </div>
           <PopoverClose>
-            {" "}
-            <Button onClick={submit} className="bg-pink-600 px-20">
+            <Button onClick={submit} className="px-20">
               Submit
             </Button>
           </PopoverClose>
@@ -117,9 +116,9 @@ export function PopoverDemo({
       </Popover>
       <div
         onClick={onClick}
-        className="mr-1 flex gap-1 rounded-full bg-pink-600 px-4 py-3 text-white"
+        className="mr-5 flex gap-1 rounded-full bg-black px-4 py-3 text-white"
       >
-        <Search /> Search
+        <Search />
       </div>
     </div>
   );
