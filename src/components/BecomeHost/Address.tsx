@@ -13,16 +13,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 export const Address = () => {
   const [step, setStep] = useState<string>("about");
-  const [streetAddress, setStreetAddress] = useState<string>("");
-  const [town, setTown] = useState<string>("");
-  const [postalCode, setPostalCode] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
-
+  const [description, setDescription] = useState<string>("");
+  // const [town, setTown] = useState<string>("");
+  // const [postalCode, setPostalCode] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const router = useRouter();
+  const { id } = router.query;
   const handleNext = () => {
-    if (streetAddress && town && postalCode && region) {
+    if (description && address) {
+      router.push(`/[${description}]/[${description}]`);
       setStep("next");
     } else {
       alert("Please fill in all the required fields.");
@@ -46,9 +49,11 @@ export const Address = () => {
       <PropertyHeader />
       <div className="mx-auto my-8 flex w-[630px] flex-col gap-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-[32px] font-semibold">your place located?</h1>
+          <h1 className="text-[32px] font-semibold">
+            Where is your place located?
+          </h1>
           <p className="text-lg text-[#6a6a6a]">
-            Your address is only shared with guests after they’ve made a
+            Your address is only shared with guests after they have made a
             reservation.
           </p>
         </div>
@@ -57,7 +62,7 @@ export const Address = () => {
             <label className="block text-sm font-medium text-gray-700">
               Select your province
             </label>
-            <Select onValueChange={setRegion}>
+            <Select onValueChange={setAddress}>
               <SelectTrigger className="w-[630px]">
                 <SelectValue placeholder="Choose a province" />
               </SelectTrigger>
@@ -78,17 +83,17 @@ export const Address = () => {
                 htmlFor="streetAddress"
                 className="block text-sm font-medium text-gray-700"
               >
-                Street Address
+                Description
               </label>
               <Input
                 id="streetAddress"
-                value={streetAddress}
-                onChange={(e) => setStreetAddress(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 type="text"
                 placeholder="Enter your street address"
               />
             </div>
-            <div>
+            {/* <div>
               <label
                 htmlFor="town"
                 className="block text-sm font-medium text-gray-700"
@@ -117,7 +122,7 @@ export const Address = () => {
                 type="text"
                 placeholder="Enter your postal code"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

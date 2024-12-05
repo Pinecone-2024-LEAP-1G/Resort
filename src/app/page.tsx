@@ -39,6 +39,7 @@ const Home = () => {
         {properties?.map((property) => {
           return (
             <HomeCard
+              property={property}
               propertyId={property?._id}
               key={property?._id}
               propertyPictures={[property?.propertyPictures]}

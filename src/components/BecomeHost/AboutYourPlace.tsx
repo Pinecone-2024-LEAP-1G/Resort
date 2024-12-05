@@ -33,9 +33,9 @@ export const AboutYourPlace = () => {
             Tell us about your place
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            In this step, ask you which type of property you have and if guests
-            will book the entire place or just a room. Then let us know the
-            location and how many guests can stay.
+            In this step, we will ask you which type of property you have and if
+            guests will book the entire place or just a room. Then let us know
+            the location and how many guests can stay.
           </p>
         </div>
         <div className="flex-shrink-0">
