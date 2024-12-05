@@ -36,9 +36,7 @@ const Header = () => {
       `/?address=${addresssearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
     );
   };
-  // const handleDateSelect = (range: { from: Date; to: Date | undefined }) => {
-  //   setDate(range);
-  // };
+
   return (
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
