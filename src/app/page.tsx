@@ -26,7 +26,7 @@ const Home = () => {
               propertyId={property._id}
               key={property._id}
               propertyPictures={property.propertyPictures}
-              property={property}
+              property={property.hostId}
             />
           );
         })}

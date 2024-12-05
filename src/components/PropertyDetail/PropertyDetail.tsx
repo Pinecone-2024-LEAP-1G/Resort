@@ -92,7 +92,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         </div>
       </div>
       <div className="mt-20">
-        <HostViewCard hostId={property?.userId} />
+        <HostViewCard userId={property?.userId} />
       </div>
     </div>
   );
