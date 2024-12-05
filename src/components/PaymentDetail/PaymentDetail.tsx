@@ -10,7 +10,6 @@ import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import { Keyboard } from "lucide-react";
 import { CheckInTime } from "./CheckInTime";
-import { GuestPopover } from "../PropertyDetail/GuestPopover";
 
 export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
@@ -115,7 +114,7 @@ export const PaymentDetail = ({}: React.HTMLAttributes<HTMLDivElement>) => {
                     </p>
                   </PopoverTrigger>
                   <PopoverContent className="border-0 bg-white shadow-transparent">
-                    <GuestPopover />
+                    {/* <GuestPopover /> */}
                   </PopoverContent>
                 </Popover>
               </div>

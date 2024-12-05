@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Property } from "./PropertyDetail/PropertyDetail";
+import { Property } from "@/lib/models";
 
 type HomeCardProps = {
   propertyId?: string;

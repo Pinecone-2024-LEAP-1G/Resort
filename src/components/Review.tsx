@@ -26,7 +26,7 @@ const Review = ({ propertyId }: Props) => {
   const [reviews, setReviews] = useState<Review>();
   useEffect(() => {
     const getReview = async () => {
-      const response = await axios.get<Review>(
+      const response = await axios.get(
         ` http://localhost:3000/api/reviews/${propertyId}`,
       );
       setReviews(response.data.review);

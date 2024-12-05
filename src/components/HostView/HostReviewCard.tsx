@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Autoplay from "embla-carousel-autoplay";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Carousel,
@@ -66,14 +65,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
   }, [reviewId]);
   return (
     <div>
-      <Carousel
-        className="w-full"
-        plugins={[
-          Autoplay({
-            delay: 2000,
-          }),
-        ]}
-      >
+      <Carousel className="w-full">
         <CarouselContent className="px-10">
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>

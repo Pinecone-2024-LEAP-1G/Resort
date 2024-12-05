@@ -17,11 +17,11 @@ interface Props {
   text: string;
 }
 export const ReverseCart = ({ property, propertyId, text }: Props) => {
-  const [reservation, setReservation] = useState<AvailableList[] | []>([]);
+  const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
   useEffect(() => {
     const getReservation = async () => {
-      const response = await axios.get<AvailableList[] | []>(
+      const response = await axios.get(
         `http://localhost:3000/api/availablelists?propertyId=${propertyId}`,
       );
       setReservation(response.data.AvailableLists);
@@ -33,6 +33,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
   }));
+  console.log(reservation);
 
   const disabledDays = reservation?.flatMap((item) => {
     const days = [];
@@ -65,7 +66,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const nearestValidToDate = addDays(nearestValidFromDate, 3);
 
-  const [{ from, to }, setDate] = useQueryStates(
+  const [{ from, to }] = useQueryStates(
     {
       from: parseAsIsoDate.withDefault(nearestValidFromDate),
       to: parseAsIsoDate.withDefault(nearestValidToDate),
@@ -120,7 +121,15 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       <p className="mb-4">Үнэ: {property?.price}₮</p>
       <DatePickerWithRange
         selected={{ from, to }}
-        onSelect={setDate}
+        onSelect={(range) => {
+          const transformedValues = range
+            ? {
+                from: range.from ?? null,
+                to: range.to ?? null,
+              }
+            : null;
+          console.log(transformedValues);
+        }}
         defaultMonth={from || new Date()}
         disabled={disabledRanges}
         date={{ from, to }}
