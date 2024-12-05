@@ -1,4 +1,5 @@
 import HostViewCard from "@/components/HostView/HostViewCard";
+import HostViewCardSecond from "@/components/HostView/HostViewCardSecond";
 import HostViewFull from "@/components/HostView/HostViewFull";
 
 const Page = async ({ params }: { params: Promise<{ hostId: string }> }) => {

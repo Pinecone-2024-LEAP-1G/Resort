@@ -1,15 +1,13 @@
-import { connectToMongoDB } from "@/lib/db";
 import { HostModel } from "@/lib/models/host.model";
 
-connectToMongoDB();
 export const GET = async (
   request: Request,
   { params }: { params: Promise<{ hostId: string }> },
 ) => {
+  const hostId = (await params).hostId;
   try {
-    const hostId = (await params).hostId;
-    const host = await HostModel.find({ _id: hostId }).populate({
-      path: "hostId",
+    const host = await HostModel.findById({ _id: hostId }).populate({
+      path: "propertyId",
     });
     return Response.json({ host });
   } catch (error) {

@@ -1,7 +1,5 @@
-import { connectToMongoDB } from "@/lib/db";
-import { HostModel } from "@/lib/models/host.model";
+import { ReviewModel } from "@/lib/models";
 
-connectToMongoDB();
 export const GET = async (
   request: Request,
   { params }: { params: Promise<{ hostId: string }> },
@@ -9,8 +7,13 @@ export const GET = async (
   const hostId = (await params).hostId;
 
   try {
-    const host = await HostModel.findById({ _id: hostId });
-    return Response.json({ host: host });
+    const review = await ReviewModel.find({
+      hostId: hostId,
+    }).populate("userId");
+
+    console.log(review.length);
+
+    return Response.json({ review: review });
   } catch (error) {
     return Response.json({ message: error });
   }

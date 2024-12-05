@@ -1,9 +1,12 @@
 "use client";
 
-import mongoose from "mongoose";
 import axios from "axios";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { useParams } from "next/navigation";
+=======
+import Autoplay from "embla-carousel-autoplay";
+>>>>>>> ec98089 (something)
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Carousel,
@@ -18,7 +21,15 @@ import { HostType } from "@/lib/models/host.model";
 
 export type ReviewType = {
   _id: string;
-  userId: mongoose.Schema.Types.ObjectId;
+  userId: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: 91212922;
+    avatar: "";
+    comment: string;
+  };
   propertyId: string;
   rating: number;
   comment: string;
@@ -81,7 +92,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold">Name</p>
+                    <p className="font-semibold"></p>
                     <p>2024 May</p>
                   </div>
                 </div>
@@ -95,4 +106,4 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
     </div>
   );
 };
-export default HostReviewCard;
+export default ReviewType;
