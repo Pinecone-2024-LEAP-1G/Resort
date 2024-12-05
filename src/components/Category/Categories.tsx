@@ -15,18 +15,11 @@ export const Categories = () => {
   const [hover, setHover] = useState<string | number | null>(null);
   useEffect(() => {
     const getCategories = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/categories",
-        );
-        Response.json({ categories });
-        setCategories(response.data);
-      } catch (error) {
-        Response.json({ error: error });
-      }
+      const response = await axios.get("http://localhost:3000/api/categories");
+      setCategories(response.data);
     };
     getCategories();
-  }, [categories]);
+  }, []);
 
   return (
     <div className="flex items-center">

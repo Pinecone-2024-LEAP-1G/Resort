@@ -16,13 +16,14 @@ type HomeCardProps = {
   address?: string[];
   distance?: string;
   rating?: string;
-  propertyPictures: string[];
+  propertyPictures: [string[]];
   property?: Property;
 };
 
 export default function HomeCard(props: HomeCardProps) {
   const { propertyId, propertyPictures, property } = props;
   const router = useRouter();
+
   return (
     <div>
       <Carousel className="w-full">
@@ -48,11 +49,11 @@ export default function HomeCard(props: HomeCardProps) {
       </Carousel>
       <div className="grid grid-cols-2">
         <div>
-          <span>{property?.address}</span>
+          <span>{property?.description}</span>
         </div>
         <div className="ml-auto flex items-center"></div>
       </div>
-      <p>distance</p>
+      <p>{property?.guests}</p>
       <div>
         <span className="mr-[2px] text-[15px] font-bold">
           {property?.price}

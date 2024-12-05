@@ -16,6 +16,7 @@ const Home = () => {
   const { from, to, guests, address } = queryParams;
 
   const [properties, setProperties] = useState<Property[]>([]);
+
   useEffect(() => {
     const getProperties = async () => {
       try {
@@ -40,6 +41,7 @@ const Home = () => {
               propertyId={property?._id}
               key={property?._id}
               propertyPictures={[property?.propertyPictures]}
+              property={property}
             />
           );
         })}

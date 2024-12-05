@@ -8,11 +8,11 @@ import { GuestPopover } from "./GuestPopover";
 import { DatePickerWithRange } from "./DatePickerWithRange";
 import axios from "axios";
 import { AvailableList } from "@/lib/models";
-import { Property } from "./PropertyDetail";
 import { useRouter } from "next/navigation";
+import { PropertyType } from "../Review";
 
 interface Props {
-  property?: Property;
+  property?: PropertyType;
   propertyId?: string;
   text: string;
 }
@@ -33,7 +33,6 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
   }));
-  console.log(reservation);
 
   const disabledDays = reservation?.flatMap((item) => {
     const days = [];
@@ -66,7 +65,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const nearestValidToDate = addDays(nearestValidFromDate, 3);
 
-  const [{ from, to }] = useQueryStates(
+  const [{ from, to }, setDate] = useQueryStates(
     {
       from: parseAsIsoDate.withDefault(nearestValidFromDate),
       to: parseAsIsoDate.withDefault(nearestValidToDate),
@@ -108,11 +107,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const navigateToNextPage = () => {
     router.push(
-<<<<<<< HEAD
       `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
-=======
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
->>>>>>> 9059e06 (a)
     );
   };
 
@@ -121,15 +116,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       <p className="mb-4">Үнэ: {property?.price}₮</p>
       <DatePickerWithRange
         selected={{ from, to }}
-        onSelect={(range) => {
-          const transformedValues = range
-            ? {
-                from: range.from ?? null,
-                to: range.to ?? null,
-              }
-            : null;
-          console.log(transformedValues);
-        }}
+        onSelect={setDate}
         defaultMonth={from || new Date()}
         disabled={disabledRanges}
         date={{ from, to }}

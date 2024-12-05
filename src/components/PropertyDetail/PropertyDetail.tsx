@@ -4,31 +4,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShare } from "react-icons/lu";
-import Review from "../Review";
+import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostViewCard";
 
-export type Property = {
-  _id: string;
-  price: number;
-  guests: number;
-  address: string;
-  description: string;
-  propertyPictures: string[];
-  userId: string;
-  categoryId: string;
-  totalBedrooms: string;
-  totalBathrooms: string;
-};
-
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
-  const [property, setProperty] = useState<Property>();
+  const [property, setProperty] = useState<PropertyType>();
 
   useEffect(() => {
     const getPropertyById = async () => {
       try {
-        const response = await axios.get<{ property: Property }>(
+        const response = await axios.get<{ property: PropertyType }>(
           `http://localhost:3000/api/properties/${propertyId}`,
         );
 
@@ -80,8 +67,8 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
               <p>~ {property?.totalBedrooms} унтлагын өрөө</p>
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
-            <div className="mt-8 flex h-fit w-fit justify-between rounded-lg border p-4">
-              <Review propertyId={propertyId} />
+            <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
+              <Review property={property} />
             </div>
             <div className="mt-24 h-[80px]"></div>
           </div>
