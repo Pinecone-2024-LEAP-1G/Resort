@@ -23,7 +23,7 @@ type ReviewType = {
   comment: string;
 };
 
-const HostViewCard = ({ userId }: { userId?: string | undefined }) => {
+const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
   const [host, setHost] = useState<HostModel | null>(null);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [averageRating, setAverageRating] = useState<number>(0);
@@ -33,7 +33,7 @@ const HostViewCard = ({ userId }: { userId?: string | undefined }) => {
     const getHostData = async () => {
       try {
         const hostResponse = await axios.get<{ host: HostModel }>(
-          `http://localhost:3000/api/host/${userId}`,
+          `http://localhost:3000/api/host/${hostId}`,
         );
 
         setHost(hostResponse.data.host);
@@ -41,7 +41,7 @@ const HostViewCard = ({ userId }: { userId?: string | undefined }) => {
         const reviewsResponse = await axios.get<{
           reviews: ReviewType[];
           reviewCount: number;
-        }>(`http://localhost:3000/api/reviews/hostReviews/${userId}`);
+        }>(`http://localhost:3000/api/reviews/hostReviews/${hostId}`);
         const reviewsData = reviewsResponse.data.reviews;
         setReviews(reviewsData);
         setReviewCount(reviewsResponse.data.reviewCount);
@@ -55,13 +55,13 @@ const HostViewCard = ({ userId }: { userId?: string | undefined }) => {
         console.error(error);
       }
     };
-    if (userId) {
+    if (hostId) {
       getHostData();
     }
-  }, [userId]);
+  }, [hostId]);
 
   return (
-    <Link href={`/hostView/${userId}`}>
+    <Link href={`/hostView/${hostId}`}>
       <div className="flex h-[230px] w-[320px] rounded-2xl border-2 shadow-2xl">
         <div className="mx-auto my-auto">
           <CgProfile className="h-[70px] w-[70px]" />
