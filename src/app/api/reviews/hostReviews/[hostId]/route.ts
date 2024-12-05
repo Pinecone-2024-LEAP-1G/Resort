@@ -4,16 +4,16 @@ export const GET = async (
   request: Request,
   { params }: { params: Promise<{ hostId: string }> },
 ) => {
-  const hostId = (await params).hostId;
+  const { userId } = (await params).hostId;
 
   try {
-    const review = await ReviewModel.find({
-      hostId: hostId,
-    }).populate("userId");
+    const reviews = await ReviewModel.find({ hostId: userId }).populate(
+      "userId",
+    );
 
-    console.log(review.length);
+    const reviewCount = reviews.length;
 
-    return Response.json({ review: review });
+    return Response.json({ reviews, reviewCount });
   } catch (error) {
     return Response.json({ message: error });
   }

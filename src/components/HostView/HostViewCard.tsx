@@ -23,25 +23,45 @@ type ReviewType = {
   comment: string;
 };
 
-const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
-  const [host, setHost] = useState<HostModel>();
-  console.log(host);
+const HostViewCard = ({ userId }: { userId?: string | undefined }) => {
+  const [host, setHost] = useState<HostModel | null>(null);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
+  const [averageRating, setAverageRating] = useState<number>(0);
+  const [reviewCount, setReviewCount] = useState<number>(0);
 
   useEffect(() => {
-    const getHostById = async () => {
+    const getHostData = async () => {
       try {
-        const response = await axios.get<{ host: HostModel }>(
-          `http://localhost:3000/api/host/${hostId}`,
+        const hostResponse = await axios.get<{ host: HostModel }>(
+          `http://localhost:3000/api/host/${userId}`,
         );
-        console.log(response);
-        setHost(response.data.host);
-      } catch (error) {}
+
+        setHost(hostResponse.data.host);
+
+        const reviewsResponse = await axios.get<{
+          reviews: ReviewType[];
+          reviewCount: number;
+        }>(`http://localhost:3000/api/reviews/hostReviews/${userId}`);
+        const reviewsData = reviewsResponse.data.reviews;
+        setReviews(reviewsData);
+        setReviewCount(reviewsResponse.data.reviewCount);
+
+        const totalRating = reviewsData.reduce(
+          (acc, review) => acc + review.rating,
+          0,
+        );
+        setAverageRating(totalRating / reviewsData.length || 0);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    getHostById();
-  }, [hostId]);
+    if (userId) {
+      getHostData();
+    }
+  }, [userId]);
 
   return (
-    <Link href={`/hostView/${hostId}`}>
+    <Link href={`/hostView/${userId}`}>
       <div className="flex h-[230px] w-[320px] rounded-2xl border-2 shadow-2xl">
         <div className="mx-auto my-auto">
           <CgProfile className="h-[70px] w-[70px]" />
@@ -50,11 +70,11 @@ const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
         </div>
         <div className="mx-auto mt-[15px]">
           <div>
-            <p className="mt-[10px] text-2xl font-bold">{}</p>
+            <p className="mt-[10px] text-2xl font-bold">{reviewCount}</p>
             <p className="text-xs">Cэтrэrдэл үлдээсэн</p>
           </div>
           <div>
-            <p className="mt-[10px] text-2xl font-bold">4.91</p>
+            <p className="mt-[10px] text-2xl font-bold">{averageRating}</p>
             <p className="text-xs">Үнэлгээ</p>
           </div>
           <div>
