@@ -34,7 +34,7 @@ const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
         <div className="flex justify-between">
-          <p className="text-[30px] font-bold">Болдоо's listings</p>
+          <p className="text-[30px] font-bold">Болдоо listings</p>
         </div>
         <div className="mb-[180px] mt-[40px] flex gap-3">
           <PropertyCard />

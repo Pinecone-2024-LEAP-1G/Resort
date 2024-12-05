@@ -30,6 +30,9 @@ type HostType = {
 const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
   const [reviewdata, setReviewdata] = useState<ReviewType[]>([]);
   const [hostdata, setHostdata] = useState<HostType[]>([]);
+  console.log(reviewdata);
+  console.log(hostdata);
+
   const params = useParams();
   const { reviewId } = params;
   const getHost = async () => {
@@ -74,11 +77,10 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
             <CarouselItem key={index}>
               <Card className="p-5">
                 <p>
-                  "…This was absolutely amazing! Polly's BFFs made us feel very
-                  welcome, gave us a great tour, and helped us make some
-                  beautiful jewelry while there. My 90s dream of dressing like
-                  Polly and being in the compact has come true. Thank you Airbnb
-                  and Polly's friends!…"
+                  was absolutely amazing! BFFs made us feel very welcome, gave
+                  us a great tour, and helped us make some beautiful jewelry
+                  while there. My 90s dream of dressing like Polly and being in
+                  the compact has come true. Thank you Airbnb and
                 </p>
                 <div className="mt-4 flex items-center gap-2">
                   <Avatar>

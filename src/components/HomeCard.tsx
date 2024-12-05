@@ -1,8 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import { TiStar } from "react-icons/ti";
-
 import {
   Carousel,
   CarouselContent,

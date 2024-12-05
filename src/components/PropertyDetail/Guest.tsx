@@ -1,6 +1,5 @@
 import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
-import { FormEventHandler } from "react";
 
 export type QuantityProps = {
   name?: number;
@@ -20,7 +19,6 @@ export const Guest = ({
   return (
     <div className={cn(`flex items-center gap-4`, className)}>
       <Button
-        
         className="h-8 w-8 rounded-full border bg-white text-black"
         aria-label="Decrease quantity"
         onClick={plusonclick}
@@ -31,7 +29,7 @@ export const Guest = ({
         {name}
       </p>
       <Button
-      disabled={disabled}
+        disabled={disabled}
         className="h-8 w-8 rounded-full border bg-white text-black"
         aria-label="Increase quantity"
         onClick={onclick}

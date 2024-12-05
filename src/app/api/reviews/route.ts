@@ -1,6 +1,5 @@
 import { PropertyModel, ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
-import { connectToMongoDB } from "@/lib/db";
 
 export const GET = async (request: NextRequest) => {
   const { propertyId } = await request.json();

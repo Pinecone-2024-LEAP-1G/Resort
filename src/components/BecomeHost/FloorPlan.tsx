@@ -69,7 +69,7 @@ export const FloorPlan = () => {
             Share some basics about your place
           </h1>
           <span className="text-lg text-[#6a6a6a]">
-            You'll add more details later, like bed types.
+            add more details later, like bed types.
           </span>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">

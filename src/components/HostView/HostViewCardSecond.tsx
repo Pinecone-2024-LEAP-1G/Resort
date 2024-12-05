@@ -7,7 +7,7 @@ const HostViewCardSecond = () => {
     <div className="h-[250px] w-[320px] rounded-2xl border-2 p-[20px]">
       <div className="">
         <div className="ml-[5px] text-[20px] font-semibold">
-        Болдоо's confirmed information
+          Болдоо confirmed information
         </div>
       </div>
       <div className="mt-[15px] flex">

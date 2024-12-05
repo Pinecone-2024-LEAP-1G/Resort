@@ -77,8 +77,8 @@ export const Photos = () => {
             Add some photos of your castle
           </h3>
           <p className="h-[48px] w-[588px] text-lg font-normal text-[#6a6a6a]">
-            You'll need 5 photos to get started. You can add more or make
-            changes later.
+            need 5 photos to get started. You can add more or make changes
+            later.
           </p>
         </div>
         <div className="flex h-[417px] w-[640px] flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[#f7f7f7]">

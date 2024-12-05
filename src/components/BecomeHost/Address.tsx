@@ -46,9 +46,7 @@ export const Address = () => {
       <PropertyHeader />
       <div className="mx-auto my-8 flex w-[630px] flex-col gap-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-[32px] font-semibold">
-            Where's your place located?
-          </h1>
+          <h1 className="text-[32px] font-semibold">your place located?</h1>
           <p className="text-lg text-[#6a6a6a]">
             Your address is only shared with guests after they’ve made a
             reservation.
