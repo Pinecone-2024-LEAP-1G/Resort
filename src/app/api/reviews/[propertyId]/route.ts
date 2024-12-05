@@ -7,9 +7,12 @@ export const GET = async (
   const propertyId = (await params).propertyId;
 
   try {
-    const review = await ReviewModel.findOne({
+    const review = await ReviewModel.find({
       propertyId: propertyId,
     }).populate("userId");
+
+    console.log(review.length);
+
     return Response.json({ review: review });
   } catch (error) {
     return Response.json({ message: error });

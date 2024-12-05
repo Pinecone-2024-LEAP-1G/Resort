@@ -31,7 +31,7 @@ const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
     const getHostById = async () => {
       try {
         const response = await axios.get<{ host: HostModel }>(
-          `http://localhost:3000/api/properties/${hostId}`,
+          `http://localhost:3000/api/host/${hostId}`,
         );
         console.log(response);
         setHost(response.data.host);
@@ -50,7 +50,7 @@ const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
         </div>
         <div className="mx-auto mt-[15px]">
           <div>
-            <p className="mt-[10px] text-2xl font-bold">48</p>
+            <p className="mt-[10px] text-2xl font-bold">{}</p>
             <p className="text-xs">Cэтrэrдэл үлдээсэн</p>
           </div>
           <div>

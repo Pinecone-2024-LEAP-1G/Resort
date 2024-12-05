@@ -1,4 +1,5 @@
 import HostViewCard from "@/components/HostView/HostViewCard";
+import HostViewCardSecond from "@/components/HostView/HostViewCardSecond";
 import HostViewFull from "@/components/HostView/HostViewFull";
 
 const Page = async ({ params }: { params: Promise<{ hostId: string }> }) => {
@@ -9,6 +10,9 @@ const Page = async ({ params }: { params: Promise<{ hostId: string }> }) => {
       <div className="mt-[120px] h-[230px] w-[500px]">
         <div className="h-[230px] w-[320px] cursor-pointer">
           <HostViewCard />
+          <div className="mt-[80px]">
+            <HostViewCardSecond />
+          </div>
         </div>
       </div>
       <HostViewFull hostId={hostId} />

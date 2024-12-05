@@ -1,9 +1,7 @@
 "use client";
 
-import mongoose from "mongoose";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import Autoplay from "embla-carousel-autoplay";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -16,49 +14,37 @@ import {
 
 import { Card } from "@/components/ui/card";
 
+interface Props {
+  hostId?: string;
+}
+
 type ReviewType = {
   _id: string;
-  userId: mongoose.Schema.Types.ObjectId;
+  userId: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: 91212922;
+    avatar: "";
+    comment: string;
+  };
   propertyId: string;
   rating: number;
-  comment: string;
-};
-type HostType = {
-  name: string;
 };
 
-const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
-  const [reviewdata, setReviewdata] = useState<ReviewType[]>([]);
-  const [hostdata, setHostdata] = useState<HostType[]>([]);
-  const params = useParams();
-  const { reviewId } = params;
-  const getHost = async () => {
-    try {
-      const response = await axios.get<{ host: HostType[] }>(
-        `http://localhost:3000/api/host/${hostId}}`,
-      );
-      setHostdata(response.data.host);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const ReviewType = ({ hostId }: Props) => {
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
   useEffect(() => {
-    getHost();
-  }, []);
-
-  const getReview = async () => {
-    try {
-      const response = await axios.get<{ reviews: ReviewType[] }>(
-        `http://localhost:3000/api/reviews/${reviewId}`,
+    const getHostReview = async () => {
+      const response = await axios.get<ReviewType[]>(
+        ` http://localhost:3000/api/reviews/host/${hostId}`,
       );
-      setReviewdata(response.data.reviews);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getReview();
-  }, []);
+      setReviews(response.data);
+      console.log(response.data);
+    };
+    getHostReview();
+  }, [hostId]);
   return (
     <div>
       <Carousel
@@ -73,13 +59,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
               <Card className="p-5">
-                <p>
-                  "…This was absolutely amazing! Polly's BFFs made us feel very
-                  welcome, gave us a great tour, and helped us make some
-                  beautiful jewelry while there. My 90s dream of dressing like
-                  Polly and being in the compact has come true. Thank you Airbnb
-                  and Polly's friends!…"
-                </p>
+                <p>"…{reviews?.comment}…"</p>
                 <div className="mt-4 flex items-center gap-2">
                   <Avatar>
                     <AvatarImage
@@ -89,7 +69,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold">Name</p>
+                    <p className="font-semibold"></p>
                     <p>2024 May</p>
                   </div>
                 </div>
@@ -103,4 +83,4 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
     </div>
   );
 };
-export default HostReviewCard;
+export default ReviewType;

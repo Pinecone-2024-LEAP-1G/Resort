@@ -16,10 +16,12 @@ const Host = new Schema<HostType>(
     experience: { type: String },
     Address: { type: String },
     description: { type: String },
-    propertyId: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Property",
-    },
+    propertyId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Property",
+      },
+    ],
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     email: { type: String, required: true },
