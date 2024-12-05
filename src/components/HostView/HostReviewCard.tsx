@@ -35,33 +35,35 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
 
   const params = useParams();
   const { reviewId } = params;
-  const getHost = async () => {
-    try {
-      const response = await axios.get<{ host: HostType[] }>(
-        `http://localhost:3000/api/host/${hostId}}`,
-      );
-      setHostdata(response.data.host);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
-    getHost();
-  }, []);
+    const getHost = async () => {
+      try {
+        const response = await axios.get<{ host: HostType[] }>(
+          `http://localhost:3000/api/host/${hostId}}`,
+        );
+        setHostdata(response.data.host);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const getReview = async () => {
-    try {
-      const response = await axios.get<{ reviews: ReviewType[] }>(
-        `http://localhost:3000/api/reviews/${reviewId}`,
-      );
-      setReviewdata(response.data.reviews);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    getHost();
+  }, [hostId]);
+
   useEffect(() => {
+    const getReview = async () => {
+      try {
+        const response = await axios.get<{ reviews: ReviewType[] }>(
+          `http://localhost:3000/api/reviews/${reviewId}`,
+        );
+        setReviewdata(response.data.reviews);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getReview();
-  }, []);
+  }, [reviewId]);
   return (
     <div>
       <Carousel
