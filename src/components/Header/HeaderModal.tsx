@@ -7,13 +7,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Kebab from "./icons/Kebab";
 import { redirect } from "next/navigation";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Profile from "./icons/Profile";
+import Profile from "../icons/Profile";
+import Kebab from "../icons/Kebab";
 
 export function HeaderModal() {
   const { data: session } = useSession();

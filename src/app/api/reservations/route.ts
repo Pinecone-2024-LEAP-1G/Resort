@@ -18,11 +18,9 @@ export const POST = async (request: NextRequest) => {
     infants,
     totalPrice,
   } = await request.json();
-
   try {
     const checkindate = new Date(checkIn);
     const checkoutdate = new Date(checkOut);
-
     const overlapReservation = await AvailableListModel.find({
       propertyId: propertyId,
       $or: [
