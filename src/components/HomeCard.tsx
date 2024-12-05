@@ -34,7 +34,7 @@ export default function HomeCard(props: HomeCardProps) {
               <CarouselItem key={index}>
                 <div
                   style={{
-                    backgroundImage: `url(${propertyPicture})`,
+                    backgroundImage: `url(${propertyPicture[0]})`,
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",

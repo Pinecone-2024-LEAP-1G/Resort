@@ -4,7 +4,6 @@ import * as React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { PropertyLocationSearch } from "./HeaderDestination";
-import { useQueryState } from "nuqs";
 
 type Property = {
   _id: string;
@@ -17,16 +16,19 @@ type SearchProps = {
   hover: string;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  addresssearchClick: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  addresssearch: string;
 };
 
 export const HeaderSearch = ({
   hover,
   onMouseEnter,
   onMouseLeave,
+  addresssearchClick,
+  addresssearch,
 }: SearchProps) => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [show, setShow] = useState(false);
-  const [addresssearch, setAddresssearch] = useQueryState("address");
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -49,7 +51,6 @@ export const HeaderSearch = ({
       .toLocaleLowerCase()
       .includes(addresssearch?.toLocaleLowerCase());
   });
-
   return (
     <div>
       <div
@@ -61,8 +62,7 @@ export const HeaderSearch = ({
       >
         Where
         <input
-          value={addresssearch || ""}
-          onChange={(e) => setAddresssearch(e.target.value)}
+          onChange={(e) => addresssearchClick(e)}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onBlur={() => setShow(false)}

@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { addDays } from "date-fns";
-import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -10,13 +8,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useQueryStates } from "nuqs";
+import { SelectRangeEventHandler } from "react-day-picker";
 
 type SearchProps = {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   hover: string;
   className?: React.HTMLAttributes<HTMLDivElement>;
+  defaultMonth: Date | undefined;
+  onSelect: SelectRangeEventHandler | undefined;
+  selected: { from: Date; to: Date | undefined };
 };
 
 export function DatePickerWithRange({
@@ -24,12 +25,10 @@ export function DatePickerWithRange({
   onMouseEnter,
   onMouseLeave,
   hover,
+  onSelect,
+  selected,
+  defaultMonth,
 }: SearchProps) {
-  const [date, setDate] = useQueryStates<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
-  });
-
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -48,8 +47,8 @@ export function DatePickerWithRange({
               className={`rounded-full text-center ${hover}`}
               placeholder="Search"
               value={
-                date
-                  ? `${date.from?.toLocaleDateString()} - ${date.to?.toLocaleDateString()}`
+                selected.from && selected.to
+                  ? `${selected.from?.toLocaleDateString()} - ${selected.to?.toLocaleDateString()}`
                   : "search"
               }
             ></input>
@@ -59,9 +58,9 @@ export function DatePickerWithRange({
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
+            defaultMonth={defaultMonth}
+            selected={selected}
+            onSelect={onSelect}
             numberOfMonths={2}
           />
         </PopoverContent>

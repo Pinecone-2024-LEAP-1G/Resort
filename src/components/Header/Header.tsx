@@ -6,59 +6,39 @@ import { HeaderModal } from "./HeaderModal";
 import { useRouter } from "next/navigation";
 ("use client");
 import Logo from "../icons/Logo";
-import { HeaderSearch } from "./HeaderSearch";
+import { HeaderSearch } from "./HeaderSearchAddress";
 import { DatePickerWithRange } from "./HeaderDate";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useQueryStates, useQueryState } from "nuqs";
+import React, { useState } from "react";
 import { addDays } from "date-fns";
-import { DateRange } from "react-day-picker";
 import { HeaderModal } from "./HeaderModal";
 import { PopoverDemo } from "./HeaderSearchGuests";
 import { useRouter } from "next/navigation";
+import { SelectRangeEventHandler } from "react-day-picker";
 
 const Header = () => {
   const router = useRouter();
   const [hover, setHover] = React.useState<number>();
-  const [addresssearch, setAddresssearch] = useQueryState("address");
+  const [addresssearch, setAddresssearch] = useState("");
   const [adultNumber, setAdultNumber] = useState(0);
   const [childrenNumber, setChildrenNumber] = useState(0);
   const [infantsNumber, setInfantsNumber] = useState(0);
   const [petNumber, setPetNumber] = useState(0);
-  const [guestsValue, setGuestsValue] = useState(true);
-  const [searchloc, setSearchloc] = useState(true);
-  const [guests, setGuests] = useQueryState<number | undefined>("guests");
-  const [date, setDate] = useQueryStates<DateRange | undefined>({
+  const [, setGuestsValue] = useState(true);
+  const [guests, setGuests] = useState<number | string>();
+  const [date, setDate] = React.useState<{ from: Date; to: Date | undefined }>({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
+
   const router = useRouter();
-  // const searchProperty = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:3000/api/properties/getAddress?address=${addressSearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
-  //     );
-  //     console.log(response.data);
-  //     setSearchProperties(response?.data);
-  //     setAddressSearch("");
-  //     setDate(null);
-  //     setAdultNumber(0);
-  //     setChildrenNumber(0);
-  //     setPetNumber(0);
-  //     setInfantsNumber(0);
-  //     setGuests(0);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   searchProperty();
-  // }, []);
   const searchProperty = () => {
     router.push(
       `/?address=${addresssearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
     );
   };
+  // const handleDateSelect = (range: { from: Date; to: Date | undefined }) => {
+  //   setDate(range);
+  // };
   return (
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
@@ -69,14 +49,19 @@ const Header = () => {
         className={`flex rounded-full border-2 ${hover === 0 ? "bg-gray-100" : "bg-gray-100"}`}
       >
         <HeaderSearch
+          addresssearch={addresssearch}
           hover={hover === 1 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => setHover(1)}
           onMouseLeave={() => setHover(0)}
+          addresssearchClick={(e) => setAddresssearch(e.target.value)}
         />
         <DatePickerWithRange
           hover={hover === 2 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => setHover(2)}
           onMouseLeave={() => setHover(0)}
+          defaultMonth={date?.from}
+          selected={date}
+          onSelect={setDate as SelectRangeEventHandler}
         />
         <PopoverDemo
           adultNumber={adultNumber}
@@ -101,11 +86,10 @@ const Header = () => {
           hover={hover === 3 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => setHover(3)}
           onMouseLeave={() => setHover(0)}
-          submit={() =>
-            setGuests(
-              adultNumber + childrenNumber + petNumber + infantsNumber,
-            ) || setGuestsValue(true)
-          }
+          submit={() => {
+            setGuests(adultNumber + childrenNumber + petNumber + infantsNumber),
+              setGuestsValue(true);
+          }}
         />
       </div>
       <div>
@@ -114,4 +98,5 @@ const Header = () => {
     </div>
   );
 };
+
 export default Header;
