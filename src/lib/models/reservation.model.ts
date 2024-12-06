@@ -10,6 +10,7 @@ type Reservation = {
   children: number;
   infants: number;
   totalPrice: number;
+  email: string;
 };
 
 const ReservationSchema = new Schema<Reservation>(
@@ -29,6 +30,7 @@ const ReservationSchema = new Schema<Reservation>(
     children: { type: Number },
     infants: { type: Number },
     totalPrice: { type: Number, required: true },
+    email: { type: String, required: true },
   },
   { timestamps: true },
 );

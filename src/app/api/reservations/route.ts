@@ -4,6 +4,7 @@ import {
   PropertyModel,
   ReservationModel,
 } from "@/lib/models";
+import { nodeMailer } from "@/util/nodemailer";
 
 import { NextRequest } from "next/server";
 
@@ -18,6 +19,7 @@ export const POST = async (request: NextRequest) => {
     children,
     infants,
     totalPrice,
+    email,
   } = await request.json();
   try {
     const checkindate = new Date(checkIn);
@@ -59,6 +61,7 @@ export const POST = async (request: NextRequest) => {
       children,
       infants,
       totalPrice,
+      email,
     });
 
     const availableList = await AvailableListModel.create({
@@ -67,7 +70,6 @@ export const POST = async (request: NextRequest) => {
       checkInDate: reservation.checkIn,
       checkOutDate: reservation.checkOut,
     });
-
     return Response.json({
       reservation: reservation,
       availableList: availableList,
