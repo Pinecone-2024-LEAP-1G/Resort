@@ -10,6 +10,7 @@ import axios from "axios";
 import { AvailableList } from "@/lib/models";
 import { useRouter } from "next/navigation";
 import { PropertyType } from "../Review";
+import { toast } from "sonner";
 
 interface Props {
   property?: PropertyType;
@@ -17,6 +18,7 @@ interface Props {
   text: string;
 }
 export const ReverseCart = ({ property, propertyId, text }: Props) => {
+  const [notchoose, setNotChoose] = useState(false);
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
   useEffect(() => {
@@ -58,12 +60,26 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     return date;
   };
 
+  const findNearestValidToDate = (startDate: Date, daysToAdd: number) => {
+    const toDate = addDays(startDate, daysToAdd);
+    while (
+      disabledDays.some(
+        (disabledDay) =>
+          disabledDay.getDate() === toDate.getDate() &&
+          disabledDay.getMonth() === toDate.getMonth() &&
+          disabledDay.getFullYear() === toDate.getFullYear(),
+      )
+    ) {
+      toDate.setDate(toDate.getDate() + 1);
+    }
+    return toDate;
+  };
+
   const today = new Date();
   const isCurrentYear2024 = today.getFullYear() === 2024;
   const baseDate = isCurrentYear2024 ? today : new Date(2024, 0, 1);
   const nearestValidFromDate = findNearestValidDate(baseDate);
-
-  const nearestValidToDate = addDays(nearestValidFromDate, 3);
+  const nearestValidToDate = findNearestValidToDate(nearestValidFromDate, 3);
 
   const [{ from, to }, setDate] = useQueryStates(
     {
@@ -77,6 +93,24 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       },
     },
   );
+
+  const getDaysArray = (start: Date, end: Date) => {
+    const dates = [];
+    for (let dt = new Date(start); dt <= end; dt.setDate(dt.getDate() + 2)) {
+      dates.push(new Date(dt));
+    }
+    return dates;
+  };
+
+  const availablelists = getDaysArray(from, to);
+
+  // const toastError = () => {
+  //   availablelists.map((day) => disabledDays.map((date) => date === day));
+  //   setNotChoose(true);
+  //   if (notchoose === true) {
+  //     toast.error("zahialgatai udur songoson baina");
+  //   }
+  // };
 
   const [
     { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
@@ -102,9 +136,25 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const totalPrice = priceOfDates + 20000 + 20000;
 
+  const checkDate = () => {
+    return availablelists.some((day) =>
+      disabledDays.some(
+        (disabledDay) =>
+          disabledDay.getDate() === day.getDate() &&
+          disabledDay.getMonth() === day.getMonth() &&
+          disabledDay.getFullYear() === day.getFullYear(),
+      ),
+    );
+  };
+
   const navigateToNextPage = () => {
+    if (checkDate()) {
+      toast.error("Захиалгатай өдөр сонгосон байна.");
+      return;
+    }
+
     router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&propertyId=${propertyId}&totalPrice=${price}`,
     );
   };
 
