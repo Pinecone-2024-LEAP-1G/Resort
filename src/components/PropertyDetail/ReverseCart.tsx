@@ -9,10 +9,7 @@ import { DatePickerWithRange } from "./DatePickerWithRange";
 import axios from "axios";
 import { AvailableList } from "@/lib/models";
 import { useRouter } from "next/navigation";
-<<<<<<< HEAD
 import { PropertyType } from "../Review";
-=======
->>>>>>> 96370d0 (send)
 
 interface Props {
   property?: PropertyType;

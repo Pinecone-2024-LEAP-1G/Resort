@@ -14,10 +14,7 @@ const BookingRequest = async ({
         <PaymentDetailSection propertyId={propertyId} />
         <div className="sticky top-10 mr-auto flex flex-col items-center justify-start gap-8 p-5">
           <GetProperty propertyId={propertyId} />
-<<<<<<< HEAD
           <ReverseCart propertyId={propertyId} text="Edit" />
-=======
->>>>>>> 96370d0 (send)
         </div>
       </div>
     </div>
