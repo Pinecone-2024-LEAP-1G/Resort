@@ -49,14 +49,14 @@ const Review = ({ property }: Props) => {
               <div
                 className="rounded-3xl border bg-cover"
                 style={{
-                  backgroundImage: `url(${review.userId.avatar})`,
+                  backgroundImage: `url(${review?.userId?.avatar})`,
                   width: "70px",
                   height: "70px",
                 }}
               />
             </div>
             <div className="flex flex-col gap-2">
-              <p className="size-xl font-medium">{review.userId.lastName}</p>
+              <p className="size-xl font-medium">{review?.userId?.lastName}</p>
               <div className="flex">
                 <MdOutlineStar />
                 <MdOutlineStar />
@@ -68,7 +68,7 @@ const Review = ({ property }: Props) => {
           </div>
 
           <div className="flex w-[250px] items-center justify-center">
-            {review.comment}
+            {review?.comment}
           </div>
         </div>
       ))}

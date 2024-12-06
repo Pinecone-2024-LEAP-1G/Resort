@@ -14,30 +14,26 @@ import {
 } from "../ui/carousel";
 
 import { Card } from "@/components/ui/card";
+import { HostType } from "@/lib/models/host.model";
 
-type ReviewType = {
+export type ReviewType = {
   _id: string;
   userId: mongoose.Schema.Types.ObjectId;
   propertyId: string;
   rating: number;
   comment: string;
 };
-type HostType = {
-  name: string;
-};
 
 const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
   const [reviewdata, setReviewdata] = useState<ReviewType[]>([]);
-  const [hostdata, setHostdata] = useState<HostType[]>([]);
-  console.log(reviewdata);
-  console.log(hostdata);
+  const [hostdata, setHostdata] = useState<HostType>();
 
   const params = useParams();
   const { reviewId } = params;
   useEffect(() => {
     const getHost = async () => {
       try {
-        const response = await axios.get<{ host: HostType[] }>(
+        const response = await axios.get<{ host: HostType }>(
           `http://localhost:3000/api/host/${hostId}}`,
         );
         setHostdata(response.data.host);

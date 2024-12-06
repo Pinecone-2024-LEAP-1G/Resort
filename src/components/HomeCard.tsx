@@ -53,7 +53,7 @@ export default function HomeCard(props: HomeCardProps) {
         </div>
         <div className="ml-auto flex items-center"></div>
       </div>
-      <p>{property?.guests}</p>
+      <p></p>
       <div>
         <span className="mr-[2px] text-[15px] font-bold">
           {property?.price}

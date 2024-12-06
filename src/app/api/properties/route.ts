@@ -61,8 +61,18 @@ export const POST = async (request: NextRequest) => {
       { $push: { propertyId: _id } },
       { new: true },
     );
-    return Response.json({ message: "success", properties, updateHost });
+
+    const updateProprty = await PropertyModel.findByIdAndUpdate(
+      { _id: _id },
+      {
+        userId: updateHost?._id,
+      },
+      { new: true },
+    );
+    return Response.json({ message: "success", updateProprty, updateHost });
   } catch (error) {
+    console.log(error);
+
     return Response.json({ message: error });
   }
 };

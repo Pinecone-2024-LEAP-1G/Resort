@@ -11,7 +11,7 @@ export type Property = {
   totalBedrooms: string;
   totalBathrooms: string;
   cleaningFee: number;
-  email: string;
+  userId: mongoose.Schema.Types.ObjectId;
   reviewId: mongoose.Schema.Types.ObjectId[];
 };
 
@@ -26,7 +26,10 @@ const PropertySchema = new Schema<Property>(
     totalBedrooms: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },
-    email: { type: String, required: true, ref: "Host" },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+    },
     reviewId: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Review",

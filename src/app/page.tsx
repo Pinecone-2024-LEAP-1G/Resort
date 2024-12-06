@@ -23,6 +23,7 @@ const Home = () => {
         const response = await axios.get(
           `http://localhost:3000/api/properties/getAddress?address=${address}&from=${from}&to=${to}&guests=${guests}`,
         );
+
         setProperties(response?.data.property);
       } catch (error) {
         console.log(error);
@@ -34,7 +35,7 @@ const Home = () => {
   return (
     <div>
       <Categories />
-      <div className="grid grow grid-cols-6 gap-8">
+      <div className="grid grow grid-cols-4 gap-8">
         {properties?.map((property) => {
           return (
             <HomeCard
