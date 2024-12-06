@@ -4,8 +4,9 @@ import { Plus, Minus } from "lucide-react";
 import { PropertyHeader } from "./PropertyHeader";
 import { Structure } from "./Structure";
 import { Photos } from "./Photos";
+import { PropertyClick } from "@/app/become-host/page";
 
-export const FloorPlan = () => {
+export const FloorPlan = ({ handleBack, handleNext }: PropertyClick) => {
   const [guests, setGuests] = useState<number>(1);
   const [beds, setBeds] = useState<number>(1);
   const [bathrooms, setBathrooms] = useState<number>(0.5);
@@ -44,21 +45,21 @@ export const FloorPlan = () => {
     }
   };
 
-  const handleNext = () => {
-    setStep("next");
-  };
+  // const handleNext = () => {
+  //   setStep("next");
+  // };
 
-  const handleBack = () => {
-    setStep("previous");
-  };
+  // const handleBack = () => {
+  //   setStep("previous");
+  // };
 
-  if (step === "next") {
-    return <Photos />;
-  }
+  // if (step === "next") {
+  //   return <Photos />;
+  // }
 
-  if (step === "previous") {
-    return <Structure />;
-  }
+  // if (step === "previous") {
+  //   return <Structure />;
+  // }
 
   return (
     <div>
@@ -69,7 +70,7 @@ export const FloorPlan = () => {
             Share some basics about your place
           </h1>
           <span className="text-lg text-[#6a6a6a]">
-            add more details later, like bed types.
+            You will add more details later, like bed types.
           </span>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">

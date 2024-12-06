@@ -7,13 +7,10 @@ import { FaCaravan } from "react-icons/fa";
 import { CasaParticular } from "../icons/PropertyIcons/CasaParticular";
 import { Castle } from "../icons/PropertyIcons/Castle";
 import { PropertyHeader } from "./PropertyHeader";
-import { FloorPlan } from "./FloorPlan";
-import { Address } from "./Address";
+import { PropertyClick } from "@/app/become-host/page";
 
-export const Structure = () => {
+export const Structure = ({ handleBack, handleNext }: PropertyClick) => {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
-  const [step, setStep] = useState<string>("about");
-
   const places = [
     {
       id: "house",
@@ -63,21 +60,22 @@ export const Structure = () => {
 
   const isNextButtonDisabled = !selectedPlace;
 
-  const handleNext = () => {
-    setStep("next");
-  };
+  // const handleNext = () => {
+  //   router.push(`/become-host/?categoryId=${selectedPlace}`);
+  //   setStep("next");
+  // };
 
-  const handleBack = () => {
-    setStep("previous");
-  };
+  // const handleBack = () => {
+  //   setStep("previous");
+  // };
 
-  if (step === "next") {
-    return <FloorPlan />;
-  }
+  // if (step === "next") {
+  //   return <FloorPlan />;
+  // }
 
-  if (step === "previous") {
-    return <Address />;
-  }
+  // if (step === "previous") {
+  //   return <Address />;
+  // }
 
   return (
     <div className="flex min-h-screen flex-col">

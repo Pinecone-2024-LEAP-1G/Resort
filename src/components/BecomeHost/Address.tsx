@@ -2,8 +2,6 @@ import { PropertyHeader } from "./PropertyHeader";
 import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { AboutYourPlace } from "./AboutYourPlace";
-import { Structure } from "./Structure";
 import { Provinces } from "../Provinces";
 import {
   Select,
@@ -13,36 +11,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRouter } from "next/navigation";
-
-export const Address = () => {
-  const [step, setStep] = useState<string>("about");
+import { PropertyClick } from "@/app/become-host/page";
+export const Address = ({
+  handleBack,
+  handleNext,
+  value,
+  handleChange,
+}: PropertyClick) => {
   const [description, setDescription] = useState<string>("");
-  // const [town, setTown] = useState<string>("");
-  // const [postalCode, setPostalCode] = useState<string>("");
   const [address, setAddress] = useState<string>("");
-  const router = useRouter();
-  const { id } = router.query;
-  const handleNext = () => {
-    if (description && address) {
-      router.push(`/[${description}]/[${description}]`);
-      setStep("next");
-    } else {
-      alert("Please fill in all the required fields.");
-    }
-  };
+  const addressvalue = value.address;
+  // const handleNext = () => {
+  //   if (description && address) {
+  //     router.push(`become-host/?address=${address}&description=${description}`);
+  //     setStep("next");
+  //   } else {
+  //     alert("Please fill in all the required fields.");
+  //   }
+  // };
+  // const handleBack=()=>{
 
-  const handleBack = () => {
-    setStep("back");
-  };
+  // }
 
-  if (step === "next") {
-    return <Structure />;
-  }
-
-  if (step === "back") {
-    return <AboutYourPlace />;
-  }
+  // const handleBack = () => {
+  //   setStep("back");
+  // };
 
   return (
     <div>
@@ -62,7 +55,7 @@ export const Address = () => {
             <label className="block text-sm font-medium text-gray-700">
               Select your province
             </label>
-            <Select onValueChange={setAddress}>
+            <Select onValueChange={handleChange}>
               <SelectTrigger className="w-[630px]">
                 <SelectValue placeholder="Choose a province" />
               </SelectTrigger>
@@ -87,8 +80,8 @@ export const Address = () => {
               </label>
               <Input
                 id="streetAddress"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={value.description}
+                onChange={handleChange}
                 type="text"
                 placeholder="Enter your street address"
               />

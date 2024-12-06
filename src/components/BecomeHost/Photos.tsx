@@ -14,8 +14,9 @@ import { Input } from "../ui/input";
 import { PropertyHeader } from "./PropertyHeader";
 import Image from "next/image";
 import { FloorPlan } from "./FloorPlan";
+import { PropertyClick } from "@/app/become-host/page";
 
-export const Photos = () => {
+export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [step, setStep] = useState<string>("about");
@@ -52,21 +53,21 @@ export const Photos = () => {
     }
   };
 
-  const handleNext = () => {
-    setStep("back");
-  };
+  // const handleNext = () => {
+  //   setStep("back");
+  // };
 
-  const handleBack = () => {
-    setStep("next");
-  };
+  // const handleBack = () => {
+  //   setStep("next");
+  // };
 
-  if (step === "next") {
-    return;
-  }
+  // if (step === "next") {
+  //   return;
+  // }
 
-  if (step === "back") {
-    return <FloorPlan />;
-  }
+  // if (step === "back") {
+  //   return <FloorPlan />;
+  // }
 
   return (
     <Dialog>
@@ -77,8 +78,8 @@ export const Photos = () => {
             Add some photos of your castle
           </h3>
           <p className="h-[48px] w-[588px] text-lg font-normal text-[#6a6a6a]">
-            need 5 photos to get started. You can add more or make changes
-            later.
+            You will need 5 photos to get started. You can add more or make
+            changes later.
           </p>
         </div>
         <div className="flex h-[417px] w-[640px] flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[#f7f7f7]">
