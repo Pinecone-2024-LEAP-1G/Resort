@@ -4,7 +4,6 @@ import {
   PropertyModel,
   ReservationModel,
 } from "@/lib/models";
-import { nodeMailer } from "@/util/nodemailer";
 
 import { NextRequest } from "next/server";
 

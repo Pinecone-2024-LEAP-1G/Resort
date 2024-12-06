@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <div>
       <Categories />
-      <div className="grid grow grid-cols-4 gap-8">
+      <div className="grid grow grid-cols-5 gap-8">
         {properties?.map((property) => {
           return (
             <HomeCard
