@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
 import GetProperty from "./GetProperty";
+import { useRouter } from "next/navigation";
 
 export type Property = {
   _id: string;
@@ -41,6 +42,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const infants = searchParams.get("infants");
   const totalPrice = searchParams.get("totalPrice");
   let allGuests = 0;
+  const router = useRouter();
 
   if (adult && !isNaN(Number(adult))) {
     allGuests += Number(adult);
@@ -70,23 +72,28 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   }, []);
 
   const SubmitReservation = async () => {
-    await axios
-      .post("http://localhost:3000/api/reservations", {
-        checkIn: from,
-        checkOut: to,
-        userId: "6747c5db0314e681044f54d0",
-        propertyId: propertyId,
-        adult: !isNaN(Number(adult)),
-        children: !isNaN(Number(child)),
-        infants: !isNaN(Number(infants)),
-        totalPrice: totalPrice,
-      })
-      .then(function () {
-        toast.success("zahialga amjilttai");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/reservations",
+        {
+          checkIn: from,
+          checkOut: to,
+          userId: property?.userId,
+          propertyId: propertyId,
+          adult: !isNaN(Number(adult)),
+          children: !isNaN(Number(child)),
+          infants: !isNaN(Number(infants)),
+          totalPrice: totalPrice,
+        },
+      );
+      console.log(response);
+
+      // const userId = response.data.updateUser._id;
+      // router.push(`/orderDetail/${userId}`);
+      toast.success("zahialga amjilttai");
+    } catch (error) {
+      toast.error("error");
+    }
   };
 
   const ToastWithAction = () => {

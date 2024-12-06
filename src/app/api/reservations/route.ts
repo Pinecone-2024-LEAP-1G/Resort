@@ -37,7 +37,7 @@ export const POST = async (request: NextRequest) => {
 
     if (overlapReservation.length > 0) {
       return Response.json({
-        message: "oh sorry this selected date not available property",
+        message: "Ta zahiagatai udur songoson baina",
       });
     }
 
@@ -71,7 +71,7 @@ export const POST = async (request: NextRequest) => {
       checkOutDate: reservation.checkOut,
     });
 
-    const updateUser = await UserModel.findByIdAndUpdate(
+    const updateUser = await UserModel.findOneAndUpdate(
       {
         _id: reservation.userId,
       },
