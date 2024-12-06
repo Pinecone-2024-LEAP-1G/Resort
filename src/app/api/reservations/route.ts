@@ -4,6 +4,7 @@ import {
   PropertyModel,
   ReservationModel,
 } from "@/lib/models";
+
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -17,6 +18,7 @@ export const POST = async (request: NextRequest) => {
     children,
     infants,
     totalPrice,
+    email,
   } = await request.json();
   try {
     const checkindate = new Date(checkIn);
@@ -58,6 +60,7 @@ export const POST = async (request: NextRequest) => {
       children,
       infants,
       totalPrice,
+      email,
     });
 
     const availableList = await AvailableListModel.create({

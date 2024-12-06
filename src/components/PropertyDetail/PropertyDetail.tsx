@@ -4,36 +4,25 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShare } from "react-icons/lu";
-import Review from "../Review";
+import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostViewCard";
 
-export type Property = {
-  _id: string;
-  price: number;
-  guests: number;
-  address: string;
-  description: string;
-  propertyPictures: string[];
-  userId: string;
-  categoryId: string;
-  totalBedrooms: string;
-  totalBathrooms: string;
-};
-
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
-  const [property, setProperty] = useState<Property>();
+  const [property, setProperty] = useState<PropertyType>();
 
   useEffect(() => {
     const getPropertyById = async () => {
       try {
-        const response = await axios.get<{ property: Property }>(
+        const response = await axios.get<{ property: PropertyType }>(
           `http://localhost:3000/api/properties/${propertyId}`,
         );
 
         setProperty(response.data.property);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getPropertyById();
@@ -71,29 +60,29 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         <div></div>
 
         <div className="mt-10 flex justify-between">
-          <div className="h-[225px] w-[600px] flex-1 border-b-2">
+          <div className="h-[225px] w-[600px] flex-1">
             <p className="mb-2 text-xl font-normal">{property?.description}</p>
             <div className="flex gap-2">
               <p>{property?.guests} хүн</p>
               <p>~ {property?.totalBedrooms} унтлагын өрөө</p>
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
-            <div className="mt-8 flex h-fit w-fit justify-between rounded-lg border p-4">
-              <Review propertyId={propertyId} />
+            <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
+              <HostViewCard hostId={property?.userId} />
             </div>
-            <div className="mt-24 h-[80px] border-b-2">
-              <div className="flex gap-2"></div>
-            </div>
-            <div className="botto-4 right-4 z-50 flex"></div>
+            <div className="mt-24 h-[80px]"></div>
           </div>
           <div className="flex-1 rounded-lg">
-            <ReverseCart property={property} propertyId={propertyId} />
+            <ReverseCart
+              property={property}
+              propertyId={propertyId}
+              text="reserve"
+            />
           </div>
         </div>
       </div>
-      <div className="mt-20">
-        <HostViewCard hostId={property?.userId} />
-      </div>
+      <Review property={property} />
+      <div className="mt-20"></div>
     </div>
   );
 };

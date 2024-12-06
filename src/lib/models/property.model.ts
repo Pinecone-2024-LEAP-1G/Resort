@@ -7,11 +7,12 @@ export type Property = {
   address: string;
   description: string;
   propertyPictures: string[];
-  userId: mongoose.Schema.Types.ObjectId;
   categoryId: string;
   totalBedrooms: string;
   totalBathrooms: string;
   cleaningFee: number;
+  userId: mongoose.Schema.Types.ObjectId;
+  reviewId: mongoose.Schema.Types.ObjectId[];
 };
 
 const PropertySchema = new Schema<Property>(
@@ -20,12 +21,19 @@ const PropertySchema = new Schema<Property>(
     description: { type: String },
     guests: { type: Number, required: true },
     price: { type: Number, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     categoryId: { type: String, ref: "Category" },
     propertyPictures: [{ type: String, required: true }],
     totalBedrooms: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+    },
+    reviewId: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Review",
+    },
   },
   { timestamps: true },
 );

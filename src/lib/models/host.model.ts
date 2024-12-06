@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
 
-type HostType = {
-  _id?: string;
+export type HostType = {
+  _id?: mongoose.Schema.Types.ObjectId;
   experience: string;
   Address: string;
   description: string;

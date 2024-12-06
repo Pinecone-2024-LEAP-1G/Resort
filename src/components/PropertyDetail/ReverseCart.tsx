@@ -8,28 +8,27 @@ import { GuestPopover } from "./GuestPopover";
 import { DatePickerWithRange } from "./DatePickerWithRange";
 import axios from "axios";
 import { AvailableList } from "@/lib/models";
-import { Property } from "./PropertyDetail";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { PropertyType } from "../Review";
 
 interface Props {
-  property?: Property;
+  property?: PropertyType;
   propertyId?: string;
   text: string;
 }
 export const ReverseCart = ({ property, propertyId, text }: Props) => {
-  const [reservation, setReservation] = useState<AvailableList[] | []>([]);
+  const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
   useEffect(() => {
     const getReservation = async () => {
-      const response = await axios.get<AvailableList[] | []>(
+      const response = await axios.get(
         `http://localhost:3000/api/availablelists?propertyId=${propertyId}`,
       );
       setReservation(response.data.AvailableLists);
     };
 
     getReservation();
-  }, []);
+  }, [propertyId]);
   const disabledRanges = reservation?.map((item) => ({
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
@@ -97,10 +96,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     return Math.abs(timeDifference) / oneDayInMilliseconds;
   };
 
-  const daysBetween = getDaysBetweenDates(
-    nearestValidFromDate,
-    nearestValidToDate,
-  );
+  const daysBetween = getDaysBetweenDates(to, from);
 
   const priceOfDates = price * daysBetween;
 

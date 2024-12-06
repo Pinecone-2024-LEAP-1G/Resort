@@ -20,7 +20,6 @@ export const POST = async (request: NextRequest) => {
     description,
     guests,
     price,
-    userId,
     categoryId,
     propertyPictures,
     totalBedrooms,
@@ -46,7 +45,6 @@ export const POST = async (request: NextRequest) => {
       description,
       guests,
       price,
-      userId,
       categoryId,
       propertyPictures,
       totalBedrooms,
@@ -63,7 +61,15 @@ export const POST = async (request: NextRequest) => {
       { $push: { propertyId: _id } },
       { new: true },
     );
-    return Response.json({ message: "success", properties, updateHost });
+
+    const updateProprty = await PropertyModel.findByIdAndUpdate(
+      { _id: _id },
+      {
+        userId: updateHost?._id,
+      },
+      { new: true },
+    );
+    return Response.json({ message: "success", updateProprty, updateHost });
   } catch (error) {
     return Response.json({ message: error });
   }
