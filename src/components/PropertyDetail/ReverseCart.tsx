@@ -9,7 +9,10 @@ import { DatePickerWithRange } from "./DatePickerWithRange";
 import axios from "axios";
 import { AvailableList } from "@/lib/models";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 import { PropertyType } from "../Review";
+=======
+>>>>>>> 96370d0 (send)
 
 interface Props {
   property?: PropertyType;
@@ -104,7 +107,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const navigateToNextPage = () => {
     router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
     );
   };
 

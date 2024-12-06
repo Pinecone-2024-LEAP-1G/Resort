@@ -1,7 +1,5 @@
 import GetProperty from "@/components/PaymentDetail/GetProperty";
 import { PaymentDetailSection } from "@/components/PaymentDetail/PaymentDetailSection";
-import { RulesAndPolicy } from "@/components/PaymentDetail/RulesAndPolicy";
-import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 
 const BookingRequest = async ({
   params,
@@ -16,9 +14,11 @@ const BookingRequest = async ({
         <PaymentDetailSection propertyId={propertyId} />
         <div className="sticky top-10 mr-auto flex flex-col items-center justify-start gap-8 p-5">
           <GetProperty propertyId={propertyId} />
+<<<<<<< HEAD
           <ReverseCart propertyId={propertyId} text="Edit" />
+=======
+>>>>>>> 96370d0 (send)
         </div>
-        <RulesAndPolicy />
       </div>
     </div>
   );
