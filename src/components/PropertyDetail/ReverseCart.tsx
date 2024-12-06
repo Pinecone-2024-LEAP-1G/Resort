@@ -96,10 +96,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     return Math.abs(timeDifference) / oneDayInMilliseconds;
   };
 
-  const daysBetween = getDaysBetweenDates(
-    nearestValidFromDate,
-    nearestValidToDate,
-  );
+  const daysBetween = getDaysBetweenDates(to, from);
 
   const priceOfDates = price * daysBetween;
 
