@@ -34,7 +34,7 @@ const Header = () => {
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
         <DiCodeigniter className="h-10 w-10" />
-        <p className="w-[30px] font-bold">Хөдөө гарья</p>
+        <p className="w-[30px] font-bold text-green-500">Хөдөө гарья</p>
       </div>
       <div
         className={`flex rounded-full border-2 ${hover === 0 ? "bg-gray-100" : "bg-gray-100"}`}

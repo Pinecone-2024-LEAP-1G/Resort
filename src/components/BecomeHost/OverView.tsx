@@ -1,8 +1,7 @@
 import { Button } from "../ui/button";
 import { PropertyHeader } from "./PropertyHeader";
-import { useState } from "react";
-import { AboutYourPlace } from "./AboutYourPlace";
 import Image from "next/image";
+import { PropertyClick } from "@/app/become-host/page";
 
 interface Step {
   id: number;
@@ -11,11 +10,7 @@ interface Step {
   image: string;
 }
 
-export const Overview = () => {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
-
-  const handleClick = () => setIsClicked(true);
-
+export const Overview = ({ handleNext }: PropertyClick) => {
   const steps: Step[] = [
     {
       id: 1,
@@ -29,7 +24,7 @@ export const Overview = () => {
       id: 2,
       title: "Make it stand out",
       description:
-        "Add 5 or more photos plus a title and description—we’ll help you out.",
+        "Add 5 or more photos plus a title and description—we will help you out.",
       image:
         "https://a0.muscache.com/4ea/air/v2/pictures/bfc0bc89-58cb-4525-a26e-7b23b750ee00.jpg",
     },
@@ -43,9 +38,6 @@ export const Overview = () => {
     },
   ];
 
-  if (isClicked) {
-    return <AboutYourPlace />;
-  }
 
   return (
     <div className="flex flex-col">
@@ -81,7 +73,7 @@ export const Overview = () => {
       <div className="mx-6 mt-12 flex justify-end border-t pt-6">
         <Button
           className="rounded-lg bg-pink-600 px-6 py-3 text-lg font-semibold text-white hover:bg-pink-500"
-          onClick={handleClick}
+          onClick={handleNext}
         >
           Get started
         </Button>
