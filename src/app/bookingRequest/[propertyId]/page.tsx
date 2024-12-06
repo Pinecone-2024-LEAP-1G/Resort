@@ -1,7 +1,5 @@
 import GetProperty from "@/components/PaymentDetail/GetProperty";
 import { PaymentDetailSection } from "@/components/PaymentDetail/PaymentDetailSection";
-import { RulesAndPolicy } from "@/components/PaymentDetail/RulesAndPolicy";
-import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 
 const BookingRequest = async ({
   params,
@@ -18,7 +16,6 @@ const BookingRequest = async ({
           <GetProperty propertyId={propertyId} />
           <ReverseCart propertyId={propertyId} text="Edit" />
         </div>
-        <RulesAndPolicy />
       </div>
     </div>
   );

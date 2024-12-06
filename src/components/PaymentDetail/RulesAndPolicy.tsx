@@ -165,7 +165,7 @@ export function RulesAndPolicy() {
           <a> if responsible for damage.</a>
         </p>
       </div>
-      <ToastWithAction />
+      {/* <ToastWithAction /> */}
     </div>
   );
 }

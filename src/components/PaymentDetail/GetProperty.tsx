@@ -3,6 +3,7 @@
 import axios from "axios";
 import { Dot, Medal, Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ReverseCart } from "../PropertyDetail/ReverseCart";
 
 export type Property = {
   _id: string;
@@ -19,6 +20,7 @@ export type Property = {
 };
 
 interface Props {
+  property?: Property;
   propertyId?: string;
 }
 
@@ -38,7 +40,7 @@ const GetProperty = ({ propertyId }: Props) => {
     getProperty();
   }, []);
   return (
-    <div className="ml-auto">
+    <div className="sticky top-10 ml-auto flex flex-col gap-12">
       <div className="h-[150px] w-[372px] gap-4 rounded-2xl border p-6 shadow-lg">
         <div className="mb-4 flex flex-row gap-4">
           <div
@@ -61,6 +63,7 @@ const GetProperty = ({ propertyId }: Props) => {
           </div>
         </div>
       </div>
+      <ReverseCart property={property} propertyId={propertyId} text="Edit" />
     </div>
   );
 };

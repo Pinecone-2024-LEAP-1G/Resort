@@ -104,7 +104,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const navigateToNextPage = () => {
     router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
     );
   };
 

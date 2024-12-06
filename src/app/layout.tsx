@@ -6,7 +6,6 @@ import Header from "@/components/Header/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/layout";
 import { usePathname } from "next/navigation";
-import ToastWithAction from "@/components/PaymentDetail/ToastWithAction";
 import { Toaster } from "@/components/ui/toaster";
 
 const RootLayout = ({
@@ -28,13 +27,14 @@ const RootLayout = ({
                 </div>
                 <br />
                 <div className="mx-5 px-20">{children}</div>
+                <Toaster />
                 <div className="mx-5 px-20">
                   {!BecomeHostPage && <Footer />}
                 </div>
               </div>
             </main>
           </body>
-          <Toaster />
+          {/* <Toaster /> */}
         </html>
       </NuqsAdapter>
     </SessionProvider>
