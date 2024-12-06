@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { PropertyCard } from "./PropertyCard";
 import HostReviewCard from "./HostReviewCard";
 
-const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
+const HostMainContent = ({ hostId }: { hostId: string | undefined }) => {
   return (
     <div className="mx-auto flex w-[1200px]">
       <div className="mt-[100px] w-[720px]">
@@ -45,4 +45,4 @@ const HostViewFull = ({ hostId }: { hostId: string | undefined }) => {
     </div>
   );
 };
-export default HostViewFull;
+export default HostMainContent;

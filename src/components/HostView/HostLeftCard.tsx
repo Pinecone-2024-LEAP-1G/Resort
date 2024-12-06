@@ -23,7 +23,7 @@ type ReviewType = {
   comment: string;
 };
 
-const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
+const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
   const [host, setHost] = useState<HostModel | null>(null);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [averageRating, setAverageRating] = useState<number>(0);
@@ -86,4 +86,4 @@ const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
     </Link>
   );
 };
-export default HostViewCard;
+export default HostLeftCard;
