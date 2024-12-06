@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { GrStatusGood } from "react-icons/gr";
 
-const HostViewCardSecond = () => {
+const HostLeftCardSecond = () => {
   return (
     <div className="h-[250px] w-[320px] rounded-2xl border-2 p-[20px]">
       <div className="">
@@ -28,4 +28,4 @@ const HostViewCardSecond = () => {
     </div>
   );
 };
-export default HostViewCardSecond;
+export default HostLeftCardSecond;
