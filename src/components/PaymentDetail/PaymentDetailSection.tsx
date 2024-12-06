@@ -85,7 +85,6 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         console.log(response);
       })
       .catch(function (error) {
-        toast.error("aldaa garlaa");
         console.log(error);
       });
   };
