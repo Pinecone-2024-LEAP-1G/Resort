@@ -3,7 +3,10 @@ import {
   AvailableListModel,
   PropertyModel,
   ReservationModel,
+  UserModel,
 } from "@/lib/models";
+import { HostModel } from "@/lib/models/host.model";
+import { nodeMailer } from "@/util/nodemailer";
 
 import { NextRequest } from "next/server";
 
@@ -18,7 +21,6 @@ export const POST = async (request: NextRequest) => {
     children,
     infants,
     totalPrice,
-    email,
   } = await request.json();
   try {
     const checkindate = new Date(checkIn);
@@ -47,7 +49,7 @@ export const POST = async (request: NextRequest) => {
       return property.guests;
     });
 
-    if (quests <= adult + children + infants) {
+    if (quests === adult + children + infants) {
       return Response.json({ message: "Oh sorry  exceeded limit" });
     }
 
@@ -60,7 +62,6 @@ export const POST = async (request: NextRequest) => {
       children,
       infants,
       totalPrice,
-      email,
     });
 
     const availableList = await AvailableListModel.create({
@@ -69,7 +70,31 @@ export const POST = async (request: NextRequest) => {
       checkInDate: reservation.checkIn,
       checkOutDate: reservation.checkOut,
     });
+
+    const updateUser = await UserModel.findByIdAndUpdate(
+      {
+        _id: reservation.userId,
+      },
+      {
+        $push: { reservationId: reservation._id },
+      },
+      { new: true },
+    );
+    const hostId = await PropertyModel.findById({
+      _id: reservation.propertyId,
+    });
+
+    const host = await HostModel.findById({ _id: hostId?.userId });
+
+    const hostEmail = host?.email;
+    const guests = adult + children + infants;
+
+    await nodeMailer({
+      to: hostEmail,
+      text: `startDate=${checkIn}, endDate${checkOut},gusts=${guests}`,
+    });
     return Response.json({
+      updateUser: updateUser,
       reservation: reservation,
       availableList: availableList,
     });

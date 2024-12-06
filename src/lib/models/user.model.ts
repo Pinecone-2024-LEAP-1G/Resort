@@ -1,4 +1,4 @@
-import { Model, Schema, model, models } from "mongoose";
+import mongoose, { Model, Schema, model, models } from "mongoose";
 
 type User = {
   _id: string;
@@ -9,6 +9,7 @@ type User = {
   password: string;
   phoneNumber: number;
   role: "User" | "Admin";
+  reservationId: mongoose.Schema.Types.ObjectId;
 };
 
 const UserSchema = new Schema<User>(
@@ -20,8 +21,12 @@ const UserSchema = new Schema<User>(
     phoneNumber: { type: Number, min: 8, required: true },
     avatar: { type: String },
     role: { type: String, enum: ["Admin", "User"], default: "User" },
+    reservationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reservations",
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const UserModel: Model<User> =
