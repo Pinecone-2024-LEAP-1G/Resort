@@ -23,6 +23,7 @@ const Home = () => {
           `http://localhost:3000/api/properties/getAddress?address=${address}&from=${from}&to=${to}&guests=${guests}`,
         );
         setProperties(response?.data.property);
+        console.log(response);
       } catch (error) {
         console.log(error);
       }

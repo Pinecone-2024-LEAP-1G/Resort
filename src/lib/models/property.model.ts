@@ -22,7 +22,7 @@ const PropertySchema = new Schema<Property>(
     price: { type: Number, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     categoryId: { type: String, ref: "Category" },
-    propertyPictures: [{ type: String, required: true }],
+    propertyPictures: [{ type: String }],
     totalBedrooms: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },

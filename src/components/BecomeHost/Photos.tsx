@@ -13,13 +13,16 @@ import { useState, useRef } from "react";
 import { Input } from "../ui/input";
 import { PropertyHeader } from "./PropertyHeader";
 import Image from "next/image";
-import { FloorPlan } from "./FloorPlan";
 import { PropertyClick } from "@/app/become-host/page";
 
-export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
+export const Photos = ({
+  handleBack,
+  handleNext,
+  value,
+  handleChange,
+}: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [step, setStep] = useState<string>("about");
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -52,22 +55,6 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
       setSelectedFile(file);
     }
   };
-
-  // const handleNext = () => {
-  //   setStep("back");
-  // };
-
-  // const handleBack = () => {
-  //   setStep("next");
-  // };
-
-  // if (step === "next") {
-  //   return;
-  // }
-
-  // if (step === "back") {
-  //   return <FloorPlan />;
-  // }
 
   return (
     <Dialog>

@@ -19,8 +19,8 @@ const Header = () => {
   const [, setGuestsValue] = useState(true);
   const [guests, setGuests] = useState<number | string>();
   const [date, setDate] = React.useState<{ from: Date; to: Date | undefined }>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
+    from: new Date(new Date()),
+    to: addDays(new Date(new Date()), 20),
   });
 
   const router = useRouter();

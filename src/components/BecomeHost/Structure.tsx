@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdOutlineHouse, MdApartment, MdCabin } from "react-icons/md";
 import { PiBarn } from "react-icons/pi";
 import { GiCoffeeCup } from "react-icons/gi";
@@ -9,8 +9,12 @@ import { Castle } from "../icons/PropertyIcons/Castle";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 
-export const Structure = ({ handleBack, handleNext }: PropertyClick) => {
-  const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
+export const Structure = ({
+  handleBack,
+  handleNext,
+  value,
+  handleChange,
+}: PropertyClick) => {
   const places = [
     {
       id: "house",
@@ -54,29 +58,7 @@ export const Structure = ({ handleBack, handleNext }: PropertyClick) => {
     },
   ];
 
-  const handleSelect = (id: string) => {
-    setSelectedPlace(id);
-  };
-
-  const isNextButtonDisabled = !selectedPlace;
-
-  // const handleNext = () => {
-  //   router.push(`/become-host/?categoryId=${selectedPlace}`);
-  //   setStep("next");
-  // };
-
-  // const handleBack = () => {
-  //   setStep("previous");
-  // };
-
-  // if (step === "next") {
-  //   return <FloorPlan />;
-  // }
-
-  // if (step === "previous") {
-  //   return <Address />;
-  // }
-
+  console.log(value.categoryId);
   return (
     <div className="flex min-h-screen flex-col">
       <PropertyHeader />
@@ -89,12 +71,17 @@ export const Structure = ({ handleBack, handleNext }: PropertyClick) => {
             <button
               key={place.id}
               className={`flex h-[98px] w-[202px] flex-col rounded-lg border p-4 transition-shadow hover:shadow-md ${
-                selectedPlace === place.id
+                value.categoryId === place.id
                   ? "border-black bg-gray-100"
                   : "border-gray-300"
               }`}
-              onClick={() => handleSelect(place.id)}
+              onClick={() =>
+                handleChange({
+                  target: { name: "categoryId", value: place.id },
+                })
+              }
               aria-label={`Select ${place.label}`}
+              value={place.id}
             >
               <div className="flex flex-col items-start justify-start">
                 <div className="h-12 w-12">{place.icon}</div>
@@ -106,20 +93,20 @@ export const Structure = ({ handleBack, handleNext }: PropertyClick) => {
       </div>
       <div className="flex items-center justify-between border-t p-4">
         <button
-          className="text-gray-500 hover:underline"
-          aria-label="Go back to the previous step"
           onClick={handleBack}
+          aria-label="Go back to the previous step"
+          className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
           Back
         </button>
         <button
           className={`rounded-md px-6 py-3 text-white transition-colors ${
-            isNextButtonDisabled
+            !value.categoryId
               ? "cursor-not-allowed bg-gray-300"
               : "bg-black hover:bg-gray-800"
           }`}
-          disabled={isNextButtonDisabled}
-          aria-disabled={isNextButtonDisabled}
+          disabled={!value.categoryId}
+          aria-disabled={!value.categoryId}
           aria-label="Proceed to the next step"
           onClick={handleNext}
         >

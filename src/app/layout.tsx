@@ -7,8 +7,8 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/layout";
 import { usePathname } from "next/navigation";
 import ToastWithAction from "@/components/PaymentDetail/ToastWithAction";
-import { Toaster } from "@/components/ui/toaster";
-
+// import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "sonner";
 const RootLayout = ({
   children,
 }: Readonly<{
