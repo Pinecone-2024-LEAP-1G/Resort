@@ -69,16 +69,19 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       }
     };
     getProperty();
-  }, []);
+  }, [propertyId]);
 
   const SubmitReservation = async () => {
+    if (allGuests === 0) {
+      return toast.error("Хүний тоог бөглөнө үү!");
+    }
     try {
       const response = await axios.post(
         "http://localhost:3000/api/reservations",
         {
           checkIn: from,
           checkOut: to,
-          userId: property?.userId,
+          userId: "6747c5db0314e681044f54d0",
           propertyId: propertyId,
           adult: !isNaN(Number(adult)),
           children: !isNaN(Number(child)),
@@ -88,8 +91,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       );
       console.log(response);
 
-      // const userId = response.data.updateUser._id;
-      // router.push(`/orderDetail/${userId}`);
+      const userId = "6747c5db0314e681044f54d0";
+      router.push(`/orderDetail/${userId}`);
       toast.success("zahialga amjilttai");
     } catch (error) {
       toast.error("error");

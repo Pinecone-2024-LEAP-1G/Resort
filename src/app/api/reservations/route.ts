@@ -71,15 +71,6 @@ export const POST = async (request: NextRequest) => {
       checkOutDate: reservation.checkOut,
     });
 
-    const updateUser = await UserModel.findOneAndUpdate(
-      {
-        _id: reservation.userId,
-      },
-      {
-        $push: { reservationId: reservation._id },
-      },
-      { new: true },
-    );
     const hostId = await PropertyModel.findById({
       _id: reservation.propertyId,
     });
@@ -94,7 +85,6 @@ export const POST = async (request: NextRequest) => {
       text: `startDate=${checkIn}, endDate${checkOut},gusts=${guests}`,
     });
     return Response.json({
-      updateUser: updateUser,
       reservation: reservation,
       availableList: availableList,
     });

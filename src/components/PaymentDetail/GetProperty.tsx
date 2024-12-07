@@ -4,28 +4,15 @@ import axios from "axios";
 import { Dot, Medal, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ReverseCart } from "../PropertyDetail/ReverseCart";
-
-export type Property = {
-  _id: string;
-  price: number;
-  guests: number;
-  address: string;
-  description: string;
-  propertyPictures: string;
-  userId: string;
-  categoryId: string;
-  totalBedrooms: string;
-  totalOccupancy: string;
-  totalBathrooms: string;
-};
+import { PropertyType } from "../Review";
 
 interface Props {
-  property?: Property;
+  property?: PropertyType;
   propertyId?: string;
 }
 
 const GetProperty = ({ propertyId }: Props) => {
-  const [property, setProperty] = useState<Property>();
+  const [property, setProperty] = useState<PropertyType>();
   useEffect(() => {
     const getProperty = async () => {
       try {
@@ -38,7 +25,7 @@ const GetProperty = ({ propertyId }: Props) => {
       }
     };
     getProperty();
-  }, []);
+  }, [propertyId]);
   return (
     <div className="sticky top-16 ml-auto mt-16 flex flex-col gap-12">
       <div className="h-[150px] w-[372px] gap-4 rounded-lg border p-6 shadow-lg">

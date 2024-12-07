@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
 
-type Reservation = {
+export type Reservation = {
   _id: string;
   userId: mongoose.Schema.Types.ObjectId;
   propertyId: mongoose.Schema.Types.ObjectId;
