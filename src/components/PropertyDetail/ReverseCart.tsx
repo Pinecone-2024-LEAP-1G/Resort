@@ -18,7 +18,6 @@ interface Props {
   text: string;
 }
 export const ReverseCart = ({ property, propertyId, text }: Props) => {
-  const [notchoose, setNotChoose] = useState(false);
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
   useEffect(() => {
@@ -70,7 +69,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
           disabledDay.getFullYear() === toDate.getFullYear(),
       )
     ) {
-      toDate.setDate(toDate.getDate() + 1);
+      return startDate;
     }
     return toDate;
   };
@@ -104,14 +103,6 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const availablelists = getDaysArray(from, to);
 
-  // const toastError = () => {
-  //   availablelists.map((day) => disabledDays.map((date) => date === day));
-  //   setNotChoose(true);
-  //   if (notchoose === true) {
-  //     toast.error("zahialgatai udur songoson baina");
-  //   }
-  // };
-
   const [
     { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
     setQueries,
@@ -123,14 +114,15 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
   });
 
   const price = property?.price ?? Infinity;
+  const cleaningFee = property?.cleaningFee ?? Infinity;
 
   const getDaysBetweenDates = (from: Date, to: Date) => {
     const oneDayInMilliseconds = 1000 * 60 * 60 * 24;
     const timeDifference = to.getTime() - from.getTime();
-    return Math.abs(timeDifference) / oneDayInMilliseconds;
+    return Math.floor(timeDifference / oneDayInMilliseconds) + 1;
   };
 
-  const daysBetween = getDaysBetweenDates(to, from);
+  const daysBetween = getDaysBetweenDates(from, to);
 
   const priceOfDates = price * daysBetween;
 
@@ -154,7 +146,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     }
 
     router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&propertyId=${propertyId}&totalPrice=${price}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&propertyId=${propertyId}&totalPrice=${price}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
     );
   };
 
@@ -191,22 +183,18 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       <div className="mt-8 flex h-28 flex-col gap-2 border-b">
         <div className="flex justify-between">
           <p className="border-b border-black">
-            {price}₮ * {daysBetween}өдөр
+            {new Intl.NumberFormat().format(price)}₮ * {daysBetween}өдөр
           </p>
-          <p>{priceOfDates}₮</p>
+          <p>{new Intl.NumberFormat().format(priceOfDates)}₮</p>
         </div>
-        <div className="flex justify-between">
+        <div className="mt-4 flex justify-between">
           <p className="border-b border-black">Цэвэрлэгээний үнэ</p>
-          <p>20000₮</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="border-b border-black">Зуучлалийн үнэ</p>
-          <p>20000₮</p>
+          <p>{new Intl.NumberFormat().format(cleaningFee)}₮</p>
         </div>
       </div>
       <div className="text-md flex h-12 justify-between font-bold">
         <p>Нийт үнэ</p>
-        <p>{totalPrice}₮</p>
+        <p>{new Intl.NumberFormat().format(totalPrice)}₮</p>
       </div>
     </div>
   );

@@ -8,16 +8,17 @@ export const GET = async (
   {
     params,
   }: {
-    params: Promise<{ reservationId: string }>;
+    params: Promise<{ userId: string }>;
   },
 ) => {
-  const reservationId = (await params).reservationId;
+  const userId = (await params).userId;
   try {
     const reservation = await ReservationModel.find({
-      _id: reservationId,
+      userId: userId,
     })
-      .populate("userId")
-      .populate("propertyId");
+      .populate("propertyId")
+      .populate("userId");
+
     return Response.json({ reservation: reservation });
   } catch (error) {
     return Response.json({ error: error });
