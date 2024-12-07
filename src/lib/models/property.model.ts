@@ -22,7 +22,7 @@ const PropertySchema = new Schema<Property>(
     guests: { type: Number, required: true },
     price: { type: Number, required: true },
     categoryId: { type: String, ref: "Category" },
-    propertyPictures: [{ type: String, required: true }],
+    propertyPictures: [{ type: String }],
     totalBedrooms: { type: String, required: true },
     totalBathrooms: { type: String, required: true },
     cleaningFee: { type: Number },

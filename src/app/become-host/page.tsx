@@ -2,11 +2,11 @@
 
 import { AboutYourPlace } from "@/components/BecomeHost/AboutYourPlace";
 import { Address } from "@/components/BecomeHost/Address";
+import { FinallyButton } from "@/components/BecomeHost/FinallyButton";
 import { FloorPlan } from "@/components/BecomeHost/FloorPlan";
 import { Overview } from "@/components/BecomeHost/OverView";
-import { Photos } from "@/components/BecomeHost/Photos";
 import { Structure } from "@/components/BecomeHost/Structure";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export type PropertyValue = {
   address: string;
@@ -17,13 +17,18 @@ export type PropertyValue = {
   propertyPictures: string[];
   totalBedrooms: number;
   totalBathrooms: number;
-  cleaningFee: string;
+  cleaningFee: number;
 };
+
 export type PropertyClick = {
   handleBack: () => void;
   handleNext: () => void;
-  value: string[];
-  handleChange:()=>void
+  value: PropertyValue;
+  handleChange: (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
 };
 const stepper = [
   Overview,
@@ -31,11 +36,13 @@ const stepper = [
   Address,
   Structure,
   FloorPlan,
-  Photos,
+
+  FinallyButton,
 ];
+
 const BecomeHost = () => {
   const [step, setStep] = useState(0);
-  const [value, setValue] = useState({
+  const [value, setValue] = useState<PropertyValue>({
     address: "",
     description: "",
     guests: 0,
@@ -47,31 +54,28 @@ const BecomeHost = () => {
     cleaningFee: 0,
   });
 
-  const handleBack = () => {
-    setStep((prev) => prev - 1);
-  };
-  const handleNext = () => {
-    setStep((prev) => prev + 1);
-  };
   const Step = stepper[step];
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValue({
-        ...value
-        [name]:value,
-    })}
-
+  const handleChange = (
+    e:
+      | React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   if (step < stepper.length)
     return (
       <Step
-      handleChange={handleChange}
-        handleBack={handleBack}
-        handleNext={handleNext}
+        handleChange={handleChange}
+        handleBack={() => setStep((prev) => prev - 1)}
+        handleNext={() => setStep((prev) => prev + 1)}
         value={value}
       ></Step>
     );
   return <div></div>;
-}
+};
 
 export default BecomeHost;

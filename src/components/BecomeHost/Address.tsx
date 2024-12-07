@@ -1,5 +1,4 @@
 import { PropertyHeader } from "./PropertyHeader";
-import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Provinces } from "../Provinces";
@@ -18,25 +17,6 @@ export const Address = ({
   value,
   handleChange,
 }: PropertyClick) => {
-  const [description, setDescription] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const addressvalue = value.address;
-  // const handleNext = () => {
-  //   if (description && address) {
-  //     router.push(`become-host/?address=${address}&description=${description}`);
-  //     setStep("next");
-  //   } else {
-  //     alert("Please fill in all the required fields.");
-  //   }
-  // };
-  // const handleBack=()=>{
-
-  // }
-
-  // const handleBack = () => {
-  //   setStep("back");
-  // };
-
   return (
     <div>
       <PropertyHeader />
@@ -55,13 +35,18 @@ export const Address = ({
             <label className="block text-sm font-medium text-gray-700">
               Select your province
             </label>
-            <Select onValueChange={handleChange}>
+            <Select
+              value={value.address}
+              onValueChange={(province) =>
+                handleChange({ target: { name: "address", value: province } })
+              }
+            >
               <SelectTrigger className="w-[630px]">
                 <SelectValue placeholder="Choose a province" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {Provinces.map((province) => (
+                  {Provinces?.map((province) => (
                     <SelectItem value={province.name} key={province.name}>
                       {province.name}
                     </SelectItem>
@@ -80,42 +65,15 @@ export const Address = ({
               </label>
               <Input
                 id="streetAddress"
-                value={value.description}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({
+                    target: { name: "description", value: value.target.value },
+                  })
+                }
                 type="text"
                 placeholder="Enter your street address"
               />
             </div>
-            {/* <div>
-              <label
-                htmlFor="town"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City/Town/Village
-              </label>
-              <Input
-                id="town"
-                value={town}
-                onChange={(e) => setTown(e.target.value)}
-                type="text"
-                placeholder="Enter your city or town"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="postalCode"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Postal Code
-              </label>
-              <Input
-                id="postalCode"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-                type="text"
-                placeholder="Enter your postal code"
-              />
-            </div> */}
           </div>
         </div>
       </div>
@@ -128,6 +86,8 @@ export const Address = ({
           Back
         </button>
         <Button
+          disabled={!value.address || !value.description}
+          aria-disabled={!value.address || !value.description}
           onClick={handleNext}
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"

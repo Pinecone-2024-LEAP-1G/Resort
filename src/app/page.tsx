@@ -25,6 +25,7 @@ const Home = () => {
         );
 
         setProperties(response?.data.property);
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
