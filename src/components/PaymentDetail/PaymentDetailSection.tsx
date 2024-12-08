@@ -2,7 +2,7 @@
 
 import { ChevronLeft, Gem } from "lucide-react";
 import { Alert, AlertTitle } from "../ui/alert";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useSearchParams } from "next/navigation";
@@ -30,7 +30,6 @@ interface Props {
 }
 
 export const PaymentDetailSection = ({ propertyId }: Props) => {
-  const [property, setProperty] = useState<Property>();
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
@@ -41,6 +40,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const totalPrice = searchParams.get("totalPrice");
   let allGuests = 0;
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   if (adult && !isNaN(Number(adult))) {
     allGuests += Number(adult);
@@ -55,24 +55,11 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     allGuests += Number(pets);
   }
 
-  useEffect(() => {
-    const getProperty = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:3000/api/properties/${propertyId}`,
-        );
-        setProperty(data?.property);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProperty();
-  }, [propertyId]);
-
   const SubmitReservation = async () => {
     if (allGuests === 0) {
       return toast.error("Хүний тоог бөглөнө үү!");
     }
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/reservations",
@@ -87,9 +74,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
           totalPrice: totalPrice,
         },
       );
-      console.log(response);
-
-      const userId = "6747c5db0314e681044f54d0";
+      setIsLoading(false);
+      const userId = response.data.reservation.userId;
       router.push(`/orderDetail/${userId}`);
       toast.success("zahialga amjilttai");
     } catch (error) {
@@ -128,8 +114,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
                 <div className="border-t">
                   <p className="w-[556px] pt-6 font-medium">Dates</p>
                   <p className="text-lg font-semibold">
-                    <p> Check-In: {moment(from).format("ll")}</p>
-                    <p> Check-out: {moment(to).format("ll")}</p>
+                    <p> Check-In: {moment(from).format("L")}</p>
+                    <p> Check-out: {moment(to).format("L")}</p>
                   </p>
                 </div>
               </div>

@@ -27,7 +27,7 @@ export const OrderProps = ({
 
       <div className="mt-4 flex justify-between rounded-lg border p-[24px] shadow-xl">
         <div
-          className="h-[80px] w-[80px]"
+          className="h-[80px] w-[80px] bg-cover"
           style={{
             backgroundImage: `url(${image})`,
             backgroundPosition: "center",
