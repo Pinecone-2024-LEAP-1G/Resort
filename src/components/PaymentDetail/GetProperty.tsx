@@ -31,7 +31,7 @@ const GetProperty = ({ propertyId }: Props) => {
       <div className="h-[150px] w-[372px] gap-4 rounded-lg border p-6 shadow-lg">
         <div className="mb-4 flex flex-row gap-4">
           <div
-            className="h-[104px] w-[104px] items-center rounded-xl"
+            className="h-[104px] w-[104px] items-center rounded-xl bg-cover"
             style={{
               backgroundImage: `url(${property?.propertyPictures[0]})`,
             }}

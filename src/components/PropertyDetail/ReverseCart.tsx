@@ -126,7 +126,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const priceOfDates = price * daysBetween;
 
-  const totalPrice = priceOfDates + 20000 + 20000;
+  const totalPrice = priceOfDates + cleaningFee;
 
   const checkDate = () => {
     return availablelists.some((day) =>
@@ -146,13 +146,13 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     }
 
     router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&propertyId=${propertyId}&totalPrice=${price}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&totalPrice=${price}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
     );
   };
 
   return (
     <div className="ml-auto grid h-[495px] w-[372px] justify-center gap-2 rounded-lg border p-8 shadow-lg">
-      <p className="mb-4">Үнэ: {property?.price}₮</p>
+      <p className="mb-4">Үнэ: {new Intl.NumberFormat().format(totalPrice)}₮</p>
       <DatePickerWithRange
         selected={{ from, to }}
         onSelect={setDate}

@@ -43,7 +43,6 @@ type Reservation = {
 
 export const OrderDetail = ({ userId }: OrderProps) => {
   const [reservations, setReservations] = useState<Reservation[]>();
-  console.log(reservations);
 
   useEffect(() => {
     const getReservation = async () => {
@@ -59,13 +58,9 @@ export const OrderDetail = ({ userId }: OrderProps) => {
     getReservation();
   }, [userId]);
 
-  const userName = reservations[0].userId.lastName;
-
   return (
     <div className="mx-auto w-[800px]">
-      <h1 className="h-[72px] py-4 text-2xl font-bold">
-        {userName} ~ Таны захиалга
-      </h1>
+      <h1 className="h-[72px] py-4 text-2xl font-bold">Таны захиалга</h1>
       {reservations?.map((reservation) => (
         <OrderProps
           key={reservation._id}
