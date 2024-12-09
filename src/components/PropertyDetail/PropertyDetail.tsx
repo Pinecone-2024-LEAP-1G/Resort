@@ -76,7 +76,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             <ReverseCart
               property={property}
               propertyId={propertyId}
-              text="reserve"
+              text="Захиалга үүсгэх"
             />
           </div>
         </div>

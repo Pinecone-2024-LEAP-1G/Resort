@@ -146,7 +146,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     }
 
     router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&totalPrice=${price}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}`,
+      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&totalPrice=${price}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
     );
   };
 
@@ -176,7 +176,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       />
       <Button
         onClick={navigateToNextPage}
-        className="mt-4 h-10 w-[300px] bg-gray-400"
+        className="mt-4 h-10 w-[300px] bg-green-500"
       >
         {text}
       </Button>

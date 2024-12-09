@@ -10,8 +10,10 @@ import { RulesAndPolicy } from "./RulesAndPolicy";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
-import GetProperty from "./GetProperty";
 import { useRouter } from "next/navigation";
+import GetProperty from "./GetProperty";
+
+import { Progress } from "@/components/ui/progress";
 
 export type Property = {
   _id: string;
@@ -43,6 +45,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   let allGuests = 0;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = React.useState(13);
 
   if (adult && !isNaN(Number(adult))) {
     allGuests += Number(adult);
@@ -61,7 +64,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     if (allGuests === 0) {
       return toast.error("Хүний тоог бөглөнө үү!");
     }
-
+    setIsLoading(false);
     try {
       const response = await axios.post(
         "http://localhost:3000/api/reservations",
@@ -97,6 +100,10 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       </Button>
     );
   };
+
+  if (!isLoading) {
+    return <ProgressDemo />;
+  }
 
   return (
     <div className="mx-40 grid w-full grid-cols-2 gap-4">
@@ -173,3 +180,13 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     </div>
   );
 };
+export function ProgressDemo() {
+  const [progress, setProgress] = React.useState(13);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setProgress(95), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return <Progress value={progress} className="w-[60%]" />;
+}
