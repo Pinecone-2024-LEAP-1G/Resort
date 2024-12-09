@@ -13,6 +13,7 @@ export type Property = {
   cleaningFee: number;
   userId: mongoose.Schema.Types.ObjectId;
   reviewId: mongoose.Schema.Types.ObjectId[];
+  length: number;
 };
 
 const PropertySchema = new Schema<Property>(

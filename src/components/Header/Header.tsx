@@ -20,8 +20,9 @@ const Header = () => {
   const [guests, setGuests] = useState<number | string>();
   const [date, setDate] = React.useState<{ from: Date; to: Date | undefined }>({
     from: new Date(new Date()),
-    to: addDays(new Date(new Date()), 20),
+    to: addDays(new Date(), 20),
   });
+  const [show, setShow] = useState(false);
 
   const router = useRouter();
   const searchProperty = () => {
@@ -40,11 +41,16 @@ const Header = () => {
         className={`flex rounded-full border-2 ${hover === 0 ? "bg-gray-100" : "bg-gray-100"}`}
       >
         <HeaderSearch
+          show={show}
+          setAddresssearch={setAddresssearch}
           addresssearch={addresssearch}
           hover={hover === 1 ? "bg-white" : "bg-gray-100 "}
-          onMouseEnter={() => setHover(1)}
-          onMouseLeave={() => setHover(0)}
-          addresssearchClick={(e) => setAddresssearch(e.target.value)}
+          onMouseEnter={() => {
+            setHover(1), setShow(true);
+          }}
+          onMouseLeave={() => {
+            setHover(0), setShow(false);
+          }}
         />
         <DatePickerWithRange
           hover={hover === 2 ? "bg-white" : "bg-gray-100 "}

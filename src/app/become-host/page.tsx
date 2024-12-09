@@ -36,7 +36,6 @@ const stepper = [
   Address,
   Structure,
   FloorPlan,
-
   FinallyButton,
 ];
 
@@ -66,6 +65,7 @@ const BecomeHost = () => {
       [name]: value,
     }));
   };
+  console.log(value);
   if (step < stepper.length)
     return (
       <Step

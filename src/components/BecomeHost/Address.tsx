@@ -18,7 +18,7 @@ export const Address = ({
   handleChange,
 }: PropertyClick) => {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div className="mx-auto my-8 flex w-[630px] flex-col gap-6">
         <div className="flex flex-col gap-6">

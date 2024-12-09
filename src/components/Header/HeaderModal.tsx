@@ -33,8 +33,7 @@ export function HeaderModal() {
 
     return <Profile />;
   };
-  
-  
+
   const handleAirbnbHome = () => {
     redirect("/become-host");
   };

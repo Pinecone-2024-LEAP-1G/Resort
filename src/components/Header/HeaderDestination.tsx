@@ -1,23 +1,18 @@
-import { useRouter } from "next/navigation";
 import React from "react";
 
 type SearchProps = {
   address: string;
   propertyPicture: string;
-  propertyId: string;
+  onClick: () => void;
 };
 export const PropertyLocationSearch = ({
   address,
   propertyPicture,
-  propertyId,
+  onClick,
 }: SearchProps) => {
-  const router = useRouter();
   return (
-    <div
-      className="flex flex-col gap-1"
-      onClick={() => router.push(`/property/${propertyId}`)}
-    >
-      <div
+    <div className="flex flex-col gap-1">
+      {/* <div
         style={{
           backgroundImage: `url(${propertyPicture})`,
           backgroundPosition: "center",
@@ -25,8 +20,8 @@ export const PropertyLocationSearch = ({
           backgroundRepeat: "no-repeat",
         }}
         className="h-28 w-28 rounded-xl"
-      ></div>
-      <p>{address}</p>
+      ></div> */}
+      <div onClick={onClick}>{address}</div>
     </div>
   );
 };

@@ -34,12 +34,12 @@ export const FinallyButton = ({
         cleaningFee: value.cleaningFee,
       })
       .then(function (response) {
-        console.log(response.data.message);
         if (response.data.message === "success")
           toast.success("Tanii bvrtgel amjilttai vvslee."),
             setTimeout(() => {
               router.push("/");
             }, 4000);
+        console.log(response);
       })
 
       .catch(function (error) {

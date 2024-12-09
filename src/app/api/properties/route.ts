@@ -27,7 +27,6 @@ export const POST = async (request: NextRequest) => {
     email,
     cleaningFee,
   } = await request.json();
-  console.log(address, description);
   // const hostExist = await HostModel.findOne({ email });
 
   // if (!hostExist) {
