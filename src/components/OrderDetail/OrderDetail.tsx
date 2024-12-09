@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { OrderProps } from "./OrderProps";
 
-type OrderProps = {
+type OrderDetailProps = {
   userId?: string;
 };
 type Reservation = {
@@ -41,7 +41,7 @@ type Reservation = {
   };
 };
 
-export const OrderDetail = ({ userId }: OrderProps) => {
+export const OrderDetail = ({ userId }: OrderDetailProps) => {
   const [reservations, setReservations] = useState<Reservation[]>();
 
   useEffect(() => {
