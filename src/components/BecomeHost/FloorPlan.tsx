@@ -18,56 +18,9 @@ export const FloorPlan = ({
   const [guests, setGuests] = useState<number>(1);
   const [beds, setBeds] = useState<number>(1);
   const [bathrooms, setBathrooms] = useState<number>(0.5);
-  const [step, setStep] = useState<string>("about");
-  const [price, setPrice] = useState();
-  const [cleaningFee, setCleaningFee] = useState();
+  const [price, setPrice] = useState<number | string>();
+  const [cleaningFee, setCleaningFee] = useState<string | number>();
 
-  const incrementGuest = () => {
-    if (guests < 15) {
-      setGuests(guests + 1);
-    }
-    handleChange({ target: { name: "guests", value: guests } });
-  };
-  const decrementGuest = () => {
-    if (guests > 1) {
-      setGuests(guests - 1);
-    }
-    handleChange({ target: { name: "guests", value: guests } });
-  };
-
-  const incrementBeds = () => {
-    if (beds < 50) {
-      setBeds(beds + 1);
-    }
-    handleChange({ target: { name: "totalBedrooms", value: beds } });
-  };
-  const decrementBeds = () => {
-    if (beds > 1) {
-      setBeds(beds - 1);
-    }
-    handleChange({ target: { name: "totalBedrooms", value: beds } });
-  };
-
-  const incrementBathrooms = () => {
-    if (bathrooms < 50) {
-      setBathrooms(bathrooms + 0.5);
-    }
-    handleChange({ target: { name: "totalBathrooms", value: bathrooms } });
-  };
-  const decrementBathrooms = () => {
-    if (bathrooms > 0.5) {
-      setBathrooms(bathrooms - 0.5);
-    }
-    handleChange({ target: { name: "totalBathrooms", value: bathrooms } });
-  };
-  const propertyCleaningFee = (e) => {
-    setCleaningFee(e.target.value);
-    handleChange({ target: { name: "cleaningFee", value: cleaningFee } });
-  };
-  const guestsPrice = (e) => {
-    setPrice(e.target.value);
-    handleChange({ target: { name: "price", value: price } });
-  };
   return (
     <div>
       <PropertyHeader />
@@ -84,14 +37,31 @@ export const FloorPlan = ({
           <p className="text-xl font-normal">Guests</p>
           <div className="flex items-center justify-center gap-2">
             <Button
-              onClick={decrementGuest}
+              onClick={() => {
+                if (guests > 1) {
+                  const guest = guests - 1;
+                  setGuests(guest);
+
+                  handleChange({
+                    target: { name: "guests", value: guest.toString() },
+                  });
+                }
+              }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
             >
               <Minus className="h-4 w-4 text-black" />
             </Button>
             <div className="w-6 text-center text-lg">{guests}</div>
             <Button
-              onClick={incrementGuest}
+              onClick={() => {
+                if (guests < 15) {
+                  const newGuests = guests + 1;
+                  setGuests(newGuests);
+                  handleChange({
+                    target: { name: "guests", value: newGuests.toString() },
+                  });
+                }
+              }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
               disabled={guests < 1}
             >
@@ -103,14 +73,31 @@ export const FloorPlan = ({
           <p className="text-xl font-normal">Beds</p>
           <div className="flex items-center justify-center gap-2">
             <Button
-              onClick={decrementBeds}
+              onClick={() => {
+                if (beds > 1) {
+                  const bed = beds - 1;
+                  setBeds(bed);
+
+                  handleChange({
+                    target: { name: "totalBedrooms", value: bed.toString() },
+                  });
+                }
+              }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
             >
               <Minus className="h-4 w-4 text-black" />
             </Button>
             <div className="w-6 text-center text-lg">{beds}</div>
             <Button
-              onClick={incrementBeds}
+              onClick={() => {
+                if (beds < 50) {
+                  const bed = beds + 1;
+                  setBeds(bed);
+                  handleChange({
+                    target: { name: "totalBedrooms", value: bed.toString() },
+                  });
+                }
+              }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
               disabled={beds < 1}
             >
@@ -122,14 +109,31 @@ export const FloorPlan = ({
           <p className="text-xl font-normal">Bathrooms</p>
           <div className="flex items-center justify-center gap-2">
             <Button
-              onClick={decrementBathrooms}
+              onClick={() => {
+                if (bathrooms > 0.5) {
+                  const rooms = bathrooms - 0.5;
+                  setBathrooms(rooms);
+                  handleChange({
+                    target: { name: "totalBathrooms", value: rooms.toString() },
+                  });
+                }
+              }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
             >
               <Minus className="h-4 w-4 text-black" />
             </Button>
             <div className="w-6 text-center text-lg">{bathrooms}</div>
             <Button
-              onClick={incrementBathrooms}
+              onClick={() => {
+                if (bathrooms < 50) {
+                  const broom = bathrooms + 0.5;
+                  setBathrooms(broom);
+
+                  handleChange({
+                    target: { name: "totalBathrooms", value: broom.toString() },
+                  });
+                }
+              }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
               disabled={bathrooms < 0.5}
             >
@@ -143,13 +147,19 @@ export const FloorPlan = ({
             <input
               className="bg-gray w-[150px] rounded-lg border p-1"
               placeholder="   Cleaning Fee"
-              onChange={(e) => propertyCleaningFee(e)}
+              onChange={(e) => {
+                const fee = parseFloat(e.target.value);
+                setCleaningFee(fee);
+                handleChange({
+                  target: { name: "cleaningFee", value: fee.toString() },
+                });
+              }}
             />
             <div className="w-[120px]">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "MNT",
-              }).format(cleaningFee)}
+              }).format(parseFloat(cleaningFee?.toString() ?? "0"))}
             </div>
           </div>
         </div>
@@ -160,16 +170,22 @@ export const FloorPlan = ({
             <input
               className="bg-gray w-[150px] rounded-lg border p-1"
               placeholder="   Guest pricing"
-              onChange={(e) => guestsPrice(e)}
+              onChange={(e) => {
+                const pri = parseFloat(e.target.value);
+                setPrice(pri);
+                handleChange({
+                  target: { name: "price", value: pri.toString() },
+                });
+              }}
             />
             <div className="w-[120px]">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "MNT",
-              }).format(price)}
+              }).format(parseFloat(price?.toString() ?? "0"))}
             </div>
           </div>
-        </div>{" "}
+        </div>
         <HoverCard>
           <HoverCardTrigger asChild>
             <Button className="text-sm text-gray-500" variant="link">

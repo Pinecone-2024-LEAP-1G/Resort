@@ -8,6 +8,7 @@ export type CategoriesState = Category[];
 type Category = {
   name: string;
   icon?: JSX.Element;
+  _id: string;
 };
 
 export const Categories = () => {
@@ -19,14 +20,13 @@ export const Categories = () => {
       setCategories(response.data);
     };
     getCategories();
-  }, []);
+  }, [categories]);
 
   return (
     <div className="flex items-center">
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">
-          {" "}
           {categories.map((data, index) => {
             return (
               <Category

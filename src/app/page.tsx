@@ -17,7 +17,7 @@ const Home = () => {
     const getProperties = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/properties/getAddress?address=${address}&from=${from}&to=${to}&guests=${guests}`,
+          `http://localhost:3000/api/properties/searchProperties?address=${address}&from=${from}&to=${to}&guests=${guests}`,
         );
 
         setProperties(response?.data.property);

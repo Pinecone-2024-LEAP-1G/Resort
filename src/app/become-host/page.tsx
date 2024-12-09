@@ -18,16 +18,23 @@ export type PropertyValue = {
   totalBedrooms: number;
   totalBathrooms: number;
   cleaningFee: number;
+  categoryname: string;
 };
-
+type CustomEvent = {
+  target: {
+    name: string;
+    value:
+      | PropertyValue
+      | string
+      | (EventTarget & (HTMLInputElement | HTMLSelectElement));
+  };
+};
 export type PropertyClick = {
   handleBack: () => void;
   handleNext: () => void;
   value: PropertyValue;
   handleChange: (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
+    e: CustomEvent | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
 };
 const stepper = [
@@ -51,13 +58,12 @@ const BecomeHost = () => {
     totalBedrooms: 0,
     totalBathrooms: 0,
     cleaningFee: 0,
+    categoryname: "",
   });
 
   const Step = stepper[step];
   const handleChange = (
-    e:
-      | React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
-      | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: CustomEvent | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setValue((prev) => ({
@@ -65,7 +71,6 @@ const BecomeHost = () => {
       [name]: value,
     }));
   };
-  console.log(value);
   if (step < stepper.length)
     return (
       <Step

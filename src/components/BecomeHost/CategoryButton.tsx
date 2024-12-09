@@ -1,14 +1,11 @@
 import categoryIcon from "@/util/findCategoryIcon";
-import { Category } from "../Category/Category";
-import { CategoriesState } from "../Category/Categories";
 import { PropertyValue } from "@/app/become-host/page";
 
 type CategoryProps = {
   text: string;
-  value: PropertyValue[];
+  value: PropertyValue;
   onClick: () => void;
-  categoryid: CategoriesState;
-  categoryId: string;
+  categoryid: string;
 };
 export const CategoryButton = ({
   text,

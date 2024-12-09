@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { MdOutlineHouse, MdApartment, MdCabin } from "react-icons/md";
-import { PiBarn } from "react-icons/pi";
-import { GiCoffeeCup } from "react-icons/gi";
-import { TbSailboat } from "react-icons/tb";
-import { FaCaravan } from "react-icons/fa";
-import { CasaParticular } from "../icons/PropertyIcons/CasaParticular";
-import { Castle } from "../icons/PropertyIcons/Castle";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
-import categoryIcon, { mockdata } from "@/util/findCategoryIcon";
 import { CategoriesState } from "../Category/Categories";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
@@ -19,49 +11,6 @@ export const Structure = ({
   value,
   handleChange,
 }: PropertyClick) => {
-  // const places = [
-  //   {
-  //     id: "house",
-  //     label: "House",
-  //     icon: <MdOutlineHouse className="h-12 w-12" />,
-  //   },
-  //   {
-  //     id: "apartment",
-  //     label: "Apartment",
-  //     icon: <MdApartment className="h-12 w-12" />,
-  //   },
-  //   { id: "barn", label: "Barn", icon: <PiBarn className="h-12 w-12" /> },
-  //   {
-  //     id: "bedBreakfast",
-  //     label: "Bed & breakfast",
-  //     icon: <GiCoffeeCup className="h-12 w-12" />,
-  //   },
-  //   { id: "boat", label: "Boat", icon: <TbSailboat className="h-12 w-12" /> },
-  //   { id: "cabin", label: "Cabin", icon: <MdCabin className="h-12 w-12" /> },
-  //   { id: "rv", label: "Camper/RV", icon: <FaCaravan className="h-12 w-12" /> },
-  //   {
-  //     id: "casaParticular",
-  //     label: "Casa particular",
-  //     icon: <CasaParticular />,
-  //   },
-  //   { id: "castle", label: "Castle", icon: <Castle /> },
-  //   {
-  //     id: "cave",
-  //     label: "Cave",
-  //     icon: <MdOutlineHouse className="h-12 w-12" />,
-  //   },
-  //   {
-  //     id: "container",
-  //     label: "Container",
-  //     icon: <MdOutlineHouse className="h-12 w-12" />,
-  //   },
-  //   {
-  //     id: "cycladicHome",
-  //     label: "Cycladic home",
-  //     icon: <MdOutlineHouse className="h-12 w-12" />,
-  //   },
-  // ];
-
   const [categories, setCategories] = useState<CategoriesState>([]);
   useEffect(() => {
     const getCategories = async () => {
@@ -76,7 +25,7 @@ export const Structure = ({
       }
     };
     getCategories();
-  }, []);
+  }, [categories]);
   return (
     <div className="flex min-h-screen flex-col">
       <PropertyHeader />
@@ -85,18 +34,30 @@ export const Structure = ({
           Which of these best describes your place?
         </h1>
         <div className="grid w-[640px] grid-cols-3 gap-4 md:grid-cols-3 lg:grid-cols-3">
-          {categories.map((category, index) => (
-            <CategoryButton
-              key={category._id}
-              text={category.name}
-              value={value}
+          {categories.map((category) => (
+            <button
               onClick={() =>
                 handleChange({
-                  target: { name: "categoryId", value: category?._id },
+                  target: { name: "categoryname", value: category.name },
                 })
               }
-              categoryid={category._id}
-            />
+              key={category._id}
+            >
+              <CategoryButton
+                key={category._id}
+                text={category.name}
+                value={value}
+                onClick={() =>
+                  handleChange({
+                    target: {
+                      name: "categoryId",
+                      value: category._id,
+                    },
+                  })
+                }
+                categoryid={category._id}
+              />
+            </button>
           ))}
         </div>
       </div>

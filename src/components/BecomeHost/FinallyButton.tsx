@@ -1,23 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PropertyClick } from "@/app/become-host/page";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import categoryIcon from "@/util/findCategoryIcon";
 
-export const FinallyButton = ({
-  value,
-  handleBack,
-  handleNext,
-  handleChange,
-}: PropertyClick) => {
+export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
   const router = useRouter();
+  const icons = categoryIcon({ value });
+  console.log(value.categoryname, value.address);
   const createProperty = async () => {
     await axios
       .post(`http://localhost:3000/api/properties`, {
@@ -34,12 +26,12 @@ export const FinallyButton = ({
         cleaningFee: value.cleaningFee,
       })
       .then(function (response) {
-        if (response.data.message === "success")
-          toast.success("Tanii bvrtgel amjilttai vvslee."),
-            setTimeout(() => {
-              router.push("/");
-            }, 4000);
         console.log(response);
+        if (response.data.message === "success")
+          toast.success("Tanii bvrtgel amjilttai vvslee.");
+        setTimeout(() => {
+          router.push("/");
+        }, 4000);
       })
 
       .catch(function (error) {
@@ -52,7 +44,6 @@ export const FinallyButton = ({
         <Card className="w-[600px] p-6">
           <CardHeader className="text-center">
             <CardTitle>Таны бүтээгдэхүүний мэдээлэл</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-6">
             <div>
@@ -84,7 +75,7 @@ export const FinallyButton = ({
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Baishingiin tsewerlegeeni tulbur
+                    Cleaning Fee price
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {value.cleaningFee}
@@ -97,7 +88,7 @@ export const FinallyButton = ({
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Baishingiin vne
+                    Tvreesiin vne
                   </p>
                   <p className="text-sm text-muted-foreground">{value.price}</p>
                 </div>
@@ -108,19 +99,44 @@ export const FinallyButton = ({
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Ornii too bolon ugaalgiin uruuniitoo
+                    bedrooms and bathrooms
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Ugaalgiiin uruuniii too {value.totalBathrooms}
+                    bathrooms {value.totalBathrooms}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Untalgiin uruuniii too {value.totalBedrooms}
+                    bedrooms {value.totalBedrooms}
                   </p>
                 </div>
               </div>
             </div>
+            <div>
+              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
+                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium leading-none">Guests</p>
+                  <p className="text-sm text-muted-foreground">
+                    Guests {value.guests}
+                  </p>
+                </div>
+              </div>
+            </div>{" "}
+            <div>
+              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
+                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium leading-none">Category</p>
+                  <div className="flex flex-row">
+                    <p className="text-sm,text-muted-foreground">
+                      {value.categoryname}
+                    </p>
+                    <div className="h-12 w-12">{icons?.icon}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col">
-              <p className="text-center"></p>{" "}
+              <p className="text-center"></p>
               <div className="flex justify-center">
                 <Button className="w-[200px]" onClick={createProperty}>
                   Submit
@@ -138,13 +154,6 @@ export const FinallyButton = ({
         >
           Back
         </button>
-        {/* <Button
-          onClick={handleNext}
-          aria-label="Proceed to the next step"
-          className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
-        >
-          Submit
-        </Button> */}
       </div>
     </div>
   );
