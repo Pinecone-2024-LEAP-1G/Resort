@@ -34,7 +34,6 @@ const RootLayout = ({
               </div>
             </main>
           </body>
-          {/* <Toaster /> */}
         </html>
       </NuqsAdapter>
     </SessionProvider>
