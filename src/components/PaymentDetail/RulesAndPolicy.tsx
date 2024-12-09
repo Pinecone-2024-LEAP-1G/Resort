@@ -14,11 +14,10 @@ import { Users } from "lucide-react";
 import { PawPrint } from "lucide-react";
 import { Cigarette } from "lucide-react";
 import Link from "next/link";
-import ToastWithAction from "./ToastWithAction";
 
 export function RulesAndPolicy() {
   return (
-    <div className="w-[556px] max-w-full border-t py-8 text-xs">
+    <div className="w-[556px] max-w-full py-8 text-xs">
       <div className="py-6">
         <p>
           By selecting the button below, I agree to the{" "}
@@ -165,7 +164,6 @@ export function RulesAndPolicy() {
           <a> if responsible for damage.</a>
         </p>
       </div>
-      {/* <ToastWithAction /> */}
     </div>
   );
 }
