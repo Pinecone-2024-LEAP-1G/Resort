@@ -3,11 +3,9 @@ import {
   AvailableListModel,
   PropertyModel,
   ReservationModel,
-  UserModel,
 } from "@/lib/models";
 import { HostModel } from "@/lib/models/host.model";
 import { nodeMailer } from "@/util/nodemailer";
-
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -22,6 +20,7 @@ export const POST = async (request: NextRequest) => {
     infants,
     totalPrice,
   } = await request.json();
+
   try {
     const checkindate = new Date(checkIn);
     const checkoutdate = new Date(checkOut);
@@ -84,6 +83,7 @@ export const POST = async (request: NextRequest) => {
       to: hostEmail,
       text: `startDate=${checkIn}, endDate${checkOut},gusts=${guests}`,
     });
+
     return Response.json({
       reservation: reservation,
       availableList: availableList,

@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
-
 import { Progress } from "@/components/ui/progress";
 
 export type Property = {
@@ -41,11 +40,10 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const child = searchParams.get("child");
   const pets = searchParams.get("pets");
   const infants = searchParams.get("infants");
-  const totalPrice = searchParams.get("totalPrice");
+  const totalPrice = searchParams.getAll("totalPrice");
   let allGuests = 0;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = React.useState(13);
 
   if (adult && !isNaN(Number(adult))) {
     allGuests += Number(adult);
@@ -76,14 +74,18 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
           adult: !isNaN(Number(adult)),
           children: !isNaN(Number(child)),
           infants: !isNaN(Number(infants)),
-          totalPrice: totalPrice,
+          totalPrice: totalPrice[1],
         },
       );
       setIsLoading(false);
-      const userId = response.data.reservation.userId;
-      router.push(`/orderDetail/${userId}`);
+      console.log(response);
+
+      // const userId = response.data.reservation.userId;
+      // router.push(`/orderDetail/${userId}`);
       toast.success("zahialga amjilttai");
     } catch (error) {
+      console.log(error);
+
       toast.error("error");
     }
   };
@@ -102,7 +104,12 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   };
 
   if (!isLoading) {
-    return <ProgressDemo />;
+    return (
+      <div className="">
+        {/* <h1 className="">Түр хүлээнэ үү!</h1> */}
+        <ProgressDemo />
+      </div>
+    );
   }
 
   return (
@@ -188,5 +195,5 @@ export function ProgressDemo() {
     return () => clearTimeout(timer);
   }, []);
 
-  return <Progress value={progress} className="w-[60%]" />;
+  return <Progress value={progress} className="mx-auto w-[60%]" />;
 }

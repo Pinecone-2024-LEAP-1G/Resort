@@ -78,7 +78,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
   const isCurrentYear2024 = today.getFullYear() === 2024;
   const baseDate = isCurrentYear2024 ? today : new Date(2024, 0, 1);
   const nearestValidFromDate = findNearestValidDate(baseDate);
-  const nearestValidToDate = findNearestValidToDate(nearestValidFromDate, 3);
+  const nearestValidToDate = findNearestValidToDate(nearestValidFromDate, 2);
 
   const [{ from, to }, setDate] = useQueryStates(
     {
