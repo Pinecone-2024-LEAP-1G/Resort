@@ -80,6 +80,7 @@ const BecomeHost = () => {
         value={value}
       ></Step>
     );
+
   return <div></div>;
 };
 

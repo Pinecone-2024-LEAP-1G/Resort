@@ -10,6 +10,8 @@ import axios from "axios";
 import { AvailableList } from "@/lib/models";
 import { useRouter } from "next/navigation";
 import { PropertyType } from "../Review";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 interface Props {
   property?: PropertyType;
@@ -19,6 +21,7 @@ interface Props {
 export const ReverseCart = ({ property, propertyId, text }: Props) => {
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
+  const { data: session } = useSession();
   useEffect(() => {
     const getReservation = async () => {
       const response = await axios.get(
@@ -103,9 +106,14 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
   const totalPrice = priceOfDates + 20000 + 20000;
 
   const navigateToNextPage = () => {
-    router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
-    );
+    if (!session) toast.message("Захиалга хийхийн тулд нэвтэрнүү");
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
+    if (session)
+      router.push(
+        `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
+      );
   };
 
   return (
