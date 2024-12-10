@@ -69,7 +69,8 @@ export const HeaderSearch = ({
                 return (
                   <PropertyLocationSearch
                     onClick={() => {
-                      setAddresssearch(property.address), onMouseLeave();
+                      setAddresssearch(property.address);
+                      onMouseLeave();
                     }}
                     key={property?._id}
                     address={property?.address}

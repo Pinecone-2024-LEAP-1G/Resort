@@ -15,12 +15,7 @@ import { PropertyHeader } from "./PropertyHeader";
 import Image from "next/image";
 import { PropertyClick } from "@/app/become-host/page";
 
-export const Photos = ({
-  handleBack,
-  handleNext,
-  value,
-  handleChange,
-}: PropertyClick) => {
+export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 

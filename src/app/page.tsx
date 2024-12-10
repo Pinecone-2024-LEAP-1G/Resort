@@ -36,7 +36,7 @@ const Home = () => {
         {properties?.map((property, index) => {
           if (properties[0].length === 0)
             return (
-              <div className="p-10 text-center">
+              <div key={index} className="p-10 text-center">
                 Tanii haisan utga oldsongvi
               </div>
             );

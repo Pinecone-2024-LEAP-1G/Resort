@@ -46,10 +46,12 @@ const Header = () => {
           addresssearch={addresssearch}
           hover={hover === 1 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => {
-            setHover(1), setShow(true);
+            setHover(1);
+            setShow(true);
           }}
           onMouseLeave={() => {
-            setHover(0), setShow(false);
+            setHover(0);
+            setShow(false);
           }}
         />
         <DatePickerWithRange
@@ -84,8 +86,8 @@ const Header = () => {
           onMouseEnter={() => setHover(3)}
           onMouseLeave={() => setHover(0)}
           submit={() => {
-            setGuests(adultNumber + childrenNumber + petNumber + infantsNumber),
-              setGuestsValue(true);
+            setGuests(adultNumber + childrenNumber + petNumber + infantsNumber);
+            setGuestsValue(true);
           }}
         />
       </div>

@@ -9,7 +9,6 @@ import categoryIcon from "@/util/findCategoryIcon";
 export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
   const router = useRouter();
   const icons = categoryIcon({ value });
-  console.log(value.categoryname, value.address);
   const createProperty = async () => {
     await axios
       .post(`http://localhost:3000/api/properties`, {
@@ -26,7 +25,6 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
         cleaningFee: value.cleaningFee,
       })
       .then(function (response) {
-        console.log(response);
         if (response.data.message === "success")
           toast.success("Tanii bvrtgel amjilttai vvslee.");
         setTimeout(() => {
