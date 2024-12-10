@@ -72,11 +72,11 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             </div>
             <div className="mt-24 h-[80px]"></div>
           </div>
-          <div className="flex-1 rounded-lg">
+          <div className="sticky top-10 mr-auto flex flex-col items-center justify-start gap-8 p-5">
             <ReverseCart
               property={property}
               propertyId={propertyId}
-              text="reserve"
+              text="Захиалга үүсгэх"
             />
           </div>
         </div>

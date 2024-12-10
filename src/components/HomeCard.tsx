@@ -23,6 +23,7 @@ type HomeCardProps = {
 export default function HomeCard(props: HomeCardProps) {
   const { propertyId, propertyPictures, property } = props;
   const router = useRouter();
+  const price = property?.price ?? Infinity;
 
   return (
     <div>
@@ -56,7 +57,7 @@ export default function HomeCard(props: HomeCardProps) {
       <p></p>
       <div>
         <span className="mr-[2px] text-[15px] font-bold">
-          {property?.price}
+          {new Intl.NumberFormat().format(price)}
         </span>
         <span>₮</span>
       </div>

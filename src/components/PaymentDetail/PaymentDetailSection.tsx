@@ -2,7 +2,7 @@
 
 import { ChevronLeft, Gem } from "lucide-react";
 import { Alert, AlertTitle } from "../ui/alert";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useSearchParams } from "next/navigation";
@@ -10,7 +10,9 @@ import { RulesAndPolicy } from "./RulesAndPolicy";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
+import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
+import { motion } from "framer-motion";
 
 export type Property = {
   _id: string;
@@ -31,7 +33,6 @@ interface Props {
 }
 
 export const PaymentDetailSection = ({ propertyId }: Props) => {
-  const [, setProperty] = useState<Property>();
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
@@ -39,8 +40,10 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const child = searchParams.get("child");
   const pets = searchParams.get("pets");
   const infants = searchParams.get("infants");
-  const totalPrice = searchParams.get("totalPrice");
+  const totalPrice = searchParams.getAll("totalPrice");
   let allGuests = 0;
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   if (adult && !isNaN(Number(adult))) {
     allGuests += Number(adult);
@@ -55,38 +58,34 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     allGuests += Number(pets);
   }
 
-  useEffect(() => {
-    const getProperty = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:3000/api/properties/${propertyId}`,
-        );
-        setProperty(data?.property);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProperty();
-  }, []);
-
   const SubmitReservation = async () => {
-    await axios
-      .post("http://localhost:3000/api/reservations", {
-        checkIn: from,
-        checkOut: to,
-        userId: "6747c5db0314e681044f54d0",
-        propertyId: propertyId,
-        adult: !isNaN(Number(adult)),
-        children: !isNaN(Number(child)),
-        infants: !isNaN(Number(infants)),
-        totalPrice: totalPrice,
-      })
-      .then(function () {
-        toast.success("zahialga amjilttai");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (allGuests === 0) {
+      return toast.error("Хүний тоог бөглөнө үү!");
+    }
+    setIsLoading(false);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/reservations",
+        {
+          checkIn: from,
+          checkOut: to,
+          userId: "6747c5db0314e681044f54d0",
+          propertyId: propertyId,
+          adult: !isNaN(Number(adult)),
+          children: !isNaN(Number(child)),
+          infants: !isNaN(Number(infants)),
+          totalPrice: totalPrice[1],
+        },
+      );
+      setIsLoading(false);
+      const userId = response.data.reservation.userId;
+      router.push(`/orderDetail/${userId}`);
+      toast.success("zahialga amjilttai");
+    } catch (error) {
+      console.log(error);
+
+      toast.error("error");
+    }
   };
 
   const ToastWithAction = () => {
@@ -101,6 +100,14 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       </Button>
     );
   };
+
+  if (!isLoading) {
+    return (
+      <div className="flex h-[100vh] w-[100vw] items-center justify-center">
+        ...isLoading
+      </div>
+    );
+  }
 
   return (
     <div className="mx-40 grid w-full grid-cols-2 gap-4">

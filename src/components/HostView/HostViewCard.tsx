@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 
-const HostViewCard = ({ hostId }: { hostId?: string | undefined }) => {
+type HostType = {
+  hostId?: string;
+};
+
+const HostViewCard = ({ hostId }: HostType) => {
   return (
     <Link href={`/hostView/${hostId}`}>
       <div className="flex h-[230px] w-[320px] rounded-2xl border-2 shadow-2xl">
         <div className="mx-auto my-auto">
           <CgProfile className="h-[70px] w-[70px]" />
-          <div className="ml-[5px] text-[18px] font-bold">Болдоо</div>
+          <div className="ml-[5px] text-[18px] font-bold"></div>
           <div className="ml-[15px] text-[16px]">Host</div>
         </div>
         <div className="mx-auto mt-[15px]">

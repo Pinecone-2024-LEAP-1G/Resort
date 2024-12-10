@@ -12,7 +12,7 @@ const transporter = createTransport({
 });
 
 type MailType = {
-  to: string;
+  to: string | undefined;
   text: string;
 };
 
@@ -22,6 +22,6 @@ export const nodeMailer = async ({ to, text }: MailType) => {
     to: to,
     subject: "Хөдөө гарья вэб сайт",
     text: text,
-    html: "<b>Hello world?</b>",
+    html: `<div style{}></div>`,
   });
 };
