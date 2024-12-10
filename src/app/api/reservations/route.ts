@@ -1,4 +1,4 @@
-import { PropertyModel, ReservationModel } from "lib/models";
+import { PropertyModel, ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
