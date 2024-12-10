@@ -20,7 +20,7 @@ export const Categories = () => {
       setCategories(response.data);
     };
     getCategories();
-  }, [categories]);
+  }, []);
 
   return (
     <div className="flex items-center">

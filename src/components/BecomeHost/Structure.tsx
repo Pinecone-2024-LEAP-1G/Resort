@@ -18,14 +18,14 @@ export const Structure = ({
         const response = await axios.get(
           "http://localhost:3000/api/categories",
         );
-        Response.json({ categories });
+        // Response.json({ categories });
         setCategories(response.data);
       } catch (error) {
-        Response.json({ error: error });
+        // Response.json({ error: error });
       }
     };
     getCategories();
-  }, [categories]);
+  }, []);
   return (
     <div className="flex min-h-screen flex-col">
       <PropertyHeader />

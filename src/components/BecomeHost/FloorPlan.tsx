@@ -3,11 +3,7 @@ import { Button } from "../ui/button";
 import { Plus, Minus } from "lucide-react";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
+import { PriceFloor } from "./FloorPlanHover";
 
 export const FloorPlan = ({
   handleBack,
@@ -145,6 +141,8 @@ export const FloorPlan = ({
           <p className="text-xl font-normal">Cleaning Fee</p>
           <div className="flex items-center gap-3">
             <input
+              min={5}
+              type="number"
               className="bg-gray w-[150px] rounded-lg border p-1"
               placeholder="   Cleaning Fee"
               onChange={(e) => {
@@ -168,6 +166,8 @@ export const FloorPlan = ({
 
           <div className="flex items-center gap-3">
             <input
+              min={5}
+              type="number"
               className="bg-gray w-[150px] rounded-lg border p-1"
               placeholder="   Guest pricing"
               onChange={(e) => {
@@ -186,22 +186,7 @@ export const FloorPlan = ({
             </div>
           </div>
         </div>
-        <HoverCard>
-          <HoverCardTrigger asChild>
-            <Button className="text-sm text-gray-500" variant="link">
-              ?Таны тооцоолох орлого
-            </Button>
-          </HoverCardTrigger>
-          <HoverCardContent className="w-80">
-            <div className="flex justify-between space-x-4">
-              <p className="text-sm">
-                Таны орлогоос 20% үйлчилгээний хураамж хасагдаж тооцогдох
-                боломжтой. Хэрэв үйлчилгээний хураамж авах бол таньд урьдчилан
-                мэдэгдэж мессэж илгээх болно.
-              </p>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
+        <PriceFloor />
       </div>
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button

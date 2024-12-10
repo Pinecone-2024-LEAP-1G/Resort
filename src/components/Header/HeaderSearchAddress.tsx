@@ -48,16 +48,14 @@ export const HeaderSearch = ({
   return (
     <div>
       <div
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        onFocus={onMouseEnter}
         className={`flex w-[234px] flex-col items-center justify-center rounded-full px-6 py-3 ${hover}`}
       >
         Where
         <input
           value={addresssearch || ""}
           onChange={(e) => setAddresssearch(e.target.value)}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+          onFocus={onMouseEnter}
           className={`flex flex-col rounded-full text-black ${hover}`}
           placeholder="               Search "
         />
@@ -70,7 +68,9 @@ export const HeaderSearch = ({
               {searchproperties?.slice(0, 6).map((property) => {
                 return (
                   <PropertyLocationSearch
-                    onClick={() => setAddresssearch(property.address)}
+                    onClick={() => {
+                      setAddresssearch(property.address), onMouseLeave();
+                    }}
                     key={property?._id}
                     address={property?.address}
                     propertyPicture={property?.propertyPictures[0]}
