@@ -3,22 +3,6 @@ import { Button } from "../ui/button";
 import { PropertyClick } from "@/app/become-host/page";
 
 export const AboutYourPlace = ({ handleBack, handleNext }: PropertyClick) => {
-  // const handleNext = () => {
-  //   setStep("next");
-  // };
-
-  // const handleBack = () => {
-  //   setStep("back");
-  // };
-
-  // if (step === "back") {
-  //   return <Overview />;
-  // }
-
-  // if (step === "next") {
-  //   return <Address />;
-  // }
-
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
