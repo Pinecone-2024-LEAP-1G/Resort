@@ -103,11 +103,9 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
 
   if (!isLoading) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="h-20 w-20 rounded-lg bg-yellow-400"
-      ></motion.div>
+      <div className="flex h-[100vh] w-[100vw] items-center justify-center">
+        ...isLoading
+      </div>
     );
   }
 
