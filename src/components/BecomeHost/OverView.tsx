@@ -2,6 +2,9 @@ import { Button } from "../ui/button";
 import { PropertyHeader } from "./PropertyHeader";
 import Image from "next/image";
 import { PropertyClick } from "@/app/become-host/page";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Step {
   id: number;
@@ -11,6 +14,8 @@ interface Step {
 }
 
 export const Overview = ({ handleNext }: PropertyClick) => {
+  const router = useRouter();
+  const { data: session } = useSession();
   const steps: Step[] = [
     {
       id: 1,
@@ -38,6 +43,16 @@ export const Overview = ({ handleNext }: PropertyClick) => {
     },
   ];
 
+  const userCheck = () => {
+    if (!session) {
+      toast.message("Та бүртгүүлэхийн тулд мэйлээрээ нэвтэрч орно уу");
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
+    } else {
+      handleNext();
+    }
+  };
 
   return (
     <div className="flex flex-col">
@@ -73,7 +88,7 @@ export const Overview = ({ handleNext }: PropertyClick) => {
       <div className="mx-6 mt-12 flex justify-end border-t pt-6">
         <Button
           className="rounded-lg bg-pink-600 px-6 py-3 text-lg font-semibold text-white hover:bg-pink-500"
-          onClick={handleNext}
+          onClick={userCheck}
         >
           Get started
         </Button>
