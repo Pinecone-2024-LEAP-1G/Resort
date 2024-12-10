@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
-import { Progress } from "@/components/ui/progress";
+import { motion } from "framer-motion";
 
 export type Property = {
   _id: string;
@@ -78,10 +78,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         },
       );
       setIsLoading(false);
-      console.log(response);
-
-      // const userId = response.data.reservation.userId;
-      // router.push(`/orderDetail/${userId}`);
+      const userId = response.data.reservation.userId;
+      router.push(`/orderDetail/${userId}`);
       toast.success("zahialga amjilttai");
     } catch (error) {
       console.log(error);
@@ -105,10 +103,11 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
 
   if (!isLoading) {
     return (
-      <div className="">
-        {/* <h1 className="">Түр хүлээнэ үү!</h1> */}
-        <ProgressDemo />
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="h-20 w-20 rounded-lg bg-yellow-400"
+      ></motion.div>
     );
   }
 
@@ -187,13 +186,3 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     </div>
   );
 };
-export function ProgressDemo() {
-  const [progress, setProgress] = React.useState(13);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(95), 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  return <Progress value={progress} className="mx-auto w-[60%]" />;
-}

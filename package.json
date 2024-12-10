@@ -38,6 +38,7 @@
     "embla-carousel-autoplay": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
     "format": "^0.2.2",
+    "framer-motion": "^11.13.3",
     "i": "^0.3.7",
     "lucide-react": "^0.460.0",
     "moment": "^2.30.1",

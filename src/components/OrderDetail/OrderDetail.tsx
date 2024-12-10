@@ -59,7 +59,7 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
   }, [userId]);
 
   return (
-    <div className="mx-auto w-[800px]">
+    <div className="mx-auto w-[1074px]">
       <h1 className="h-[72px] py-4 text-2xl font-bold">Таны захиалга</h1>
       {reservations?.map((reservation) => (
         <OrderProps
