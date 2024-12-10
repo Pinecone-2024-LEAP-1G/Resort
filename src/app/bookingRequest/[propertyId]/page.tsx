@@ -1,6 +1,4 @@
-import GetProperty from "@/components/PaymentDetail/GetProperty";
 import { PaymentDetailSection } from "@/components/PaymentDetail/PaymentDetailSection";
-import { ReverseCart } from "@/components/PropertyDetail/ReverseCart";
 
 const BookingRequest = async ({
   params,
