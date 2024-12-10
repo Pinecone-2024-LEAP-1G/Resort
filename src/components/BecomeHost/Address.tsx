@@ -1,9 +1,6 @@
 import { PropertyHeader } from "./PropertyHeader";
-import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { AboutYourPlace } from "./AboutYourPlace";
-import { Structure } from "./Structure";
 import { Provinces } from "../Provinces";
 import {
   Select,
@@ -13,42 +10,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-export const Address = () => {
-  const [step, setStep] = useState<string>("about");
-  const [streetAddress, setStreetAddress] = useState<string>("");
-  const [town, setTown] = useState<string>("");
-  const [postalCode, setPostalCode] = useState<string>("");
-  const [region, setRegion] = useState<string>("");
-
-  const handleNext = () => {
-    if (streetAddress && town && postalCode && region) {
-      setStep("next");
-    } else {
-      alert("Please fill in all the required fields.");
-    }
-  };
-
-  const handleBack = () => {
-    setStep("back");
-  };
-
-  if (step === "next") {
-    return <Structure />;
-  }
-
-  if (step === "back") {
-    return <AboutYourPlace />;
-  }
-
+import { PropertyClick } from "@/app/become-host/page";
+export const Address = ({
+  handleBack,
+  handleNext,
+  value,
+  handleChange,
+}: PropertyClick) => {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div className="mx-auto my-8 flex w-[630px] flex-col gap-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-[32px] font-semibold">your place located?</h1>
+          <h1 className="text-[32px] font-semibold">
+            Where is your place located?
+          </h1>
           <p className="text-lg text-[#6a6a6a]">
-            Your address is only shared with guests after they’ve made a
+            Your address is only shared with guests after they have made a
             reservation.
           </p>
         </div>
@@ -57,13 +35,18 @@ export const Address = () => {
             <label className="block text-sm font-medium text-gray-700">
               Select your province
             </label>
-            <Select onValueChange={setRegion}>
+            <Select
+              value={value.address}
+              onValueChange={(province) =>
+                handleChange({ target: { name: "address", value: province } })
+              }
+            >
               <SelectTrigger className="w-[630px]">
                 <SelectValue placeholder="Choose a province" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {Provinces.map((province) => (
+                  {Provinces?.map((province) => (
                     <SelectItem value={province.name} key={province.name}>
                       {province.name}
                     </SelectItem>
@@ -78,44 +61,17 @@ export const Address = () => {
                 htmlFor="streetAddress"
                 className="block text-sm font-medium text-gray-700"
               >
-                Street Address
+                Description
               </label>
               <Input
                 id="streetAddress"
-                value={streetAddress}
-                onChange={(e) => setStreetAddress(e.target.value)}
+                onChange={(value) =>
+                  handleChange({
+                    target: { name: "description", value: value.target.value },
+                  })
+                }
                 type="text"
                 placeholder="Enter your street address"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="town"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City/Town/Village
-              </label>
-              <Input
-                id="town"
-                value={town}
-                onChange={(e) => setTown(e.target.value)}
-                type="text"
-                placeholder="Enter your city or town"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="postalCode"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Postal Code
-              </label>
-              <Input
-                id="postalCode"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-                type="text"
-                placeholder="Enter your postal code"
               />
             </div>
           </div>
@@ -130,6 +86,8 @@ export const Address = () => {
           Back
         </button>
         <Button
+          disabled={!value.address || !value.description}
+          aria-disabled={!value.address || !value.description}
           onClick={handleNext}
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"

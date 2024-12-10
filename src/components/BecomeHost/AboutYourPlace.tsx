@@ -1,28 +1,8 @@
-import { Overview } from "./OverView";
 import { PropertyHeader } from "./PropertyHeader";
 import { Button } from "../ui/button";
-import { useState } from "react";
-import { Address } from "./Address";
+import { PropertyClick } from "@/app/become-host/page";
 
-export const AboutYourPlace = () => {
-  const [step, setStep] = useState<string>("about");
-
-  const handleNext = () => {
-    setStep("next");
-  };
-
-  const handleBack = () => {
-    setStep("back");
-  };
-
-  if (step === "back") {
-    return <Overview />;
-  }
-
-  if (step === "next") {
-    return <Address />;
-  }
-
+export const AboutYourPlace = ({ handleBack, handleNext }: PropertyClick) => {
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
@@ -33,9 +13,9 @@ export const AboutYourPlace = () => {
             Tell us about your place
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            In this step, ask you which type of property you have and if guests
-            will book the entire place or just a room. Then let us know the
-            location and how many guests can stay.
+            In this step, we will ask you which type of property you have and if
+            guests will book the entire place or just a room. Then let us know
+            the location and how many guests can stay.
           </p>
         </div>
         <div className="flex-shrink-0">
@@ -48,7 +28,6 @@ export const AboutYourPlace = () => {
           </video>
         </div>
       </div>
-
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}

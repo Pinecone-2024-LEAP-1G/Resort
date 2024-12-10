@@ -30,7 +30,7 @@ interface Props {
 }
 
 export const PaymentDetailSection = ({ propertyId }: Props) => {
-  const [property, setProperty] = useState<Property>();
+  const [, setProperty] = useState<Property>();
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
@@ -80,9 +80,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         infants: !isNaN(Number(infants)),
         totalPrice: totalPrice,
       })
-      .then(function (response) {
+      .then(function () {
         toast.success("zahialga amjilttai");
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

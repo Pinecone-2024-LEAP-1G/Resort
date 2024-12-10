@@ -4,10 +4,11 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "./Category";
-type CategoriesState = Category[];
+export type CategoriesState = Category[];
 type Category = {
   name: string;
   icon?: JSX.Element;
+  _id: string;
 };
 
 export const Categories = () => {
@@ -26,7 +27,6 @@ export const Categories = () => {
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">
-          {" "}
           {categories.map((data, index) => {
             return (
               <Category

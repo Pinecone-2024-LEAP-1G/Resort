@@ -19,9 +19,10 @@ const Header = () => {
   const [, setGuestsValue] = useState(true);
   const [guests, setGuests] = useState<number | string>();
   const [date, setDate] = React.useState<{ from: Date; to: Date | undefined }>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
+    from: new Date(new Date()),
+    to: addDays(new Date(), 20),
   });
+  const [show, setShow] = useState(false);
 
   const router = useRouter();
   const searchProperty = () => {
@@ -34,17 +35,24 @@ const Header = () => {
     <div className="flex items-center justify-between px-2 py-8">
       <div className="flex gap-2" onClick={() => router.push("/")}>
         <DiCodeigniter className="h-10 w-10" />
-        <p className="w-[30px] font-bold">Хөдөө гарья</p>
+        <p className="w-[30px] font-bold text-green-500">Хөдөө гарья</p>
       </div>
       <div
         className={`flex rounded-full border-2 ${hover === 0 ? "bg-gray-100" : "bg-gray-100"}`}
       >
         <HeaderSearch
+          show={show}
+          setAddresssearch={setAddresssearch}
           addresssearch={addresssearch}
           hover={hover === 1 ? "bg-white" : "bg-gray-100 "}
-          onMouseEnter={() => setHover(1)}
-          onMouseLeave={() => setHover(0)}
-          addresssearchClick={(e) => setAddresssearch(e.target.value)}
+          onMouseEnter={() => {
+            setHover(1);
+            setShow(true);
+          }}
+          onMouseLeave={() => {
+            setHover(0);
+            setShow(false);
+          }}
         />
         <DatePickerWithRange
           hover={hover === 2 ? "bg-white" : "bg-gray-100 "}
@@ -78,8 +86,8 @@ const Header = () => {
           onMouseEnter={() => setHover(3)}
           onMouseLeave={() => setHover(0)}
           submit={() => {
-            setGuests(adultNumber + childrenNumber + petNumber + infantsNumber),
-              setGuestsValue(true);
+            setGuests(adultNumber + childrenNumber + petNumber + infantsNumber);
+            setGuestsValue(true);
           }}
         />
       </div>

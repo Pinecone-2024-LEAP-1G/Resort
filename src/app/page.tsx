@@ -4,24 +4,20 @@ import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
-import { parseAsIsoDate, parseAsString, useQueryStates } from "nuqs";
+import { useSearchParams } from "next/navigation";
 
 const Home = () => {
-  const [queryParams] = useQueryStates({
-    from: parseAsIsoDate,
-    to: parseAsIsoDate,
-    guests: parseAsString,
-    address: parseAsString,
-  });
-  const { from, to, guests, address } = queryParams;
-
-  const [properties, setProperties] = useState<Property[]>([]);
-
+  const searchParams = useSearchParams();
+  const address = searchParams.get("address");
+  const from = searchParams.get("from");
+  const to = searchParams.get("to");
+  const guests = searchParams.get("guests");
+  const [properties, setProperties] = useState<Property[] | []>([]);
   useEffect(() => {
     const getProperties = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/properties/getAddress?address=${address}&from=${from}&to=${to}&guests=${guests}`,
+          `http://localhost:3000/api/properties/searchProperties?address=${address}&from=${from}&to=${to}&guests=${guests}`,
         );
 
         setProperties(response?.data.property);
@@ -32,19 +28,27 @@ const Home = () => {
 
     getProperties();
   }, [guests, from, to, address, setProperties]);
+
   return (
     <div>
       <Categories />
-      <div className="grid grow grid-cols-5 gap-8">
-        {properties?.map((property) => {
-          return (
-            <HomeCard
-              propertyId={property?._id}
-              key={property?._id}
-              propertyPictures={[property?.propertyPictures]}
-              property={property}
-            />
-          );
+      <div className="grid grow grid-cols-6 gap-8">
+        {properties?.map((property, index) => {
+          if (properties[0].length === 0)
+            return (
+              <div key={index} className="p-10 text-center">
+                Tanii haisan utga oldsongvi
+              </div>
+            );
+          else
+            return (
+              <HomeCard
+                key={index}
+                property={property}
+                propertyId={property?._id}
+                propertyPictures={[property?.propertyPictures]}
+              />
+            );
         })}
       </div>
     </div>
