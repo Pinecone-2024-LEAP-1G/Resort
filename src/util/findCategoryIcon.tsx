@@ -2,31 +2,30 @@ import {
   Caravan,
   Castle,
   ChefHat,
-  Dog,
-  Dumbbell,
-  FerrisWheel,
   HandPlatter,
   House,
   KeyIcon,
   Lamp,
-  MicVocal,
   Tent,
   TentTree,
-  Theater,
   TowerControl,
   Trees,
-  Tv,
   Warehouse,
   Waves,
 } from "lucide-react";
-import { CasaParticular } from "@/components/icons/PropertyIcons/CasaParticular";
 import { MdApartment, MdCabin, MdOutlineHouse } from "react-icons/md";
 import { PiBarn } from "react-icons/pi";
-import { TbSailboat } from "react-icons/tb";
 import { FaCaravan } from "react-icons/fa";
-import { GiCoffeeCup } from "react-icons/gi";
 import { PropertyValue } from "@/app/become-host/page";
-
+import { RiTentFill } from "react-icons/ri";
+import { GiHouse } from "react-icons/gi";
+import { GiWoodCabin } from "react-icons/gi";
+import { GiForest } from "react-icons/gi";
+import { MdOutlineCastle } from "react-icons/md";
+import { GiFamilyHouse } from "react-icons/gi";
+import { MdHouseSiding } from "react-icons/md";
+import { GiBarracksTent } from "react-icons/gi";
+import { GiBaseDome } from "react-icons/gi";
 export type Props = {
   text: string;
   value: PropertyValue;
@@ -35,8 +34,9 @@ export type Props = {
 export const mockdata = [
   { name: "Өрөө", icon: <Lamp /> },
   { name: "Гэр", icon: <Warehouse /> },
+  { name: "Урц", icon: <RiTentFill /> },
   { name: "Шинэ", icon: <KeyIcon /> },
-  { name: "Тансан зэрэглэлийнх", icon: <HandPlatter /> },
+  { name: "Тансаг зэрэглэлийнх", icon: <HandPlatter /> },
   { name: "Жижигхэн байшин", icon: <Warehouse /> },
   { name: "Кабин", icon: <House /> },
   { name: "A-frames", icon: <Tent /> },
@@ -47,38 +47,43 @@ export const mockdata = [
   { name: "Цамхаг", icon: <TowerControl /> },
   { name: "Майхан", icon: <TentTree /> },
   { name: "Тогоочтой", icon: <ChefHat /> },
-  { name: "Play", icon: <MicVocal /> },
-  { name: "Park", icon: <FerrisWheel /> },
-  { name: "Pet", icon: <Dog /> },
-  { name: "TV", icon: <Tv /> },
-  { name: "Theater", icon: <Theater /> },
-  { name: "Gem", icon: <Dumbbell /> },
   { name: "Байшин", icon: <MdOutlineHouse /> },
   { name: "Орон сууц", icon: <MdApartment /> },
-  { id: "barn", name: "Barn", icon: <PiBarn /> },
-  {
-    name: "Bed & breakfast",
-    icon: <GiCoffeeCup />,
-  },
-  { name: "Boat", icon: <TbSailboat /> },
+  { name: "Модон пин", icon: <PiBarn /> },
   { name: "Кабин", icon: <MdCabin /> },
   { name: "Фургон", icon: <FaCaravan /> },
   {
-    name: "Casa particular",
-    icon: <CasaParticular />,
-  },
-  { name: "Castle", icon: <Castle /> },
-  {
-    name: "Cave",
-    icon: <MdOutlineHouse />,
+    name: "Торхон байшин",
+    icon: <GiBaseDome />,
   },
   {
-    name: "Container",
-    icon: <MdOutlineHouse />,
+    name: "Дүнзэн байшин",
+    icon: <MdHouseSiding />,
   },
   {
-    name: "Cycladic home",
-    icon: <MdOutlineHouse />,
+    name: "Тоосгон байшин",
+    icon: <GiHouse />,
+  },
+  {
+    name: "Модон байшин",
+    icon: <GiWoodCabin />,
+  },
+  {
+    name: "Ой модтой",
+    icon: <GiForest />,
+  },
+
+  {
+    name: "Харш",
+    icon: <MdOutlineCastle />,
+  },
+  {
+    name: "Том байшин",
+    icon: <GiFamilyHouse />,
+  },
+  {
+    name: "Бааз",
+    icon: <GiBarracksTent />,
   },
 ];
 const categoryIcon = (props: Props) => {
