@@ -1,4 +1,7 @@
+import { useState, useRef } from "react";
+import axios from "axios"; // For making HTTP requests
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -9,46 +12,90 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DragPhoto } from "../icons/DragPhoto";
-import { useState, useRef } from "react";
-import { Input } from "../ui/input";
-import { PropertyHeader } from "./PropertyHeader";
 import Image from "next/image";
+import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 
 export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+  const [uploading, setUploading] = useState(false);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
 
-    const file = files[0];
+    const newFiles = Array.from(files);
 
-    setSelectedFile(file);
+    const validFiles = newFiles.filter((file) =>
+      file.type.startsWith("image/"),
+    );
 
-    if (!file.type.startsWith("image/")) {
-      alert("Only image files are allowed");
+    if (validFiles.length + selectedFiles.length > 5) {
+      alert("You can only select up to 5 photos.");
       return;
+    }
+
+    setSelectedFiles((prev) => [...prev, ...validFiles]);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    const files = e.dataTransfer.files;
+    if (!files) return;
+
+    const newFiles = Array.from(files);
+
+    const validFiles = newFiles.filter((file) =>
+      file.type.startsWith("image/"),
+    );
+
+    if (validFiles.length + selectedFiles.length > 5) {
+      alert("You can only select up to 5 photos.");
+      return;
+    }
+
+    setSelectedFiles((prev) => [...prev, ...validFiles]);
+  };
+
+  const handleUploadToCloudinary = async () => {
+    if (selectedFiles.length < 5) {
+      alert("Please select at least 5 photos before uploading.");
+      return;
+    }
+
+    setUploading(true);
+    const uploadedUrls: string[] = [];
+
+    try {
+      for (const file of selectedFiles) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "ml_default");
+
+        const response = await axios.post(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          formData,
+        );
+
+        uploadedUrls.push(response.data.secure_url);
+      }
+
+      setUploadedImageUrls(uploadedUrls);
+      alert("All photos uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      alert("Failed to upload images.");
+    } finally {
+      setUploading(false);
     }
   };
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
-    if (!inputRef || !inputRef.current) return;
-
-    inputRef.current.click();
-  };
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-
-    const files = e.dataTransfer.files;
-
-    if (files.length) {
-      const file = files[0];
-      setSelectedFile(file);
-    }
+    inputRef.current?.click();
   };
 
   return (
@@ -57,72 +104,66 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
       <div className="mx-auto mt-8 flex w-[640px] flex-col gap-12">
         <div className="flex flex-col gap-2">
           <h3 className="text-[32px] font-semibold text-[#222222]">
-            Add some photos of your castle
+            Add some photos of your property
           </h3>
           <p className="h-[48px] w-[588px] text-lg font-normal text-[#6a6a6a]">
-            You will need 5 photos to get started. You can add more or make
-            changes later.
+            You will need at least 5 photos to get started.
           </p>
         </div>
-        <div className="flex h-[417px] w-[640px] flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[#f7f7f7]">
-          <Image
-            alt="Photo"
-            width={182}
-            height={182}
-            src="https://a0.muscache.com/im/pictures/mediaverse/mys-amenities-n8/original/c83b2a87-3be4-43c9-ad47-12dd2aee24c4.jpeg"
-          />
-          {selectedFile && (
-            <Image
-              src={URL.createObjectURL(selectedFile)}
-              alt="Preview"
-              width={120}
-              height={120}
-              objectFit="cover"
-            />
+        <div
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={handleDrop}
+          className="flex h-[417px] w-[640px] flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed bg-[#f7f7f7]"
+        >
+          {selectedFiles.length === 0 && <DragPhoto />}
+          {selectedFiles.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {selectedFiles.map((file, index) => (
+                <Image
+                  key={index}
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${index + 1}`}
+                  width={100}
+                  height={100}
+                  className="rounded-md"
+                />
+              ))}
+            </div>
           )}
-          <DialogTrigger asChild>
-            <Button variant="outline">Add photos</Button>
-          </DialogTrigger>
+          <p className="text-2xl font-semibold">
+            Drag and drop or browse for photos
+          </p>
+          <Button onClick={handleButtonClick} className="h-12 w-[103.5px]">
+            Browse
+          </Button>
+          <Input
+            ref={inputRef}
+            type="file"
+            className="hidden"
+            onChange={handleFileUpload}
+            multiple
+          />
         </div>
+        <DialogTrigger asChild>
+          <Button variant="outline" className="w-full">
+            Review & Upload Photos
+          </Button>
+        </DialogTrigger>
       </div>
       <DialogContent className="sm:max-w-[568px]">
         <DialogHeader className="flex flex-col items-center">
           <DialogTitle>Upload photos</DialogTitle>
           <DialogDescription>
-            {selectedFile
-              ? `Selected file: ${selectedFile.name}`
-              : "No items selected"}
+            {selectedFiles.length} file(s) selected. You need at least 5.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <div
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={handleDrop}
-              className="flex h-[271px] w-[520px] flex-col items-center gap-4 rounded-xl border-2 border-dashed border-gray-300 p-8 text-center"
-            >
-              <DragPhoto />
-              <p className="text-2xl font-semibold">Drag and drop</p>
-              <p className="text-sm">or browse for photos</p>
-              <Button onClick={handleButtonClick} className="h-12 w-[103.5px]">
-                Browse
-              </Button>
-              <Input
-                ref={inputRef}
-                type="file"
-                className="hidden"
-                multiple
-                onChange={handleFileUpload}
-              />
-            </div>
-          </div>
-        </div>
         <DialogFooter className="justify-between">
           <Button
-            disabled={selectedFile === null}
+            disabled={selectedFiles.length < 5 || uploading}
+            onClick={handleUploadToCloudinary}
             className="h-[48px] w-[112px] text-base"
           >
-            Upload
+            {uploading ? "Uploading..." : "Upload"}
           </Button>
         </DialogFooter>
       </DialogContent>
