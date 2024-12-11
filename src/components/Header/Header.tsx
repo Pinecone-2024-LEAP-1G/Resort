@@ -18,6 +18,7 @@ const Header = () => {
   const [petNumber, setPetNumber] = useState(0);
   const [, setGuestsValue] = useState(true);
   const [guests, setGuests] = useState<number | string>();
+
   const [date, setDate] = React.useState<{ from: Date; to: Date | undefined }>({
     from: new Date(new Date()),
     to: addDays(new Date(), 20),
@@ -25,6 +26,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   const router = useRouter();
+
   const searchProperty = () => {
     router.push(
       `/?address=${addresssearch}&from=${date?.from}&to=${date?.to}&guests=${guests}`,
