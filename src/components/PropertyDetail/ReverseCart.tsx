@@ -146,15 +146,10 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       toast.error("Захиалгатай өдөр сонгосон байна.");
       return;
     }
-
-    router.push(
-      `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to.toISOString()}&totalPrice=${price}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
-    );
-    if (!session) toast.message("Захиалга хийхийн тулд нэвтэрнүү");
-    setTimeout(() => {
-      router.push("/");
-    }, 3000);
-    if (session)
+    if (!session) {
+      toast.message("Та захиалга хийхийн тулд мэйлээрээ нэвтэрч орно уу");
+      return;
+    } else
       router.push(
         `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
       );
