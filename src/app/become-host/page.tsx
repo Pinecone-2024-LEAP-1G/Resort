@@ -4,8 +4,8 @@ import { AboutYourPlace } from "@/components/BecomeHost/AboutYourPlace";
 import { Address } from "@/components/BecomeHost/Address";
 import { FinallyButton } from "@/components/BecomeHost/FinallyButton";
 import { FloorPlan } from "@/components/BecomeHost/FloorPlan";
-import { Overview } from "@/components/BecomeHost/OverView";
 import { Structure } from "@/components/BecomeHost/Structure";
+import { Photos } from "@/components/BecomeHost/Photos"; // Import Photos component
 import React, { useState } from "react";
 
 export type PropertyValue = {
@@ -36,12 +36,14 @@ export type PropertyClick = {
   handleChange: (
     e: CustomEvent | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
+  handleAddPhoto?: (photoUrl: string) => void;
 };
+
 const stepper = [
-  Overview,
   AboutYourPlace,
   Address,
   Structure,
+  Photos,
   FloorPlan,
   FinallyButton,
 ];
@@ -62,6 +64,7 @@ const BecomeHost = () => {
   });
 
   const Step = stepper[step];
+
   const handleChange = (
     e: CustomEvent | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -71,6 +74,14 @@ const BecomeHost = () => {
       [name]: value,
     }));
   };
+
+  const handleAddPhoto = (photoUrl: string) => {
+    setValue((prev) => ({
+      ...prev,
+      propertyPictures: [...prev.propertyPictures, photoUrl],
+    }));
+  };
+
   if (step < stepper.length)
     return (
       <Step
@@ -78,6 +89,7 @@ const BecomeHost = () => {
         handleBack={() => setStep((prev) => prev - 1)}
         handleNext={() => setStep((prev) => prev + 1)}
         value={value}
+        handleAddPhoto={handleAddPhoto}
       ></Step>
     );
 
