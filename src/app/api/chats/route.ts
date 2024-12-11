@@ -12,14 +12,12 @@ export const POST = async (request: NextRequest) => {
     if (chat) return Response.json(chat);
 
     const newChat = await chatModel.create({
-      userId,
-      hostId,
+      userId: userId,
+      hostId: hostId,
     });
 
     return Response.json(newChat);
   } catch (error) {
-    console.log(error);
-
     return Response.json({ message: error });
   }
 };

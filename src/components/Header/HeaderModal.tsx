@@ -17,7 +17,6 @@ import Kebab from "../icons/Kebab";
 
 export function HeaderModal() {
   const { data: session } = useSession();
-
   const renderUserProfile = () => {
     if (session) {
       return (

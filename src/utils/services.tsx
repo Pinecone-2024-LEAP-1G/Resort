@@ -1,7 +1,7 @@
 export const baseUrl = "http://localhost:3000/api";
 
-export const postRequest = async (baseUrl, body) => {
-  const response = await fetch(baseUrl, {
+export const postRequest = async (url, body) => {
+  const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,

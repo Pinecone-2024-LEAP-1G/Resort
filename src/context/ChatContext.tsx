@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { baseUrl, getRequest } from "@/utils/services";
+import { useSession } from "next-auth/react";
 
 interface Chat {
   _id: string;
@@ -29,8 +30,8 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isUserChatLoading, setIsUserChatLoading] = useState(false);
   const [userChatsError, setUserChatsError] = useState<string | null>(null);
   const [potentialChats, setPotentialChats] = useState<Chat[]>([]);
-
-  const userId = "674ec1843ec43bcb847236f6";
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
 
   useEffect(() => {
     const getUserChats = async () => {
@@ -66,7 +67,7 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({
         console.log("Response from /users:", response);
 
         const filteredChats = response.users.filter((user: Chat) => {
-          if (userId === user._id) return true;
+          if (userId === user._id) return;
 
           const alreadyInChat = userChats?.some(
             (chat) => chat.userId === user._id || chat.hostId === user._id,

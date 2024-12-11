@@ -11,7 +11,6 @@ import {
 import { Property } from "@/lib/models";
 
 type HomeCardProps = {
-  propertyId?: string;
   price?: object;
   address?: string[];
   distance?: string;
@@ -21,14 +20,13 @@ type HomeCardProps = {
 };
 
 export default function HomeCard(props: HomeCardProps) {
-  const { propertyId, propertyPictures, property } = props;
-  const router = useRouter();
+  const { propertyPictures, property } = props;
   const price = property?.price ?? Infinity;
 
   return (
     <div>
       <Carousel className="w-full">
-        <CarouselContent onClick={() => router.push(`/property/${propertyId}`)}>
+        <CarouselContent>
           {propertyPictures?.map((propertyPicture, index) => {
             return (
               <CarouselItem key={index}>

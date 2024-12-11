@@ -16,7 +16,7 @@ const Page = () => {
         <div>
           {userChats?.map((chat, index) => {
             return (
-              <div key={index} className="flex justify-between">
+              <div key={index} className="">
                 <UserChat chat={chat} />
                 <PotentialChat />
               </div>

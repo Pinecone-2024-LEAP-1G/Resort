@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 export const PotentialChat = () => {
   const { potentialChats } = useContext(ChatContext);
-  console.log("potential", potentialChats);
+  console.log(potentialChats);
 
   return (
     <div>

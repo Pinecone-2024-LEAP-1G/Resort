@@ -15,7 +15,11 @@ export const UserChat = ({ chat }) => {
 
   return (
     <div>
-      <h1>{}</h1>
+      <h1>
+        {userChats.map((user) => {
+          return <div key={user._id}>{user.name}</div>;
+        })}
+      </h1>
       <input placeholder="chat" />
     </div>
   );

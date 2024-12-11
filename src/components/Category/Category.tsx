@@ -1,31 +1,45 @@
-"use client";
-import React from "react";
-import categoryIcon from "@/util/findCategoryIcon";
+// "use client";
+// import React from "react";
+// // import categoryIcon from "@/util/findCategoryIcon";
 
-type Category = {
-  text: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-  hover: string;
-};
+// type Category = {
+//   text: string;
+//   onMouseEnter: () => void;
+//   onMouseLeave: () => void;
+//   hover: string;
+// };
 
-export const Category = ({
-  text,
-  onMouseEnter,
-  onMouseLeave,
-  hover,
-}: Category) => {
-  const icons = categoryIcon({ text });
-  return (
-    <div className="flex flex-col items-center gap-1 p-5">
-      <div className={`${hover}items-center text-gray-600`}>{icons?.icon}</div>
-      <p
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        className={`${hover} text-center text-xs font-medium`}
-      >
-        {text}
-      </p>
-    </div>
-  );
-};
+// export const Category = ({
+//   text,
+//   onMouseEnter,
+//   onMouseLeave,
+//   hover,
+// }: Category) => {
+//   const icons = categoryIcon({
+//     text,
+//     value: {
+//       address: "",
+//       description: "",
+//       guests: 0,
+//       price: 0,
+//       categoryId: "",
+//       propertyPictures: [],
+//       totalBedrooms: 0,
+//       totalBathrooms: 0,
+//       cleaningFee: 0,
+//       categoryname: "",
+//     },
+//   });
+//   return (
+//     <div className="flex flex-col items-center gap-1 p-5">
+//       <div className={`${hover}items-center text-gray-600`}>{icons?.icon}</div>
+//       <p
+//         onMouseEnter={onMouseEnter}
+//         onMouseLeave={onMouseLeave}
+//         className={`${hover} text-center text-xs font-medium`}
+//       >
+//         {text}
+//       </p>
+//     </div>
+//   );
+// };
