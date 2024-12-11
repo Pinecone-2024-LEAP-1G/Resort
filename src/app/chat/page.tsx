@@ -1,4 +1,5 @@
 "use client";
+import { PotentialChat } from "@/components/UserChat/PotentialChat";
 import { UserChat } from "@/components/UserChat/UserChat";
 import { ChatContext } from "@/context/ChatContext";
 import { useContext } from "react";
@@ -6,7 +7,6 @@ import { useContext } from "react";
 const Page = () => {
   const { userChats, isUserChatLoadin, userChatsError } =
     useContext(ChatContext);
-  console.log(userChats, isUserChatLoadin, userChatsError);
 
   return (
     <div>
@@ -16,8 +16,9 @@ const Page = () => {
         <div>
           {userChats?.map((chat, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="flex justify-between">
                 <UserChat chat={chat} />
+                <PotentialChat />
               </div>
             );
           })}

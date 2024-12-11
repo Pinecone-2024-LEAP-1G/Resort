@@ -15,7 +15,7 @@ export const UserChat = ({ chat }) => {
 
   return (
     <div>
-      <h1>{recipientUser[0].name}</h1>
+      <h1>{}</h1>
       <input placeholder="chat" />
     </div>
   );

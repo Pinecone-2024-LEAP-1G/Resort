@@ -19,7 +19,7 @@ export const ChatContext = createContext<ChatContextType>({
   userChats: [],
   isUserChatLoading: false,
   userChatsError: null,
-  potentialChats: [], // Defaults to an empty array
+  potentialChats: [],
 });
 
 export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -65,13 +65,8 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({
         const response = await getRequest(`${baseUrl}/users`);
         console.log("Response from /users:", response);
 
-        if (!Array.isArray(response)) {
-          console.error("Expected an array but got:", response);
-          return;
-        }
-
-        const filteredChats = response.filter((user: Chat) => {
-          if (userId === user._id) return false;
+        const filteredChats = response.users.filter((user: Chat) => {
+          if (userId === user._id) return true;
 
           const alreadyInChat = userChats?.some(
             (chat) => chat.userId === user._id || chat.hostId === user._id,
