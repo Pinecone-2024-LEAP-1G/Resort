@@ -5,9 +5,11 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import categoryIcon from "@/util/findCategoryIcon";
+import { useSession } from "next-auth/react";
 
 export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
   const router = useRouter();
+  const { data: session } = useSession();
   const icons = categoryIcon({ value });
   const createProperty = async () => {
     await axios
@@ -16,8 +18,8 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
         description: value.description,
         guests: value.guests,
         price: value.price,
-        userId: "6743f5e7a24be0fa04784f75",
-        categoryId: "673c502a575c6654675aae7e",
+        userId: session?.user.id,
+        categoryId: value.categoryId,
         propertyPictures: value.propertyPictures,
         totalBedrooms: value.totalBedrooms,
         totalBathrooms: value.totalBathrooms,

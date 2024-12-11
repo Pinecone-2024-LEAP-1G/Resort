@@ -13,13 +13,14 @@ const Home = () => {
   const to = searchParams.get("to");
   const guests = searchParams.get("guests");
   const [properties, setProperties] = useState<Property[] | []>([]);
+  const [filterProperty, setFilterProperty] = useState<Property[] | []>([]);
   useEffect(() => {
     const getProperties = async () => {
       try {
         const response = await axios.get(
           `/api/properties/searchProperties?address=${address}&from=${from}&to=${to}&guests=${guests}`,
         );
-
+        setFilterProperty(response?.data.property);
         setProperties(response?.data.property);
       } catch (error) {
         console.log(error);
@@ -27,14 +28,24 @@ const Home = () => {
     };
 
     getProperties();
-  }, [guests, from, to, address, setProperties]);
+  }, [guests, from, to, address]);
+
+  const changePropertyCategory = (id: string) => {
+    const filterProperties = properties.filter(
+      (property) => property.categoryId === id,
+    );
+    setFilterProperty(filterProperties);
+  };
+  // const allProperties = () => {
+  //   setFilterProperty(properties);
+  // };
 
   return (
     <div>
-      <Categories />
+      <Categories onClick={(id) => changePropertyCategory(id)} />
       <div className="grid grow grid-cols-6 gap-8">
-        {properties?.map((property, index) => {
-          if (properties[0].length === 0)
+        {filterProperty?.map((property, index) => {
+          if (filterProperty[0].length === 0)
             return (
               <div key={index} className="p-10 text-center">
                 Tanii haisan utga oldsongvi

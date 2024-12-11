@@ -10,9 +10,12 @@ type Category = {
   icon?: JSX.Element;
   _id: string;
 };
+type FilterCategory = {
+  onClick: (id: string) => void;
+};
 
-export const Categories = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+export const Categories = ({ onClick }: FilterCategory) => {
+  const [categories, setCategories] = useState<CategoriesState>([]);
   const [hover, setHover] = useState<string | number | null>(null);
 
   useEffect(() => {
@@ -28,14 +31,15 @@ export const Categories = () => {
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">
-          {categories?.map((data, index) => {
+          {categories?.map((category, index) => {
             return (
               <Category
+                onClick={() => onClick(category._id)}
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(null)}
                 hover={hover === index ? "text-gray-800" : "text-gray-500"}
                 key={index}
-                text={data.name}
+                text={category.name}
               />
             );
           })}
