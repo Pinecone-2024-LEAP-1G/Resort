@@ -1,10 +1,12 @@
 "use client";
+
 import HomeCard from "@/components/HomeCard";
 import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
 import { useSearchParams } from "next/navigation";
+import { AvatarUploader } from "@/components/ImageUploader";
 
 const Home = () => {
   const searchParams = useSearchParams();
@@ -29,9 +31,13 @@ const Home = () => {
     getProperties();
   }, [guests, from, to, address, setProperties]);
 
+  async function saveAvatar(url: string) {
+    console.log(url);
+  }
+
   return (
     <div>
-      <Categories />
+      {/* <Categories />
       <div className="grid grow grid-cols-6 gap-8">
         {properties?.map((property, index) => {
           if (properties[0].length === 0)
@@ -50,7 +56,8 @@ const Home = () => {
               />
             );
         })}
-      </div>
+      </div> */}
+      <AvatarUploader onUploadSuccess={saveAvatar} />
     </div>
   );
 };

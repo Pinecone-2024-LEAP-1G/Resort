@@ -10,7 +10,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "res.cloudinary.com",
       },
     ],
   },
