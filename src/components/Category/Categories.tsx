@@ -27,7 +27,7 @@ export const Categories = () => {
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">
-          {categories.map((data, index) => {
+          {categories?.map((data, index) => {
             return (
               <Category
                 onMouseEnter={() => setHover(index)}
