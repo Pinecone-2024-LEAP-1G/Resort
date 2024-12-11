@@ -1,11 +1,13 @@
 import { connectToMongoDB } from "@/lib/db";
 import { UserModel } from "@/lib/models";
+import { uploadImage } from "@/util/fileupload";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
 export const GET = async () => {
   try {
     const users = await UserModel.find();
+    uploadImage();
     return Response.json({ users });
   } catch (error) {
     return Response.json({ message: error });
