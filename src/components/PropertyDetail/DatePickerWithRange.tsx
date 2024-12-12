@@ -10,8 +10,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 interface Props {
   defaultMonth?: Date;
-  selected?: Date | DateRange;
-  onSelect?: SelectRangeEventHandler | Date;
+  selected?: DateRange;
+  onSelect?: SelectRangeEventHandler;
   date?: DateRange | undefined;
   fromDate?: Date;
   disabled?: DateRange[] | Date[];

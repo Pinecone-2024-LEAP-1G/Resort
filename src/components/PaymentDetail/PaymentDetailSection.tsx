@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
-import { motion } from "framer-motion";
 
 export type Property = {
   _id: string;

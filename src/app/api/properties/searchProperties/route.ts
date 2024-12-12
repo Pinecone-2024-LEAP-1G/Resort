@@ -1,4 +1,5 @@
 import { AvailableListModel, PropertyModel } from "@/lib/models";
+import { error } from "console";
 import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -8,7 +9,7 @@ export const GET = async (request: NextRequest) => {
   const to = searchParams.get("to");
   const guests = searchParams.get("guests");
   const guestNumber = Number(guests);
-  if (!from || !to) return new Error("aldaa garlaa");
+  if (!from || !to) return Response.json({ message: error });
 
   try {
     const checkinDate = new Date(from);

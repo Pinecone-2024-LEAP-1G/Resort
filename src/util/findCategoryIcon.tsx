@@ -27,8 +27,8 @@ import { MdHouseSiding } from "react-icons/md";
 import { GiBarracksTent } from "react-icons/gi";
 import { GiBaseDome } from "react-icons/gi";
 export type Props = {
-  text: string;
-  value: PropertyValue;
+  text?: string;
+  value?: PropertyValue;
 };
 
 export const mockdata = [

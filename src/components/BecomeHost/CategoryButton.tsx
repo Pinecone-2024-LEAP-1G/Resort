@@ -13,7 +13,7 @@ export const CategoryButton = ({
   onClick,
   categoryid,
 }: CategoryProps) => {
-  const icons = categoryIcon({ text });
+  const icons = categoryIcon({ text, value });
 
   return (
     <button

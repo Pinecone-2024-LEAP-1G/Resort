@@ -34,9 +34,11 @@ export type PropertyClick = {
   handleNext: () => void;
   value: PropertyValue;
   handleChange: (
-    e: CustomEvent | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    event:
+      | CustomEvent
+      | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
-  handleAddPhoto?: (photoUrl: string) => void;
+  text: string;
 };
 
 const stepper = [
@@ -50,7 +52,7 @@ const stepper = [
 
 const BecomeHost = () => {
   const [step, setStep] = useState(0);
-  const [value, setValue] = useState<PropertyValue>({
+  const [property, setProperty] = useState<PropertyValue>({
     address: "",
     description: "",
     guests: 0,
@@ -66,19 +68,14 @@ const BecomeHost = () => {
   const Step = stepper[step];
 
   const handleChange = (
-    e: CustomEvent | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    event:
+      | CustomEvent
+      | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
-    setValue((prev) => ({
+    const { name, value } = event.target;
+    setProperty((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
-
-  const handleAddPhoto = (photoUrl: string) => {
-    setValue((prev) => ({
-      ...prev,
-      propertyPictures: [...prev.propertyPictures, photoUrl],
     }));
   };
 
@@ -88,8 +85,8 @@ const BecomeHost = () => {
         handleChange={handleChange}
         handleBack={() => setStep((prev) => prev - 1)}
         handleNext={() => setStep((prev) => prev + 1)}
-        value={value}
-        handleAddPhoto={handleAddPhoto}
+        value={property}
+        text={""}
       ></Step>
     );
 
