@@ -83,7 +83,6 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
 
         uploadedUrls.push(response.data.secure_url);
       }
-      console.log(uploadedUrls);
       setUploadedImageUrls(uploadedUrls);
       alert("All photos uploaded successfully!");
     } catch (error) {
@@ -93,7 +92,6 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
       setUploading(false);
     }
   };
-  console.log(uploadedImageUrls);
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
