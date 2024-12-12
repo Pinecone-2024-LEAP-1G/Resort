@@ -6,24 +6,30 @@ import HostLeftCard, { HostModel } from "./HostLeftCard";
 import HostLeftCardSecond from "./HostLeftCardSecond";
 import { HostReviewCard, ReviewType } from "./HostReviewCard";
 import { PropertyCard } from "./PropertyCard";
-import { useSession } from "next-auth/react";
 import axios from "axios";
+import { PropertyType } from "../Review";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const HostMainContent = () => {
-  const [hostData, setHostdata] = useState();
+type HostType = {
+  _id: string;
+  name: string;
+  phoneNumber: string;
+  email: string;
+  propertyId: PropertyType[];
+};
+
+const HostMainContent = ({ hostId }: { hostId: string }) => {
+  const [hostData, setHostdata] = useState<HostType>();
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [reviewCount, setReviewCount] = useState<number>(0);
   const [averageRating, setAverageRating] = useState<number>(0);
-  const { data: session } = useSession();
-  const hostId = session?.user?.id;
+  const router = useRouter();
 
   useEffect(() => {
     const getHostData = async () => {
       try {
-        const response = await axios.get<{ host: HostModel }>(
-          `/api/host/${hostId}`,
-        );
-        console.log(response);
+        const response = await axios.get(`/api/host/${hostId}`);
 
         setHostdata(response.data.host);
 
@@ -51,8 +57,8 @@ const HostMainContent = () => {
   return (
     <div className="ml-auto flex w-[1200px] justify-between">
       <div>
-        <HostLeftCard />
-        <HostLeftCardSecond />
+        <HostLeftCard hostId={hostId} />
+        <HostLeftCardSecond hostData={hostData} />
       </div>
 
       <div className="mt-[100px]">
@@ -70,7 +76,7 @@ const HostMainContent = () => {
           </div>
 
           <div className="mb-[32px] h-[230px] w-[700px] cursor-pointer">
-            <HostReviewCard hostId={hostId} />
+            <HostReviewCard reviews={reviews} />
           </div>
 
           <Button
@@ -82,12 +88,23 @@ const HostMainContent = () => {
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
         <div className="flex justify-between">
-          <p className="text-[30px] font-bold">Болдоо listings</p>
+          <p className="text-[30px] font-bold">{hostData?.name} listings</p>
         </div>
         <div className="mb-[180px] mt-[40px] flex gap-3">
+          {hostData?.propertyId?.map((property) => {
+            const propertyId = property?._id;
+            return (
+              <PropertyCard
+                onclick={() => router.push(`/property/${propertyId}`)}
+                key={property._id}
+                image={property.propertyPictures[0]}
+                address={property.description}
+              />
+            );
+          })}
+          {/* <PropertyCard />
           <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
+          <PropertyCard /> */}
         </div>
       </div>
     </div>

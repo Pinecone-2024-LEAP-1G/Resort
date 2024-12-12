@@ -9,6 +9,7 @@ export type HostType = {
   name: string;
   phoneNumber: number;
   email: string;
+  avatar: string;
 };
 
 const Host = new Schema<HostType>(
@@ -25,6 +26,7 @@ const Host = new Schema<HostType>(
     name: { type: String },
     phoneNumber: { type: Number },
     email: { type: String, required: true },
+    avatar: { type: String },
   },
   { timestamps: true },
 );

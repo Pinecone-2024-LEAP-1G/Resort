@@ -27,6 +27,7 @@ export const POST = async (request: NextRequest) => {
     email,
     cleaningFee,
     userId,
+    phoneNumber,
   } = await request.json();
   const hostExist = await HostModel.findOne({
     email,
@@ -39,7 +40,7 @@ export const POST = async (request: NextRequest) => {
     await HostModel.create({
       name: user?.name,
       email: user?.email,
-      phoneNumber: user?.phoneNumber,
+      phoneNumber: phoneNumber,
       avatar: user?.image,
     });
   }
