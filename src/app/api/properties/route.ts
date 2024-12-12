@@ -7,6 +7,7 @@ connectToMongoDB();
 export const GET = async () => {
   try {
     const properties = await PropertyModel.find();
+
     return Response.json({ properties });
   } catch (error) {
     return Response.json({ message: error });
@@ -50,6 +51,7 @@ export const POST = async (request: NextRequest) => {
       email,
       cleaningFee,
     });
+
     // const { _id } = properties;
 
     // const updateHost = await HostModel.findOneAndUpdate(

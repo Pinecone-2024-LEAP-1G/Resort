@@ -83,7 +83,6 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
 
         uploadedUrls.push(response.data.secure_url);
       }
-
       setUploadedImageUrls(uploadedUrls);
       alert("All photos uploaded successfully!");
     } catch (error) {

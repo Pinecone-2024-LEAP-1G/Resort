@@ -154,7 +154,6 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
         `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
       );
   };
-
   return (
     <div className="ml-auto grid h-[495px] w-[372px] justify-center gap-2 rounded-lg border p-8 shadow-lg">
       <p className="mb-4">Үнэ: {new Intl.NumberFormat().format(totalPrice)}₮</p>
