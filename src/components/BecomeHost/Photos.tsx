@@ -21,6 +21,7 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  console.log(uploadedImageUrls);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;

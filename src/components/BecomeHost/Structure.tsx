@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
-import { CategoriesState } from "../Category/Categories";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
+
+type Category = {
+  name: string;
+  _id: string;
+};
 
 export const Structure = ({
   handleBack,
@@ -11,7 +15,7 @@ export const Structure = ({
   value,
   handleChange,
 }: PropertyClick) => {
-  const [categories, setCategories] = useState<CategoriesState>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
     const getCategories = async () => {
       try {

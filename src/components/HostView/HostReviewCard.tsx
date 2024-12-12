@@ -27,6 +27,7 @@ export type ReviewType = {
 const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
   const [reviewdata, setReviewdata] = useState<ReviewType[]>([]);
   const [hostdata, setHostdata] = useState<HostType>();
+  console.log(reviewdata, hostdata);
 
   const params = useParams();
   const { reviewId } = params;

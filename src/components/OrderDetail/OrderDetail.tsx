@@ -52,6 +52,8 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
         );
         setReservations(response.data.reservation);
       } catch (error) {
+        console.log(error);
+
         toast.error("error");
       }
     };

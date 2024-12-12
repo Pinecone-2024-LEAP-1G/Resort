@@ -4,7 +4,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "./Category";
-export type CategoriesState = Category[];
+
 type Category = {
   name: string;
   icon?: JSX.Element;
@@ -12,8 +12,9 @@ type Category = {
 };
 
 export const Categories = () => {
-  const [categories, setCategories] = useState<CategoriesState>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [hover, setHover] = useState<string | number | null>(null);
+
   useEffect(() => {
     const getCategories = async () => {
       const response = await axios.get("http://localhost:3000/api/categories");
