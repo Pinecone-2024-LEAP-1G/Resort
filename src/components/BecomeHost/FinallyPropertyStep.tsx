@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import categoryIcon from "@/util/findCategoryIcon";
 import { useSession } from "next-auth/react";
 
-export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
+export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
   const router = useRouter();
   const { data: session } = useSession();
   const text = value.categoryname;

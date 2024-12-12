@@ -2,7 +2,7 @@
 
 import { AboutYourPlace } from "@/components/BecomeHost/AboutYourPlace";
 import { Address } from "@/components/BecomeHost/Address";
-import { FinallyButton } from "@/components/BecomeHost/FinallyPropertyStep";
+import { CreateProperty } from "@/components/BecomeHost/FinallyPropertyStep";
 import { FloorPlan } from "@/components/BecomeHost/FloorPlan";
 import { Structure } from "@/components/BecomeHost/Structure";
 import { Photos } from "@/components/BecomeHost/Photos";
@@ -49,7 +49,7 @@ const stepper = [
   Structure,
   Photos,
   FloorPlan,
-  FinallyButton,
+  CreateProperty,
 ];
 
 const BecomeHost = () => {
