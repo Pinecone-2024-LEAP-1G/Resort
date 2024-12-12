@@ -24,9 +24,8 @@ export type PropertyType = {
       rating: number;
       userId: {
         _id: string;
-        lastName: string;
-        firstName: string;
-        avatar: string;
+        image: string;
+        name: string;
         phoneNumber: number;
       };
     },
@@ -39,23 +38,21 @@ interface Props {
 
 const Review = ({ property }: Props) => {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="mt-8 grid grid-cols-2 gap-2">
       {property?.reviewId?.map((review) => (
         <div key={review._id} className="mb-4 justify-start">
           <div className="flex flex-col items-start gap-5">
             <div className="flex items-center gap-4">
               <div
-                className="rounded-3xl border bg-cover"
+                className="rounded-full border bg-cover"
                 style={{
-                  backgroundImage: `url(${review?.userId?.avatar})`,
+                  backgroundImage: `url(${review?.userId?.image})`,
                   width: "70px",
                   height: "70px",
                 }}
               />
               <div className="flex flex-col gap-2">
-                <p className="size-xl font-medium">
-                  {review?.userId?.lastName}
-                </p>
+                <p className="text-xl font-medium">{review?.userId?.name}</p>
                 <div className="flex">
                   {review.rating >= 1 ? <MdOutlineStar /> : <IoMdStarOutline />}
                   {review.rating >= 2 ? <MdOutlineStar /> : <IoMdStarOutline />}
@@ -65,9 +62,7 @@ const Review = ({ property }: Props) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center">
-              {review?.comment}
-            </div>
+            <div className="flex w-[400px] pl-1.5">{review?.comment}</div>
           </div>
         </div>
       ))}
