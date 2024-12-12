@@ -16,7 +16,7 @@ type FilterCategory = {
 };
 
 export const Categories = ({ onClick, allProperties }: FilterCategory) => {
-  const [categories, setCategories] = useState<CategoriesState>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [hover, setHover] = useState<string | number | null>(null);
 
   useEffect(() => {
