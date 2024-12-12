@@ -16,9 +16,7 @@ const GetProperty = ({ propertyId }: Props) => {
   useEffect(() => {
     const getProperty = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:3000/api/properties/${propertyId}`,
-        );
+        const { data } = await axios.get(`/api/properties/${propertyId}`);
         setProperty(data?.property);
       } catch (error) {
         console.log(error);

@@ -63,19 +63,16 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     }
     setIsLoading(false);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/reservations",
-        {
-          checkIn: from,
-          checkOut: to,
-          userId: "6747c5db0314e681044f54d0",
-          propertyId: propertyId,
-          adult: !isNaN(Number(adult)),
-          children: !isNaN(Number(child)),
-          infants: !isNaN(Number(infants)),
-          totalPrice: totalPrice[1],
-        },
-      );
+      const response = await axios.post("/api/reservations", {
+        checkIn: from,
+        checkOut: to,
+        userId: "6747c5db0314e681044f54d0",
+        propertyId: propertyId,
+        adult: !isNaN(Number(adult)),
+        children: !isNaN(Number(child)),
+        infants: !isNaN(Number(infants)),
+        totalPrice: totalPrice[1],
+      });
       setIsLoading(false);
       const userId = response.data.reservation.userId;
       router.push(`/orderDetail/${userId}`);

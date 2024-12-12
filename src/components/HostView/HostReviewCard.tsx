@@ -35,7 +35,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
     const getHost = async () => {
       try {
         const response = await axios.get<{ host: HostType }>(
-          `http://localhost:3000/api/host/${hostId}}`,
+          `/api/host/${hostId}}`,
         );
         setHostdata(response.data.host);
       } catch (error) {
@@ -50,7 +50,7 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
     const getReview = async () => {
       try {
         const response = await axios.get<{ reviews: ReviewType[] }>(
-          `http://localhost:3000/api/reviews/${reviewId}`,
+          `/api/reviews/${reviewId}`,
         );
         setReviewdata(response.data.reviews);
       } catch (error) {

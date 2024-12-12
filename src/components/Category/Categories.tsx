@@ -17,7 +17,7 @@ export const Categories = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const response = await axios.get("http://localhost:3000/api/categories");
+      const response = await axios.get("/api/categories");
       setCategories(response.data);
     };
     getCategories();

@@ -16,7 +16,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
     const getPropertyById = async () => {
       try {
         const response = await axios.get<{ property: PropertyType }>(
-          `http://localhost:3000/api/properties/${propertyId}`,
+          `/api/properties/${propertyId}`,
         );
 
         setProperty(response.data.property);

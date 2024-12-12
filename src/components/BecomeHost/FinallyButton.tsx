@@ -11,7 +11,7 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
   const icons = categoryIcon({ value });
   const createProperty = async () => {
     await axios
-      .post(`http://localhost:3000/api/properties`, {
+      .post(`/api/properties`, {
         address: value.address,
         description: value.description,
         guests: value.guests,

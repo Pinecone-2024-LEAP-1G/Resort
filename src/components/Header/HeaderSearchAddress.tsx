@@ -33,7 +33,7 @@ export const HeaderSearch = ({
 
   useEffect(() => {
     const fetchProperties = async () => {
-      const response = await axios.get("http://localhost:3000/api/properties");
+      const response = await axios.get("/api/properties");
       setProperties(response?.data?.properties);
     };
     fetchProperties();

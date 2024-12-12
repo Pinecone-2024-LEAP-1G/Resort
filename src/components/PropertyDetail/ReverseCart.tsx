@@ -25,7 +25,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
   useEffect(() => {
     const getReservation = async () => {
       const response = await axios.get(
-        `http://localhost:3000/api/availablelists?propertyId=${propertyId}`,
+        `/api/availablelists?propertyId=${propertyId}`,
       );
       setReservation(response.data.AvailableLists);
     };
