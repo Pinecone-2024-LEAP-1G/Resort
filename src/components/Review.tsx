@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "react-day-picker";
 import { IoMdStarOutline } from "react-icons/io";
 import { MdOutlineStar } from "react-icons/md";
 
@@ -38,14 +39,11 @@ interface Props {
 
 const Review = ({ property }: Props) => {
   return (
-    <div>
+    <div className="grid grid-cols-2 gap-2">
       {property?.reviewId?.map((review) => (
-        <div
-          key={review._id}
-          className="mb-4 flex w-[500px] justify-between border-none"
-        >
-          <div className="flex items-center gap-5">
-            <div>
+        <div key={review._id} className="mb-4 justify-start">
+          <div className="flex flex-col items-start gap-5">
+            <div className="flex items-center gap-4">
               <div
                 className="rounded-3xl border bg-cover"
                 style={{
@@ -54,21 +52,22 @@ const Review = ({ property }: Props) => {
                   height: "70px",
                 }}
               />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="size-xl font-medium">{review?.userId?.lastName}</p>
-              <div className="flex">
-                <MdOutlineStar />
-                <MdOutlineStar />
-                <MdOutlineStar />
-                <MdOutlineStar />
-                <IoMdStarOutline />
+              <div className="flex flex-col gap-2">
+                <p className="size-xl font-medium">
+                  {review?.userId?.lastName}
+                </p>
+                <div className="flex">
+                  {review.rating >= 1 ? <MdOutlineStar /> : <IoMdStarOutline />}
+                  {review.rating >= 2 ? <MdOutlineStar /> : <IoMdStarOutline />}
+                  {review.rating >= 3 ? <MdOutlineStar /> : <IoMdStarOutline />}
+                  {review.rating >= 4 ? <MdOutlineStar /> : <IoMdStarOutline />}
+                  {review.rating >= 5 ? <MdOutlineStar /> : <IoMdStarOutline />}
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex w-[250px] items-center justify-center">
-            {review?.comment}
+            <div className="flex items-center justify-center">
+              {review?.comment}
+            </div>
           </div>
         </div>
       ))}
