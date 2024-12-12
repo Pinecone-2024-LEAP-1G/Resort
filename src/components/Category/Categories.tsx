@@ -12,9 +12,10 @@ type Category = {
 };
 type FilterCategory = {
   onClick: (id: string) => void;
+  allProperties: () => void;
 };
 
-export const Categories = ({ onClick }: FilterCategory) => {
+export const Categories = ({ onClick, allProperties }: FilterCategory) => {
   const [categories, setCategories] = useState<CategoriesState>([]);
   const [hover, setHover] = useState<string | number | null>(null);
 
@@ -31,6 +32,12 @@ export const Categories = ({ onClick }: FilterCategory) => {
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">
+          <div
+            className="ml-6 flex items-center justify-center"
+            onClick={allProperties}
+          >
+            All
+          </div>
           {categories?.map((category, index) => {
             return (
               <Category

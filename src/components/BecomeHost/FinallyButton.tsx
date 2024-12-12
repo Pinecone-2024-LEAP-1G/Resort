@@ -23,7 +23,7 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
         propertyPictures: value.propertyPictures,
         totalBedrooms: value.totalBedrooms,
         totalBathrooms: value.totalBathrooms,
-        email: "bvsbvu",
+        email: session?.user.email,
         cleaningFee: value.cleaningFee,
       })
       .then(function (response) {
