@@ -5,26 +5,15 @@ import {
 } from "@/components/ui/popover";
 import { CircleMinus, CirclePlus, Search } from "lucide-react";
 import { PopoverClose } from "@radix-ui/react-popover";
-import { Button } from "../ui/button";
 
 type SearchProps = {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   hover: string;
   onClick: () => void;
-  infantsNumber: number;
-  childrenNumber: number;
-  adultNumber: number;
-  petNumber: number;
-  decreaseAdult: () => void;
-  decreaseChildren: () => void;
-  decreaseInfants: () => void;
-  decreasePet: () => void;
-  plusAdult: () => void;
-  plusChildren: () => void;
-  plusInfants: () => void;
-  plusPet: () => void;
-  submit: () => void;
+  guests: number;
+  decrease: () => void;
+  increase: () => void;
 };
 
 export function PopoverDemo({
@@ -32,19 +21,9 @@ export function PopoverDemo({
   onMouseLeave,
   hover,
   onClick,
-  infantsNumber,
-  childrenNumber,
-  adultNumber,
-  petNumber,
-  decreaseAdult,
-  decreaseChildren,
-  decreaseInfants,
-  decreasePet,
-  plusAdult,
-  plusChildren,
-  plusInfants,
-  plusPet,
-  submit,
+  guests,
+  decrease,
+  increase,
 }: SearchProps) {
   return (
     <div
@@ -57,61 +36,25 @@ export function PopoverDemo({
             onMouseLeave={onMouseLeave}
             className={`ml-7 flex w-[234px] flex-col items-start justify-center rounded-full ${hover}`}
           >
-            Add guests
+            {" "}
+            Зочдын тоо оруулах
           </button>
         </PopoverTrigger>
         <PopoverContent className="flex w-[380px] flex-col rounded-2xl px-7 py-8">
           <div className="flex items-center justify-between py-5">
             <div className="flex flex-col">
-              <p>Adults</p>
-              <p className="text-sm text-gray-400">Ages 13 or above</p>
-            </div>
-            <div className="flex flex-row justify-between gap-5">
-              <CirclePlus onClick={plusAdult} />
-              {adultNumber}
-              <CircleMinus onClick={decreaseAdult} />
-            </div>
-          </div>
-          <div className="flex items-center justify-between py-5">
-            <div className="flex flex-col">
-              <p>Children</p>
-              <p className="text-sm text-gray-400">Ages 2-12</p>
-            </div>
-            <div className="flex flex-row justify-between gap-5">
-              <CirclePlus onClick={plusChildren} />
-              {childrenNumber}
-              <CircleMinus onClick={decreaseChildren} />
-            </div>
-          </div>
-          <div className="flex items-center justify-between py-5">
-            <div className="flex flex-col">
-              <p>Infants</p>
-              <p className="text-sm text-gray-400">Under-2</p>
-            </div>
-            <div className="flex flex-row justify-between gap-5">
-              <CirclePlus onClick={plusInfants} />
-              {infantsNumber}
-              <CircleMinus onClick={decreaseInfants} />
-            </div>
-          </div>
-          <div className="flex items-center justify-between py-5">
-            <div className="flex flex-col">
-              <p>Pets</p>
+              <p>Зочдын тоо</p>
               <p className="text-sm text-gray-400">
-                Bringing a server animal ?
+                Та хэдэн хүний сууц хайж байна вэ?
               </p>
             </div>
             <div className="flex flex-row justify-between gap-5">
-              <CirclePlus onClick={plusPet} />
-              {petNumber}
-              <CircleMinus onClick={decreasePet} />
+              <CirclePlus onClick={increase} />
+              {guests}
+              <CircleMinus onClick={decrease} />
             </div>
           </div>
-          <PopoverClose>
-            <Button onClick={submit} className="px-20">
-              Submit
-            </Button>
-          </PopoverClose>
+          <PopoverClose />
         </PopoverContent>
       </Popover>
       <div

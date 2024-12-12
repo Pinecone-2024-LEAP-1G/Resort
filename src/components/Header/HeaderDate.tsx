@@ -40,7 +40,7 @@ export function DatePickerWithRange({
               hover
             }`}
           >
-            Add dates
+            Өдөр сонгох
             <input
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}

@@ -36,7 +36,7 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
             className="ml-6 flex items-center justify-center"
             onClick={allProperties}
           >
-            All
+            Бүгдийг харах
           </div>
           {categories?.map((category, index) => {
             return (

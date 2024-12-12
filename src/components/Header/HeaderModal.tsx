@@ -46,29 +46,20 @@ export function HeaderModal() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
-        <DropdownMenuItem>
-          {" "}
-          <button
-            type="submit"
-            className="text-sm font-normal"
-            onClick={() => signIn("google")}
-          >
-            Log in
-          </button>{" "}
+        <DropdownMenuItem onClick={() => signIn("google")}>
+          <button type="submit" className="text-sm font-normal">
+            Нэвтрэх
+          </button>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <span>Gift cards</span>
-        </DropdownMenuItem>
-
+        {/* <DropdownMenuSeparator /> */}
         <DropdownMenuItem onClick={handleAirbnbHome}>
-          <span>Airbnb your home</span>
+          <span>Сууц бүртгүүлэх</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <span>Host an experience</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <span>Help center</span>
+          <span>Тусламжийн төв</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LogOut />
@@ -77,7 +68,7 @@ export function HeaderModal() {
             className="ml-2 text-sm font-normal"
             onClick={() => signOut()}
           >
-            Log Out
+            Гарах
           </button>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

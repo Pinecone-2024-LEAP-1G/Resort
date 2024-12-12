@@ -12,13 +12,7 @@ import { SelectRangeEventHandler } from "react-day-picker";
 const Header = () => {
   const [hover, setHover] = React.useState<number>();
   const [addresssearch, setAddresssearch] = useState("");
-  const [adultNumber, setAdultNumber] = useState(0);
-  const [childrenNumber, setChildrenNumber] = useState(0);
-  const [infantsNumber, setInfantsNumber] = useState(0);
-  const [petNumber, setPetNumber] = useState(0);
-  const [, setGuestsValue] = useState(true);
-  const [guests, setGuests] = useState<number | string>();
-
+  const [guests, setAdultNumber] = useState<number>(1);
   const [date, setDate] = React.useState<{ from: Date; to: Date | undefined }>({
     from: new Date(new Date()),
     to: addDays(new Date(), 20),
@@ -65,32 +59,13 @@ const Header = () => {
           onSelect={setDate as SelectRangeEventHandler}
         />
         <PopoverDemo
-          adultNumber={adultNumber}
-          childrenNumber={childrenNumber}
-          infantsNumber={infantsNumber}
-          petNumber={petNumber}
-          decreaseAdult={() =>
-            adultNumber > 0 && setAdultNumber((prev) => prev - 1)
-          }
-          decreaseChildren={() =>
-            childrenNumber > 0 && setChildrenNumber((prev) => prev - 1)
-          }
-          decreaseInfants={() =>
-            infantsNumber > 0 && setInfantsNumber((prev) => prev - 1)
-          }
+          guests={guests}
+          decrease={() => guests > 1 && setAdultNumber((prev) => prev - 1)}
           onClick={searchProperty}
-          decreasePet={() => petNumber > 0 && setPetNumber((prev) => prev - 1)}
-          plusAdult={() => setAdultNumber((prev) => prev + 1)}
-          plusChildren={() => setChildrenNumber((prev) => prev + 1)}
-          plusInfants={() => setInfantsNumber((prev) => prev + 1)}
-          plusPet={() => setPetNumber((prev) => prev + 1)}
+          increase={() => setAdultNumber((prev) => prev + 1)}
           hover={hover === 3 ? "bg-white" : "bg-gray-100 "}
           onMouseEnter={() => setHover(3)}
           onMouseLeave={() => setHover(0)}
-          submit={() => {
-            setGuests(adultNumber + childrenNumber + petNumber + infantsNumber);
-            setGuestsValue(true);
-          }}
         />
       </div>
       <div>
