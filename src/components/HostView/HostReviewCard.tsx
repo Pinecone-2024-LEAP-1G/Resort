@@ -2,11 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { useParams } from "next/navigation";
-=======
-import Autoplay from "embla-carousel-autoplay";
->>>>>>> ec98089 (something)
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Carousel,
@@ -35,9 +31,9 @@ export type ReviewType = {
   comment: string;
 };
 
-const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
-  const [, setReviewdata] = useState<ReviewType[]>([]);
-  const [, setHostdata] = useState<HostType>();
+export const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
+  const [reviewdata, setReviewdata] = useState<ReviewType[]>([]);
+  const [hostdata, setHostdata] = useState<HostType>();
 
   const params = useParams();
   const { reviewId } = params;
@@ -106,4 +102,3 @@ const HostReviewCard = ({ hostId }: { hostId: string | undefined }) => {
     </div>
   );
 };
-export default ReviewType;

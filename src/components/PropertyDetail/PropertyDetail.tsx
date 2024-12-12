@@ -79,9 +79,8 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
           </div>
         </div>
       </div>
-      <div className="mt-20">
-        <HostViewCard hostId={property?.userId} />
-      </div>
+      <Review property={property} />
+      <div className="mt-20"></div>
     </div>
   );
 };

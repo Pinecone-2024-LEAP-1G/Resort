@@ -4,7 +4,7 @@ import { GrStatusGood } from "react-icons/gr";
 
 const HostLeftCardSecond = () => {
   return (
-    <div className="h-[250px] w-[320px] rounded-2xl border-2 p-[20px]">
+    <div className="mt-[100px] h-[250px] w-[320px] rounded-2xl border-2 p-[20px]">
       <div className="">
         <div className="ml-[5px] text-[20px] font-semibold">
           Болдоо confirmed information

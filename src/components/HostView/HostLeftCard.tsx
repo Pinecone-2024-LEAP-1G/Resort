@@ -62,7 +62,7 @@ const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
 
   return (
     <Link href={`/hostView/${hostId}`}>
-      <div className="flex h-[230px] w-[320px] rounded-2xl border-2 shadow-2xl">
+      <div className="mr-auto mt-[100px] flex h-[230px] w-[320px] rounded-2xl border-2 shadow-2xl">
         <div className="mx-auto my-auto">
           <CgProfile className="h-[70px] w-[70px]" />
           <div className="ml-[5px] text-[18px] font-bold">{host?.name}</div>
