@@ -10,7 +10,9 @@ import { useSession } from "next-auth/react";
 export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
   const router = useRouter();
   const { data: session } = useSession();
-  const icons = categoryIcon({ value });
+  const text = value.categoryname;
+  const icons = categoryIcon({ text });
+  console.log(value.propertyPictures);
   const createProperty = async () => {
     await axios
       .post(`/api/properties`, {
@@ -38,6 +40,7 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
         console.log(error);
       });
   };
+  console.log(value);
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <div className="flex min-h-screen items-center justify-center">
@@ -131,6 +134,32 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
                       {value.categoryname}
                     </p>
                     <div className="h-12 w-12">{icons?.icon}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
+                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium leading-none">Pictures</p>
+                  <div className="flex flex-row">
+                    <p className="text-sm,text-muted-foreground">
+                      {value.propertyPictures.map((picture) => {
+                        console.log(picture);
+                        return (
+                          <div
+                            style={{
+                              backgroundImage: `url(${picture})`,
+                              backgroundPosition: "center",
+                              backgroundSize: "cover",
+                              backgroundRepeat: "no-repeat",
+                            }}
+                            className="h-8 w-7"
+                          ></div>
+                        );
+                      })}
+                    </p>
                   </div>
                 </div>
               </div>

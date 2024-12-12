@@ -33,10 +33,8 @@ export const mockdata = [
   { name: "Дүнзэн байшин", icon: <WoodHouse /> },
 ];
 const categoryIcon = (props: Props) => {
-  const { text, value } = props;
-  const findIcon = mockdata.find(
-    (data) => data.name === text || data.name === value?.categoryname,
-  );
+  const { text } = props;
+  const findIcon = mockdata.find((data) => data.name === text);
   return findIcon;
 };
 export default categoryIcon;

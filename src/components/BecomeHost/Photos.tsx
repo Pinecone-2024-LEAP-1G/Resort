@@ -16,12 +16,16 @@ import Image from "next/image";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 
-export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
+export const Photos = ({
+  handleBack,
+  handleNext,
+  value,
+  handleChange,
+}: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
-  console.log(uploadedImageUrls);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -97,7 +101,7 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
     e.preventDefault();
     inputRef.current?.click();
   };
-
+  console.log(value.propertyPictures, uploadedImageUrls);
   return (
     <Dialog>
       <PropertyHeader />
@@ -159,8 +163,13 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
         </DialogHeader>
         <DialogFooter className="justify-between">
           <Button
+            onClick={() => (
+              handleUploadToCloudinary(),
+              handleChange({
+                target: { name: "propertyPictures", value: uploadedImageUrls },
+              })
+            )}
             disabled={selectedFiles.length < 5 || uploading}
-            onClick={handleUploadToCloudinary}
             className="h-[48px] w-[112px] text-base"
           >
             {uploading ? "Uploading..." : "Upload"}
@@ -176,6 +185,7 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
           Back
         </button>
         <Button
+          // disabled={selectedFiles.length < 1 || uploading}
           onClick={handleNext}
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
