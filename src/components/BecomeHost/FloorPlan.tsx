@@ -13,7 +13,7 @@ export const FloorPlan = ({
 }: PropertyClick) => {
   const [guests, setGuests] = useState<number>(1);
   const [beds, setBeds] = useState<number>(1);
-  const [bathrooms, setBathrooms] = useState<number>(0.5);
+  const [bathrooms, setBathrooms] = useState<number>(1);
   const [price, setPrice] = useState<number | string>();
   const [cleaningFee, setCleaningFee] = useState<string | number>();
 
@@ -106,8 +106,8 @@ export const FloorPlan = ({
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
-                if (bathrooms > 0.5) {
-                  const rooms = bathrooms - 0.5;
+                if (bathrooms > 1) {
+                  const rooms = bathrooms - 1;
                   setBathrooms(rooms);
                   handleChange({
                     target: { name: "totalBathrooms", value: rooms.toString() },
@@ -122,7 +122,7 @@ export const FloorPlan = ({
             <Button
               onClick={() => {
                 if (bathrooms < 50) {
-                  const broom = bathrooms + 0.5;
+                  const broom = bathrooms + 1;
                   setBathrooms(broom);
 
                   handleChange({

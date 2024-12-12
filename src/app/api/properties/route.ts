@@ -1,7 +1,7 @@
 import { connectToMongoDB } from "@/lib/db";
-import { PropertyModel } from "@/lib/models";
+import { PropertyModel, UserModel } from "@/lib/models";
+import { HostModel } from "@/lib/models/host.model";
 import { NextRequest } from "next/server";
-
 connectToMongoDB();
 
 export const GET = async () => {
@@ -26,19 +26,24 @@ export const POST = async (request: NextRequest) => {
     totalBathrooms,
     email,
     cleaningFee,
+    userId,
   } = await request.json();
-  // const hostExist = await HostModel.findOne({ email });
-
-  // if (!hostExist) {
-  //   const user = await UserModel.findOne({ email });
-  //   await HostModel.create({
-  //     name: user?.firstName,
-  //     email: user?.email,
-  //     phoneNumber: user?.phoneNumber,
-  //   });
-  // }
 
   try {
+    const hostExist = await HostModel.findOne({
+      email,
+    });
+    if (!hostExist) {
+      const user = await UserModel.findOne({
+        email,
+      });
+      await HostModel.create({
+        name: user?.name,
+        email: user?.email,
+        phoneNumber: user?.phoneNumber,
+      });
+    }
+
     const properties = await PropertyModel.create({
       address,
       description,
@@ -50,26 +55,30 @@ export const POST = async (request: NextRequest) => {
       totalBathrooms,
       email,
       cleaningFee,
+      userId,
     });
 
-    // const { _id } = properties;
+    const { _id } = properties;
+    const updateHost = await HostModel.findOneAndUpdate(
+      {
+        email: email,
+      },
+      { $push: { propertyId: _id } },
+      { new: true },
+    );
 
-    // const updateHost = await HostModel.findOneAndUpdate(
-    //   {
-    //     email: email,
-    //   },
-    //   { $push: { propertyId: _id } },
-    //   { new: true },
-    // );
-
-    // const updateProprty = await PropertyModel.findByIdAndUpdate(
-    //   { _id: _id },
-    //   {
-    //     userId: updateHost?._id,
-    //   },
-    //   { new: true },
-    // );
-    return Response.json({ message: "success", property: properties });
+    const updateProprty = await PropertyModel.findByIdAndUpdate(
+      { _id: _id },
+      {
+        userId: updateHost?._id,
+      },
+      { new: true },
+    );
+    return Response.json({
+      message: "success",
+      property: properties,
+      updateProprty: updateProprty,
+    });
   } catch (error) {
     return Response.json({ message: error });
   }

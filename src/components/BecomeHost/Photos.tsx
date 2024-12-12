@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import axios from "axios"; // For making HTTP requests
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,12 +16,11 @@ import Image from "next/image";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 
-export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
+export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+  const [, setUploadedImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
-  console.log(uploadedImageUrls);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -82,8 +81,10 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
         );
 
         uploadedUrls.push(response.data.secure_url);
+        value.propertyPictures.push(response.data.secure_url);
       }
       setUploadedImageUrls(uploadedUrls);
+
       alert("All photos uploaded successfully!");
     } catch (error) {
       console.error("Error uploading images:", error);
@@ -97,7 +98,6 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
     e.preventDefault();
     inputRef.current?.click();
   };
-
   return (
     <Dialog>
       <PropertyHeader />
@@ -159,8 +159,8 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
         </DialogHeader>
         <DialogFooter className="justify-between">
           <Button
-            disabled={selectedFiles.length < 5 || uploading}
             onClick={handleUploadToCloudinary}
+            disabled={selectedFiles.length < 5 || uploading}
             className="h-[48px] w-[112px] text-base"
           >
             {uploading ? "Uploading..." : "Upload"}
@@ -176,6 +176,7 @@ export const Photos = ({ handleBack, handleNext }: PropertyClick) => {
           Back
         </button>
         <Button
+          disabled={selectedFiles.length < 5 || uploading}
           onClick={handleNext}
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"

@@ -7,7 +7,7 @@ export type HostType = {
   description: string;
   propertyId: mongoose.Schema.Types.ObjectId[];
   name: string;
-  phoneNumber: string;
+  phoneNumber: number;
   email: string;
 };
 
@@ -20,9 +20,9 @@ const Host = new Schema<HostType>(
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Property",
     },
-    name: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
-    email: { type: String, required: true },
+    name: { type: String },
+    phoneNumber: { type: Number },
+    email: { type: String },
   },
   { timestamps: true },
 );
