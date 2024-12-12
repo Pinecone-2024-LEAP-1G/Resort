@@ -32,13 +32,10 @@ const Home = () => {
 
   const changePropertyCategory = (id: string) => {
     const filterProperties = properties.filter(
-      (property) => property.categoryId === id,
+      (property) => property?.categoryId === id,
     );
     setFilterProperty(filterProperties);
   };
-  // const allProperties = () => {
-  //   setFilterProperty(properties);
-  // };
 
   return (
     <div>

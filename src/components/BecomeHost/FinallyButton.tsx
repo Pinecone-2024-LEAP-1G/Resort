@@ -19,12 +19,12 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
         guests: value.guests,
         price: value.price,
         userId: session?.user.id,
-        categoryId: value.categoryId,
-        propertyPictures: value.propertyPictures,
-        totalBedrooms: value.totalBedrooms,
-        totalBathrooms: value.totalBathrooms,
+        categoryId: value?.categoryId,
+        propertyPictures: value?.propertyPictures,
+        totalBedrooms: value?.totalBedrooms,
+        totalBathrooms: value?.totalBathrooms,
         email: session?.user.email,
-        cleaningFee: value.cleaningFee,
+        cleaningFee: value?.cleaningFee,
       })
       .then(function (response) {
         if (response.data.message === "success")
