@@ -8,6 +8,7 @@ import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostViewCard";
+import { Button } from "react-day-picker";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [property, setProperty] = useState<PropertyType>();
@@ -44,7 +45,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         </div>
       </div>
       <div className="mt-4">
-        <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {property?.propertyPictures?.map((image, index) => (
             <div key={index} className="col-span-1 hidden lg:block">
               <Image
@@ -57,8 +58,6 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             </div>
           ))}
         </div>
-        <div></div>
-
         <div className="mt-10 flex justify-between">
           <div className="h-[225px] w-[600px] flex-1">
             <p className="mb-2 text-xl font-normal">{property?.description}</p>
