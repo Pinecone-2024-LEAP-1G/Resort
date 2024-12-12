@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import axios from "axios"; // For making HTTP requests
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,15 +16,10 @@ import Image from "next/image";
 import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 
-export const Photos = ({
-  handleBack,
-  handleNext,
-  value,
-  handleChange,
-}: PropertyClick) => {
+export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+  const [, setUploadedImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,8 +81,10 @@ export const Photos = ({
         );
 
         uploadedUrls.push(response.data.secure_url);
+        value.propertyPictures.push(response.data.secure_url);
       }
       setUploadedImageUrls(uploadedUrls);
+
       alert("All photos uploaded successfully!");
     } catch (error) {
       console.error("Error uploading images:", error);
@@ -101,7 +98,6 @@ export const Photos = ({
     e.preventDefault();
     inputRef.current?.click();
   };
-  console.log(value.propertyPictures, uploadedImageUrls);
   return (
     <Dialog>
       <PropertyHeader />
@@ -163,12 +159,7 @@ export const Photos = ({
         </DialogHeader>
         <DialogFooter className="justify-between">
           <Button
-            onClick={() => (
-              handleUploadToCloudinary(),
-              handleChange({
-                target: { name: "propertyPictures", value: uploadedImageUrls },
-              })
-            )}
+            onClick={handleUploadToCloudinary}
             disabled={selectedFiles.length < 5 || uploading}
             className="h-[48px] w-[112px] text-base"
           >
@@ -185,7 +176,7 @@ export const Photos = ({
           Back
         </button>
         <Button
-          // disabled={selectedFiles.length < 1 || uploading}
+          disabled={selectedFiles.length < 5 || uploading}
           onClick={handleNext}
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"

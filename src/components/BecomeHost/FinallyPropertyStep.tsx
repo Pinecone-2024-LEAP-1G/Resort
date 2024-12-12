@@ -12,7 +12,6 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
   const { data: session } = useSession();
   const text = value.categoryname;
   const icons = categoryIcon({ text });
-  console.log(value.propertyPictures);
   const createProperty = async () => {
     await axios
       .post(`/api/properties`, {
@@ -40,7 +39,6 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
         console.log(error);
       });
   };
-  console.log(value);
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <div className="flex min-h-screen items-center justify-center">
@@ -143,23 +141,21 @@ export const FinallyButton = ({ value, handleBack }: PropertyClick) => {
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">Pictures</p>
-                  <div className="flex flex-row">
-                    <p className="text-sm,text-muted-foreground">
-                      {value.propertyPictures.map((picture) => {
-                        console.log(picture);
-                        return (
-                          <div
-                            style={{
-                              backgroundImage: `url(${picture})`,
-                              backgroundPosition: "center",
-                              backgroundSize: "cover",
-                              backgroundRepeat: "no-repeat",
-                            }}
-                            className="h-8 w-7"
-                          ></div>
-                        );
-                      })}
-                    </p>
+                  <div className="flex flex-wrap gap-4">
+                    {value.propertyPictures.map((picture, index) => {
+                      return (
+                        <div
+                          key={index}
+                          style={{
+                            backgroundImage: `url(${picture})`,
+                            backgroundPosition: "center",
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                          }}
+                          className="h-20 w-20 rounded-lg"
+                        ></div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
