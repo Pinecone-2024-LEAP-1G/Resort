@@ -11,12 +11,12 @@ export const FloorPlan = ({
   value,
   handleChange,
 }: PropertyClick) => {
-  const [guests, setGuests] = useState<number>(1);
-  const [beds, setBeds] = useState<number>(1);
-  const [bathrooms, setBathrooms] = useState<number>(1);
+  const [guests, setGuests] = useState<number>(0);
+  const [beds, setBeds] = useState<number>(0);
+  const [bathrooms, setBathrooms] = useState<number>(0);
   const [price, setPrice] = useState<number | string>();
   const [cleaningFee, setCleaningFee] = useState<string | number>();
-
+  const [, setPhoneNumber] = useState<number>();
   return (
     <div>
       <PropertyHeader />
@@ -30,7 +30,7 @@ export const FloorPlan = ({
           </span>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">
-          <p className="text-xl font-normal">Guests</p>
+          <p className="text-xl font-normal">Зочдыг хүлээн авах тоо</p>
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
@@ -51,10 +51,9 @@ export const FloorPlan = ({
             <Button
               onClick={() => {
                 if (guests < 15) {
-                  const newGuests = guests + 1;
-                  setGuests(newGuests);
+                  setGuests(guests + 1);
                   handleChange({
-                    target: { name: "guests", value: newGuests.toString() },
+                    target: { name: "guests", value: guests.toString() },
                   });
                 }
               }}
@@ -66,7 +65,7 @@ export const FloorPlan = ({
           </div>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">
-          <p className="text-xl font-normal">Beds</p>
+          <p className="text-xl font-normal">Унтлагны өрөө</p>
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
@@ -102,7 +101,7 @@ export const FloorPlan = ({
           </div>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">
-          <p className="text-xl font-normal">Bathrooms</p>
+          <p className="text-xl font-normal">Угаалгын өрөө</p>
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
@@ -138,13 +137,13 @@ export const FloorPlan = ({
           </div>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">
-          <p className="text-xl font-normal">Cleaning Fee</p>
+          <p className="text-xl font-normal">Цэвэрлэгээний үнэ</p>
           <div className="flex items-center gap-3">
             <input
               min={5}
               type="number"
               className="bg-gray w-[150px] rounded-lg border p-1"
-              placeholder="   Cleaning Fee"
+              placeholder="   Үнэ"
               onChange={(e) => {
                 const fee = parseFloat(e.target.value);
                 setCleaningFee(fee);
@@ -162,14 +161,13 @@ export const FloorPlan = ({
           </div>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">
-          <p className="text-xl font-normal">Guest pricing</p>
-
+          <p className="text-xl font-normal">Түрээсийн үнэ</p>
           <div className="flex items-center gap-3">
             <input
               min={5}
               type="number"
               className="bg-gray w-[150px] rounded-lg border p-1"
-              placeholder="   Guest pricing"
+              placeholder="   Үнэ"
               onChange={(e) => {
                 const pri = parseFloat(e.target.value);
                 setPrice(pri);
@@ -184,9 +182,25 @@ export const FloorPlan = ({
                 currency: "MNT",
               }).format(parseFloat(price?.toString() ?? "0"))}
             </div>
-          </div>
-        </div>
+          </div>{" "}
+        </div>{" "}
         <PriceFloor />
+        <div className="flex h-16 flex-row justify-between border-b p-4">
+          <p className="text-xl font-normal">Утасны дугаар</p>
+          <input
+            min={8}
+            type="number"
+            className="bg-gray w-[150px] rounded-lg border p-1"
+            placeholder="   Дугаар"
+            onChange={(e) => {
+              const number = parseFloat(e.target.value);
+              setPhoneNumber(number);
+              handleChange({
+                target: { name: "phoneNumber", value: number.toString() },
+              });
+            }}
+          />
+        </div>
       </div>
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
@@ -194,7 +208,7 @@ export const FloorPlan = ({
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
         <Button
           disabled={!value.price || !value.cleaningFee}
@@ -203,7 +217,7 @@ export const FloorPlan = ({
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
         >
-          Next
+          Дараагийх
         </Button>
       </div>
     </div>

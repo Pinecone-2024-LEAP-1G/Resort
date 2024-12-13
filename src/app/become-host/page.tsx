@@ -20,6 +20,7 @@ export type PropertyValue = {
   totalBathrooms: number;
   cleaningFee: number;
   categoryname: string;
+  phoneNumber: number;
 };
 type CustomEvent = {
   target: {
@@ -65,6 +66,7 @@ const BecomeHost = () => {
     totalBathrooms: 0,
     cleaningFee: 0,
     categoryname: "",
+    phoneNumber: 0,
   });
 
   const Step = stepper[step];
