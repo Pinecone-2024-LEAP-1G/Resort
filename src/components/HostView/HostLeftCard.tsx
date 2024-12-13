@@ -17,7 +17,6 @@ type ReviewType = {
 
 const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
   const [host, setHost] = useState<HostType | null>(null);
-  const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [averageRating, setAverageRating] = useState<number>(0);
   const [reviewCount, setReviewCount] = useState<number>(0);
   const router = useRouter();
@@ -34,10 +33,8 @@ const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
           reviews: ReviewType[];
           reviewCount: number;
         }>(`/api/reviews/hostReviews/${propertyId}`);
-        console.log(reviewsResponse);
 
         const reviewsData = reviewsResponse.data.reviews;
-        setReviews(reviewsData);
         setReviewCount(reviewsResponse.data.reviewCount);
 
         const totalRating = reviewsData.reduce(

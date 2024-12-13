@@ -32,19 +32,15 @@ type Props = {
 };
 
 export const HostReviewCard = ({ reviews }: Props) => {
-  console.log(reviews);
-
   return (
     <div>
       <Carousel className="w-full">
         <CarouselContent className="px-10">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index}>
+          {reviews?.map((review) => (
+            <CarouselItem key={review._id}>
               <Card className="p-5">
                 <div>
-                  {reviews?.map((review) => (
-                    <p key={review._id}>{review.comment}</p>
-                  ))}
+                  <p key={review._id}>{review.comment}</p>
                 </div>
                 <div className="mt-4 flex items-center gap-2">
                   <div style={{ backgroundImage: `url(${""}})` }}></div>
