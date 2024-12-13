@@ -63,7 +63,7 @@ export const HeaderSearch = ({
       {show && (
         <div className="fixed bottom-0 left-0 right-0 top-24 z-30 flex justify-center">
           <div className="h-fit w-[450px] rounded-3xl border-2 bg-white p-10 px-5 py-7">
-            <h4 className="font-medium leading-none">Аймгиар хайх</h4>
+            <h4 className="font-medium leading-none">Аймгаар хайх</h4>
             <div className="grid grid-flow-col grid-rows-2 gap-4 px-5 py-5">
               {searchproperties?.slice(0, 6).map((property) => {
                 return (
