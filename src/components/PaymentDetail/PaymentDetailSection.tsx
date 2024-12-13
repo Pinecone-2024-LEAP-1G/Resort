@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
+import { useSession } from "next-auth/react";
 
 export type Property = {
   _id: string;
@@ -43,7 +44,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   let allGuests = 0;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-
+  const { data: session } = useSession();
   if (adult && !isNaN(Number(adult))) {
     allGuests += Number(adult);
   }
@@ -66,7 +67,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       const response = await axios.post("/api/reservations", {
         checkIn: from,
         checkOut: to,
-        userId: "6747c5db0314e681044f54d0",
+        userId: session?.user?.id,
         propertyId: propertyId,
         adult: !isNaN(Number(adult)),
         children: !isNaN(Number(child)),

@@ -12,6 +12,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
   const { data: session } = useSession();
   const text = value.categoryname;
   const icons = categoryIcon({ text });
+
   const createProperty = async () => {
     await axios
       .post(`/api/properties`, {
@@ -39,6 +40,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
         console.log(error);
       });
   };
+
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <div className="flex min-h-screen items-center justify-center">

@@ -17,6 +17,7 @@ export const FloorPlan = ({
   const [price, setPrice] = useState<number | string>();
   const [cleaningFee, setCleaningFee] = useState<string | number>();
   const [, setPhoneNumber] = useState<number>();
+
   return (
     <div>
       <PropertyHeader />

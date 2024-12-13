@@ -16,6 +16,7 @@ export const Structure = ({
   handleChange,
 }: PropertyClick) => {
   const [categories, setCategories] = useState<Category[]>([]);
+
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -27,6 +28,7 @@ export const Structure = ({
     };
     getCategories();
   }, []);
+
   return (
     <div className="flex min-h-screen flex-col">
       <PropertyHeader />

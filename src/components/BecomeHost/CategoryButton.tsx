@@ -7,6 +7,7 @@ type CategoryProps = {
   onClick: () => void;
   categoryid: string;
 };
+
 export const CategoryButton = ({
   text,
   value,
