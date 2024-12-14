@@ -7,7 +7,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
@@ -17,6 +17,8 @@ import Kebab from "../icons/Kebab";
 
 export function HeaderModal() {
   const { data: session } = useSession();
+  const router = useRouter();
+  const userId = session?.user?.id;
 
   const renderUserProfile = () => {
     if (session) {
@@ -55,7 +57,9 @@ export function HeaderModal() {
         <DropdownMenuItem onClick={handleAirbnbHome}>
           <span>Сууц бүртгүүлэх</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => router.push(`/hostProperties/${userId}`)}
+        >
           <span>Host an experience</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
