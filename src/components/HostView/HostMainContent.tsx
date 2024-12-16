@@ -8,10 +8,9 @@ import { HostReviewCard, ReviewType } from "./HostReviewCard";
 import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
 import { PropertyType } from "../Review";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-type HostType = {
+export type HostType = {
   _id: string;
   name: string;
   phoneNumber: string;
@@ -19,45 +18,29 @@ type HostType = {
   propertyId: PropertyType[];
 };
 
-const HostMainContent = ({ hostId }: { hostId: string }) => {
+const HostMainContent = ({ userId }: { userId?: string }) => {
   const [hostData, setHostdata] = useState<HostType>();
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [reviewCount, setReviewCount] = useState<number>(0);
-  const [averageRating, setAverageRating] = useState<number>(0);
   const router = useRouter();
 
   useEffect(() => {
     const getHostData = async () => {
       try {
-        const response = await axios.get(`/api/host/${hostId}`);
-
+        const response = await axios.get(`/api/users/${userId}`);
         setHostdata(response.data.host);
-
-        const reviewsResponse = await axios.get<{
-          reviews: ReviewType[];
-          reviewCount: number;
-        }>(`http://localhost:3000/api/reviews/hostReviews/${hostId}`);
-        const reviewsData = reviewsResponse.data.reviews;
-        setReviews(reviewsData);
-        setReviewCount(reviewsResponse.data.reviewCount);
-
-        const totalRating = reviewsData.reduce(
-          (acc, review) => acc + review.rating,
-          0,
-        );
-        setAverageRating(totalRating / reviewsData.length || 0);
+        console.log(response.data.host.propertyId);
       } catch (error) {
         console.error(error);
       }
     };
-    if (hostId) {
+    if (userId) {
       getHostData();
     }
-  }, [hostId]);
+  }, [userId]);
   return (
     <div className="ml-auto flex justify-between">
       <div>
-        <HostLeftCard hostId={hostId} />
+        <HostLeftCard userId={userId} />
         <HostLeftCardSecond hostData={hostData} />
       </div>
 
@@ -102,9 +85,6 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
               />
             );
           })}
-          {/* <PropertyCard />
-          <PropertyCard />
-          <PropertyCard /> */}
         </div>
       </div>
     </div>

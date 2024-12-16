@@ -66,7 +66,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
             <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
-              <HostViewCard hostId={property?.userId} />
+              <HostViewCard userId={property?.userId} />
             </div>
             <div className="mt-24 h-[80px]"></div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { HostType } from "@/lib/models/host.model";
 import { GrStatusGood } from "react-icons/gr";
+import { HostType } from "./HostMainContent";
 
 type SecondProps = {
   hostData?: HostType;

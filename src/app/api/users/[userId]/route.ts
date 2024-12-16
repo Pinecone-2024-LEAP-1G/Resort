@@ -1,12 +1,12 @@
-import { HostModel } from "@/lib/models/host.model";
+import { UserModel } from "@/lib/models";
 
 export const GET = async (
   request: Request,
-  { params }: { params: Promise<{ hostId: string }> },
+  { params }: { params: Promise<{ userId: string }> },
 ) => {
-  const hostId = (await params).hostId;
+  const userId = (await params).userId;
   try {
-    const host = await HostModel.findById({ _id: hostId }).populate({
+    const host = await UserModel.findById({ _id: userId }).populate({
       path: "propertyId",
     });
     return Response.json({ host });

@@ -1,38 +1,39 @@
 "use client";
 
-import mongoose from "mongoose";
 import { useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import axios from "axios";
-import { HostType } from "@/lib/models/host.model";
 import { useRouter } from "next/navigation";
+import { HostType } from "./HostMainContent";
 
 type ReviewType = {
   _id: string;
-  userId: mongoose.Schema.Types.ObjectId;
+  userId: string;
   propertyId: string;
   rating: number;
   comment: string;
 };
 
-const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
+const HostLeftCard = ({ userId }: { userId?: string }) => {
   const [host, setHost] = useState<HostType | null>(null);
   const [averageRating, setAverageRating] = useState<number>(0);
   const [reviewCount, setReviewCount] = useState<number>(0);
   const router = useRouter();
-  const propertyId = host?.propertyId;
+
+  const propertyId = host?.propertyId?.map((id) => id._id);
 
   useEffect(() => {
     const getHostData = async () => {
       try {
-        const hostResponse = await axios.get(`/api/host/${hostId}`);
+        const hostResponse = await axios.get(`/api/users/${userId}`);
 
         setHost(hostResponse.data.host);
 
         const reviewsResponse = await axios.get<{
           reviews: ReviewType[];
           reviewCount: number;
-        }>(`/api/reviews/hostReviews/${propertyId}`);
+        }>(`/api/reviews/${propertyId}`);
+        console.log(reviewsResponse);
 
         const reviewsData = reviewsResponse.data.reviews;
         setReviewCount(reviewsResponse.data.reviewCount);
@@ -46,14 +47,12 @@ const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
         console.error(error);
       }
     };
-    if (hostId) {
-      getHostData();
-    }
-  }, [hostId]);
+    getHostData();
+  }, [userId]);
 
   return (
     <div
-      onClick={() => router.push(`/hostView/${hostId}`)}
+      onClick={() => router.push(`/hostView/${userId}`)}
       className="mr-auto mt-[100px] flex h-[230px] w-[320px] rounded-2xl border-2 shadow-2xl"
     >
       <div className="mx-auto my-auto">

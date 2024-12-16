@@ -33,8 +33,8 @@ export const MyReservations = ({ propertyId }: ReserProps) => {
     };
     getReservations();
   }, [propertyId]);
-  if (reviews[0] === null) {
-    return <>Tand odoogoor zahialga bhgui baina</>;
-  }
+  // if (reviews[0] === null) {
+  //   return <>Tand odoogoor zahialga bhgui baina</>;
+  // }
   return <div>hi</div>;
 };
