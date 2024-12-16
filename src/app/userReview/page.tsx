@@ -9,41 +9,29 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { ReviewUser } from "@/components/UserReview/star";
 import axios from "axios";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const Review = () => {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>();
-  const { data: session } = useSession();
-  const router = useRouter();
-  if (!session) return router.push(`${signIn("google")}`);
-  const getUser = async () => {
-    try {
-      const userProperty = await axios.get("/api/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const createHostView = async () => {
     try {
-      const response = await axios.post("/api/reviews", {
-        userId: session?.user.id,
-        // propertyId: ;
+      const response = await axios.post("/api/propertyReviews", {
         rating: rating,
         comment: comment,
       });
-      console.log(response);
+      if (response) toast.message("Үнэлгээ өгсөн танд баярлалаа");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="flex w-fit text-center">
-      <Card className="p-5">
+    <div className="my-10 flex items-center justify-center">
+      <Card className="w-fit p-5 text-center">
         <CardHeader>
           <CardTitle>Таны оршин суусан газарт өгөх үнэлгээ</CardTitle>
         </CardHeader>

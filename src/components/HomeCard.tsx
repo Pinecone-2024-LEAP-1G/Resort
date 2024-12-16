@@ -30,6 +30,7 @@ export default function HomeCard(props: HomeCardProps) {
       <Carousel className="w-full">
         <CarouselContent onClick={() => router.push(`/property/${propertyId}`)}>
           {propertyPictures?.map((propertyPicture, index) => {
+            console.log(propertyPictures);
             return (
               <CarouselItem key={index}>
                 <div
@@ -45,8 +46,8 @@ export default function HomeCard(props: HomeCardProps) {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="ml-[70px]" />
+        <CarouselNext className="mr-[70px]" />
       </Carousel>
       <div className="grid grid-cols-2">
         <div>

@@ -45,6 +45,7 @@ const Home = () => {
       />
       <div className="grid grow grid-cols-6 gap-8">
         {filterProperty?.map((property, index) => {
+          console.log(filterProperty);
           if (filterProperty[0].length === 0)
             return (
               <div key={index} className="p-10 text-center">

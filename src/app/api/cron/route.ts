@@ -1,15 +1,14 @@
-import { ReservationModel, ReviewModel } from "@/lib/models";
+import { ReservationModel } from "@/lib/models";
 import { nodeMailer } from "@/util/nodemailer";
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
-  const { rating, comment } = await request.json();
-  // const authHeader = request.headers.get("authorization");
-  // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-  //   return new Response("Unauthorized", {
-  //     status: 401,
-  //   });
-  // }
+  const authHeader = request.headers.get("authorization");
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response("Unauthorized", {
+      status: 401,
+    });
+  }
   try {
     const reservations = await ReservationModel.find().populate("userId");
     const checkoutday = reservations.filter((userreservation) => {

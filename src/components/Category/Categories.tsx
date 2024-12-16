@@ -33,7 +33,7 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">
           <div
-            className="ml-6 flex items-center justify-center"
+            className="ml-6 flex cursor-pointer items-center justify-center"
             onClick={allProperties}
           >
             Бүгдийг харах

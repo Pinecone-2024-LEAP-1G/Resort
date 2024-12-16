@@ -1,5 +1,7 @@
+import { auth } from "@/auth";
 import { PropertyModel, ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
+import { error } from "console";
 
 export const GET = async (request: NextRequest) => {
   const { propertyId } = await request.json();
@@ -13,12 +15,14 @@ export const GET = async (request: NextRequest) => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { propertyId, userId, rating, comment } = await request.json();
+  const { propertyId, rating, comment } = await request.json();
 
+  const session = await auth();
+  if (!session) return Response.json(error);
   try {
     const review = await ReviewModel.create({
       propertyId,
-      userId,
+      userId: session?.user.id,
       rating,
       comment,
     });
@@ -35,6 +39,7 @@ export const POST = async (request: NextRequest) => {
         new: true,
       },
     );
+
     return Response.json({ review, updateProperty });
   } catch (error) {
     return Response.json({ message: error });
