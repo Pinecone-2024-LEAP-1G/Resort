@@ -1,5 +1,5 @@
 import { connectToMongoDB } from "@/lib/db";
-import { PropertyModel, ReservationModel } from "@/lib/models";
+import { PropertyModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();

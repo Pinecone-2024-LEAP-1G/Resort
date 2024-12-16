@@ -1,24 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useQueryState } from "nuqs";
+import { PropertyType } from "../Review";
 
 export const Footer = () => {
   const [showAll, setShowAll] = useState(false);
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState<PropertyType[]>();
+  const [address, setAdress] = useQueryState("address");
 
   useEffect(() => {
     const getaddressProperty = async () => {
       try {
-        const response = await axios.get(`/api/properties/address/Bulgan`);
-        setFilter(response.data.address);
+        const response = await axios.get(
+          `/api/properties/address/?address=${address}`,
+        );
+
+        setFilter(response.data.properties);
       } catch (error) {
         console.log(error);
       }
     };
     getaddressProperty();
-  }, []);
+  }, [address]);
   console.log(filter);
 
   const regions = [
@@ -41,27 +46,16 @@ export const Footer = () => {
     { name: "Selenge", id: "selenge" },
   ];
 
-  const router = useRouter();
-
-  const handleRegionClick = (regionId: string) => {
-    const element = document.getElementById(regionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <footer className="p-6 text-sm text-gray-700">
       <div className="p-4">
-        <h2 className="mb-4 text-xl font-bold">
-          Inspiration for future getaways
-        </h2>
+        <h2 className="mb-4 text-xl font-bold">Aimgiin nerseer haih</h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
           {regions.map((region, index) => (
             <button
               key={index}
               className="block w-full rounded-lg border p-4 text-center text-gray-800 hover:bg-gray-100"
-              onClick={() => handleRegionClick(region.id)}
+              onClick={() => setAdress(region.name)}
             >
               <h3 className="font-semibold">{region.name}</h3>
             </button>
@@ -75,13 +69,9 @@ export const Footer = () => {
         </button>
       </div>
       <div className="my-6 border-t border-gray-300"></div>
-      <div className="grid grid-cols-1 gap-6 px-10 md:grid-cols-3">
-        {/* Add your other sections here */}
-      </div>
+      <div className="grid grid-cols-1 gap-6 px-10 md:grid-cols-3"></div>
       <div className="my-6 border-t border-gray-300"></div>
-      <div className="flex flex-col items-center space-y-4 md:flex-row md:justify-between md:space-y-0">
-        {/* Add your footer social media links and other content here */}
-      </div>
+      <div className="flex flex-col items-center space-y-4 md:flex-row md:justify-between md:space-y-0"></div>
     </footer>
   );
 };
