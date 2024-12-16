@@ -14,7 +14,7 @@ export const GET = async (
     }).populate({
       path: "reviewId",
     });
-    return Response.json({ property: property });
+    return Response.json({ property: [property] });
   } catch (error) {
     return Response.json({ message: error });
   }

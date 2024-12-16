@@ -7,33 +7,21 @@ import { Guest } from "./Guest";
 import { ImArrowDown2 } from "react-icons/im";
 
 interface Props {
-  adult: number;
-  setAdult: (adult: number) => void;
-  child: number;
-  setChild: (child: number) => void;
-  infants: number;
-  setInfants: (infants: number) => void;
-  pets: number;
-  setPets: (pets: number) => void;
+  guest: number;
+  setGuests: (adult: number) => void;
+
   people?: number;
   limitGuest?: number;
 }
 
 export const GuestPopover = ({
-  adult,
-  setAdult,
-  child,
-  setChild,
-  infants,
-  setInfants,
-  pets,
-  setPets,
+  guest,
+  setGuests,
+
   people,
   limitGuest,
 }: Props) => {
   const maxGuests = limitGuest ?? Infinity;
-
-  const guests: number = adult + child + infants + pets;
 
   return (
     <Popover>
@@ -57,37 +45,10 @@ export const GuestPopover = ({
             <div className="grid grid-cols-3 items-center gap-4 border-b">
               <Label htmlFor="adult">Том хүн</Label>
               <Guest
-                disabled={guests === maxGuests}
-                name={adult}
-                onclick={() => setAdult(adult + 1)}
-                plusonclick={() => setAdult(adult > 0 ? adult - 1 : 0)}
-              />
-            </div>
-            <div className="grid grid-cols-3 items-center gap-4 border-b">
-              <Label htmlFor="child">Хүүхэд</Label>
-              <Guest
-                disabled={guests === maxGuests}
-                name={child}
-                onclick={() => setChild(child + 1)}
-                plusonclick={() => setChild(child > 0 ? child - 1 : 0)}
-              />
-            </div>
-            <div className="grid grid-cols-3 items-center gap-4 border-b">
-              <Label htmlFor="infants">Нялх мама</Label>
-              <Guest
-                disabled={guests === maxGuests}
-                name={infants}
-                onclick={() => setInfants(infants + 1)}
-                plusonclick={() => setInfants(infants > 0 ? infants - 1 : 0)}
-              />
-            </div>
-            <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="pets">Амьтан</Label>
-              <Guest
-                disabled={guests === maxGuests}
-                name={pets}
-                onclick={() => setPets(pets + 1)}
-                plusonclick={() => setPets(pets > 0 ? pets - 1 : 0)}
+                disabled={guest === maxGuests}
+                name={guest}
+                onclick={() => setGuests(guest + 1)}
+                plusonclick={() => setGuests(guest > 0 ? guest - 1 : 0)}
               />
             </div>
           </div>

@@ -165,16 +165,8 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
         date={{ from, to }}
       />
       <GuestPopover
-        adult={Number(numberOfAdult)}
-        setAdult={(adult: number) => setQueries({ numberOfAdult: adult })}
-        child={Number(numberOfChild)}
-        setChild={(child: number) => setQueries({ numberOfChild: child })}
-        infants={Number(numberOfInfants)}
-        setInfants={(infants: number) =>
-          setQueries({ numberOfInfants: infants })
-        }
-        pets={Number(numberOfPets)}
-        setPets={(pets: number) => setQueries({ numberOfPets: pets })}
+        guest={Number(numberOfAdult)}
+        setGuests={(adult: number) => setQueries({ numberOfAdult: adult })}
         people={property?.guests}
         limitGuest={property?.guests}
       />

@@ -22,7 +22,7 @@ export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
   return (
     <div onClick={onclick} className="cursor-pointer gap-5">
       <div
-        className="h-[182] w-[224] rounded-2xl"
+        className="h-[182] w-[200px] rounded-2xl bg-cover"
         style={{
           height: 181,
           backgroundImage: `url(${image})`,
