@@ -55,7 +55,7 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
     }
   }, [hostId]);
   return (
-    <div className="ml-auto flex w-[1200px] justify-between">
+    <div className="ml-auto flex justify-between">
       <div>
         <HostLeftCard hostId={hostId} />
         <HostLeftCardSecond hostData={hostData} />
