@@ -1,0 +1,12 @@
+name: Daily Email Job
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # Өдөр бүр өглөөний 9 цагт ажиллана
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel API
+        run: curl -X POST https://resort-kappa.vercel.app/

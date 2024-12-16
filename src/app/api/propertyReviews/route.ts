@@ -13,15 +13,14 @@ export const GET = async (request: NextRequest) => {
     return Response.json({ message: error });
   }
 };
-
 export const POST = async (request: NextRequest) => {
   const { propertyId, rating, comment } = await request.json();
 
   const session = await auth();
-  if (!session) return Response.json(error);
+  if (!session) return Response.json({ message: "newternvv" });
   try {
     const review = await ReviewModel.create({
-      propertyId,
+      // propertyId,
       userId: session?.user.id,
       rating,
       comment,

@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from "@/auth";
 import {
   Card,
   CardContent,
@@ -9,6 +10,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { ReviewUser } from "@/components/UserReview/star";
 import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -16,7 +19,9 @@ const Review = () => {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>();
-
+  const { data: session } = useSession();
+  const router = useRouter();
+  // if (!session) return router.push(`${signIn()}`);
   const createHostView = async () => {
     try {
       const response = await axios.post("/api/propertyReviews", {
