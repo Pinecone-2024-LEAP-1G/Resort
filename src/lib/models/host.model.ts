@@ -9,6 +9,7 @@ export type HostType = {
   name: string;
   phoneNumber: number;
   email: string;
+  avatar: string;
 };
 
 const Host = new Schema<HostType>(
@@ -16,13 +17,16 @@ const Host = new Schema<HostType>(
     experience: { type: String },
     Address: { type: String },
     description: { type: String },
-    propertyId: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Property",
-    },
+    propertyId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Property",
+      },
+    ],
     name: { type: String },
     phoneNumber: { type: Number },
-    email: { type: String },
+    email: { type: String, required: true },
+    avatar: { type: String },
   },
   { timestamps: true },
 );

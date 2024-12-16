@@ -29,6 +29,21 @@ export const POST = async (request: NextRequest) => {
     userId,
     phoneNumber,
   } = await request.json();
+  const hostExist = await HostModel.findOne({
+    email,
+  });
+
+  if (!hostExist) {
+    const user = await UserModel.findOne({
+      email,
+    });
+    await HostModel.create({
+      name: user?.name,
+      email: user?.email,
+      phoneNumber: phoneNumber,
+      avatar: user?.image,
+    });
+  }
 
   try {
     const hostExist = await HostModel.findOne({
@@ -59,26 +74,24 @@ export const POST = async (request: NextRequest) => {
       userId,
     });
 
-    const { _id } = properties;
-    const updateHost = await HostModel.findOneAndUpdate(
+    const updatedHost = await HostModel.findOneAndUpdate(
       {
         email: email,
       },
-      { $push: { propertyId: _id } },
+      { $push: { propertyId: properties?._id } },
       { new: true },
     );
 
     const updateProprty = await PropertyModel.findByIdAndUpdate(
-      { _id: _id },
+      { _id: properties?._id },
       {
-        userId: updateHost?._id,
+        userId: updatedHost?._id,
       },
       { new: true },
     );
     return Response.json({
-      message: "success",
-      property: properties,
       updateProprty: updateProprty,
+      updatedHost: updatedHost,
     });
   } catch (error) {
     return Response.json({ message: error });

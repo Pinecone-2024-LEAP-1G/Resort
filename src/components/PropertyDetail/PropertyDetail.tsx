@@ -7,8 +7,7 @@ import { LuShare } from "react-icons/lu";
 import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
-import HostViewCard from "../HostView/HostViewCard";
-import { Button } from "react-day-picker";
+import HostViewCard from "../HostView/HostLeftCard";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [property, setProperty] = useState<PropertyType>();
@@ -45,7 +44,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         </div>
       </div>
       <div className="mt-4">
-        <div className="flex grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid- gap-4">
           {property?.propertyPictures?.map((image, index) => (
             <div key={index} className="col-span-1 hidden lg:block">
               <Image
