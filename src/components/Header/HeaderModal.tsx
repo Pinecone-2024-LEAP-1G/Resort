@@ -16,6 +16,7 @@ import Kebab from "../icons/Kebab";
 export function HeaderModal() {
   const { data: session } = useSession();
   const router = useRouter();
+  const userId = session?.user?.id;
 
   const renderUserProfile = () => {
     if (session) {
@@ -63,6 +64,11 @@ export function HeaderModal() {
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handlejump}>
               <span>Захиалга харуулах</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <span onClick={() => router.push(`/hostProperty/${userId}`)}>
+                Миний байшин
+              </span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <LogOut />

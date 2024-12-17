@@ -6,7 +6,7 @@ import { TiStar } from "react-icons/ti";
 type PropertyProps = {
   image: string;
   address: string;
-  onclick: () => void;
+  onclick?: () => void;
 };
 
 export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
@@ -22,9 +22,8 @@ export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
   return (
     <div onClick={onclick} className="cursor-pointer gap-5">
       <div
-        className="h-[182] w-[224] rounded-2xl"
+        className="h-[182px] w-[224px] rounded-2xl bg-cover"
         style={{
-          height: 181,
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
         }}
@@ -41,8 +40,8 @@ export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
         <div className="flex justify-between">
           <h2 className="w-[180px] font-bold">{address} </h2>
           <div className="flex items-center">
-            <TiStar />
-            <p>5</p>
+            {/* <TiStar />
+            <p>5</p> */}
           </div>
         </div>
         <p className="text-[14px]"></p>

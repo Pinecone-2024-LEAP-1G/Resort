@@ -8,7 +8,7 @@ import { OrderProps } from "./OrderProps";
 type OrderDetailProps = {
   userId?: string;
 };
-type Reservation = {
+export type ReservationType = {
   _id: string;
   propertyId: {
     _id: string;
@@ -40,7 +40,7 @@ type Reservation = {
 };
 
 export const OrderDetail = ({ userId }: OrderDetailProps) => {
-  const [reservations, setReservations] = useState<Reservation[]>();
+  const [reservations, setReservations] = useState<ReservationType[]>();
 
   useEffect(() => {
     const getReservation = async () => {

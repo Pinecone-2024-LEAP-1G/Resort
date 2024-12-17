@@ -1,11 +1,7 @@
 import { connectToMongoDB } from "@/lib/db";
-import {
-  AvailableListModel,
-  PropertyModel,
-  ReservationModel,
-} from "@/lib/models";
-import { HostModel } from "@/lib/models/host.model";
+import { AvailableListModel, ReservationModel, UserModel } from "@/lib/models";
 import { nodeMailer } from "@/util/nodemailer";
+import moment from "moment";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -48,17 +44,13 @@ export const POST = async (request: NextRequest) => {
       checkOutDate: reservation.checkOut,
     });
 
-    const hostId = await PropertyModel.findById({
-      _id: reservation.propertyId,
-    });
-
-    const host = await HostModel.findById({ _id: hostId?.userId });
+    const host = await UserModel.findById({ _id: userId });
 
     const hostEmail = host?.email;
 
     await nodeMailer({
       to: hostEmail,
-      text: `startDate=${checkIn}, endDate${checkOut},gusts=${guest}`,
+      text: `startDate=${moment(checkIn).format("L")}}, endDate${moment(checkOut).format("L")},gusts=${guest}`,
     });
 
     return Response.json({
@@ -66,6 +58,8 @@ export const POST = async (request: NextRequest) => {
       availableList: availableList,
     });
   } catch (error) {
+    console.log(error);
+
     return Response.json({ message: error });
   }
 };
