@@ -32,26 +32,30 @@ type Props = {
 };
 
 export const HostReviewCard = ({ reviews }: Props) => {
+  if (reviews?.length === 0) {
+    return <p>no reviews</p>;
+  }
+
   return (
     <div>
       <Carousel className="w-full">
         <CarouselContent className="px-10">
-          {reviews?.map((review) => (
-            <CarouselItem key={review._id}>
-              <Card className="p-5">
-                <div>
+          <CarouselItem>
+            <Card className="p-5">
+              <div>
+                {reviews?.map((review) => (
                   <p key={review._id}>{review.comment}</p>
+                ))}
+              </div>
+              <div className="mt-4 flex items-center gap-2">
+                <div style={{ backgroundImage: `url(${""}})` }}></div>
+                <div>
+                  <p className="font-semibold"></p>
+                  <p>2024 May</p>
                 </div>
-                <div className="mt-4 flex items-center gap-2">
-                  <div style={{ backgroundImage: `url(${""}})` }}></div>
-                  <div>
-                    <p className="font-semibold"></p>
-                    <p>2024 May</p>
-                  </div>
-                </div>
-              </Card>
-            </CarouselItem>
-          ))}
+              </div>
+            </Card>
+          </CarouselItem>
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

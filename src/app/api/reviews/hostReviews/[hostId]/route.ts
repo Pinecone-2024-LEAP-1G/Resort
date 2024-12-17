@@ -4,10 +4,16 @@ export const GET = async (
   request: Request,
   { params }: { params: Promise<{ hostId: string }> },
 ) => {
-  const { userId } = (await params).hostId;
+  const { hostId } = await params;
+
+  console.log({ hostId });
+
+  if (!hostId) {
+    throw new Error("no host id");
+  }
 
   try {
-    const reviews = await ReviewModel.find({ hostId: userId }).populate(
+    const reviews = await ReviewModel.find({ userId: hostId }).populate(
       "userId",
     );
 
