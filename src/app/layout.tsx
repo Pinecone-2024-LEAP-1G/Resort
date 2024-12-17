@@ -15,6 +15,7 @@ const RootLayout = ({
 }>) => {
   const pathName = usePathname();
   const BecomeHostPage = pathName.startsWith("/become-host");
+  const ReviewPage = pathName.startsWith("/userReview");
   return (
     <Suspense>
       <SessionProvider>
@@ -30,7 +31,7 @@ const RootLayout = ({
                   <div className="mx-5 px-20">{children}</div>
                   <Toaster />
                   <div className="mx-5 px-20">
-                    {!BecomeHostPage && <Footer />}
+                    {!BecomeHostPage || (!ReviewPage && <Footer />)}
                   </div>
                 </div>
               </main>

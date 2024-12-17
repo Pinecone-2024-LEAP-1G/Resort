@@ -31,9 +31,9 @@ export const Address = ({
             reservation.
           </p>
         </div>
-        <div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
+        <div className="flex flex-col gap-5">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
               Select your province
             </label>
             <Select
@@ -60,11 +60,32 @@ export const Address = ({
             <div>
               <label
                 htmlFor="streetAddress"
-                className="block text-sm font-medium text-gray-700"
+                className="mb-1 block text-sm font-medium text-gray-700"
+              >
+                Title
+              </label>
+              <Input
+                id="streetAddress"
+                onChange={(value) =>
+                  handleChange({
+                    target: { name: "title", value: value.target.value },
+                  })
+                }
+                type="text"
+                placeholder="Enter your street title"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <div>
+              <label
+                htmlFor="streetAddress"
+                className="mb-1 block text-sm font-medium text-gray-700"
               >
                 Description
               </label>
               <Input
+                className="pl-3"
                 id="streetAddress"
                 onChange={(value) =>
                   handleChange({

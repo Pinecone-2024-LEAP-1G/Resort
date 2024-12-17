@@ -1,4 +1,5 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
+import { title } from "process";
 
 export type Property = {
   _id: string;
@@ -14,6 +15,7 @@ export type Property = {
   userId: mongoose.Schema.Types.ObjectId;
   reviewId: mongoose.Schema.Types.ObjectId[];
   length: number;
+  title: string;
 };
 
 const PropertySchema = new Schema<Property>(
@@ -35,6 +37,7 @@ const PropertySchema = new Schema<Property>(
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Review",
     },
+    title: { type: String },
   },
   { timestamps: true },
 );

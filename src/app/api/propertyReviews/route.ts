@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { PropertyModel, ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
-import { error } from "console";
 
 export const GET = async (request: NextRequest) => {
   const { propertyId } = await request.json();

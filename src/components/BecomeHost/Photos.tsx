@@ -2,15 +2,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { DragPhoto } from "../icons/DragPhoto";
 import Image from "next/image";
 import { PropertyHeader } from "./PropertyHeader";
@@ -145,12 +137,17 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
           />
         </div>
         <DialogTrigger asChild>
-          <Button variant="outline" className="w-full">
-            Review & Upload Photos
+          <Button
+            variant="outline"
+            className="h-[48px] w-full text-base"
+            onClick={handleUploadToCloudinary}
+            disabled={selectedFiles.length < 5 || uploading}
+          >
+            {uploading ? "Uploading..." : "Upload"}
           </Button>
         </DialogTrigger>
       </div>
-      <DialogContent className="sm:max-w-[568px]">
+      {/* <DialogContent className="sm:max-w-[568px]">
         <DialogHeader className="flex flex-col items-center">
           <DialogTitle>Upload photos</DialogTitle>
           <DialogDescription>
@@ -166,7 +163,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
             {uploading ? "Uploading..." : "Upload"}
           </Button>
         </DialogFooter>
-      </DialogContent>
+      </DialogContent> */}
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}

@@ -8,7 +8,6 @@ import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostViewCard";
-import { Button } from "react-day-picker";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [property, setProperty] = useState<PropertyType>();

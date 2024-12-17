@@ -1,5 +1,4 @@
 "use client";
-import { signIn } from "@/auth";
 import {
   Card,
   CardContent,
@@ -11,7 +10,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { ReviewUser } from "@/components/UserReview/star";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -20,8 +18,7 @@ const Review = () => {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>();
   const { data: session } = useSession();
-  const router = useRouter();
-  // if (!session) return router.push(`${signIn()}`);
+  if (comment?.length === 0) toast.message("Сэтгэгдэл бичнэ үү");
   const createHostView = async () => {
     try {
       const response = await axios.post("/api/propertyReviews", {
@@ -36,16 +33,25 @@ const Review = () => {
 
   return (
     <div className="my-10 flex items-center justify-center">
-      <Card className="w-fit p-5 text-center">
+      <Card className="w-fit p-7 text-center">
         <CardHeader>
-          <CardTitle>Таны оршин суусан газарт өгөх үнэлгээ</CardTitle>
+          <CardTitle className="text-2xl">
+            Таны оршин суусан газарт өгөх үнэлгээ
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-row justify-around">
             {stars.map((star, index) => {
               return (
                 <ReviewUser
-                  onClick={() => setRating(star)}
+                  onClick={() =>
+                    !session
+                      ? (setRating(0),
+                        toast.message(
+                          "Үнэлгээ өгөхийн тулд мэйлээрээ нэвтэрч орно уу",
+                        ))
+                      : setRating(star)
+                  }
                   key={index}
                   fill={rating > index ? "black" : "white"}
                 />
@@ -55,8 +61,11 @@ const Review = () => {
         </CardContent>
         <CardFooter>
           <div className="flex flex-col gap-5">
-            <p>Танд тухайн газар ямар сэтгэгдэл үлдээсэн бэ?</p>
+            <p className="text-lg">
+              Танд тухайн газар ямар сэтгэгдэл үлдээсэн бэ?
+            </p>
             <Textarea
+              disabled={!session}
               placeholder=" Сэтгэгдэл"
               onChange={(e) => setComment(e.target.value)}
             />

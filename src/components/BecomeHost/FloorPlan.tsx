@@ -59,7 +59,7 @@ export const FloorPlan = ({
                 }
               }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
-              disabled={guests < 1}
+              disabled={guests < 0}
             >
               <Plus className="h-4 w-4 text-black" />
             </Button>
@@ -95,7 +95,6 @@ export const FloorPlan = ({
                 }
               }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
-              disabled={beds < 1}
             >
               <Plus className="h-4 w-4 text-black" />
             </Button>
@@ -131,7 +130,6 @@ export const FloorPlan = ({
                 }
               }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
-              disabled={bathrooms < 0.5}
             >
               <Plus className="h-4 w-4 text-black" />
             </Button>
@@ -186,7 +184,7 @@ export const FloorPlan = ({
           </div>{" "}
         </div>{" "}
         <PriceFloor />
-        <div className="flex h-16 flex-row justify-between border-b p-4">
+        <div className="flex h-16 flex-row gap-[180px] border-b p-4">
           <p className="text-xl font-normal">Утасны дугаар</p>
           <input
             min={8}
@@ -212,11 +210,13 @@ export const FloorPlan = ({
           Буцах
         </button>
         <Button
-          disabled={!value.price || !value.cleaningFee}
-          aria-disabled={!value.price || !value.cleaningFee}
+          disabled={!value.price || !value.cleaningFee || !value.phoneNumber}
+          aria-disabled={
+            !value.price || !value.cleaningFee || !value.phoneNumber
+          }
           onClick={handleNext}
           aria-label="Proceed to the next step"
-          className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
+          className="rounded-lg px-6 py-3 text-white"
         >
           Дараагийх
         </Button>

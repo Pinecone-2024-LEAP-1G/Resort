@@ -28,6 +28,7 @@ export const POST = async (request: NextRequest) => {
     cleaningFee,
     userId,
     phoneNumber,
+    title,
   } = await request.json();
 
   try {
@@ -57,6 +58,7 @@ export const POST = async (request: NextRequest) => {
       email,
       cleaningFee,
       userId,
+      title,
     });
 
     const { _id } = properties;

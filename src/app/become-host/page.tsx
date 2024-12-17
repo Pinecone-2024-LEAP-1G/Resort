@@ -21,6 +21,7 @@ export type PropertyValue = {
   cleaningFee: number;
   categoryname: string;
   phoneNumber: number;
+  title: string;
 };
 type CustomEvent = {
   target: {
