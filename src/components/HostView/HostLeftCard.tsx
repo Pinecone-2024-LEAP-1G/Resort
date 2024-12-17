@@ -67,12 +67,12 @@ const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
       onClick={handleClick}
       className="mr-auto mt-[100px] flex h-[230px] w-[320px] cursor-pointer rounded-2xl border-2 shadow-2xl"
     >
-      <div className="mx-auto my-auto text-center">
+      <div className="flex flex-col items-center justify-center text-center">
         <CgProfile className="h-[70px] w-[70px]" />
         <div className="ml-[5px] text-[18px] font-bold">
           {host?.name || "Loading..."}
         </div>
-        <div className="ml-[15px] text-[16px]">Host</div>
+        <div className="text-[16px]">Түрээслэгч</div>
       </div>
       <div className="mx-auto mt-[15px]">
         <div>
@@ -81,13 +81,9 @@ const HostLeftCard = ({ hostId }: { hostId?: string | undefined }) => {
         </div>
         <div>
           <p className="mt-[10px] text-2xl font-bold">
-            {averageRating !== null ? averageRating.toFixed(1) : "N/A"}
+            {averageRating !== null ? averageRating.toFixed(1) : "0"}
           </p>
           <p className="text-xs">Үнэлгээ</p>
-        </div>
-        <div>
-          <p className="mt-[10px] text-2xl font-bold">7</p>
-          <p className="text-xs">Хугацаа</p>
         </div>
       </div>
     </div>
