@@ -26,9 +26,7 @@ type Reservation = {
   };
   checkIn: Date;
   checkOut: Date;
-  adult: number;
-  children: number;
-  infants: number;
+  guest: number;
   totalPrice: number;
   userId: {
     _id: string;
@@ -49,6 +47,7 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
       try {
         const response = await axios.get(`/api/reservations/${userId}`);
         setReservations(response.data.reservation);
+        console.log(response);
       } catch (error) {
         console.log(error);
 

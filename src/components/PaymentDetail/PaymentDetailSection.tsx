@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
+import { useSession } from "next-auth/react";
 
 export type Property = {
   _id: string;
@@ -35,30 +36,15 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
-  const adult = searchParams.get("adult");
-  const child = searchParams.get("child");
-  const pets = searchParams.get("pets");
-  const infants = searchParams.get("infants");
-  const totalPrice = searchParams.getAll("totalPrice");
-  let allGuests = 0;
+  const guest = searchParams.get("guest");
+  const totalPrice = searchParams.get("totalPrice");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-
-  if (adult && !isNaN(Number(adult))) {
-    allGuests += Number(adult);
-  }
-  if (child && !isNaN(Number(child))) {
-    allGuests += Number(child);
-  }
-  if (infants && !isNaN(Number(infants))) {
-    allGuests += Number(infants);
-  }
-  if (pets && !isNaN(Number(pets))) {
-    allGuests += Number(pets);
-  }
+  const { data: session } = useSession();
+  const userID = session?.user?.id;
 
   const SubmitReservation = async () => {
-    if (allGuests === 0) {
+    if (!guest) {
       return toast.error("Хүний тоог бөглөнө үү!");
     }
     setIsLoading(false);
@@ -66,12 +52,10 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       const response = await axios.post("/api/reservations", {
         checkIn: from,
         checkOut: to,
-        userId: "6747c5db0314e681044f54d0",
+        userId: userID,
         propertyId: propertyId,
-        adult: !isNaN(Number(adult)),
-        children: !isNaN(Number(child)),
-        infants: !isNaN(Number(infants)),
-        totalPrice: totalPrice[1],
+        guest: !isNaN(Number(guest)),
+        totalPrice: totalPrice,
       });
       setIsLoading(false);
       const userId = response.data.reservation.userId;
@@ -79,7 +63,6 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
       toast.success("zahialga amjilttai");
     } catch (error) {
       console.log(error);
-
       toast.error("error");
     }
   };
@@ -87,7 +70,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const ToastWithAction = () => {
     return (
       <Button
-        className="h-[72px] w-[556px] rounded-2xl text-lg font-semibold shadow-lg"
+        className="mt-10 h-[72px] w-[556px] rounded-2xl bg-green-500 text-lg font-semibold text-white shadow-lg"
         type="submit"
         variant="outline"
         onClick={SubmitReservation}
@@ -132,7 +115,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
               <div className="flex flex-row justify-between">
                 <div className="mb-6 border-t">
                   <p className="w-[556px] pt-6 font-medium">Зочдын тоо</p>
-                  <p className="text-lg font-semibold">{allGuests} зочин</p>
+                  <p className="text-lg font-semibold">{guest} зочин</p>
                   <div />
                 </div>
               </div>
@@ -144,6 +127,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
                 </div>
               </div>
             </div>
+            <ToastWithAction />
             <div className="flex pt-20">
               <Alert className="my-6 flex h-[98px] w-[556px] flex-row items-center justify-between rounded-2xl text-base shadow-lg">
                 <div className="flex flex-col">
@@ -171,8 +155,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
             </div>
           </div>
         </div>
+
         <RulesAndPolicy />
-        <ToastWithAction />
       </div>
       <div className="mr-auto flex flex-col items-center justify-start gap-8 p-5">
         <GetProperty propertyId={propertyId} />
