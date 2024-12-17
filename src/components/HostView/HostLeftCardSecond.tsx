@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { HostType } from "@/lib/models/host.model";
+import { HostType, HostTypePopulatedProperties } from "@/lib/models/host.model";
 import { GrStatusGood } from "react-icons/gr";
 
 type SecondProps = {
-  hostData?: HostType;
+  hostData?: HostTypePopulatedProperties;
 };
 const HostLeftCardSecond = ({ hostData }: SecondProps) => {
   return (
@@ -14,17 +14,9 @@ const HostLeftCardSecond = ({ hostData }: SecondProps) => {
           {hostData?.name} -н мэдээлэл
         </div>
       </div>
-      {/* <div className="mt-[15px] flex">
-        <GrStatusGood className="h-[30px] w-[30px]" />
-        <p className="ml-3 text-[16px]">Identity</p>
-      </div> */}
       <div className="mt-[30px] flex">
         <GrStatusGood className="h-[30px] w-[30px]" />
         <p className="ml-3 text-[16px]">{hostData?.email}</p>
-      </div>
-      <div className="mt-[30px] flex">
-        <GrStatusGood className="h-[30px] w-[30px]" />
-        <p className="ml-3 text-[16px]">{hostData?.phoneNumber}</p>
       </div>
       <Button className="text-[13px]" variant="link"></Button>
     </div>

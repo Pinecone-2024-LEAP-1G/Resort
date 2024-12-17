@@ -37,6 +37,12 @@ export function HeaderModal() {
   const handleAirbnbHome = () => {
     redirect("/become-host");
   };
+  const handlejump = () => {
+    redirect("ReservationPage");
+  };
+  const handleContact = () => {
+    redirect("HostContact");
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -51,15 +57,14 @@ export function HeaderModal() {
             Нэвтрэх
           </button>
         </DropdownMenuItem>
-        {/* <DropdownMenuSeparator /> */}
         <DropdownMenuItem onClick={handleAirbnbHome}>
           <span>Сууц бүртгүүлэх</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <span>Host an experience</span>
+        <DropdownMenuItem onClick={handlejump}>
+          <span>Захиалга харуулах</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <span>Тусламжийн төв</span>
+        <DropdownMenuItem onClick={handleContact}>
+          <span>Холбоо барих</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LogOut />

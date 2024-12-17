@@ -1,4 +1,5 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
+import { Property } from "./property.model";
 
 export type HostType = {
   _id?: mongoose.Schema.Types.ObjectId;
@@ -10,6 +11,10 @@ export type HostType = {
   phoneNumber: number;
   email: string;
   avatar: string;
+};
+
+export type HostTypePopulatedProperties = Omit<HostType, "propertyId"> & {
+  propertyId: Property[];
 };
 
 const Host = new Schema<HostType>(
