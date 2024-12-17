@@ -147,23 +147,6 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
           </Button>
         </DialogTrigger>
       </div>
-      {/* <DialogContent className="sm:max-w-[568px]">
-        <DialogHeader className="flex flex-col items-center">
-          <DialogTitle>Upload photos</DialogTitle>
-          <DialogDescription>
-            {selectedFiles.length} file(s) selected. You need at least 5.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter className="justify-between">
-          <Button
-            onClick={handleUploadToCloudinary}
-            disabled={selectedFiles.length < 5 || uploading}
-            className="h-[48px] w-[112px] text-base"
-          >
-            {uploading ? "Uploading..." : "Upload"}
-          </Button>
-        </DialogFooter>
-      </DialogContent> */}
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}
