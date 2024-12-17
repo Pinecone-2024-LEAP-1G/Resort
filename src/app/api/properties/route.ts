@@ -1,6 +1,5 @@
 import { connectToMongoDB } from "@/lib/db";
 import { PropertyModel, UserModel } from "@/lib/models";
-import { HostModel } from "@/lib/models/host.model";
 import { NextRequest } from "next/server";
 connectToMongoDB();
 
@@ -29,36 +28,45 @@ export const POST = async (request: NextRequest) => {
     userId,
     phoneNumber,
   } = await request.json();
+
   if (userId) {
-    try {
-      const properties = await PropertyModel.create({
-        address,
-        description,
-        guests,
-        price,
-        categoryId,
-        propertyPictures,
-        totalBedrooms,
-        totalBathrooms,
-        email,
-        cleaningFee,
-        userId,
-      });
+    await UserModel.findOneAndUpdate(
+      {
+        _id: userId,
+      },
+      { phoneNumber: phoneNumber },
+      { new: true },
+    );
+  }
 
-      const updateUser = await UserModel.findOneAndUpdate(
-        {
-          _id: userId,
-        },
-        { $push: { propertyId: properties?._id } },
-        { new: true },
-      );
+  try {
+    const properties = await PropertyModel.create({
+      address,
+      description,
+      guests,
+      price,
+      categoryId,
+      propertyPictures,
+      totalBedrooms,
+      totalBathrooms,
+      email,
+      cleaningFee,
+      userId,
+    });
 
-      return Response.json({
-        updateUser: updateUser,
-        properties: properties,
-      });
-    } catch (error) {
-      return Response.json({ message: error });
-    }
+    const updateUser = await UserModel.findOneAndUpdate(
+      {
+        _id: userId,
+      },
+      { $push: { propertyId: properties?._id } },
+      { new: true },
+    );
+
+    return Response.json({
+      updateUser: updateUser,
+      properties: properties,
+    });
+  } catch (error) {
+    return Response.json({ message: error });
   }
 };

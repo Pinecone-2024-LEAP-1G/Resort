@@ -9,7 +9,7 @@ type User = {
   phoneNumber: number;
   reservationId: mongoose.Schema.Types.ObjectId;
   role: "User" | "Admin";
-  propertyId: mongoose.Schema.Types.ObjectId;
+  propertyId: mongoose.Schema.Types.ObjectId[];
 };
 
 const UserSchema = new Schema<User>(
@@ -25,7 +25,7 @@ const UserSchema = new Schema<User>(
     },
     role: { type: String, enum: ["Admin", "User"], default: "User" },
     propertyId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "Property",
     },
   },
