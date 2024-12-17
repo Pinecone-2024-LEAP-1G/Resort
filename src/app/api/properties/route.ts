@@ -1,6 +1,5 @@
 import { connectToMongoDB } from "@/lib/db";
 import { PropertyModel, UserModel } from "@/lib/models";
-import { HostModel } from "@/lib/models/host.model";
 import { NextRequest } from "next/server";
 connectToMongoDB();
 
@@ -29,37 +28,18 @@ export const POST = async (request: NextRequest) => {
     userId,
     phoneNumber,
   } = await request.json();
-  const hostExist = await HostModel.findOne({
-    email,
-  });
 
-  if (!hostExist) {
-    const user = await UserModel.findOne({
-      email,
-    });
-    await HostModel.create({
-      name: user?.name,
-      email: user?.email,
-      phoneNumber: phoneNumber,
-      avatar: user?.image,
-    });
+  if (userId) {
+    await UserModel.findOneAndUpdate(
+      {
+        _id: userId,
+      },
+      { phoneNumber: phoneNumber },
+      { new: true },
+    );
   }
 
   try {
-    const hostExist = await HostModel.findOne({
-      email,
-    });
-    if (!hostExist) {
-      const user = await UserModel.findOne({
-        email,
-      });
-      await HostModel.create({
-        name: user?.name,
-        email: user?.email,
-        phoneNumber: phoneNumber,
-      });
-    }
-
     const properties = await PropertyModel.create({
       address,
       description,
@@ -74,24 +54,17 @@ export const POST = async (request: NextRequest) => {
       userId,
     });
 
-    const updatedHost = await HostModel.findOneAndUpdate(
+    const updateUser = await UserModel.findOneAndUpdate(
       {
-        email: email,
+        _id: userId,
       },
       { $push: { propertyId: properties?._id } },
       { new: true },
     );
 
-    const updateProprty = await PropertyModel.findByIdAndUpdate(
-      { _id: properties?._id },
-      {
-        userId: updatedHost?._id,
-      },
-      { new: true },
-    );
     return Response.json({
-      updateProprty: updateProprty,
-      updatedHost: updatedHost,
+      updateUser: updateUser,
+      properties: properties,
     });
   } catch (error) {
     return Response.json({ message: error });
