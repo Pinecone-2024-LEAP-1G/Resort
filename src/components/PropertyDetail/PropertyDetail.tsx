@@ -8,12 +8,15 @@ import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostLeftCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
+  const [loading, setLoading] = useState(true);
   const [property, setProperty] = useState<PropertyType>();
 
   useEffect(() => {
     const getPropertyById = async () => {
+      setLoading(true);
       try {
         const response = await axios.get<{ property: PropertyType }>(
           `/api/properties/${propertyId}`,
@@ -22,11 +25,15 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         setProperty(response.data.property);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     getPropertyById();
   }, [propertyId]);
+
+  const propertyPictures = property?.propertyPictures;
 
   return (
     <div className="mx-auto w-[1200px]">
@@ -45,17 +52,68 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
       </div>
       <div className="mt-4">
         <div className="grid- gap-4">
-          {property?.propertyPictures?.map((image, index) => (
-            <div key={index} className="col-span-1 hidden lg:block">
-              <Image
-                src={image}
-                alt=""
-                width={400}
-                height={400}
-                className="h-[400px] w-[400px] rounded-lg"
-              />
+          <div className="flex h-[560px] gap-2">
+            {loading ? (
+              <Skeleton className="w-1/2 rounded-xl" />
+            ) : (
+              <div
+                className="relative flex-1 rounded-xl"
+                style={{
+                  backgroundImage: `url(${propertyPictures?.[0]})`,
+                  backgroundSize: "cover",
+                }}
+              ></div>
+            )}
+
+            <div className="grid flex-1 grid-cols-2 grid-rows-2 gap-2">
+              {loading ? (
+                <Skeleton className="rounded-xl" />
+              ) : (
+                <div
+                  className="rounded-xl"
+                  style={{
+                    backgroundImage: `url(${propertyPictures?.[1]})`,
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              )}
+
+              {loading ? (
+                <Skeleton className="rounded-xl" />
+              ) : (
+                <div
+                  className="rounded-xl"
+                  style={{
+                    backgroundImage: `url(${propertyPictures?.[2]})`,
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              )}
+              {loading ? (
+                <Skeleton className="rounded-xl" />
+              ) : (
+                <div
+                  className="rounded-xl"
+                  style={{
+                    backgroundImage: `url(${propertyPictures?.[3]})`,
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              )}
+
+              {loading ? (
+                <Skeleton className="rounded-xl" />
+              ) : (
+                <div
+                  className="rounded-xl"
+                  style={{
+                    backgroundImage: `url(${propertyPictures?.[4]})`,
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              )}
             </div>
-          ))}
+          </div>
         </div>
         <div className="mt-10 flex justify-between">
           <div className="h-[225px] w-[600px] flex-1">
