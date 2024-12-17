@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import HostLeftCard, { HostModel } from "./HostLeftCard";
+import HostLeftCard from "./HostLeftCard";
 import HostLeftCardSecond from "./HostLeftCardSecond";
 import { HostReviewCard, ReviewType } from "./HostReviewCard";
 import { PropertyCard } from "./PropertyCard";
@@ -33,13 +32,14 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
 
         setHostdata(response.data.host);
 
-        const reviewsResponse = await axios.get<{
+        const { data } = await axios.get<{
           reviews: ReviewType[];
           reviewCount: number;
         }>(`http://localhost:3000/api/reviews/hostReviews/${hostId}`);
-        const reviewsData = reviewsResponse.data.reviews;
+
+        const reviewsData = data.reviews;
         setReviews(reviewsData);
-        setReviewCount(reviewsResponse.data.reviewCount);
+        setReviewCount(data.reviewCount);
 
         const totalRating = reviewsData.reduce(
           (acc, review) => acc + review.rating,
@@ -55,7 +55,7 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
     }
   }, [hostId]);
   return (
-    <div className="ml-auto flex justify-between">
+    <div className="ml-auto flex w-[1200px] justify-between">
       <div>
         <HostLeftCard hostId={hostId} />
         <HostLeftCardSecond hostData={hostData} />
@@ -75,16 +75,9 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
             <p className="font-bold">Red Rock resort талаар </p>
           </div>
 
-          <div className="mb-[32px] h-[230px] w-[700px] cursor-pointer">
+          <div className="mb-[32px] w-[700px] cursor-pointer">
             <HostReviewCard reviews={reviews} />
           </div>
-
-          <Button
-            className="font-semi mb-[30px] h-[48px] w-[400px] text-[19px]"
-            variant="link"
-          >
-            Бүгдийг харуулах нийт 7 сэтгэгдэл
-          </Button>
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
         <div className="flex justify-between">
@@ -102,9 +95,6 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
               />
             );
           })}
-          {/* <PropertyCard />
-          <PropertyCard />
-          <PropertyCard /> */}
         </div>
       </div>
     </div>
