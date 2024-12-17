@@ -4,11 +4,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { redirect } from "next/navigation";
-import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import { useRouter } from "next/navigation";
 import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -17,6 +15,7 @@ import Kebab from "../icons/Kebab";
 
 export function HeaderModal() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const renderUserProfile = () => {
     if (session) {
@@ -35,14 +34,12 @@ export function HeaderModal() {
   };
 
   const handleAirbnbHome = () => {
-    redirect("/become-host");
+    router.push("/become-host");
   };
   const handlejump = () => {
-    redirect("ReservationPage");
+    router.push("/ReservationPage");
   };
-  const handleContact = () => {
-    redirect("HostContact");
-  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -52,31 +49,33 @@ export function HeaderModal() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
-        <DropdownMenuItem onClick={() => signIn("google")}>
-          <button type="submit" className="text-sm font-normal">
-            Нэвтрэх
-          </button>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleAirbnbHome}>
-          <span>Сууц бүртгүүлэх</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handlejump}>
-          <span>Захиалга харуулах</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleContact}>
-          <span>Холбоо барих</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <LogOut />
+        {!session && (
+          <DropdownMenuItem onClick={() => signIn("google")}>
+            <button type="submit" className="text-sm font-normal">
+              Нэвтрэх
+            </button>
+          </DropdownMenuItem>
+        )}
+        {session && (
+          <>
+            <DropdownMenuItem>
+              <span onClick={handleAirbnbHome}>Сууц бүртгүүлэх</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handlejump}>
+              <span>Захиалга харуулах</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <LogOut />
 
-          <button
-            className="ml-2 text-sm font-normal"
-            onClick={() => signOut()}
-          >
-            Гарах
-          </button>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+              <button
+                className="ml-2 text-sm font-normal"
+                onClick={() => signOut()}
+              >
+                Гарах
+              </button>
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
