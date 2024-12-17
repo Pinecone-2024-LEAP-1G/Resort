@@ -21,11 +21,9 @@ const RootLayout = ({
         <NuqsAdapter>
           <html lang="en">
             <body>
-              <main>
+              <main className="w-full">
                 <div className="text-base font-normal">
-                  <div className="mx-5 px-20">
-                    {!BecomeHostPage && <Header />}
-                  </div>
+                  {!BecomeHostPage && <Header />}
                   <br />
                   <div className="mx-5 px-20">{children}</div>
                   <Toaster />

@@ -6,26 +6,25 @@ export const AboutYourPlace = ({ handleBack, handleNext }: PropertyClick) => {
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
-      <div className="mx-auto flex flex-col items-center px-6 md:flex-row md:items-center">
-        <div className="flex flex-col">
-          <p className="text-sm font-medium text-gray-600">Step 1</p>
-          <h1 className="mt-2 text-4xl font-bold leading-tight text-gray-900">
-            Tell us about your place
+      <div
+        className="relative mx-auto flex h-[724px] w-[628px] flex-col items-center rounded-3xl px-6 md:flex-row md:items-center"
+        style={{
+          backgroundImage:
+            "url('https://i.pinimg.com/736x/59/be/d2/59bed276e7ed42bfdf342db1a43d0f4a.jpg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="absolute top-10 flex flex-col gap-6">
+          <h1 className="mt-2 text-4xl font-bold leading-tight text-white">
+            Өөрийн газрыг танилцуулна уу
           </h1>
-          <p className="mt-4 text-lg text-gray-600">
-            In this step, we will ask you which type of property you have and if
-            guests will book the entire place or just a room. Then let us know
-            the location and how many guests can stay.
+          <p className="mt-4 text-balance text-2xl text-white">
+            Энэ алхамд бид таны ямар төрлийн үл хөдлөх хөрөнгөтэйг асуух бөгөөд
+            зочид бүхэл бүтэн байрыг эсвэл зөвхөн нэг өрөөг захиалах эсэхийг
+            тодруулна. Дараа нь байршил болон хэдэн зочин хүлээн авах боломжтойг
+            бидэнд мэдэгдэнэ үү.
           </p>
-        </div>
-        <div className="flex-shrink-0">
-          <video autoPlay muted aria-hidden="true">
-            <source
-              src="https://stream.media.muscache.com/zFaydEaihX6LP01x8TSCl76WHblb01Z01RrFELxyCXoNek.mp4?v_q=high"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
         </div>
       </div>
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
@@ -34,14 +33,14 @@ export const AboutYourPlace = ({ handleBack, handleNext }: PropertyClick) => {
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
         <Button
           onClick={handleNext}
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
         >
-          Next
+          Үргэлжүүлэх
         </Button>
       </div>
     </div>
