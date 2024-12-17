@@ -24,7 +24,7 @@ export default function HomeCard(props: HomeCardProps) {
   const price = property?.price ?? Infinity;
 
   return (
-    <div className="w-full rounded-xl bg-transparent transition-shadow duration-200 hover:shadow-lg">
+    <div className="w-full cursor-pointer rounded-xl bg-transparent shadow-lg transition-shadow duration-200">
       <Carousel className="w-full">
         <CarouselContent onClick={() => router.push(`/property/${propertyId}`)}>
           {propertyPictures?.map((propertyPicture, index) => {
@@ -37,7 +37,7 @@ export default function HomeCard(props: HomeCardProps) {
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                   }}
-                  className="aspect-[20/19] rounded-xl"
+                  className="aspect-[20/19] rounded-t-xl"
                 ></div>
               </CarouselItem>
             );
@@ -47,15 +47,14 @@ export default function HomeCard(props: HomeCardProps) {
       <div className="flex flex-col gap-2 px-1 py-4">
         <div className="mt-4 gap-2 md:grid-cols-2">
           <div>
-            <span className="text-md text-white">{property?.description}</span>
+            <span className="text-md">{property?.description}</span>
           </div>
           <div className="ml-auto flex items-center"></div>
         </div>
         <div className="flex items-center">
-          <span className="mr-1 text-lg font-semibold text-white">
-            {new Intl.NumberFormat().format(price)}
+          <span className="mr-1 text-lg font-semibold">
+            {new Intl.NumberFormat().format(price)}₮
           </span>
-          <span className="text-sm text-white">₮</span>
         </div>
       </div>
     </div>

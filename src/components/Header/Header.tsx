@@ -29,8 +29,11 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-between overflow-hidden border-none bg-gradient-to-b from-[#87CEEB] to-emerald-300 px-10">
-      <div className="flex gap-2" onClick={() => router.push("/")}>
+    <div className="flex items-center justify-between overflow-hidden border-none bg-white">
+      <div
+        className="flex cursor-pointer gap-2"
+        onClick={() => router.push("/")}
+      >
         <MainHeaderLogo />
       </div>
       <div

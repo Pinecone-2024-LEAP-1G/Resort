@@ -21,18 +21,7 @@ const RootLayout = ({
         <NuqsAdapter>
           <html lang="en">
             <body>
-              <main
-                className="w-full"
-                style={{
-                  backgroundImage:
-                    "url('https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundAttachment: "fixed",
-                  boxShadow: " inset 0 0 0 1000px rgba(135,206,235,.6)",
-                  backgroundBlendMode: "color-dodge",
-                }}
-              >
+              <main className="w-full">
                 <div className="text-base font-normal">
                   {!BecomeHostPage && <Header />}
                   <br />
