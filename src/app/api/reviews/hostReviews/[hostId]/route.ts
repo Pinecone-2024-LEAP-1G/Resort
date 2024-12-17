@@ -6,8 +6,6 @@ export const GET = async (
 ) => {
   const { hostId } = await params;
 
-  console.log({ hostId });
-
   if (!hostId) {
     throw new Error("no host id");
   }
