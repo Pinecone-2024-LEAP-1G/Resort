@@ -2,7 +2,7 @@ name: Daily Email Job
 
 on:
   schedule:
-    - cron: "0 9 * * *" # Өдөр бүр өглөөний 9 цагт ажиллана
+    - cron: "15 10 * * *" # Өдөр бүр өглөөний 10:15 цагт ажиллана
 
 jobs:
   send-email:

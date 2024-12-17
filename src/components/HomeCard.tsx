@@ -28,7 +28,7 @@ export default function HomeCard(props: HomeCardProps) {
   return (
     <div>
       <Carousel className="w-full">
-        <CarouselContent onClick={() => router.push(`/property/${propertyId}`)}>
+        <CarouselContent>
           {propertyPictures?.map((propertyPicture, index) => {
             console.log(propertyPictures);
             return (
@@ -49,7 +49,10 @@ export default function HomeCard(props: HomeCardProps) {
         <CarouselPrevious className="ml-[70px]" />
         <CarouselNext className="mr-[70px]" />
       </Carousel>
-      <div className="grid grid-cols-2">
+      <div
+        className="grid grid-cols-2"
+        onClick={() => router.push(`/property/${propertyId}`)}
+      >
         <div>
           <span>{property?.description}</span>
         </div>
