@@ -57,7 +57,6 @@ export function HeaderModal() {
             Нэвтрэх
           </button>
         </DropdownMenuItem>
-        {/* <DropdownMenuSeparator /> */}
         <DropdownMenuItem onClick={handleAirbnbHome}>
           <span>Сууц бүртгүүлэх</span>
         </DropdownMenuItem>

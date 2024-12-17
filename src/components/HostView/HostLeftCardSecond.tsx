@@ -18,10 +18,6 @@ const HostLeftCardSecond = ({ hostData }: SecondProps) => {
         <GrStatusGood className="h-[30px] w-[30px]" />
         <p className="ml-3 text-[16px]">{hostData?.email}</p>
       </div>
-      <div className="mt-[30px] flex">
-        <GrStatusGood className="h-[30px] w-[30px]" />
-        <p className="ml-3 text-[16px]">{hostData?.phoneNumber}</p>
-      </div>
       <Button className="text-[13px]" variant="link"></Button>
     </div>
   );

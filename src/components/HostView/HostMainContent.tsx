@@ -6,7 +6,7 @@ import HostLeftCardSecond from "./HostLeftCardSecond";
 import { HostReviewCard, ReviewType } from "./HostReviewCard";
 import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
-import { HostType, HostTypePopulatedProperties } from "@/lib/models/host.model";
+import { HostTypePopulatedProperties } from "@/lib/models/host.model";
 import { useRouter } from "next/navigation";
 
 const HostMainContent = ({ hostId }: { hostId: string }) => {
@@ -56,7 +56,8 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
         <p className="text-[30px] font-bold"> Зөвлөмж</p>
         <div className="mb-5 mt-5">
           <p className="text-s mb-[32px] w-[700px]">
-            Тухайн амралтын газах амрахдаа дараах дүрмийг баримтлана.
+            Тухайн амралтын газар амрахдаа та өмнөх хэрэглэчийн сэтгэгдэлийг
+            уншина уу.
           </p>
           <div className="mb-[32px] border-b-2 border-black"></div>
           <div className="mb-[32px] flex justify-between">
