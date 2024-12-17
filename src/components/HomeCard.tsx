@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Property } from "@/lib/models";
 
@@ -26,7 +24,7 @@ export default function HomeCard(props: HomeCardProps) {
   const price = property?.price ?? Infinity;
 
   return (
-    <div>
+    <div className="w-full rounded-xl bg-transparent transition-shadow duration-200 hover:shadow-lg">
       <Carousel className="w-full">
         <CarouselContent onClick={() => router.push(`/property/${propertyId}`)}>
           {propertyPictures?.map((propertyPicture, index) => {
@@ -45,21 +43,20 @@ export default function HomeCard(props: HomeCardProps) {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
-      <div className="grid grid-cols-2">
-        <div>
-          <span>{property?.description}</span>
+      <div className="flex flex-col gap-2 px-1 py-4">
+        <div className="mt-4 gap-2 md:grid-cols-2">
+          <div>
+            <span className="text-md text-white">{property?.description}</span>
+          </div>
+          <div className="ml-auto flex items-center"></div>
         </div>
-        <div className="ml-auto flex items-center"></div>
-      </div>
-      <p></p>
-      <div>
-        <span className="mr-[2px] text-[15px] font-bold">
-          {new Intl.NumberFormat().format(price)}
-        </span>
-        <span>₮</span>
+        <div className="flex items-center">
+          <span className="mr-1 text-lg font-semibold text-white">
+            {new Intl.NumberFormat().format(price)}
+          </span>
+          <span className="text-sm text-white">₮</span>
+        </div>
       </div>
     </div>
   );

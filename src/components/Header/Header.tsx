@@ -1,5 +1,5 @@
 "use client";
-import { DiCodeigniter } from "react-icons/di";
+
 import { HeaderSearch } from "./HeaderSearchAddress";
 import { DatePickerWithRange } from "./HeaderDate";
 import React, { useState } from "react";
@@ -8,6 +8,7 @@ import { HeaderModal } from "./HeaderModal";
 import { PopoverDemo } from "./HeaderSearchGuests";
 import { useRouter } from "next/navigation";
 import { SelectRangeEventHandler } from "react-day-picker";
+import { MainHeaderLogo } from "../icons/MainHeaderLogo";
 
 const Header = () => {
   const [hover, setHover] = React.useState<number>();
@@ -28,13 +29,12 @@ const Header = () => {
   };
 
   return (
-    <div className="flex items-center justify-between px-2 py-8">
+    <div className="sticky top-0 z-50 flex items-center justify-between overflow-hidden border-none bg-gradient-to-b from-[#87CEEB] to-emerald-300 px-10">
       <div className="flex gap-2" onClick={() => router.push("/")}>
-        <DiCodeigniter className="h-10 w-10" />
-        <p className="w-[30px] font-bold text-green-500">Хөдөө гарья</p>
+        <MainHeaderLogo />
       </div>
       <div
-        className={`flex rounded-full border-2 ${hover === 0 ? "bg-gray-100" : "bg-gray-100"}`}
+        className={`flex rounded-full border text-xs ${hover === 0 ? "bg-gray-100" : "bg-gray-100"}`}
       >
         <HeaderSearch
           show={show}

@@ -28,7 +28,7 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
   }, []);
 
   return (
-    <div className="flex items-center">
+    <div className="sticky flex items-center">
       <CircleChevronLeft />
       <ScrollArea className="w-screen">
         <div className="flex flex-row gap-9">

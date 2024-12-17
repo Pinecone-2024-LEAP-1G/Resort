@@ -7,7 +7,6 @@ import { FloorPlan } from "@/components/BecomeHost/FloorPlan";
 import { Structure } from "@/components/BecomeHost/Structure";
 import { Photos } from "@/components/BecomeHost/Photos";
 import React, { useState } from "react";
-import { Overview } from "@/components/BecomeHost/OverView";
 
 export type PropertyValue = {
   address: string;
@@ -44,7 +43,6 @@ export type PropertyClick = {
 };
 
 const stepper = [
-  Overview,
   AboutYourPlace,
   Address,
   Structure,

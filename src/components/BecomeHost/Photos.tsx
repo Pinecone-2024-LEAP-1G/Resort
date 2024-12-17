@@ -104,10 +104,10 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
       <div className="mx-auto mt-8 flex w-[640px] flex-col gap-12">
         <div className="flex flex-col gap-2">
           <h3 className="text-[32px] font-semibold text-[#222222]">
-            Add some photos of your property
+            Өөрийн газрын зурагаа оруулна уу
           </h3>
           <p className="h-[48px] w-[588px] text-lg font-normal text-[#6a6a6a]">
-            You will need at least 5 photos to get started.
+            Таньд багадаа 5 зураг хэрэгтэй
           </p>
         </div>
         <div
@@ -131,10 +131,10 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
             </div>
           )}
           <p className="text-2xl font-semibold">
-            Drag and drop or browse for photos
+            Та зурагаа чирж эсвэл хайж оруулна уу.
           </p>
           <Button onClick={handleButtonClick} className="h-12 w-[103.5px]">
-            Browse
+            Хайх
           </Button>
           <Input
             ref={inputRef}
@@ -146,7 +146,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
         </div>
         <DialogTrigger asChild>
           <Button variant="outline" className="w-full">
-            Review & Upload Photos
+            Шалгаад илгээх
           </Button>
         </DialogTrigger>
       </div>
@@ -163,7 +163,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
             disabled={selectedFiles.length < 5 || uploading}
             className="h-[48px] w-[112px] text-base"
           >
-            {uploading ? "Uploading..." : "Upload"}
+            {uploading ? "Хүлээн авч байна..." : "Хүлээн авлаа"}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -173,7 +173,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
         <Button
           disabled={selectedFiles.length < 5 || uploading}
@@ -181,7 +181,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
         >
-          Next
+          Үргэлжүүлэх
         </Button>
       </div>
     </Dialog>

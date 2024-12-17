@@ -51,7 +51,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
               <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Bairshil</p>
+                  <p className="text-sm font-medium leading-none">Байршил</p>
                   <p className="text-sm text-muted-foreground">
                     {value.address}
                   </p>
@@ -63,7 +63,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Delgerengvi hayg
+                    Дэлгэрэнгүй хаяг
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {value.description}
@@ -76,7 +76,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Cleaning Fee price
+                    Цэвэрлэгээний төлбөр
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {value.cleaningFee}
@@ -89,7 +89,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Tvreesiin vne
+                    Түрээсийн үнэ
                   </p>
                   <p className="text-sm text-muted-foreground">{value.price}</p>
                 </div>
@@ -100,13 +100,13 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    bedrooms and bathrooms
+                    Унталгын өрөө болон угаалгын өрөө
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    bathrooms {value.totalBathrooms}
+                    Угаалгын өрөө {value.totalBathrooms}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    bedrooms {value.totalBedrooms}
+                    Унталгын өрөө {value.totalBedrooms}
                   </p>
                 </div>
               </div>
@@ -115,9 +115,9 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
               <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Guests</p>
+                  <p className="text-sm font-medium leading-none">Зочид</p>
                   <p className="text-sm text-muted-foreground">
-                    Guests {value.guests}
+                    Зочид {value.guests}
                   </p>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
               <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Category</p>
+                  <p className="text-sm font-medium leading-none">Төрөл</p>
                   <div className="flex flex-row">
                     <p className="text-sm,text-muted-foreground">
                       {value.categoryname}
@@ -140,7 +140,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
               <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Pictures</p>
+                  <p className="text-sm font-medium leading-none">Зурагнууд</p>
                   <div className="flex flex-wrap gap-4">
                     {value.propertyPictures.map((picture, index) => {
                       return (
@@ -177,7 +177,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
       </div>
     </div>

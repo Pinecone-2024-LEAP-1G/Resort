@@ -43,12 +43,12 @@ const Home = () => {
         onClick={(id) => changePropertyCategory(id)}
         allProperties={() => setFilterProperty(properties)}
       />
-      <div className="grid grow grid-cols-6 gap-8">
+      <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {filterProperty?.map((property, index) => {
           if (filterProperty[0].length === 0)
             return (
               <div key={index} className="p-10 text-center">
-                Tanii haisan utga oldsongvi
+                Таны хайсан утга олдсонгүй.
               </div>
             );
           else

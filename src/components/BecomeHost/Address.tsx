@@ -23,17 +23,13 @@ export const Address = ({
       <div className="mx-auto my-8 flex w-[630px] flex-col gap-6">
         <div className="flex flex-col gap-6">
           <h1 className="text-[32px] font-semibold">
-            Where is your place located?
+            Таны байр хаана байдаг вэ?
           </h1>
-          <p className="text-lg text-[#6a6a6a]">
-            Your address is only shared with guests after they have made a
-            reservation.
-          </p>
         </div>
         <div>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Select your province
+              Бүсээ сонгоно уу
             </label>
             <Select
               value={value.address}
@@ -61,7 +57,7 @@ export const Address = ({
                 htmlFor="streetAddress"
                 className="block text-sm font-medium text-gray-700"
               >
-                Description
+                Тайлбар
               </label>
               <Input
                 id="streetAddress"
@@ -83,7 +79,7 @@ export const Address = ({
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
         <Button
           disabled={!value.address || !value.description}
@@ -92,7 +88,7 @@ export const Address = ({
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
         >
-          Next
+          Үргэлжүүлэх
         </Button>
       </div>
     </div>
