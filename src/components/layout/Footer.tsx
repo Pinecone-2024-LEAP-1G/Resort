@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 export const Footer = () => {
   const [showAll, setShowAll] = useState(false);
-  const [filter, setFilter] = useState<PropertyType[]>();
+  const [, setFilter] = useState<PropertyType[]>();
   const [address, setAdress] = useQueryState("address");
 
   useEffect(() => {

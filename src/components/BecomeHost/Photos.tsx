@@ -2,15 +2,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { DragPhoto } from "../icons/DragPhoto";
 import Image from "next/image";
 import { PropertyHeader } from "./PropertyHeader";
@@ -85,7 +77,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
       }
       setUploadedImageUrls(uploadedUrls);
 
-      alert("All photos uploaded successfully!");
+      alert("Зураг амжилттай уншигдаж дууслаа");
     } catch (error) {
       console.error("Error uploading images:", error);
       alert("Failed to upload images.");
@@ -99,91 +91,80 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
     inputRef.current?.click();
   };
   return (
-    <Dialog>
-      <PropertyHeader />
-      <div className="mx-auto mt-8 flex w-[640px] flex-col gap-12">
-        <div className="flex flex-col gap-2">
-          <h3 className="text-[32px] font-semibold text-[#222222]">
-            Өөрийн газрын зурагаа оруулна уу
-          </h3>
-          <p className="h-[48px] w-[588px] text-lg font-normal text-[#6a6a6a]">
-            Таньд багадаа 5 зураг хэрэгтэй
-          </p>
-        </div>
-        <div
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={handleDrop}
-          className="flex h-[417px] w-[640px] flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed bg-[#f7f7f7]"
-        >
-          {selectedFiles.length === 0 && <DragPhoto />}
-          {selectedFiles.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {selectedFiles.map((file, index) => (
-                <Image
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt={`Preview ${index + 1}`}
-                  width={100}
-                  height={100}
-                  className="rounded-md"
-                />
-              ))}
-            </div>
-          )}
-          <p className="text-2xl font-semibold">
-            Та зурагаа чирж эсвэл хайж оруулна уу.
-          </p>
-          <Button onClick={handleButtonClick} className="h-12 w-[103.5px]">
-            Хайх
-          </Button>
-          <Input
-            ref={inputRef}
-            type="file"
-            className="hidden"
-            onChange={handleFileUpload}
-            multiple
-          />
-        </div>
-        <DialogTrigger asChild>
-          <Button variant="outline" className="w-full">
-            Шалгаад илгээх
-          </Button>
-        </DialogTrigger>
-      </div>
-      <DialogContent className="sm:max-w-[568px]">
-        <DialogHeader className="flex flex-col items-center">
-          <DialogTitle>Upload photos</DialogTitle>
-          <DialogDescription>
-            {selectedFiles.length} file(s) selected. You need at least 5.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter className="justify-between">
-          <Button
-            onClick={handleUploadToCloudinary}
-            disabled={selectedFiles.length < 5 || uploading}
-            className="h-[48px] w-[112px] text-base"
+    <div className="flex min-h-screen flex-col justify-between">
+      <Dialog>
+        <PropertyHeader />
+        <div className="mx-auto mt-8 flex w-[640px] flex-col gap-12">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-[32px] font-semibold text-[#222222]">
+              Газрынхаа ерөнхий үзэмжийг харуулсан зураг оруулна уу
+            </h3>
+            <p className="h-[48px] w-[588px] text-lg font-normal text-[#6a6a6a]">
+              Таньд багадаа 5 зураг хэрэгтэй
+            </p>
+          </div>
+          <div
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={handleDrop}
+            className="flex h-[417px] w-[640px] flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed bg-[#f7f7f7]"
           >
-            {uploading ? "Хүлээн авч байна..." : "Хүлээн авлаа"}
+            {selectedFiles.length === 0 && <DragPhoto />}
+            {selectedFiles.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedFiles.map((file, index) => (
+                  <Image
+                    key={index}
+                    src={URL.createObjectURL(file)}
+                    alt={`Preview ${index + 1}`}
+                    width={100}
+                    height={100}
+                    className="rounded-md"
+                  />
+                ))}
+              </div>
+            )}
+            <p className="text-2xl font-semibold">
+              Та зурагаа чирж эсвэл сонгож оруулна уу.
+            </p>
+            <Button onClick={handleButtonClick} className="h-12 w-[103.5px]">
+              Сонгох
+            </Button>
+            <Input
+              ref={inputRef}
+              type="file"
+              className="hidden"
+              onChange={handleFileUpload}
+              multiple
+            />
+          </div>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              onClick={handleUploadToCloudinary}
+              className="w-full"
+            >
+              {uploading ? "Хүлээн авч байна..." : "Хүлээн авах"}
+            </Button>
+          </DialogTrigger>
+        </div>
+        <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
+          <button
+            onClick={handleBack}
+            aria-label="Go back to the previous step"
+            className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
+          >
+            Буцах
+          </button>
+          <Button
+            disabled={selectedFiles.length < 5 || uploading}
+            onClick={handleNext}
+            aria-label="Proceed to the next step"
+            className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
+          >
+            Үргэлжүүлэх
           </Button>
-        </DialogFooter>
-      </DialogContent>
-      <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
-        <button
-          onClick={handleBack}
-          aria-label="Go back to the previous step"
-          className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
-        >
-          Буцах
-        </button>
-        <Button
-          disabled={selectedFiles.length < 5 || uploading}
-          onClick={handleNext}
-          aria-label="Proceed to the next step"
-          className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
-        >
-          Үргэлжүүлэх
-        </Button>
-      </div>
-    </Dialog>
+        </div>
+      </Dialog>
+    </div>
   );
 };

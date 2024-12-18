@@ -11,8 +11,6 @@ export const GET = async (
       propertyId: propertyId,
     }).populate("userId");
 
-    console.log(review.length);
-
     return Response.json({ review: review });
   } catch (error) {
     return Response.json({ message: error });
