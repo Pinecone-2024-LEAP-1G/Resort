@@ -20,7 +20,7 @@ export const Footer = () => {
 
         setFilter(response.data.properties);
       } catch (error) {
-        toast.error(error);
+        toast.error("error");
       }
     };
     getaddressProperty();
