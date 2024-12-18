@@ -26,8 +26,8 @@ export const FloorPlan = ({
           <h1 className="text-[32px] font-semibold">
             Газрын талаарх үндсэн мэдээллийг оруулна уу
           </h1>
-          <span className="text-lg text-[#6a6a6a]">
-            Мэдээллийг бөглөхдөө тооцоолох орлого хэсгийг нягталж харна уу
+          <span className="text-base text-[#6a6a6a]">
+            Мэдээллийг бөглөхдөө `тооцоолох орлого` хэсгийг нягталж харна уу
           </span>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">

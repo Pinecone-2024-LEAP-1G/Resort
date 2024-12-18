@@ -46,7 +46,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
     }
     setIsLoading(false);
     try {
-      const response = await axios.post("/api/reservations", {
+      await axios.post("/api/reservations", {
         checkIn: from,
         checkOut: to,
         userId: userID,
@@ -55,7 +55,6 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         totalPrice: totalPrice,
       });
       setIsLoading(false);
-      console.log(response);
 
       router.push(`/orderDetail/${userID}`);
       toast.success("zahialga amjilttai");

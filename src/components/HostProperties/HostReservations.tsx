@@ -11,8 +11,7 @@ type Props = {
 };
 
 export const HostReservations = ({ propertyId }: Props) => {
-  const [reservations, setReservations] = useState<ReservationType[]>();
-  console.log(reservations);
+  const [, setReservations] = useState<ReservationType[]>();
 
   useEffect(() => {
     const getReserve = async () => {
