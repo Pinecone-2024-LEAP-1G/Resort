@@ -31,7 +31,7 @@ export const HostProperties = ({ userId }: HostProps) => {
   }, [userId]);
 
   return (
-    <div>
+    <div className="mx-auto w-[1074px]">
       <h1 className="p-12 text-xl font-bold">{properties?.name} </h1>
       <div className="grid grid-cols-3">
         {properties?.propertyId.map((property) => (

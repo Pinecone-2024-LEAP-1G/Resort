@@ -58,8 +58,6 @@ export const POST = async (request: NextRequest) => {
       availableList: availableList,
     });
   } catch (error) {
-    console.log(error);
-
     return Response.json({ message: error });
   }
 };

@@ -13,11 +13,13 @@ export const GET = async (
 ) => {
   const propertyId = (await params).propertyId;
   try {
-    const reservation = await ReservationModel.findOne({
+    const reservation = await ReservationModel.find({
       propertyId: propertyId,
-    }).populate("userId");
+    })
+      .populate("userId")
+      .populate("propertyId");
 
-    return Response.json({ reservations: [reservation] });
+    return Response.json({ reservations: reservation });
   } catch (error) {
     return Response.json({ error: error });
   }

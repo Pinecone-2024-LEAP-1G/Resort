@@ -143,6 +143,10 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     if (!session) {
       toast.message("Та захиалга хийхийн тулд мэйлээрээ нэвтэрч орно уу");
       return;
+    }
+    if (!numberOfGuest) {
+      toast.error("Хүний тоог бөглөнө үү!");
+      return;
     } else
       router.push(
         `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&guest=${numberOfGuest}&totalPrice=${totalPrice}`,

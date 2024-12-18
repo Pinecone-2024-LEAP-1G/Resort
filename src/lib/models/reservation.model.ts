@@ -6,9 +6,8 @@ export type Reservation = {
   propertyId: mongoose.Schema.Types.ObjectId;
   checkIn: Date;
   checkOut: Date;
-  adult: number;
-  children: number;
-  infants: number;
+  guest: number;
+
   totalPrice: number;
 };
 
@@ -25,9 +24,7 @@ const ReservationSchema = new Schema<Reservation>(
     },
     checkIn: { type: Date, required: true },
     checkOut: { type: Date, required: true },
-    adult: { type: Number },
-    children: { type: Number },
-    infants: { type: Number },
+    guest: { type: Number },
     totalPrice: { type: Number, required: true },
   },
   { timestamps: true },
