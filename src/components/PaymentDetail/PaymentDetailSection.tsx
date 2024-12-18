@@ -58,8 +58,9 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         totalPrice: totalPrice,
       });
       setIsLoading(false);
-      const userId = response.data.reservation.userId;
-      router.push(`/orderDetail/${userId}`);
+      console.log(response);
+
+      router.push(`/orderDetail/${userID}`);
       toast.success("zahialga amjilttai");
     } catch (error) {
       console.log(error);

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQueryState } from "nuqs";
 import { PropertyType } from "../Review";
+import { toast } from "sonner";
 
 export const Footer = () => {
   const [showAll, setShowAll] = useState(false);
@@ -19,12 +20,11 @@ export const Footer = () => {
 
         setFilter(response.data.properties);
       } catch (error) {
-        console.log(error);
+        toast.error(error);
       }
     };
     getaddressProperty();
   }, [address]);
-  console.log(filter);
 
   const regions = [
     { name: "Arhangai", id: "arhangai" },
