@@ -22,6 +22,6 @@ export const nodeMailer = async ({ to, text }: MailType) => {
     to: to,
     subject: "Хөдөө гарья вэб сайт",
     text: text,
-    html: `<div style{}></div>`,
+    html: `<div>${text}</div>`,
   });
 };

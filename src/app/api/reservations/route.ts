@@ -47,10 +47,11 @@ export const POST = async (request: NextRequest) => {
     const host = await UserModel.findById({ _id: userId });
 
     const hostEmail = host?.email;
+    console.log(guest);
 
     await nodeMailer({
       to: hostEmail,
-      text: `startDate=${moment(checkIn).format("L")}}, endDate${moment(checkOut).format("L")},gusts=${guest}`,
+      text: ` ${moment(checkIn).format("L")}-${moment(checkOut).format("L")},  зочдын тоо=${guest} захиалга ирсэн байна`,
     });
 
     return Response.json({
