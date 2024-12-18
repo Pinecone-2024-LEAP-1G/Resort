@@ -25,7 +25,7 @@ const RootLayout = ({
             <body>
               <main className="w-full">
                 <div className="text-base font-normal">
-                  {!BecomeHostPage || (!GooglePage && <Header />)}
+                  {!BecomeHostPage && <Header />}
                   <br />
                   <div
                     className={`mx-auto max-w-screen-2xl px-20 ${!BecomeHostPage ? "pt-32" : ""}`}
@@ -34,7 +34,7 @@ const RootLayout = ({
                   </div>
                   <Toaster />
                   <div className="mx-5 px-20">
-                    {!BecomeHostPage || (!GooglePage && <Footer />)}
+                    {!BecomeHostPage && <Footer />}
                   </div>
                 </div>
               </main>
