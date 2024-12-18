@@ -1,10 +1,12 @@
 import { PropertyHeader } from "./PropertyHeader";
 import { Button } from "../ui/button";
 import { PropertyClick } from "@/app/become-host/page";
+import { useRouter } from "next/navigation";
 
-export const AboutYourPlace = ({ handleBack, handleNext }: PropertyClick) => {
+export const AboutYourPlace = ({ handleNext }: PropertyClick) => {
+  const router = useRouter();
   return (
-    <div className="flex min-h-screen flex-col justify-between">
+    <div className="mx-auto flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div
         className="relative mx-auto flex h-[724px] w-[628px] flex-col items-center rounded-3xl px-6 md:flex-row md:items-center"
@@ -29,7 +31,7 @@ export const AboutYourPlace = ({ handleBack, handleNext }: PropertyClick) => {
       </div>
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
-          onClick={handleBack}
+          onClick={() => router.push("/")}
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >

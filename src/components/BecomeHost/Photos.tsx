@@ -25,7 +25,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
     );
 
     if (validFiles.length + selectedFiles.length > 5) {
-      alert("You can only select up to 5 photos.");
+      alert("Та зөвхөн 5 хүртэлх зураг сонгох боломжтой");
       return;
     }
 
@@ -45,7 +45,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
     );
 
     if (validFiles.length + selectedFiles.length > 5) {
-      alert("You can only select up to 5 photos.");
+      alert("Та зөвхөн 5 хүртэлх зураг сонгох боломжтой.");
       return;
     }
 
@@ -54,7 +54,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
 
   const handleUploadToCloudinary = async () => {
     if (selectedFiles.length < 5) {
-      alert("Please select at least 5 photos before uploading.");
+      alert("Байршуулахаасаа өмнө дор хаяж 5 зураг сонгоно уу.");
       return;
     }
 
@@ -80,7 +80,7 @@ export const Photos = ({ handleBack, handleNext, value }: PropertyClick) => {
       alert("Зураг амжилттай уншигдаж дууслаа");
     } catch (error) {
       console.error("Error uploading images:", error);
-      alert("Failed to upload images.");
+      alert("Зураг уншихад алдаа гарлаа.");
     } finally {
       setUploading(false);
     }
