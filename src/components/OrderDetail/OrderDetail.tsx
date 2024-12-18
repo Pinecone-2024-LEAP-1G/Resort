@@ -10,6 +10,7 @@ import moment from "moment";
 type OrderDetailProps = {
   userId?: string;
 };
+
 export type ReservationType = {
   _id: string;
   createdAt: Date;
@@ -48,12 +49,18 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
   const getReservation = async () => {
     try {
       const response = await axios.get(`/api/reservations/${userId}`);
-      setReservations(response.data.reservation);
+      // Sort reservations by createdAt (latest first)
+      const sortedReservations = response.data.reservation.sort(
+        (a: ReservationType, b: ReservationType) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      );
+      setReservations(sortedReservations);
     } catch (error) {
       console.log(error);
       toast.error("error");
     }
   };
+
   useEffect(() => {
     getReservation();
   }, [userId]);
@@ -78,8 +85,7 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
         {reservations?.map((reservation) => (
           <div key={reservation._id}>
             <h1 className="mb-2 font-bold">
-              Захиалга хийсэн өдөр:
-              {moment(reservation.createdAt).format("ll")}
+              Захиалга хийсэн өдөр: {moment(reservation.createdAt).format("ll")}
             </h1>
             <div
               onClick={() =>
