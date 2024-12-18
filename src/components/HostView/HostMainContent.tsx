@@ -13,14 +13,14 @@ import { Property } from "@/lib/models";
 const HostMainContent = ({ hostId }: { hostId: string }) => {
   const [hostData, setHostdata] = useState<HostTypePopulatedProperties>();
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [reviewCount, setReviewCount] = useState<number>(0);
-  const [averageRating, setAverageRating] = useState<number>(0);
+  const [, setReviewCount] = useState<number>(0);
+  const [, setAverageRating] = useState<number>(0);
   const router = useRouter();
 
   useEffect(() => {
     const getHostData = async () => {
       try {
-        const response = await axios.get(`/api/users/${hostId}`);
+        const response = await axios.get(`/api/host/${hostId}`);
 
         setHostdata(response.data.host);
 
@@ -37,6 +37,7 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
           (acc, review) => acc + review.rating,
           0,
         );
+
         setAverageRating(totalRating / reviewsData.length || 0);
       } catch (error) {
         console.error(error);

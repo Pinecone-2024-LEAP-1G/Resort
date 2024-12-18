@@ -43,7 +43,7 @@ const Home = () => {
         onClick={(id) => changePropertyCategory(id)}
         allProperties={() => setFilterProperty(properties)}
       />
-      <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
         {filterProperty?.map((property, index) => {
           if (filterProperty[0].length === 0)
             return (

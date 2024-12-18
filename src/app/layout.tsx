@@ -27,7 +27,7 @@ const RootLayout = ({
                   {!BecomeHostPage && <Header />}
                   <br />
                   <div
-                    className={`mx-auto max-w-screen-2xl px-20 ${!BecomeHostPage ? "pt-32" : ""}`}
+                    className={`mx-auto px-20 ${!BecomeHostPage ? "pt-32" : ""}`}
                   >
                     {children}
                   </div>

@@ -22,16 +22,15 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
   const { data: session } = useSession();
+
   useEffect(() => {
     const getReservation = async () => {
-      const response = await axios.get(
-        `/api/availablelists?propertyId=${propertyId}`,
-      );
+      const response = await axios.get(`/api/availablelists/${propertyId}`);
       setReservation(response.data.AvailableLists);
     };
-
     getReservation();
   }, [propertyId]);
+
   const disabledRanges = reservation?.map((item) => ({
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),

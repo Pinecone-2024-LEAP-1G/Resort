@@ -42,7 +42,7 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
               Бүгдийг харах
             </p>
           </div>
-          <div className="flex w-full flex-row">
+          <div className="flex w-full flex-row gap-10">
             {categories?.map((category, index) => {
               return (
                 <Category
