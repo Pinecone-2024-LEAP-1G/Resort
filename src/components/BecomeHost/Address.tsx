@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PropertyClick } from "@/app/become-host/page";
+import { Textarea } from "../ui/textarea";
 
 export const Address = ({
   handleBack,
@@ -28,7 +29,7 @@ export const Address = ({
           </h1>
         </div>
         <div>
-          <div className="mb-4">
+          <div className="mb-8">
             <label className="block text-sm font-medium text-gray-700">
               Бүсээ сонгоно уу
             </label>
@@ -60,14 +61,13 @@ export const Address = ({
               >
                 Дэлгэрэнгүй хаяг
               </label>
-              <Input
+              <Textarea
                 id="streetAddress"
                 onChange={(value) =>
                   handleChange({
                     target: { name: "description", value: value.target.value },
                   })
                 }
-                type="text"
                 placeholder="Хаягаа тодорхой бичнэ үү"
               />
             </div>
@@ -81,14 +81,13 @@ export const Address = ({
             >
               Давуу тал
             </label>
-            <Input
+            <Textarea
               id="streetAddress"
               onChange={(value) =>
                 handleChange({
                   target: { name: "advantage", value: value.target.value },
                 })
               }
-              type="text"
               placeholder="Сууцны давуу талаа бичнэ үү"
             />
           </div>

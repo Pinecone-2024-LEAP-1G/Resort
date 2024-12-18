@@ -3,6 +3,7 @@ import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
+import { Button } from "react-day-picker";
 
 type Category = {
   name: string;
@@ -73,13 +74,12 @@ export const Structure = ({
           Буцах
         </button>
         <button
-          className={`rounded-md px-6 py-3 text-white transition-colors ${
+          className={`rounded-lg px-6 py-2 text-sm text-white transition-colors ${
             !value.categoryId
               ? "cursor-not-allowed bg-gray-300"
               : "bg-black hover:bg-gray-800"
           }`}
           disabled={!value.categoryId}
-          aria-disabled={!value.categoryId}
           aria-label="Proceed to the next step"
           onClick={handleNext}
         >

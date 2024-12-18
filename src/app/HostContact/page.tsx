@@ -2,7 +2,6 @@
 import { Textarea } from "@/components/ui/textarea";
 import { ImProfile } from "react-icons/im";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 
 const ContactHost = () => {
   return (

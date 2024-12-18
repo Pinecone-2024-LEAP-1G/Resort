@@ -35,7 +35,8 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
         cleaningFee: value?.cleaningFee,
       })
       .then(function (response) {
-        if (response.data) toast.success("Tanii bvrtgel amjilttai vvslee.");
+        if (response.data && !loading)
+          toast.success("Tanii bvrtgel amjilttai vvslee.");
         setTimeout(() => {
           router.push("/");
         }, 2000);
@@ -51,17 +52,17 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div className="mx-auto">
-        <Card className="w-[1200px] border-none p-8 shadow-none">
+        <Card className="w-[1200px] border-none shadow-none">
           <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold">
-              Таны оруулсан мэдээлэл
+            <CardTitle className="text-2xl font-bold">
+              Таны оруулсан газрын мэдээлэл
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col gap-8">
+          <CardContent className="flex flex-col gap-4">
             <div className="">
-              <div className="pl-5 text-2xl">{value.address}</div>
+              <div className="pl-5 text-xl">{value.address}</div>
             </div>
-            <div className="flex h-[560px] gap-2">
+            <div className="flex h-[530px] gap-2">
               {loading ? (
                 <Skeleton className="w-1/2 rounded-xl" />
               ) : (
@@ -79,7 +80,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                   <Skeleton className="rounded-xl" />
                 ) : (
                   <div
-                    className="h-[280px] w-[272px] rounded-xl"
+                    className="h-[260px] w-[275px] rounded-xl"
                     style={{
                       backgroundImage: `url(${propertyPictures?.[1]})`,
                       backgroundSize: "cover",
@@ -91,7 +92,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                   <Skeleton className="rounded-xl" />
                 ) : (
                   <div
-                    className="h-[280px] w-[272px] rounded-xl"
+                    className="h-[260px] w-[275px] rounded-xl"
                     style={{
                       backgroundImage: `url(${propertyPictures?.[2]})`,
                       backgroundSize: "cover",
@@ -102,7 +103,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                   <Skeleton className="rounded-xl" />
                 ) : (
                   <div
-                    className="h-[280px] w-[272px] rounded-xl"
+                    className="h-[260px] w-[275px] rounded-xl"
                     style={{
                       backgroundImage: `url(${propertyPictures?.[3]})`,
                       backgroundSize: "cover",
@@ -114,7 +115,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                   <Skeleton className="rounded-xl" />
                 ) : (
                   <div
-                    className="h-[280px] w-[272px] rounded-xl"
+                    className="h-[260px] w-[275px] rounded-xl"
                     style={{
                       backgroundImage: `url(${propertyPictures?.[4]})`,
                       backgroundSize: "cover",
@@ -128,25 +129,24 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                 {value.description}
               </div>
               <div className="flex flex-row gap-40 pl-3 pt-3">
-                <div className="flex flex-row gap-2">
+                <div className="flex flex-row items-center gap-2">
                   <p className="text-xl font-semibold">Сууцны төрөл:</p>
                   <div>{icons?.icon}</div>{" "}
                   <p className="text-xl">{value.categoryname}</p>{" "}
                 </div>
-                <div className="flex flex-row items-center">
-                  <p className="flex flex-row text-gray-500">
-                    Хүний тоо / {value.guests}
-                    <Dot />
-                  </p>
-                  <p className="flex flex-row text-gray-500">
-                    Унтлагны өрөө / {value.totalBedrooms} <Dot />
-                  </p>
-                  <p className="flex flex-row text-gray-500">
-                    Угаалгын өрөө / {value.totalBathrooms}
-                  </p>
-                </div>
               </div>
-
+              <div className="flex flex-row items-center pl-3 pt-3">
+                <p className="flex flex-row text-gray-500">
+                  Хүний тоо: {value.guests}
+                  <Dot />
+                </p>
+                <p className="flex flex-row text-gray-500">
+                  Унтлагны өрөө: {value.totalBedrooms} <Dot />
+                </p>
+                <p className="flex flex-row text-gray-500">
+                  Угаалгын өрөө: {value.totalBathrooms}
+                </p>
+              </div>
               <div className="flex flex-row gap-[98px] py-3 pl-3">
                 <div className="flex gap-1">
                   <a className="text-xl">
@@ -155,7 +155,7 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
                       currency: "MNT",
                     }).format(parseFloat(value.price?.toString() ?? "0"))}
                   </a>
-                  /<a className="text-xl">Түрээсийн үнэ</a>
+                  /<a className="text-xl">Түрээсийн үнэ </a>
                 </div>
                 <div className="flex gap-1">
                   <a className="text-xl">
