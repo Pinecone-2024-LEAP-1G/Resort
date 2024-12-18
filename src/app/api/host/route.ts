@@ -13,8 +13,16 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { experience, Address, description, name, phoneNumber, email } =
-    await request.json();
+  const {
+    experience,
+    Address,
+    description,
+    name,
+    phoneNumber,
+    email,
+    avatar,
+    timestamps,
+  } = await request.json();
   try {
     const host = await HostModel.create({
       experience,
@@ -23,6 +31,8 @@ export const POST = async (request: NextRequest) => {
       name,
       phoneNumber,
       email,
+      avatar,
+      timestamps,
     });
     return Response.json({ message: "success", host });
   } catch (error) {

@@ -31,7 +31,7 @@ type Props = {
 
 export const HostReviewCard = ({ reviews }: Props) => {
   if (reviews?.length === 0) {
-    return <p>no reviews</p>;
+    return <p>Одоогоор сэтгэгдэл байхгүй</p>;
   }
 
   return (
