@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout";
 import { usePathname } from "next/navigation";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -25,7 +26,11 @@ const RootLayout = ({
                 <div className="text-base font-normal">
                   {!BecomeHostPage && <Header />}
                   <br />
-                  <div className="mx-5 px-20">{children}</div>
+                  <div
+                    className={`mx-auto max-w-screen-2xl px-20 ${!BecomeHostPage ? "pt-32" : ""}`}
+                  >
+                    {children}
+                  </div>
                   <Toaster />
                   <div className="mx-5 px-20">
                     {!BecomeHostPage && <Footer />}

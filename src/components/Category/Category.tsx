@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import categoryIcon from "@/util/findCategoryIcon";
 
@@ -19,12 +20,15 @@ export const Category = ({
 }: Category) => {
   const icons = categoryIcon({ text });
   return (
-    <div onClick={onClick} className="flex flex-col items-center gap-1 p-5">
-      <div className={`${hover}items-center text-gray-600`}>{icons?.icon}</div>
+    <div
+      onClick={onClick}
+      className="flex flex-col items-center justify-between gap-1 p-5 hover:cursor-pointer"
+    >
+      <div className={`${hover}i text-gray-600`}>{icons?.icon}</div>
       <p
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        className={`${hover} text-center text-xs font-medium`}
+        className={`${hover} text-balance text-center text-xs font-medium`}
       >
         {text}
       </p>
