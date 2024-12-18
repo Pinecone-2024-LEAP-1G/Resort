@@ -16,10 +16,10 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { ReviewUser } from "./Star";
 
-type Property={
-    propertyId?:string
-}
-export function ReviewProperty({propertyId}: Property) {
+type Property = {
+  propertyId?: string;
+};
+export function ReviewProperty({ propertyId }: Property) {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>();
