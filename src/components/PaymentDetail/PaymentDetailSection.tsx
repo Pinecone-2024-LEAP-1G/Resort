@@ -1,15 +1,12 @@
 "use client";
 
-import { ChevronLeft, Gem } from "lucide-react";
-import { Alert, AlertTitle } from "../ui/alert";
+import { ChevronLeft } from "lucide-react";
 import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useSearchParams } from "next/navigation";
-import { RulesAndPolicy } from "./RulesAndPolicy";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
 import { useSession } from "next-auth/react";
@@ -69,16 +66,19 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   };
 
   const ToastWithAction = () => {
-    return (
-      <Button
-        className="mt-10 h-[72px] w-[556px] rounded-2xl bg-green-500 text-lg font-semibold text-white shadow-lg"
-        type="submit"
-        variant="outline"
-        onClick={SubmitReservation}
-      >
-        Баталгаажуулах
-      </Button>
-    );
+    if (guest === null) {
+      return toast.error("Хүний тоог бөглөнө үү!");
+    } else
+      return (
+        <Button
+          className="mt-10 h-[72px] w-[556px] rounded-2xl bg-green-500 text-lg font-semibold text-white shadow-lg"
+          type="submit"
+          variant="outline"
+          onClick={SubmitReservation}
+        >
+          Баталгаажуулах
+        </Button>
+      );
   };
 
   if (!isLoading) {
@@ -123,41 +123,17 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
               <div className="flex flex-row justify-between">
                 <div className="border-t">
                   <p className="w-[556px] pt-6 font-medium">Нийт төлбөр</p>
-                  <p className="text-lg font-semibold">{totalPrice}₮</p>
+                  <p className="text-lg font-semibold">
+                    {new Intl.NumberFormat().format(Number(totalPrice))}₮
+                  </p>
                   <div />
                 </div>
               </div>
             </div>
             <ToastWithAction />
-            <div className="flex pt-20">
-              <Alert className="my-6 flex h-[98px] w-[556px] flex-row items-center justify-between rounded-2xl text-base shadow-lg">
-                <div className="flex flex-col">
-                  <AlertTitle>
-                    <div>
-                      <div className="flex flex-row">
-                        <p className="flex items-center justify-center">
-                          Яагаад
-                        </p>
-                        <div className="flex gap-2 p-3">
-                          <DiCodeigniter className="h-10 w-10" />
-                          <p className="w-[30px] font-bold">Хөдөө гарья</p>
-                        </div>
-                        <p className="ml-5 flex items-center justify-center">
-                          гэж ?
-                        </p>
-                      </div>
-                    </div>
-                  </AlertTitle>
-                </div>
-                <div>
-                  <Gem className="justify-end fill-pink-700" />
-                </div>
-              </Alert>
-            </div>
+            <div className="flex pt-20"></div>
           </div>
         </div>
-
-        <RulesAndPolicy />
       </div>
       <div className="mr-auto flex flex-col items-center justify-start gap-8 p-5">
         <GetProperty propertyId={propertyId} />
