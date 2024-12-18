@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PropertyClick } from "@/app/become-host/page";
+
 export const Address = ({
   handleBack,
   handleNext,
@@ -38,7 +39,7 @@ export const Address = ({
               }
             >
               <SelectTrigger className="w-[630px]">
-                <SelectValue placeholder="Choose a province" />
+                <SelectValue placeholder="Аймаг сонгоно уу" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -57,7 +58,7 @@ export const Address = ({
                 htmlFor="streetAddress"
                 className="block text-sm font-medium text-gray-700"
               >
-                Тайлбар
+                Дэлгэрэнгүй хаяг
               </label>
               <Input
                 id="streetAddress"
@@ -67,12 +68,33 @@ export const Address = ({
                   })
                 }
                 type="text"
-                placeholder="Enter your street address"
+                placeholder="Хаягаа тодорхой бичнэ үү"
               />
             </div>
           </div>
+        </div>{" "}
+        <div className="flex flex-col gap-4">
+          <div>
+            <label
+              htmlFor="streetAddress"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Давуу тал
+            </label>
+            <Input
+              id="streetAddress"
+              onChange={(value) =>
+                handleChange({
+                  target: { name: "advantage", value: value.target.value },
+                })
+              }
+              type="text"
+              placeholder="Сууцны давуу талаа бичнэ үү"
+            />
+          </div>
         </div>
       </div>
+
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}

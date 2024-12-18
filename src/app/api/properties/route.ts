@@ -27,6 +27,7 @@ export const POST = async (request: NextRequest) => {
     cleaningFee,
     userId,
     phoneNumber,
+    advantage,
   } = await request.json();
 
   if (userId) {
@@ -52,6 +53,7 @@ export const POST = async (request: NextRequest) => {
       email,
       cleaningFee,
       userId,
+      advantage,
     });
 
     const updateUser = await UserModel.findOneAndUpdate(

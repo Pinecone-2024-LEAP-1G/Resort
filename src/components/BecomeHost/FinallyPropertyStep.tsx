@@ -6,12 +6,19 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import categoryIcon from "@/util/findCategoryIcon";
 import { useSession } from "next-auth/react";
+import { LoaderCircle } from "lucide-react";
+import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
+import { Dot } from "lucide-react";
+import { PropertyHeader } from "./PropertyHeader";
 
 export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
   const text = value.categoryname;
   const icons = categoryIcon({ text });
+
   const createProperty = async () => {
     await axios
       .post(`/api/properties`, {
@@ -28,150 +35,157 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
         cleaningFee: value?.cleaningFee,
       })
       .then(function (response) {
-        if (response.data.message === "success")
-          toast.success("Tanii bvrtgel amjilttai vvslee.");
+        if (response.data) toast.success("Tanii bvrtgel amjilttai vvslee.");
         setTimeout(() => {
           router.push("/");
-        }, 4000);
+        }, 2000);
+        setLoading(true);
       })
 
       .catch(function (error) {
         console.log(error);
       });
   };
+  const propertyPictures = value.propertyPictures;
   return (
     <div className="flex min-h-screen flex-col justify-between">
-      <div className="flex min-h-screen items-center justify-center">
-        <Card className="w-[600px] p-6">
+      <PropertyHeader />
+      <div className="mx-auto">
+        <Card className="w-[1200px] border-none p-8 shadow-none">
           <CardHeader className="text-center">
-            <CardTitle>Таны бүтээгдэхүүний мэдээлэл</CardTitle>
+            <CardTitle className="text-3xl font-bold">
+              Таны оруулсан мэдээлэл
+            </CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-6">
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Байршил</p>
-                  <p className="text-sm text-muted-foreground">
-                    {value.address}
-                  </p>
-                </div>
+          <CardContent className="flex flex-col gap-8">
+            <div className="">
+              <div className="pl-5 text-2xl">{value.address}</div>
+            </div>
+            <div className="flex h-[560px] gap-2">
+              {loading ? (
+                <Skeleton className="w-1/2 rounded-xl" />
+              ) : (
+                <div
+                  className="relative flex-1 rounded-xl"
+                  style={{
+                    backgroundImage: `url(${propertyPictures?.[0]})`,
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              )}
+
+              <div className="grid flex-1 grid-cols-2 grid-rows-2 gap-2">
+                {loading ? (
+                  <Skeleton className="rounded-xl" />
+                ) : (
+                  <div
+                    className="h-[280px] w-[272px] rounded-xl"
+                    style={{
+                      backgroundImage: `url(${propertyPictures?.[1]})`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                )}
+
+                {loading ? (
+                  <Skeleton className="rounded-xl" />
+                ) : (
+                  <div
+                    className="h-[280px] w-[272px] rounded-xl"
+                    style={{
+                      backgroundImage: `url(${propertyPictures?.[2]})`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                )}
+                {loading ? (
+                  <Skeleton className="rounded-xl" />
+                ) : (
+                  <div
+                    className="h-[280px] w-[272px] rounded-xl"
+                    style={{
+                      backgroundImage: `url(${propertyPictures?.[3]})`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                )}
+
+                {loading ? (
+                  <Skeleton className="rounded-xl" />
+                ) : (
+                  <div
+                    className="h-[280px] w-[272px] rounded-xl"
+                    style={{
+                      backgroundImage: `url(${propertyPictures?.[4]})`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                )}
               </div>
             </div>
             <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Дэлгэрэнгүй хаяг
+              <div className="pl-3 text-xl font-medium">
+                {value.description}
+              </div>
+              <div className="flex flex-row gap-40 pl-3 pt-3">
+                <div className="flex flex-row gap-2">
+                  <p className="text-xl font-semibold">Сууцны төрөл:</p>
+                  <div>{icons?.icon}</div>{" "}
+                  <p className="text-xl">{value.categoryname}</p>{" "}
+                </div>
+                <div className="flex flex-row items-center">
+                  <p className="flex flex-row text-gray-500">
+                    Хүний тоо / {value.guests}
+                    <Dot />
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    {value.description}
+                  <p className="flex flex-row text-gray-500">
+                    Унтлагны өрөө / {value.totalBedrooms} <Dot />
                   </p>
+                  <p className="flex flex-row text-gray-500">
+                    Угаалгын өрөө / {value.totalBathrooms}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-row gap-[98px] py-3 pl-3">
+                <div className="flex gap-1">
+                  <a className="text-xl">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "MNT",
+                    }).format(parseFloat(value.price?.toString() ?? "0"))}
+                  </a>
+                  /<a className="text-xl">Түрээсийн үнэ</a>
+                </div>
+                <div className="flex gap-1">
+                  <a className="text-xl">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "MNT",
+                    }).format(parseFloat(value.cleaningFee?.toString() ?? "0"))}
+                  </a>
+                  /<a className="text-xl">Цэвэрлэгээний үнэ </a>
                 </div>
               </div>
             </div>
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Цэвэрлэгээний төлбөр
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {value.cleaningFee}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Түрээсийн үнэ
-                  </p>
-                  <p className="text-sm text-muted-foreground">{value.price}</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Унталгын өрөө болон угаалгын өрөө
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Угаалгын өрөө {value.totalBathrooms}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Унталгын өрөө {value.totalBedrooms}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Зочид</p>
-                  <p className="text-sm text-muted-foreground">
-                    Зочид {value.guests}
-                  </p>
-                </div>
-              </div>
-            </div>{" "}
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Төрөл</p>
-                  <div className="flex flex-row">
-                    <p className="text-sm,text-muted-foreground">
-                      {value.categoryname}
-                    </p>
-                    <div className="h-12 w-12">{icons?.icon}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">Зурагнууд</p>
-                  <div className="flex flex-wrap gap-4">
-                    {value.propertyPictures.map((picture, index) => {
-                      return (
-                        <div
-                          key={index}
-                          style={{
-                            backgroundImage: `url(${picture})`,
-                            backgroundPosition: "center",
-                            backgroundSize: "cover",
-                            backgroundRepeat: "no-repeat",
-                          }}
-                          className="h-20 w-20 rounded-lg"
-                        ></div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <div className="flex flex-col">
               <p className="text-center"></p>
               <div className="flex justify-center">
-                <Button className="w-[200px]" onClick={createProperty}>
-                  Submit
+                <Button
+                  disabled={loading}
+                  className="w-[250px] bg-cyan-500 p-6"
+                  onClick={createProperty}
+                >
+                  {loading && <LoaderCircle className="animate-spin" />}
+                  Баталгаажуулах
                 </Button>
               </div>
             </div>
           </CardContent>
         </Card>
-      </div>
-      <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
+      </div>{" "}
+      <div className="border-t px-6 py-4">
         <button
           onClick={handleBack}
           aria-label="Go back to the previous step"

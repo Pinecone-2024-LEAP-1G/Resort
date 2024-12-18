@@ -47,7 +47,6 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
       try {
         const response = await axios.get(`/api/reservations/${userId}`);
         setReservations(response.data.reservation);
-        console.log(response);
       } catch (error) {
         console.log(error);
 

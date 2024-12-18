@@ -16,6 +16,7 @@ export const Structure = ({
   handleChange,
 }: PropertyClick) => {
   const [categories, setCategories] = useState<Category[]>([]);
+
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -27,13 +28,14 @@ export const Structure = ({
     };
     getCategories();
   }, []);
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div className="mx-auto w-[680px] px-4 py-8">
-        <h1 className="mb-12 text-pretty text-[32px] font-semibold">
+        <p className="mb-12 text-[32px] font-semibold">
           Эдгээрээс аль нь таны газрыг тодорхойлж байна вэ?
-        </h1>
+        </p>
         <div className="grid w-[640px] grid-cols-3 gap-4 md:grid-cols-3 lg:grid-cols-3">
           {categories.map((category) => (
             <button
