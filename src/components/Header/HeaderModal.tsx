@@ -51,7 +51,7 @@ export function HeaderModal() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
         {!session && (
-          <DropdownMenuItem onClick={() => signIn("google")}>
+          <DropdownMenuItem onClick={() => router.push("/signin")}>
             <button type="submit" className="text-sm font-normal">
               Нэвтрэх
             </button>
