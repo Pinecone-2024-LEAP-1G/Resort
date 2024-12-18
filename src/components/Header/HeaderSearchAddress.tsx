@@ -49,7 +49,7 @@ export const HeaderSearch = ({
     <div>
       <div
         onFocus={onMouseEnter}
-        className={`flex w-[234px] flex-col items-center justify-center rounded-full px-6 py-3 ${hover}`}
+        className={`flex w-[234px] cursor-pointer flex-col items-center justify-center rounded-full px-6 py-3 ${hover}`}
       >
         Байршил сонгох
         <input
@@ -61,7 +61,7 @@ export const HeaderSearch = ({
         />
       </div>
       {show && (
-        <div className="fixed bottom-0 left-0 right-0 top-24 z-30 flex justify-center">
+        <div className="fixed bottom-0 left-0 right-0 top-24 z-30 flex cursor-pointer justify-center">
           <div className="h-fit w-[450px] rounded-3xl border-2 bg-white p-10 px-5 py-7">
             <h4 className="font-medium leading-none">Аймгаар хайх</h4>
             <div className="grid grid-flow-col grid-rows-2 gap-4 px-5 py-5">

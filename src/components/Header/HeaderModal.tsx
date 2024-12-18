@@ -44,7 +44,7 @@ export function HeaderModal() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="flex items-center gap-3 rounded-full border-2 px-4 py-2">
+        <div className="flex cursor-pointer items-center gap-3 rounded-full border-2 px-4 py-2">
           <Kebab />
           {renderUserProfile()}
         </div>
@@ -52,7 +52,10 @@ export function HeaderModal() {
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
         {!session && (
           <DropdownMenuItem onClick={() => router.push("/signin")}>
-            <button type="submit" className="text-sm font-normal">
+            <button
+              type="submit"
+              className="cursor-pointer text-sm font-normal"
+            >
               Нэвтрэх
             </button>
           </DropdownMenuItem>
@@ -74,7 +77,7 @@ export function HeaderModal() {
               <LogOut />
 
               <button
-                className="ml-2 text-sm font-normal"
+                className="ml-2 cursor-pointer text-sm font-normal"
                 onClick={() => signOut()}
               >
                 Гарах
