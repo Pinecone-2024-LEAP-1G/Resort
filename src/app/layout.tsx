@@ -25,7 +25,7 @@ const RootLayout = ({
                 <div className="text-base font-normal">
                   {!BecomeHostPage && <Header />}
                   <br />
-                  <div className="mx-5 px-20">{children}</div>
+                  <div className="mx-5 flex flex-grow px-20">{children}</div>
                   <Toaster />
                   <div className="mx-5 px-20">
                     {!BecomeHostPage && <Footer />}

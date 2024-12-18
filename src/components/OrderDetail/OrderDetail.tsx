@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { OrderProps } from "./OrderProps";
+import { ReservationCancel } from "./ResevationCancel";
 
 type OrderDetailProps = {
   userId?: string;
@@ -60,17 +60,19 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
   return (
     <div className="mx-auto w-[1074px]">
       <h1 className="h-[72px] py-4 text-2xl font-bold">Таны захиалга</h1>
-      {reservations?.map((reservation) => (
-        <OrderProps
-          key={reservation._id}
-          adress={reservation.propertyId.address}
-          from={reservation.checkIn}
-          to={reservation.checkOut}
-          totalPrice={reservation.totalPrice}
-          image={reservation.propertyId.propertyPictures[0]}
-          description={reservation.propertyId.description}
-        />
-      ))}
+      <div className="grid grid-cols-3 p-2">
+        {reservations?.map((reservation) => (
+          <div key={reservation._id}>
+            <ReservationCancel
+              image={reservation.propertyId.propertyPictures[0]}
+              address={reservation.propertyId.address}
+              checkIn={reservation.checkIn}
+              checkOut={reservation.checkOut}
+              price={reservation.totalPrice}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

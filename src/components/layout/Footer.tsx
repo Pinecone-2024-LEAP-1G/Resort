@@ -25,7 +25,6 @@ export const Footer = () => {
     };
     getaddressProperty();
   }, [address]);
-  console.log(filter);
 
   const regions = [
     { name: "Arhangai", id: "arhangai" },

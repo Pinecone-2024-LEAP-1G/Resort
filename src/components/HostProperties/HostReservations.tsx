@@ -16,8 +16,17 @@ export const HostReservations = ({ propertyId }: Props) => {
     const getReserve = async () => {
       const response = axios.get(`/api/reservations/property/${propertyId}`);
       setReservations((await response).data.reservations);
+      console.log(response);
     };
     getReserve();
   }, [propertyId]);
-  return <div>hi</div>;
+  return (
+    <div>
+      <div className="mx-auto p-8">
+        <button className="rounded-md border bg-cyan-500 p-2 text-white hover:bg-cyan-800">
+          Захиалгатай өдрүүд
+        </button>
+      </div>
+    </div>
+  );
 };

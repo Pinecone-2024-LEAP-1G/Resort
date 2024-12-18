@@ -38,7 +38,7 @@ export function HeaderModal() {
     router.push("/become-host");
   };
   const handlejump = () => {
-    router.push("/ReservationPage");
+    router.push(`/orderDetail/${userId}`);
   };
 
   return (
