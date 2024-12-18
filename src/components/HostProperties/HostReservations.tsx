@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const HostReservations = ({ propertyId }: Props) => {
-  const [, setReservations] = useState<ReservationType[]>();
+  const [reservations, setReservations] = useState<ReservationType[]>();
 
   useEffect(() => {
     const getReserve = async () => {
@@ -39,7 +39,7 @@ export const HostReservations = ({ propertyId }: Props) => {
           {/* <p>Захиалагчийн мэдээлэл </p>
           <p className="font-bold">Эхлэх өдөр </p> */}
         </div>
-        <div >
+        <div>
           {reservations?.map((reserve) => (
             <div
               className="mt-8 flex w-[1200px] justify-between gap-4 rounded-xl border border-b bg-gray-100 p-8"
