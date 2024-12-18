@@ -1,16 +1,13 @@
 "use client";
 
-import mongoose from "mongoose";
 import { useState, useEffect } from "react";
-import { CgProfile } from "react-icons/cg";
 import axios from "axios";
 import { HostType } from "@/lib/models/host.model";
 import { useRouter } from "next/navigation";
-
 import { getHostById, getHostReviewsByHostId } from "@/util/get-host";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Review } from "@/lib/models";
-import { FaStar } from "react-icons/fa";
+
 import { HostLeftCardRating } from "./HostLeftCardRating";
 
 type HostReviews = {
