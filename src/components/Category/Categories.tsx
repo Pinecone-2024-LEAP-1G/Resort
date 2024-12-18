@@ -1,15 +1,17 @@
 "use client";
-import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
+
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "./Category";
+import { SeeAllIcon } from "../icons/CategoryIcons/SeeAllIcon";
 
 type Category = {
   name: string;
   icon?: JSX.Element;
   _id: string;
 };
+
 type FilterCategory = {
   onClick: (id: string) => void;
   allProperties: () => void;
@@ -28,32 +30,35 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
   }, []);
 
   return (
-    <div className="sticky flex items-center">
-      <CircleChevronLeft />
+    <div className="flex items-center pb-6">
       <ScrollArea className="w-screen">
-        <div className="flex flex-row gap-9">
+        <div className="flex flex-row py-2">
           <div
-            className="ml-6 flex items-center justify-center"
+            className="flex flex-col items-center justify-center gap-1 p-5 hover:cursor-pointer"
             onClick={allProperties}
           >
-            Бүгдийг харах
+            <SeeAllIcon />
+            <p className="text-nowrap text-center text-xs font-medium text-black">
+              Бүгдийг харах
+            </p>
           </div>
-          {categories?.map((category, index) => {
-            return (
-              <Category
-                onClick={() => onClick(category._id)}
-                onMouseEnter={() => setHover(index)}
-                onMouseLeave={() => setHover(null)}
-                hover={hover === index ? "text-gray-800" : "text-gray-500"}
-                key={index}
-                text={category.name}
-              />
-            );
-          })}
+          <div className="flex w-full flex-row">
+            {categories?.map((category, index) => {
+              return (
+                <Category
+                  onClick={() => onClick(category._id)}
+                  onMouseEnter={() => setHover(index)}
+                  onMouseLeave={() => setHover(null)}
+                  hover={hover === index ? "text-gray-800" : "text-gray-500"}
+                  key={index}
+                  text={category.name}
+                />
+              );
+            })}
+          </div>
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
-      <CircleChevronRight />
     </div>
   );
 };

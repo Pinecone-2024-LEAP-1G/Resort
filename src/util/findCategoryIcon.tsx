@@ -6,19 +6,22 @@ import { Ger } from "@/components/icons/CategoryIcons/Ger";
 import { SimpleHouse } from "@/components/icons/CategoryIcons/House";
 import { Luxe } from "@/components/icons/CategoryIcons/Luxe";
 import { New } from "@/components/icons/CategoryIcons/New";
-import { Room } from "@/components/icons/CategoryIcons/Room";
 import { SmallHouse } from "@/components/icons/CategoryIcons/Small";
-import { WoodHouse } from "@/components/icons/CategoryIcons/WoodHouse";
-import { WoodPin } from "@/components/icons/CategoryIcons/WoodPin";
 import { Yurts } from "@/components/icons/CategoryIcons/Yurts";
-import { Tent } from "lucide-react";
+import { Tent } from "@/components/icons/CategoryIcons/Tent";
+import { NiceView } from "@/components/icons/CategoryIcons/NiceView";
+import { LakeArea } from "@/components/icons/CategoryIcons/LakeArea";
+import { BigHouse } from "@/components/icons/CategoryIcons/BigHouse";
+import { WithPark } from "@/components/icons/CategoryIcons/WithPark";
+import { Forest } from "@/components/icons/CategoryIcons/Forest";
+import { Party } from "@/components/icons/CategoryIcons/Party";
+
 export type Props = {
   text?: string;
   value?: PropertyValue;
 };
 
 export const mockdata = [
-  { name: "Өрөө", icon: <Room /> },
   { name: "Гэр", icon: <Ger /> },
   { name: "Урц", icon: <Yurts /> },
   { name: "Шинэ", icon: <New /> },
@@ -28,9 +31,13 @@ export const mockdata = [
   { name: "Тогоочтой", icon: <Chef /> },
   { name: "Байшин", icon: <SimpleHouse /> },
   { name: "Орон сууц", icon: <Apartment /> },
-  { name: "Модон пин", icon: <WoodPin /> },
   { name: "Кабин", icon: <Cabin /> },
-  { name: "Дүнзэн байшин", icon: <WoodHouse /> },
+  { name: "Ой модтой", icon: <Forest /> },
+  { name: "Нууртай", icon: <LakeArea /> },
+  { name: "Гоё харагдацтай", icon: <NiceView /> },
+  { name: "Том байшин", icon: <BigHouse /> },
+  { name: "Тоглоомын талбайтай", icon: <WithPark /> },
+  { name: "Парти", icon: <Party /> },
 ];
 const categoryIcon = (props: Props) => {
   const { text } = props;
