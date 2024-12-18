@@ -49,7 +49,7 @@ export const HostReviewCard = ({ reviews }: Props) => {
                 <div style={{ backgroundImage: `url(${""}})` }}></div>
                 <div>
                   <p className="font-semibold"></p>
-                  <p>2024 May</p>
+                  <p>2024</p>
                 </div>
               </div>
             </Card>

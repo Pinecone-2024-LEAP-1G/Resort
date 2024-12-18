@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { HostType, HostTypePopulatedProperties } from "@/lib/models/host.model";
+import { HostTypePopulatedProperties } from "@/lib/models/host.model";
 import { GrStatusGood } from "react-icons/gr";
 
 type SecondProps = {
