@@ -8,6 +8,7 @@ import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
 import { HostTypePopulatedProperties } from "@/lib/models/host.model";
 import { useRouter } from "next/navigation";
+import { Property } from "@/lib/models";
 
 const HostMainContent = ({ hostId }: { hostId: string }) => {
   const [hostData, setHostdata] = useState<HostTypePopulatedProperties>();
@@ -45,6 +46,15 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
       getHostData();
     }
   }, [hostId]);
+
+  const getfirstTwoProperties = (properties?: Property[]) => {
+    if (!properties) return [];
+
+    return [...properties].slice(0, 3);
+  };
+
+  const firstTwoProperties = getfirstTwoProperties(hostData?.propertyId);
+
   return (
     <div className="ml-auto flex w-[1200px] justify-between">
       <div>
@@ -61,19 +71,21 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
           </p>
           <div className="mb-[32px] border-b-2 border-black"></div>
           <div className="mb-[32px] flex justify-between">
-            <p className="font-bold">Resort- н талаар </p>
+            <p className="font-bold">{hostData?.name} н талаар </p>
           </div>
 
-          <div className="mb-[32px] h-[230px] w-[700px] cursor-pointer">
+          <div className="mb-[32px] h-[230px] w-auto cursor-pointer">
             <HostReviewCard reviews={reviews} />
           </div>
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
         <div className="flex justify-between">
-          <p className="text-[30px] font-bold">{hostData?.name} listings</p>
+          <p className="text-[24px] font-bold">
+            {hostData?.name} Түрээслэж буй газрууд
+          </p>
         </div>
-        <div className="mb-[180px] mt-[40px] flex gap-3">
-          {hostData?.propertyId?.map((property) => {
+        <div className="mt-[40px] flex gap-5">
+          {firstTwoProperties?.map((property) => {
             const propertyId = property?._id;
             return (
               <PropertyCard

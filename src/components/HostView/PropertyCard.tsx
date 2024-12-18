@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { TiStar } from "react-icons/ti";
@@ -6,7 +7,8 @@ import { TiStar } from "react-icons/ti";
 type PropertyProps = {
   image: string;
   address: string;
-  onclick?: () => void;
+
+  onclick: () => void;
 };
 
 export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
@@ -20,9 +22,9 @@ export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
   const hearthFillColor = liked ? "red" : "transparent";
 
   return (
-    <div onClick={onclick} className="cursor-pointer gap-5">
+    <div onClick={onclick} className="h-[205px] w-[170px] cursor-pointer">
       <div
-        className="h-[182px] w-[224px] rounded-2xl bg-cover"
+        className="h-[169px] w-[170px] rounded-2xl"
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
@@ -36,15 +38,12 @@ export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
           />
         </div>
       </div>
-      <div className="">
-        <div className="flex justify-between">
-          <h2 className="w-[180px] font-bold">{address} </h2>
-          <div className="flex items-center">
-            {/* <TiStar />
-            <p>5</p> */}
-          </div>
+      <div className="flex justify-between">
+        <h2 className="w-auto font-bold">{address} </h2>
+        <div className="flex items-center">
+          <TiStar />
+          <p>5</p>
         </div>
-        <p className="text-[14px]"></p>
       </div>
     </div>
   );
