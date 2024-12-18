@@ -8,6 +8,7 @@ import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostLeftCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ReviewProperty } from "../PropertyReview/View";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,6 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
 
     getPropertyById();
   }, [propertyId]);
-
   const propertyPictures = property?.propertyPictures;
 
   return (
@@ -122,6 +122,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
               <p>~ {property?.totalBedrooms} унтлагын өрөө</p>
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
+            <ReviewProperty propertyId={propertyId} />
             <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
               <HostViewCard hostId={property?.userId} />
             </div>
