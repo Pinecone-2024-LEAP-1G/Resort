@@ -16,12 +16,13 @@ export const POST = async (request: NextRequest) => {
     const reservations = await ReservationModel.find().populate("userId");
     const today = formatDate(new Date());
     const checkoutDays = reservations.filter((userreservation) => {
-      if (formatDate(new Date(userreservation.checkOut)) === today)
-        nodeMailer({
-          to: userreservation?.userId.email,
-          text: `https://localhost:3000/userReview`,
-          // text: `https://resort-kappa.vercel.app/`,
-        });
+      const email = userreservation?.userId?.email(
+        formatDate(new Date(userreservation.checkOut)) === today,
+      );
+      nodeMailer({
+        to: email,
+        text: `Та манай пэйж хуудасруу хандан амралтын газарт амарсан сэтгэгдлээ үлдээнэ үү`,
+      });
       return true;
     });
 
