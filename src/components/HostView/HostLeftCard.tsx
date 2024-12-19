@@ -33,7 +33,6 @@ const HostLeftCard = ({ userId }: { userId?: string }) => {
         console.error(error);
       }
     };
-
     getHostData();
   }, [userId]);
 

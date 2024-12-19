@@ -20,7 +20,6 @@ export const GET = async (
     const review = properties.map((property) => {
       return property.reviewId;
     });
-    console.log(review);
 
     const reviews = await ReviewModel.find<Review>({ userId: userId });
 

@@ -76,16 +76,6 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
     <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">
         <h1 className="text-3xl font-semibold">{property?.address}</h1>
-        <div className="flex gap-2">
-          <div className="grid place-items-center rounded-full bg-white lg:flex lg:gap-2">
-            <LuShare />
-            <p className="hidden lg:block">share</p>
-          </div>
-          <div className="grid place-items-center rounded-full bg-white lg:flex lg:gap-2">
-            <FaRegHeart className="flex items-center justify-center" />
-            <p className="hidden lg:block">like</p>
-          </div>
-        </div>
       </div>
       <div className="mt-4">
         <div className="grid- gap-4">
