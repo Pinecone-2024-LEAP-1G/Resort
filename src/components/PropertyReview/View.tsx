@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReviewUser } from "./Star";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { GrEmoji } from "react-icons/gr";
 
 type Property = {
   propertyId?: string;
@@ -26,8 +25,9 @@ export function ReviewProperty({ propertyId }: Property) {
   const [comment, setComment] = useState<string>();
   const [show, setShow] = useState(false);
   const { data: session } = useSession();
-  if (comment?.length === 0) toast.message("Сэтгэгдэл бичнэ үү");
-  const createHostView = async () => {
+  const createReview = async () => {
+    if (rating === 0 && comment?.length === 0)
+      return toast.message("Та үнэлгээ өгөөгүй байна");
     try {
       const response = await axios.post("/api/reviews", {
         rating: rating,
@@ -35,7 +35,10 @@ export function ReviewProperty({ propertyId }: Property) {
         propertyId: propertyId,
       });
       setShow(true);
-      if (response) toast.message("Үнэлгээ өгсөн танд баярлалаа");
+      setComment("");
+      setRating(0);
+      console.log(response.data);
+      if (response.data) toast.message("Үнэлгээ өгсөн танд баярлалаа");
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +48,7 @@ export function ReviewProperty({ propertyId }: Property) {
       <DialogTrigger asChild>
         {!show && (
           <div className="flex flex-col">
-            <p className="w-fit transform animate-spin text-xl transition-transform duration-1000">
+            <p className="w-fit transform animate-spin cursor-pointer text-xl transition-transform duration-1000">
               😃
             </p>
             <Button
@@ -97,8 +100,9 @@ export function ReviewProperty({ propertyId }: Property) {
             <DialogClose>
               {" "}
               <button
+                disabled={rating === 0 || comment?.length === 0}
                 className="cursor-auto rounded-xl border-2 bg-green-500 px-10 py-3 text-white"
-                onClick={createHostView}
+                onClick={createReview}
               >
                 Илгээх
               </button>

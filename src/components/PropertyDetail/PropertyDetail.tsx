@@ -9,7 +9,6 @@ import axios from "axios";
 import HostViewCard from "../HostView/HostLeftCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ReviewProperty } from "../PropertyReview/View";
-import { CheckCheck } from "lucide-react";
 import { toast } from "sonner";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
@@ -17,6 +16,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [property, setProperty] = useState<PropertyType>();
   const [checkOut, setCheckOut] = useState();
   const [showReview, setShowReview] = useState(false);
+  const [checkReview, setCheckReview] = useState();
   useEffect(() => {
     const getPropertyById = async () => {
       setLoading(true);
@@ -45,7 +45,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
           `/api/reservations/userCheckoutDay/${propertyId}`,
         );
         setCheckOut(response.data.reservation);
-        if (response.data.reservation.length === 1)
+        if (response.data.reservation.length === 1 && checkReview === 0)
           return (
             setShowReview(true),
             toast.message("Тухайн газарт төрсөн сэтгэгдэлээ үнэлнүү")
@@ -55,8 +55,21 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
       }
     };
     getreservations();
+  }, [propertyId, checkReview]);
+  useEffect(() => {
+    const getReview = async () => {
+      try {
+        const response = await axios.get(
+          `/api/reviews/propertyAndUserid?propertyId=${propertyId}`,
+        );
+        if (response.data.length >= 0) setShowReview(false);
+        setCheckReview(response.data.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getReview();
   }, [propertyId]);
-
   return (
     <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">

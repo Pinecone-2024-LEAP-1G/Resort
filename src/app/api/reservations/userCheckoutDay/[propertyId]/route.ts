@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
+import { nodeMailer } from "@/util/nodemailer";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -24,6 +25,12 @@ export const GET = async (
     const checkOutDay = reservations.filter(
       (reservation) => formatDate(new Date(reservation.checkOut)) === today,
     );
+    const sendEmail = checkOutDay.map((user) => {
+      console.log(user);
+      //  nodeMailer({
+      //   to:us
+      //  })
+    });
     console.log(checkOutDay);
     return Response.json({ reservation: checkOutDay });
   } catch (error) {
