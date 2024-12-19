@@ -18,13 +18,15 @@ import { DialogClose } from "@radix-ui/react-dialog";
 
 type Property = {
   propertyId?: string;
+  getPropertyById?: () => void;
 };
-export function ReviewProperty({ propertyId }: Property) {
+export function ReviewProperty({ propertyId, getPropertyById }: Property) {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>();
   const [show, setShow] = useState(false);
   const { data: session } = useSession();
+
   const createReview = async () => {
     if (rating === 0 && comment?.length === 0)
       return toast.message("Та үнэлгээ өгөөгүй байна");
@@ -37,11 +39,13 @@ export function ReviewProperty({ propertyId }: Property) {
       setShow(true);
       setComment("");
       setRating(0);
+      getPropertyById();
       if (response.data) toast.message("Үнэлгээ өгсөн танд баярлалаа");
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>

@@ -20,6 +20,7 @@ type FilterCategory = {
 export const Categories = ({ onClick, allProperties }: FilterCategory) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [hover, setHover] = useState<string | number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -46,12 +47,20 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
             {categories?.map((category, index) => {
               return (
                 <Category
-                  onClick={() => onClick(category._id)}
+                  onClick={() => {
+                    onClick(category._id);
+                    setHover(index);
+                  }}
                   onMouseEnter={() => setHover(index)}
                   onMouseLeave={() => setHover(null)}
-                  hover={hover === index ? "text-gray-800" : "text-gray-500"}
+                  hover={
+                    hover === index
+                      ? "text-gray-950 underline"
+                      : "text-gray-500"
+                  }
                   key={index}
                   text={category.name}
+                  className={`} flex flex-col items-center justify-between gap-1 p-5 hover:cursor-pointer`}
                 />
               );
             })}

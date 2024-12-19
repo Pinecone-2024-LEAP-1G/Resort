@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { ReservationCancel } from "./ResevationCancel";
 import { useRouter } from "next/navigation";
 import moment from "moment";
+import { AlertDialogDemo } from "./DeleteDialog";
 
 type OrderDetailProps = {
   userId?: string;
@@ -30,7 +31,7 @@ export type ReservationType = {
   };
   checkIn: Date;
   checkOut: Date;
-  guest: number;
+  guests: number;
   totalPrice: number;
   userId: {
     _id: string;
@@ -100,12 +101,9 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
                 price={reservation.totalPrice}
               />
             </div>
-            <button
-              onClick={() => deleteReservation(reservation._id)}
-              className="mb-10 mt-4 w-fit items-center justify-center rounded-lg bg-gray-700 p-2 text-white"
-            >
-              Захиалга цуцлах
-            </button>
+            <AlertDialogDemo
+              onclick={() => deleteReservation(reservation._id)}
+            />
           </div>
         ))}
       </div>

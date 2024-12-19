@@ -9,6 +9,7 @@ type Category = {
   onMouseLeave: () => void;
   hover: string;
   onClick: () => void;
+  className: string;
 };
 
 export const Category = ({
@@ -17,17 +18,15 @@ export const Category = ({
   onMouseLeave,
   hover,
   onClick,
+  className,
 }: Category) => {
   const icons = categoryIcon({ text });
   return (
-    <div
-      onClick={onClick}
-      className="flex flex-col items-center justify-between gap-1 p-5 hover:cursor-pointer"
-    >
-      <div className={`${hover}i text-gray-600`}>{icons?.icon}</div>
+    <div onClick={onClick} className={className}>
+      <div className={`${hover} `}>{icons?.icon}</div>
       <p
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        onFocus={onMouseEnter}
+        onBlur={onMouseLeave}
         className={`${hover} text-balance text-center text-xs font-medium`}
       >
         {text}

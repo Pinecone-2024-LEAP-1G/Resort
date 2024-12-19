@@ -36,7 +36,7 @@ export const HostReservations = ({ propertyId }: Props) => {
         <div>
           {reservations?.map((reserve) => (
             <div
-              className="mt-8 flex justify-center justify-between gap-4 rounded-xl border border-b bg-gray-100 p-8"
+              className="mt-8 flex justify-between gap-4 rounded-xl border border-b bg-gray-100 p-8"
               key={reserve._id}
             >
               <div>
@@ -64,7 +64,9 @@ export const HostReservations = ({ propertyId }: Props) => {
               </div>
               <div className="ml-10">
                 <p className="font-bold">Зочдын тоо</p>
-                <p>{reserve.guest}</p>
+                <p className="flex items-center justify-center">
+                  {reserve.guests}
+                </p>
               </div>
               <div className="ml-10">
                 <p className="font-bold">Нийт үнийн дүн</p>
