@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
 import { useSearchParams } from "next/navigation";
+<<<<<<< HEAD
 import { PropertyType } from "@/components/Review";
 import { toast } from "sonner";
+=======
+>>>>>>> 925c063346d5f554e0023819bd765d2c45f0f35a
 import { SkeletonHomeCard } from "@/components/Skeletons/SkeletonHomeCard";
 
 const Home = () => {
@@ -136,6 +139,33 @@ const Home = () => {
           </div>
         </div>
       )}
+      <Categories
+        onClick={(id) => changePropertyCategory(id)}
+        allProperties={() => setFilterProperty(properties)}
+      />
+      <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        {loading
+          ? Array(10)
+              .fill(null)
+              .map((_, index) => <SkeletonHomeCard key={index} />)
+          : filteredAndSortedProperties?.map((property, index) => {
+              if (filterProperty[0].length === 0)
+                return (
+                  <div key={index} className="p-10 text-center">
+                    Таны хайсан утга олдсонгүй.
+                  </div>
+                );
+              else
+                return (
+                  <HomeCard
+                    key={index}
+                    property={property}
+                    propertyId={property?._id}
+                    propertyPictures={[property?.propertyPictures]}
+                  />
+                );
+            })}
+      </div>
     </div>
   );
 };
