@@ -64,7 +64,9 @@ export const HostReservations = ({ propertyId }: Props) => {
               </div>
               <div className="ml-10">
                 <p className="font-bold">Зочдын тоо</p>
-                <p>{reserve.guest}</p>
+                <p className="flex items-center justify-center">
+                  {reserve.guests}
+                </p>
               </div>
               <div className="ml-10">
                 <p className="font-bold">Нийт үнийн дүн</p>

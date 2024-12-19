@@ -71,7 +71,7 @@ const Home = () => {
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
 
   return (
-    <div className="mb-10">
+    <div className="mb-10 mt-10">
       {adress ? (
         <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {footerP?.map((property, index) => {

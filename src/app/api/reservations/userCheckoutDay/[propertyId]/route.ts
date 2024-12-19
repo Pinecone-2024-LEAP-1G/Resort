@@ -25,7 +25,7 @@ export const GET = async (
     }).populate("userId");
     const today = formatDate(new Date());
     const checkOutDay = reservations.filter(
-      (reservation) => formatDate(new Date(reservation.checkOut)) === today,
+      (reservation) => formatDate(new Date(reservation.checkOut)) >= today,
     );
 
     checkOutDay.map(async (user) => {

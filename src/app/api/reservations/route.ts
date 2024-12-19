@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 
 connectToMongoDB();
 export const POST = async (request: NextRequest) => {
-  const { checkIn, checkOut, userId, propertyId, guest, totalPrice } =
+  const { checkIn, checkOut, userId, propertyId, guests, totalPrice } =
     await request.json();
 
   try {
@@ -33,9 +33,10 @@ export const POST = async (request: NextRequest) => {
       userId,
       checkIn: checkindate,
       checkOut: checkoutdate,
-      guest,
+      guests: guests,
       totalPrice,
     });
+    console.log(guests);
 
     const availableList = await AvailableListModel.create({
       propertyId: reservation.propertyId,
@@ -50,7 +51,7 @@ export const POST = async (request: NextRequest) => {
 
     await nodeMailer({
       to: hostEmail,
-      text: ` ${moment(checkIn).format("L")}-${moment(checkOut).format("L")},  зочдын тоо=${guest} захиалга ирсэн байна`,
+      text: ` ${moment(checkIn).format("L")}-${moment(checkOut).format("L")},  зочдын тоо=${guests} захиалга ирсэн байна`,
     });
 
     return Response.json({
