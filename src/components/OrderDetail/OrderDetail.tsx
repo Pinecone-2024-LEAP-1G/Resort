@@ -63,12 +63,20 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
     getReservation();
   };
 
+  if (reservations?.length === 0) {
+    return (
+      <div className="w-[100vw] p-40 text-center font-bold">
+        Уучлаарай, Танд захиалга байхгүй байна
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto w-[1074px]">
       <h1 className="h-[72px] py-4 text-2xl font-bold">Таны захиалга</h1>
       <div className="grid grid-cols-3 p-4">
         {reservations?.map((reservation) => (
-          <div>
+          <div key={reservation._id}>
             <h1 className="mb-2 font-bold">
               Захиалга хийсэн өдөр:
               {moment(reservation.createdAt).format("ll")}

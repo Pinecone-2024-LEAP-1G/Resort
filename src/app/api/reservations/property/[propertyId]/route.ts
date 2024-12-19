@@ -12,6 +12,7 @@ export const GET = async (
   },
 ) => {
   const propertyId = (await params).propertyId;
+
   try {
     const reservation = await ReservationModel.find({
       propertyId: propertyId,
@@ -21,6 +22,8 @@ export const GET = async (
 
     return Response.json({ reservations: reservation });
   } catch (error) {
+    console.log(error);
+
     return Response.json({ error: error });
   }
 };

@@ -27,51 +27,42 @@ export const Footer = () => {
   }, [address]);
 
   const regions = [
-    { name: "Arhangai", id: "arhangai" },
-    { name: "Bayn-Olgii", id: "bayn-olgii" },
-    { name: "Baynkhongor", id: "baynkhongor" },
-    { name: "Bulgan", id: "bulgan" },
-    { name: "Gobi-Altai", id: "gobi-altai" },
-    { name: "Darkhan-uul", id: "darkhan-uul" },
-    { name: "Tov", id: "tov" },
-    { name: "Khentii", id: "khentii" },
-    { name: "Uvs", id: "uvs" },
-    { name: "Sukhbaatar", id: "sukhbaatar" },
-    { name: "Dorno-gobi", id: "dorno-gobi" },
-    { name: "Ovorhangai", id: "ovorhangai" },
-    { name: "Zavhan", id: "zavhan" },
-    { name: "Khuvsgul", id: "khuvsgul" },
-    { name: "Omno-gobi", id: "omno-gobi" },
-    { name: "Bagannur", id: "bagannur" },
-    { name: "Selenge", id: "selenge" },
+    { name: "Aрхангай", id: "arhangai" },
+    { name: "Баян-Өлгий", id: "bayn-olgii" },
+    { name: "Баянхонгор", id: "baynkhongor" },
+    { name: "Булган", id: "bulgan" },
+    { name: "Говь-Алтай", id: "gobi-altai" },
+    { name: "Дархан-Уул", id: "darkhan-uul" },
+    { name: "Төв Аймаг", id: "tov" },
+    { name: "Хэнтий", id: "khentii" },
+    { name: "Увс", id: "uvs" },
+    { name: "Сүхбаатар", id: "sukhbaatar" },
+    { name: "Дорно-Говь", id: "dorno-gobi" },
+    { name: "Өвөрхангай", id: "ovorhangai" },
+    { name: "Завхан", id: "zavhan" },
+    { name: "Хөвсгөл", id: "khuvsgul" },
+    { name: "Өмнө-Говь", id: "omno-gobi" },
+    { name: "Багануур", id: "bagannur" },
+    { name: "Сэлэнгэ", id: "selenge" },
   ];
 
   return (
-    <footer className="p-6 text-sm text-gray-700">
+    <footer className="bg-gray-100 p-6 text-sm text-gray-700">
       <div className="p-4">
-        <h2 className="mb-4 text-xl font-bold">Aimgiin nerseer haih</h2>
+        <h2 className="mb-4 text-xl font-bold"></h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
           {regions.map((region, index) => (
-            <button
+            <p
               key={index}
-              className="block w-full rounded-lg border p-4 text-center text-gray-800 hover:bg-gray-100"
+              className="w-full p-4 text-center text-gray-800 underline"
               onClick={() => setAdress(region.name)}
             >
               <h3 className="font-semibold">{region.name}</h3>
-            </button>
+            </p>
           ))}
         </div>
-        <button
-          className="mt-4 text-blue-500 underline"
-          onClick={() => setShowAll(!showAll)}
-        >
-          {showAll ? "Show Less" : "Show More"}
-        </button>
       </div>
       <div className="my-6 border-t border-gray-300"></div>
-      <div className="grid grid-cols-1 gap-6 px-10 md:grid-cols-3"></div>
-      <div className="my-6 border-t border-gray-300"></div>
-      <div className="flex flex-col items-center space-y-4 md:flex-row md:justify-between md:space-y-0"></div>
     </footer>
   );
 };

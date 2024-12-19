@@ -51,7 +51,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         checkOut: to,
         userId: userID,
         propertyId: propertyId,
-        guest: !isNaN(Number(guest)),
+        guest: guest,
         totalPrice: totalPrice,
       });
       setIsLoading(false);
