@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
+import { formatDate } from "date-fns";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -17,9 +18,9 @@ export const GET = async (
       propertyId: propertyId,
       userId: userId,
     });
-    const today = new Date();
+    const today = formatDate(new Date());
     const checkOutDay = reservations.filter(
-      (reservation) => new Date(reservation.checkOut) === today,
+      (reservation) => formatDate(new Date(reservation.checkOut)) === today,
     );
     console.log(checkOutDay);
     return Response.json({ reservation: checkOutDay });
