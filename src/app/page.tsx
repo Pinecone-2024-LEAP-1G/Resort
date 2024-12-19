@@ -6,6 +6,7 @@ import { Categories } from "@/components/Category/Categories";
 import { useSearchParams } from "next/navigation";
 import { PropertyType } from "@/components/Review";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
   const searchParams = useSearchParams();
@@ -20,7 +21,7 @@ const Home = () => {
   >([]);
   const adress = searchParams.get("adress");
   const [footerP, setFooterP] = useState<PropertyType[]>();
-
+  const [sliceCard, setSliceCard] = useState(12);
   useEffect(() => {
     const getaddressProperty = async () => {
       try {
@@ -65,9 +66,16 @@ const Home = () => {
   };
 
   const filteredAndSortedProperties = filterProperty
-    .filter((filterProperty) => filterProperty.reviewId.length >= 0)
+    .filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
-
+  const more = () => {
+    if (filteredAndSortedProperties.length > sliceCard)
+      setSliceCard((prev) => prev + 4);
+  };
+  console.log(sliceCard);
+  const finalProperty = filteredAndSortedProperties?.slice(sliceCard);
+  const finalProperty2 = filterProperty2?.slice(sliceCard);
+  console.log(finalProperty);
   return (
     <div>
       {adress ? (
@@ -77,7 +85,7 @@ const Home = () => {
             allProperties={() => setFilterProperty(properties)}
           />
           <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-            {filterProperty2?.map((property, index) => {
+            {finalProperty2?.map((property, index) => {
               if (filterProperty.length <= 1)
                 return (
                   <div key={index} className="p-10 text-center">
@@ -95,6 +103,7 @@ const Home = () => {
                 );
             })}
           </div>
+          <Button className="">Цааш үзэх</Button>
         </div>
       ) : (
         <div>
@@ -103,7 +112,7 @@ const Home = () => {
             allProperties={() => setFilterProperty(properties)}
           />
           <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-            {filteredAndSortedProperties?.map((property, index) => {
+            {finalProperty?.map((property, index) => {
               if (filterProperty.length <= 0)
                 return (
                   <div key={index} className="p-10 text-center">
@@ -120,7 +129,10 @@ const Home = () => {
                   />
                 );
             })}
-          </div>
+          </div>{" "}
+          <Button onClick={more} className="">
+            Цааш үзэх
+          </Button>
         </div>
       )}
     </div>
