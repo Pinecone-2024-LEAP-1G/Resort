@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShare } from "react-icons/lu";
@@ -137,7 +136,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
           </div>
         </div>
       </div>
-      <Review property={property} />
+      <Review propertyId={propertyId} />
       <div className="mt-20"></div>
     </div>
   );

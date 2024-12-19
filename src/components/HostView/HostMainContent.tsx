@@ -20,7 +20,7 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
   useEffect(() => {
     const getHostData = async () => {
       try {
-        const response = await axios.get(`/api/host/${hostId}`);
+        const response = await axios.get(`/api/users/${hostId}`);
 
         setHostdata(response.data.host);
 

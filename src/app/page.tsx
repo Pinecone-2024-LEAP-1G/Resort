@@ -36,6 +36,7 @@ const Home = () => {
     );
     setFilterProperty(filterProperties);
   };
+
   const filteredAndSortedProperties = filterProperty
     .filter((filterProperty) => filterProperty.reviewId.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
