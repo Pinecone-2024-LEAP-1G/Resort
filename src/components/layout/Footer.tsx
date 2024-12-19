@@ -27,7 +27,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-100 p-6 text-sm text-gray-700">
+    <footer className="mb-1 bg-gray-100 p-6 text-sm text-gray-700">
       <div className="p-4">
         <h2 className="mb-4 text-xl font-bold"></h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
