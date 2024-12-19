@@ -24,7 +24,7 @@ export const Category = ({
       onClick={onClick}
       className="flex flex-col items-center justify-between gap-1 p-5 hover:cursor-pointer"
     >
-      <div className={`${hover}i text-gray-600`}>{icons?.icon}</div>
+      <div className={`${hover} text-gray-600`}>{icons?.icon}</div>
       <p
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "./Category";
 import { SeeAllIcon } from "../icons/CategoryIcons/SeeAllIcon";
+import { SkeletonCategories } from "../Skeletons/SkeletonCategories";
 
 type Category = {
   name: string;
@@ -20,11 +21,18 @@ type FilterCategory = {
 export const Categories = ({ onClick, allProperties }: FilterCategory) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [hover, setHover] = useState<string | number | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getCategories = async () => {
-      const response = await axios.get("/api/categories");
-      setCategories(response.data);
+      try {
+        const response = await axios.get("/api/categories");
+        setCategories(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     };
     getCategories();
   }, []);
@@ -43,18 +51,24 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
             </p>
           </div>
           <div className="flex w-full flex-row gap-10">
-            {categories?.map((category, index) => {
-              return (
-                <Category
-                  onClick={() => onClick(category._id)}
-                  onMouseEnter={() => setHover(index)}
-                  onMouseLeave={() => setHover(null)}
-                  hover={hover === index ? "text-gray-800" : "text-gray-500"}
-                  key={index}
-                  text={category.name}
-                />
-              );
-            })}
+            {loading
+              ? Array(12)
+                  .fill(null)
+                  .map((_, index) => <SkeletonCategories key={index} />)
+              : categories?.map((category, index) => {
+                  return (
+                    <Category
+                      onClick={() => onClick(category._id)}
+                      onMouseEnter={() => setHover(index)}
+                      onMouseLeave={() => setHover(null)}
+                      hover={
+                        hover === index ? "text-gray-800" : "text-gray-500"
+                      }
+                      key={index}
+                      text={category.name}
+                    />
+                  );
+                })}
           </div>
         </div>
         <ScrollBar orientation="horizontal" />
