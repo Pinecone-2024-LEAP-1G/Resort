@@ -20,9 +20,7 @@ const Home = () => {
   const guests = searchParams.get("guests");
   const [properties, setProperties] = useState<PropertyType[] | []>([]);
   const [filterProperty, setFilterProperty] = useState<PropertyType[] | []>([]);
-  const [filterProperty2, setFilterProperty2] = useState<
-    PropertyType[] | undefined
-  >([]);
+
   const adress = searchParams.get("adress");
   const [footerP, setFooterP] = useState<PropertyType[]>();
 
@@ -64,48 +62,35 @@ const Home = () => {
     const filterProperties = properties.filter(
       (property) => property?.categoryId === id,
     );
-    const filterProperties2 = footerP?.filter(
-      (property) => property?.categoryId === id,
-    );
+
     setFilterProperty(filterProperties);
-    setFilterProperty2(filterProperties2);
   };
 
   const filteredAndSortedProperties = filterProperty
-    .filter((filterProperty) => filterProperty.reviewId.length >= 0)
+    ?.filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
 
   return (
-    <div>
+    <div className="mb-10">
       {adress ? (
-        <div>
-          <Categories
-            onClick={(id) => changePropertyCategory(id)}
-            allProperties={() => setFilterProperty(properties)}
-          />
-          <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-            {loading
-              ? Array(10)
-                  .fill(null)
-                  .map((_, index) => <SkeletonHomeCard key={index} />)
-              : filteredAndSortedProperties?.map((property, index) => {
-                  if (filterProperty[0].length === 0)
-                    return (
-                      <div key={index} className="p-10 text-center">
-                        Таны хайсан утга олдсонгүй.
-                      </div>
-                    );
-                  else
-                    return (
-                      <HomeCard
-                        key={index}
-                        property={property}
-                        propertyId={property?._id}
-                        propertyPictures={[property?.propertyPictures]}
-                      />
-                    );
-                })}
-          </div>
+        <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+          {footerP?.map((property, index) => {
+            if (footerP.length === 0)
+              return (
+                <div key={index} className="p-10 text-center">
+                  Таны хайсан утга олдсонгүй.
+                </div>
+              );
+            else
+              return (
+                <HomeCard
+                  key={index}
+                  property={property}
+                  propertyId={property?._id}
+                  propertyPictures={[property?.propertyPictures]}
+                />
+              );
+          })}
         </div>
       ) : (
         <div>

@@ -17,7 +17,6 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [, setCheckOut] = useState();
   const [showReview, setShowReview] = useState(false);
   const [checkReview, setCheckReview] = useState();
-  console.log("ldnc");
   useEffect(() => {
     const getPropertyById = async () => {
       setLoading(true);
@@ -57,6 +56,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
     };
     getreservations();
   }, [propertyId, checkReview]);
+
   useEffect(() => {
     const getReview = async () => {
       try {
@@ -71,6 +71,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
     };
     getReview();
   }, [propertyId]);
+
   return (
     <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">
