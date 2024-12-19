@@ -24,7 +24,7 @@ const Home = () => {
 
   const adress = searchParams.get("adress");
   const [footerP, setFooterP] = useState<PropertyType[]>();
-  const [sliceCard, setSliceCard] = useState(12);
+  const [sliceCard, setSliceCard] = useState(9);
   useEffect(() => {
     const getaddressProperty = async () => {
       try {
@@ -72,8 +72,7 @@ const Home = () => {
     .filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
   const more = () => {
-    if (filteredAndSortedProperties.length > sliceCard)
-      setSliceCard((prev) => prev + 4);
+    if (0 < sliceCard) setSliceCard((prev) => prev - 4);
   };
   console.log(sliceCard);
   const finalProperty = filteredAndSortedProperties?.slice(sliceCard);
@@ -102,7 +101,7 @@ const Home = () => {
           })}
         </div>
       ) : (
-        <div>
+        <div className="">
           <Categories
             onClick={(id) => changePropertyCategory(id)}
             allProperties={() => setFilterProperty(properties)}
