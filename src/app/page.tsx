@@ -1,13 +1,16 @@
 "use client";
+
 import HomeCard from "@/components/HomeCard";
 import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
 import { useSearchParams } from "next/navigation";
+import { SkeletonHomeCard } from "@/components/Skeletons/SkeletonHomeCard";
 
 const Home = () => {
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const address = searchParams.get("address");
   const from = searchParams.get("from");
   const to = searchParams.get("to");
@@ -23,8 +26,10 @@ const Home = () => {
         );
         setFilterProperty(response?.data.property);
         setProperties(response?.data.property);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getProperties();
@@ -48,23 +53,27 @@ const Home = () => {
         allProperties={() => setFilterProperty(properties)}
       />
       <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-        {filteredAndSortedProperties?.map((property, index) => {
-          if (filterProperty[0].length === 0)
-            return (
-              <div key={index} className="p-10 text-center">
-                Таны хайсан утга олдсонгүй.
-              </div>
-            );
-          else
-            return (
-              <HomeCard
-                key={index}
-                property={property}
-                propertyId={property?._id}
-                propertyPictures={[property?.propertyPictures]}
-              />
-            );
-        })}
+        {loading
+          ? Array(10)
+              .fill(null)
+              .map((_, index) => <SkeletonHomeCard key={index} />)
+          : filteredAndSortedProperties?.map((property, index) => {
+              if (filterProperty[0].length === 0)
+                return (
+                  <div key={index} className="p-10 text-center">
+                    Таны хайсан утга олдсонгүй.
+                  </div>
+                );
+              else
+                return (
+                  <HomeCard
+                    key={index}
+                    property={property}
+                    propertyId={property?._id}
+                    propertyPictures={[property?.propertyPictures]}
+                  />
+                );
+            })}
       </div>
     </div>
   );
