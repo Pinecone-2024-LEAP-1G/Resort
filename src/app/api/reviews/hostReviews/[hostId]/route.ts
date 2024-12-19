@@ -1,5 +1,4 @@
 import { Review, ReviewModel } from "@/lib/models";
-import mongoose from "mongoose";
 import currency from "currency.js";
 
 export const GET = async (

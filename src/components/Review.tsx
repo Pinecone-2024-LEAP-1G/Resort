@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "react-day-picker";
 import { IoMdStarOutline } from "react-icons/io";
 import { MdOutlineStar } from "react-icons/md";
 
@@ -38,7 +37,7 @@ interface Props {
 
 const Review = ({ property }: Props) => {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-2">
+    <div className="mx-auto mt-32 grid grid-cols-2 gap-2">
       {property?.reviewId?.map((review) => (
         <div key={review._id} className="mb-4 justify-start">
           <div className="flex flex-col items-start gap-5">

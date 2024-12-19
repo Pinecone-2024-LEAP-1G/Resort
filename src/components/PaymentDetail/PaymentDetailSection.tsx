@@ -10,6 +10,15 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
 import { useSession } from "next-auth/react";
+import {
+  BouncingDots,
+  ContinuousTrainLoader,
+  MovingTrain,
+  MovingTrainLoader,
+  Pulse,
+  RealTrainLoader,
+  TrainLoader,
+} from "./Loading";
 
 export type Property = {
   _id: string;
@@ -82,8 +91,8 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
 
   if (!isLoading) {
     return (
-      <div className="flex h-[100vh] w-[100vw] items-center justify-center">
-        ...isLoading
+      <div className="">
+        <MovingTrain />
       </div>
     );
   }
