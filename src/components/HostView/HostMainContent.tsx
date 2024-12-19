@@ -6,11 +6,11 @@ import HostLeftCardSecond from "./HostLeftCardSecond";
 import { HostReviewCard, ReviewType } from "./HostReviewCard";
 import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
-import { HostTypePopulatedProperties } from "@/lib/models/host.model";
+import { HostTypePopulatedProperties } from "@/lib/models/user.model";
 import { useRouter } from "next/navigation";
-import { Property } from "@/lib/models";
+import { PropertyType } from "../Review";
 
-const HostMainContent = ({ hostId }: { hostId: string }) => {
+const HostMainContent = ({ userId }: { userId: string }) => {
   const [hostData, setHostdata] = useState<HostTypePopulatedProperties>();
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [, setReviewCount] = useState<number>(0);
@@ -20,14 +20,14 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
   useEffect(() => {
     const getHostData = async () => {
       try {
-        const response = await axios.get(`/api/users/${hostId}`);
+        const response = await axios.get(`/api/users/${userId}`);
 
-        setHostdata(response.data.host);
+        setHostdata(response.data.user);
 
         const { data } = await axios.get<{
           reviews: ReviewType[];
           reviewCount: number;
-        }>(`http://localhost:3000/api/reviews/hostReviews/${hostId}`);
+        }>(`http://localhost:3000/api/reviews/hostReviews/${userId}`);
 
         const reviewsData = data.reviews;
         setReviews(reviewsData);
@@ -43,12 +43,12 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
         console.error(error);
       }
     };
-    if (hostId) {
+    if (userId) {
       getHostData();
     }
-  }, [hostId]);
+  }, [userId]);
 
-  const getfirstTwoProperties = (properties?: Property[]) => {
+  const getfirstTwoProperties = (properties?: PropertyType[]) => {
     if (!properties) return [];
 
     return [...properties].slice(0, 3);
@@ -57,9 +57,9 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
   const firstTwoProperties = getfirstTwoProperties(hostData?.propertyId);
 
   return (
-    <div className="ml-auto flex w-[1200px] justify-between">
+    <div className="mb-40 flex justify-between">
       <div>
-        <HostLeftCard hostId={hostId} />
+        <HostLeftCard userId={userId} />
         <HostLeftCardSecond hostData={hostData} />
       </div>
 
@@ -71,16 +71,16 @@ const HostMainContent = ({ hostId }: { hostId: string }) => {
             уншина уу.
           </p>
           <div className="mb-[32px] border-b-2 border-black"></div>
-          <div className="mb-[32px] flex justify-between">
+          <div className="mb-[32px] flex">
             <p className="font-bold">{hostData?.name} н талаар </p>
           </div>
 
-          <div className="mb-[32px] h-[230px] w-auto cursor-pointer">
+          <div className="mb-[64px] flex w-auto cursor-pointer flex-col">
             <HostReviewCard reviews={reviews} />
           </div>
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
-        <div className="flex justify-between">
+        <div className="flex">
           <p className="text-[24px] font-bold">
             {hostData?.name} Түрээслэж буй газрууд
           </p>

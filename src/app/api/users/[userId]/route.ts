@@ -10,7 +10,7 @@ export const GET = async (
       "propertyId",
     );
 
-    return Response.json({ user: user });
+    return Response.json({ user });
   } catch (error) {
     console.log(error);
 

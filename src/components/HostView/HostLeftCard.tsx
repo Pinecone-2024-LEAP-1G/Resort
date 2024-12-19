@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { HostType } from "@/lib/models/host.model";
 import { useRouter } from "next/navigation";
 import { getHostById, getHostReviewsByHostId } from "@/util/get-host";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Review } from "@/lib/models";
-
 import { HostLeftCardRating } from "./HostLeftCardRating";
 
 type HostReviews = {
@@ -16,18 +13,18 @@ type HostReviews = {
   rating: number;
 };
 
-const HostLeftCard = ({ hostId }: { hostId?: string }) => {
+const HostLeftCard = ({ userId }: { userId?: string }) => {
   const [host, setHost] = useState<HostType | null>(null);
   const [hostReviews, setHostReviews] = useState<HostReviews | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (!hostId) return;
+    if (!userId) return;
     const getHostData = async () => {
       try {
         const [hostData, hostReviewsData] = await Promise.all([
-          getHostById(hostId),
-          getHostReviewsByHostId(hostId),
+          getHostById(userId),
+          getHostReviewsByHostId(userId),
         ]);
 
         setHost(hostData);
@@ -38,30 +35,36 @@ const HostLeftCard = ({ hostId }: { hostId?: string }) => {
     };
 
     getHostData();
-  }, [hostId]);
+  }, [userId]);
 
   const handleClick = () => {
-    if (hostId) router.push(`/hostView/${hostId}`);
+    if (userId) router.push(`/hostView/${userId}`);
   };
 
   return (
     <div
       onClick={handleClick}
-      className="mr-auto mt-[30px] flex h-[230px] w-[320px] cursor-pointer rounded-2xl border-2 shadow-2xl"
+      className="mr-auto mt-[100px] flex rounded-2xl border-2 p-10 shadow-2xl"
     >
-      <div className="m-4 flex flex-col items-center justify-center text-center">
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        </Avatar>
+      <div className="flex flex-col items-center justify-center gap-6 p-4 text-center">
+        <div
+          className="rounded-full border bg-cover"
+          style={{
+            backgroundImage: `url(${host?.image})`,
+            width: "60px",
+            height: "60px",
+          }}
+        />
         <div className="ml-[5px] text-[18px] font-bold">
           {host?.name || "Loading..."}
         </div>
       </div>
-
-      <HostLeftCardRating
-        rating={hostReviews?.rating}
-        reviewCount={hostReviews?.rating}
-      />
+      <div>
+        <HostLeftCardRating
+          rating={hostReviews?.rating}
+          reviewCount={hostReviews?.rating}
+        />
+      </div>
     </div>
   );
 };

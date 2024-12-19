@@ -1,6 +1,4 @@
 import mongoose, { Model, Schema, model, models } from "mongoose";
-import { Property } from "./property.model";
-
 export type HostType = {
   _id?: mongoose.Schema.Types.ObjectId;
   experience: string;
@@ -10,11 +8,7 @@ export type HostType = {
   name: string;
   phoneNumber: number;
   email: string;
-  avatar: string;
-};
-
-export type HostTypePopulatedProperties = Omit<HostType, "propertyId"> & {
-  propertyId: Property[];
+  image: string;
 };
 
 const Host = new Schema<HostType>(
@@ -31,7 +25,7 @@ const Host = new Schema<HostType>(
     name: { type: String },
     phoneNumber: { type: Number },
     email: { type: String, required: true },
-    avatar: { type: String },
+    image: { type: String },
   },
   { timestamps: true },
 );

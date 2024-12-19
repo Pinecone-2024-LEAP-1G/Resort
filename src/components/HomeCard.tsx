@@ -49,7 +49,7 @@ export default function HomeCard(props: HomeCardProps) {
           onClick={() => router.push(`/property/${propertyId}`)}
         >
           <div>
-            <span className="text-lg font-medium">{property?.description}</span>
+            <span className="text-lg font-medium">{property?.address}</span>
           </div>
           <div className="ml-auto flex items-center"></div>
         </div>
