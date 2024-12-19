@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";

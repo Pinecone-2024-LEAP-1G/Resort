@@ -14,7 +14,7 @@ import { toast } from "sonner";
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [loading, setLoading] = useState(true);
   const [property, setProperty] = useState<PropertyType>();
-  const [checkOut, setCheckOut] = useState();
+  const [, setCheckOut] = useState();
   const [showReview, setShowReview] = useState(false);
   const [checkReview, setCheckReview] = useState();
   useEffect(() => {
@@ -174,7 +174,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
           </div>
         </div>
       </div>
-      <Review propertyId={propertyId} />
+      <Review property={property?.reviewId} />
       <div className="mt-20"></div>
     </div>
   );

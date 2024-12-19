@@ -93,8 +93,8 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
               key={reservation._id}
             >
               <ReservationCancel
-                image={reservation.propertyId.propertyPictures[0]}
-                address={reservation.propertyId.address}
+                image={reservation?.propertyId?.propertyPictures[0]}
+                address={reservation?.propertyId?.address}
                 checkIn={reservation.checkIn}
                 checkOut={reservation.checkOut}
                 price={reservation.totalPrice}

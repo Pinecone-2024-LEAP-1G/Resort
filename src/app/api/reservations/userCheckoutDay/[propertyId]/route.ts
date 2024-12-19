@@ -15,9 +15,9 @@ export const GET = async (
   { params }: { params: Promise<{ propertyId: string }> },
 ) => {
   const propertyId = (await params).propertyId;
+
   const session = await auth();
   const userId = session?.user.id;
-
   try {
     const reservations = await ReservationModel.find({
       propertyId: propertyId,

@@ -21,10 +21,9 @@ module.exports = {
           "0%": { transform: "translateX(0) rotate(0deg)" },
           "100%": { transform: "translateX(300px) rotate(720deg)" },
         },
-      },
-      animation: {
         spin: "moveRightAndSpin 2s linear infinite",
       },
+
       screens: {
         sm: "375px",
         md: "768px",
@@ -34,7 +33,6 @@ module.exports = {
       },
       boxShadow: {
         custom: "0px 0px 10px rgba(0, 0, 0, 0.3)",
-        custom: " 0px 0px 10px rgba(0, 0, 0, 0.3)",
       },
       borderRadius: {
         lg: "var(--radius)",
