@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PropertyClick } from "@/app/become-host/page";
+import { Textarea } from "../ui/textarea";
+
 export const Address = ({
   handleBack,
   handleNext,
@@ -23,17 +25,13 @@ export const Address = ({
       <div className="mx-auto my-8 flex w-[630px] flex-col gap-6">
         <div className="flex flex-col gap-6">
           <h1 className="text-[32px] font-semibold">
-            Where is your place located?
+            Таны байр хаана байдаг вэ?
           </h1>
-          <p className="text-lg text-[#6a6a6a]">
-            Your address is only shared with guests after they have made a
-            reservation.
-          </p>
         </div>
         <div>
-          <div className="mb-4">
+          <div className="mb-8">
             <label className="block text-sm font-medium text-gray-700">
-              Select your province
+              Бүсээ сонгоно уу
             </label>
             <Select
               value={value.address}
@@ -42,7 +40,7 @@ export const Address = ({
               }
             >
               <SelectTrigger className="w-[630px]">
-                <SelectValue placeholder="Choose a province" />
+                <SelectValue placeholder="Аймаг сонгоно уу" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -61,29 +59,48 @@ export const Address = ({
                 htmlFor="streetAddress"
                 className="block text-sm font-medium text-gray-700"
               >
-                Description
+                Дэлгэрэнгүй хаяг
               </label>
-              <Input
+              <Textarea
                 id="streetAddress"
                 onChange={(value) =>
                   handleChange({
                     target: { name: "description", value: value.target.value },
                   })
                 }
-                type="text"
-                placeholder="Enter your street address"
+                placeholder="Хаягаа тодорхой бичнэ үү"
               />
             </div>
           </div>
+        </div>{" "}
+        <div className="flex flex-col gap-4">
+          <div>
+            <label
+              htmlFor="streetAddress"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Давуу тал
+            </label>
+            <Textarea
+              id="streetAddress"
+              onChange={(value) =>
+                handleChange({
+                  target: { name: "advantage", value: value.target.value },
+                })
+              }
+              placeholder="Сууцны давуу талаа бичнэ үү"
+            />
+          </div>
         </div>
       </div>
+
       <div className="mt-12 flex items-center justify-between border-t px-6 py-4">
         <button
           onClick={handleBack}
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
         <Button
           disabled={!value.address || !value.description}
@@ -92,7 +109,7 @@ export const Address = ({
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
         >
-          Next
+          Үргэлжүүлэх
         </Button>
       </div>
     </div>

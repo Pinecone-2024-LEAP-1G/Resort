@@ -1,25 +1,13 @@
 import { connectToMongoDB } from "@/lib/db";
-import {
-  AvailableListModel,
-  PropertyModel,
-  ReservationModel,
-} from "@/lib/models";
-import { HostModel } from "@/lib/models/host.model";
+import { AvailableListModel, ReservationModel, UserModel } from "@/lib/models";
 import { nodeMailer } from "@/util/nodemailer";
+import moment from "moment";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
 export const POST = async (request: NextRequest) => {
-  const {
-    checkIn,
-    checkOut,
-    userId,
-    propertyId,
-    adult,
-    children,
-    infants,
-    totalPrice,
-  } = await request.json();
+  const { checkIn, checkOut, userId, propertyId, guest, totalPrice } =
+    await request.json();
 
   try {
     const checkindate = new Date(checkIn);
@@ -40,26 +28,12 @@ export const POST = async (request: NextRequest) => {
       });
     }
 
-    const propertyLimit = await PropertyModel.find({
-      _id: propertyId,
-    });
-
-    const quests = propertyLimit.map((property) => {
-      return property.guests;
-    });
-
-    if (quests === adult + children + infants) {
-      return Response.json({ message: "Oh sorry  exceeded limit" });
-    }
-
     const reservation = await ReservationModel.create({
       propertyId,
       userId,
       checkIn: checkindate,
       checkOut: checkoutdate,
-      adult,
-      children,
-      infants,
+      guest,
       totalPrice,
     });
 
@@ -70,18 +44,14 @@ export const POST = async (request: NextRequest) => {
       checkOutDate: reservation.checkOut,
     });
 
-    const hostId = await PropertyModel.findById({
-      _id: reservation.propertyId,
-    });
-
-    const host = await HostModel.findById({ _id: hostId?.userId });
+    const host = await UserModel.findById({ _id: userId });
 
     const hostEmail = host?.email;
-    const guests = adult + children + infants;
+    console.log(guest);
 
     await nodeMailer({
       to: hostEmail,
-      text: `startDate=${checkIn}, endDate${checkOut},gusts=${guests}`,
+      text: ` ${moment(checkIn).format("L")}-${moment(checkOut).format("L")},  зочдын тоо=${guest} захиалга ирсэн байна`,
     });
 
     return Response.json({

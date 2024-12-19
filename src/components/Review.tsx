@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "react-day-picker";
 import { IoMdStarOutline } from "react-icons/io";
 import { MdOutlineStar } from "react-icons/md";
 
@@ -33,13 +32,25 @@ export type PropertyType = {
 };
 
 interface Props {
-  property?: PropertyType;
+  property?: [
+    {
+      _id: string;
+      comment: string;
+      rating: number;
+      userId: {
+        _id: string;
+        image: string;
+        name: string;
+        phoneNumber: number;
+      };
+    },
+  ];
 }
 
 const Review = ({ property }: Props) => {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-2">
-      {property?.reviewId?.map((review) => (
+    <div className="mx-auto mt-32 grid grid-cols-2 gap-2">
+      {property?.map((review) => (
         <div key={review._id} className="mb-4 justify-start">
           <div className="flex flex-col items-start gap-5">
             <div className="flex items-center gap-4">
@@ -47,8 +58,8 @@ const Review = ({ property }: Props) => {
                 className="rounded-full border bg-cover"
                 style={{
                   backgroundImage: `url(${review?.userId?.image})`,
-                  width: "70px",
-                  height: "70px",
+                  width: "50px",
+                  height: "50px",
                 }}
               />
               <div className="flex flex-col gap-2">

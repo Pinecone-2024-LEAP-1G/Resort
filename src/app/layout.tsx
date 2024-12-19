@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout";
 import { usePathname } from "next/navigation";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -15,22 +16,25 @@ const RootLayout = ({
 }>) => {
   const pathName = usePathname();
   const BecomeHostPage = pathName.startsWith("/become-host");
+  const GooglePage = pathName.startsWith("/signin");
   return (
     <Suspense>
       <SessionProvider>
         <NuqsAdapter>
           <html lang="en">
             <body>
-              <main>
+              <main className="w-full">
                 <div className="text-base font-normal">
-                  <div className="mx-5 px-20">
-                    {!BecomeHostPage && <Header />}
-                  </div>
+                  {!BecomeHostPage && !GooglePage && <Header />}
                   <br />
-                  <div className="mx-5 px-20">{children}</div>
+                  <div
+                    className={`mx-auto px-20 ${!BecomeHostPage ? "pt-32" : ""}`}
+                  >
+                    {children}
+                  </div>
                   <Toaster />
                   <div className="mx-5 px-20">
-                    {!BecomeHostPage && <Footer />}
+                    {!BecomeHostPage && !GooglePage&& <Footer />}
                   </div>
                 </div>
               </main>

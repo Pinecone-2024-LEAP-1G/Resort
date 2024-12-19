@@ -22,16 +22,15 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
   const [reservation, setReservation] = useState<AvailableList[]>([]);
   const router = useRouter();
   const { data: session } = useSession();
+
   useEffect(() => {
     const getReservation = async () => {
-      const response = await axios.get(
-        `/api/availablelists?propertyId=${propertyId}`,
-      );
+      const response = await axios.get(`/api/availablelists/${propertyId}`);
       setReservation(response.data.AvailableLists);
     };
-
     getReservation();
   }, [propertyId]);
+
   const disabledRanges = reservation?.map((item) => ({
     from: new Date(item.checkInDate),
     to: new Date(item.checkOutDate),
@@ -105,14 +104,8 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
 
   const availablelists = getDaysArray(from, to);
 
-  const [
-    { numberOfAdult, numberOfChild, numberOfInfants, numberOfPets },
-    setQueries,
-  ] = useQueryStates({
-    numberOfAdult: parseAsInteger,
-    numberOfChild: parseAsInteger,
-    numberOfInfants: parseAsInteger,
-    numberOfPets: parseAsInteger,
+  const [{ numberOfGuest }, setQueries] = useQueryStates({
+    numberOfGuest: parseAsInteger,
   });
 
   const price = property?.price ?? Infinity;
@@ -149,32 +142,28 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
     if (!session) {
       toast.message("Та захиалга хийхийн тулд мэйлээрээ нэвтэрч орно уу");
       return;
+    }
+    if (!numberOfGuest) {
+      toast.error("Хүний тоог бөглөнө үү!");
+      return;
     } else
       router.push(
-        `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&propertyId=${propertyId}&adult=${numberOfAdult}&child=${numberOfChild}&infants=${numberOfInfants}&pets=${numberOfPets}&totalPrice=${totalPrice}`,
+        `/bookingRequest/${propertyId}?from=${from.toISOString()}&to=${to?.toISOString()}&guest=${numberOfGuest}&totalPrice=${totalPrice}`,
       );
   };
   return (
     <div className="ml-auto grid h-[495px] w-[372px] justify-center gap-2 rounded-lg border p-8 shadow-lg">
-      <p className="mb-4">Үнэ: {new Intl.NumberFormat().format(totalPrice)}₮</p>
+      <p className="mb-4">Үнэ: {new Intl.NumberFormat().format(price)}₮</p>
       <DatePickerWithRange
         selected={{ from, to }}
-        onSelect={() => setDate}
+        onSelect={setDate}
         defaultMonth={from || new Date()}
         disabled={disabledRanges}
         date={{ from, to }}
       />
       <GuestPopover
-        adult={Number(numberOfAdult)}
-        setAdult={(adult: number) => setQueries({ numberOfAdult: adult })}
-        child={Number(numberOfChild)}
-        setChild={(child: number) => setQueries({ numberOfChild: child })}
-        infants={Number(numberOfInfants)}
-        setInfants={(infants: number) =>
-          setQueries({ numberOfInfants: infants })
-        }
-        pets={Number(numberOfPets)}
-        setPets={(pets: number) => setQueries({ numberOfPets: pets })}
+        guest={Number(numberOfGuest)}
+        setGuest={(guest: number) => setQueries({ numberOfGuest: guest })}
         people={property?.guests}
         limitGuest={property?.guests}
       />

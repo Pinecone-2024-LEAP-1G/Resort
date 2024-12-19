@@ -1,17 +1,24 @@
 "use client";
 
-import { ChevronLeft, Gem } from "lucide-react";
-import { Alert, AlertTitle } from "../ui/alert";
+import { ChevronLeft } from "lucide-react";
 import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useSearchParams } from "next/navigation";
-import { RulesAndPolicy } from "./RulesAndPolicy";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
+import { useSession } from "next-auth/react";
+import {
+  BouncingDots,
+  ContinuousTrainLoader,
+  MovingTrain,
+  MovingTrainLoader,
+  Pulse,
+  RealTrainLoader,
+  TrainLoader,
+} from "./Loading";
 
 export type Property = {
   _id: string;
@@ -35,72 +42,57 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
-  const adult = searchParams.get("adult");
-  const child = searchParams.get("child");
-  const pets = searchParams.get("pets");
-  const infants = searchParams.get("infants");
-  const totalPrice = searchParams.getAll("totalPrice");
-  let allGuests = 0;
+  const guest = searchParams.get("guest");
+  const totalPrice = searchParams.get("totalPrice");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-
-  if (adult && !isNaN(Number(adult))) {
-    allGuests += Number(adult);
-  }
-  if (child && !isNaN(Number(child))) {
-    allGuests += Number(child);
-  }
-  if (infants && !isNaN(Number(infants))) {
-    allGuests += Number(infants);
-  }
-  if (pets && !isNaN(Number(pets))) {
-    allGuests += Number(pets);
-  }
+  const { data: session } = useSession();
+  const userID = session?.user?.id;
 
   const SubmitReservation = async () => {
-    if (allGuests === 0) {
+    if (!guest) {
       return toast.error("Хүний тоог бөглөнө үү!");
     }
     setIsLoading(false);
     try {
-      const response = await axios.post("/api/reservations", {
+      await axios.post("/api/reservations", {
         checkIn: from,
         checkOut: to,
-        userId: "6747c5db0314e681044f54d0",
+        userId: userID,
         propertyId: propertyId,
-        adult: !isNaN(Number(adult)),
-        children: !isNaN(Number(child)),
-        infants: !isNaN(Number(infants)),
-        totalPrice: totalPrice[1],
+        guest: guest,
+        totalPrice: totalPrice,
       });
       setIsLoading(false);
-      const userId = response.data.reservation.userId;
-      router.push(`/orderDetail/${userId}`);
+
+      router.push(`/orderDetail/${userID}`);
       toast.success("zahialga amjilttai");
     } catch (error) {
       console.log(error);
-
       toast.error("error");
     }
   };
 
   const ToastWithAction = () => {
-    return (
-      <Button
-        className="h-[72px] w-[556px] rounded-2xl text-lg font-semibold shadow-lg"
-        type="submit"
-        variant="outline"
-        onClick={SubmitReservation}
-      >
-        Баталгаажуулах
-      </Button>
-    );
+    if (guest === null) {
+      return toast.error("Хүний тоог бөглөнө үү!");
+    } else
+      return (
+        <Button
+          className="mt-10 h-[72px] w-[556px] rounded-2xl bg-green-500 text-lg font-semibold text-white shadow-lg"
+          type="submit"
+          variant="outline"
+          onClick={SubmitReservation}
+        >
+          Баталгаажуулах
+        </Button>
+      );
   };
 
   if (!isLoading) {
     return (
-      <div className="flex h-[100vh] w-[100vw] items-center justify-center">
-        ...isLoading
+      <div className="">
+        <MovingTrain />
       </div>
     );
   }
@@ -132,47 +124,24 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
               <div className="flex flex-row justify-between">
                 <div className="mb-6 border-t">
                   <p className="w-[556px] pt-6 font-medium">Зочдын тоо</p>
-                  <p className="text-lg font-semibold">{allGuests} зочин</p>
+                  <p className="text-lg font-semibold">{guest} зочин</p>
                   <div />
                 </div>
               </div>
               <div className="flex flex-row justify-between">
                 <div className="border-t">
                   <p className="w-[556px] pt-6 font-medium">Нийт төлбөр</p>
-                  <p className="text-lg font-semibold">{totalPrice}₮</p>
+                  <p className="text-lg font-semibold">
+                    {new Intl.NumberFormat().format(Number(totalPrice))}₮
+                  </p>
                   <div />
                 </div>
               </div>
             </div>
-            <div className="flex pt-20">
-              <Alert className="my-6 flex h-[98px] w-[556px] flex-row items-center justify-between rounded-2xl text-base shadow-lg">
-                <div className="flex flex-col">
-                  <AlertTitle>
-                    <div>
-                      <div className="flex flex-row">
-                        <p className="flex items-center justify-center">
-                          Яагаад
-                        </p>
-                        <div className="flex gap-2 p-3">
-                          <DiCodeigniter className="h-10 w-10" />
-                          <p className="w-[30px] font-bold">Хөдөө гарья</p>
-                        </div>
-                        <p className="ml-5 flex items-center justify-center">
-                          гэж ?
-                        </p>
-                      </div>
-                    </div>
-                  </AlertTitle>
-                </div>
-                <div>
-                  <Gem className="justify-end fill-pink-700" />
-                </div>
-              </Alert>
-            </div>
+            <ToastWithAction />
+            <div className="flex pt-20"></div>
           </div>
         </div>
-        <RulesAndPolicy />
-        <ToastWithAction />
       </div>
       <div className="mr-auto flex flex-col items-center justify-start gap-8 p-5">
         <GetProperty propertyId={propertyId} />

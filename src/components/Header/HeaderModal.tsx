@@ -4,11 +4,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { redirect } from "next/navigation";
-import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import { useRouter } from "next/navigation";
 import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -17,6 +15,8 @@ import Kebab from "../icons/Kebab";
 
 export function HeaderModal() {
   const { data: session } = useSession();
+  const router = useRouter();
+  const userId = session?.user?.id;
 
   const renderUserProfile = () => {
     if (session) {
@@ -35,43 +35,56 @@ export function HeaderModal() {
   };
 
   const handleAirbnbHome = () => {
-    redirect("/become-host");
+    router.push("/become-host");
   };
+  const handlejump = () => {
+    router.push(`/orderDetail/${userId}`);
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="flex items-center gap-3 rounded-full border-2 px-4 py-2">
+        <div className="flex cursor-pointer items-center gap-3 rounded-full border-2 px-4 py-2">
           <Kebab />
           {renderUserProfile()}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col gap-3 rounded-2xl">
-        <DropdownMenuItem onClick={() => signIn("google")}>
-          <button type="submit" className="text-sm font-normal">
-            Нэвтрэх
-          </button>
-        </DropdownMenuItem>
-        {/* <DropdownMenuSeparator /> */}
-        <DropdownMenuItem onClick={handleAirbnbHome}>
-          <span>Сууц бүртгүүлэх</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <span>Host an experience</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <span>Тусламжийн төв</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <LogOut />
+        {!session && (
+          <DropdownMenuItem onClick={() => router.push("/signin")}>
+            <button
+              type="submit"
+              className="cursor-pointer text-sm font-normal"
+            >
+              Нэвтрэх
+            </button>
+          </DropdownMenuItem>
+        )}
+        {session && (
+          <>
+            <DropdownMenuItem>
+              <span onClick={handleAirbnbHome}>Сууц бүртгүүлэх</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handlejump}>
+              <span>Захиалга харуулах</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <span onClick={() => router.push(`/hostProperty/${userId}`)}>
+                Миний байшин
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <LogOut />
 
-          <button
-            className="ml-2 text-sm font-normal"
-            onClick={() => signOut()}
-          >
-            Гарах
-          </button>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+              <button
+                className="ml-2 cursor-pointer text-sm font-normal"
+                onClick={() => signOut()}
+              >
+                Гарах
+              </button>
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

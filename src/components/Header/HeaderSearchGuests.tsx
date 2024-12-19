@@ -36,7 +36,6 @@ export function PopoverDemo({
             onMouseLeave={onMouseLeave}
             className={`ml-7 flex w-[234px] flex-col items-start justify-center rounded-full ${hover}`}
           >
-            {" "}
             Зочдын тоо оруулах
           </button>
         </PopoverTrigger>
@@ -59,7 +58,7 @@ export function PopoverDemo({
       </Popover>
       <div
         onClick={onClick}
-        className="mr-5 flex gap-1 rounded-full bg-green-500 px-4 py-3 text-white"
+        className="mr-5 flex cursor-pointer gap-1 rounded-full bg-cyan-500 px-4 py-3 text-white"
       >
         <Search />
       </div>

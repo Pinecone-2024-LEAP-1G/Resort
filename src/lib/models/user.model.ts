@@ -4,25 +4,30 @@ type User = {
   _id: string;
   name: string;
   email: string;
-  avatar: string;
+  image: string;
   password: string;
   phoneNumber: number;
   reservationId: mongoose.Schema.Types.ObjectId;
   role: "User" | "Admin";
+  propertyId: mongoose.Schema.Types.ObjectId[];
 };
 
 const UserSchema = new Schema<User>(
   {
     name: { type: String },
-    email: { type: String },
-    password: { type: String },
-    phoneNumber: { type: Number },
-    avatar: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, min: 8, required: true },
+    phoneNumber: { type: Number, min: 8, required: true },
+    image: { type: String },
     reservationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Reservations",
     },
     role: { type: String, enum: ["Admin", "User"], default: "User" },
+    propertyId: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Property",
+    },
   },
   { timestamps: true },
 );

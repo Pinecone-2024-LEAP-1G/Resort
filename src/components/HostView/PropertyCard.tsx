@@ -1,11 +1,17 @@
 "use client";
+
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { TiStar } from "react-icons/ti";
 
-const imageUrl =
-  "https://static.spacecrafted.com/ac45f202f5554b16bc04eb8950ff21bd/i/b6169b30c8eb4f268e69b41cdafb6924/1/GCuCv726gZycFxatknDdac/Houston%20Residential%20Property%20Management.jpeg";
-export const PropertyCard = () => {
+type PropertyProps = {
+  image: string;
+  address: string;
+
+  onclick: () => void;
+};
+
+export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
   const [liked, setLiked] = useState(false);
 
   const toggleLike = () => {
@@ -16,12 +22,11 @@ export const PropertyCard = () => {
   const hearthFillColor = liked ? "red" : "transparent";
 
   return (
-    <div className="cursor-pointer gap-5">
+    <div onClick={onclick} className="h-[205px] w-[170px] cursor-pointer">
       <div
-        className="h-[182] w-[224] rounded-2xl"
+        className="h-[169px] w-[170px] rounded-2xl"
         style={{
-          height: 181,
-          backgroundImage: `url(${imageUrl})`,
+          backgroundImage: `url(${image})`,
           backgroundSize: "cover",
         }}
       >
@@ -33,15 +38,12 @@ export const PropertyCard = () => {
           />
         </div>
       </div>
-      <div className="">
-        <div className="flex justify-between">
-          <h2 className="w-[180px] font-bold">Name </h2>
-          <div className="flex items-center">
-            <TiStar />
-            <p>5</p>
-          </div>
+      <div className="flex justify-between">
+        <h2 className="w-auto font-bold">{address} </h2>
+        <div className="flex items-center">
+          <TiStar />
+          <p>5</p>
         </div>
-        <p className="text-[14px]">Description</p>
       </div>
     </div>
   );

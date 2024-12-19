@@ -14,6 +14,7 @@ const Home = () => {
   const guests = searchParams.get("guests");
   const [properties, setProperties] = useState<Property[] | []>([]);
   const [filterProperty, setFilterProperty] = useState<Property[] | []>([]);
+
   useEffect(() => {
     const getProperties = async () => {
       try {
@@ -26,7 +27,6 @@ const Home = () => {
         console.log(error);
       }
     };
-
     getProperties();
   }, [guests, from, to, address]);
 
@@ -37,18 +37,22 @@ const Home = () => {
     setFilterProperty(filterProperties);
   };
 
+  const filteredAndSortedProperties = filterProperty
+    .filter((filterProperty) => filterProperty.reviewId.length >= 0)
+    .sort((a, b) => b.reviewId.length - a.reviewId.length);
+
   return (
     <div>
       <Categories
         onClick={(id) => changePropertyCategory(id)}
         allProperties={() => setFilterProperty(properties)}
       />
-      <div className="grid grow grid-cols-6 gap-8">
-        {filterProperty?.map((property, index) => {
+      <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        {filteredAndSortedProperties?.map((property, index) => {
           if (filterProperty[0].length === 0)
             return (
               <div key={index} className="p-10 text-center">
-                Tanii haisan utga oldsongvi
+                Таны хайсан утга олдсонгүй.
               </div>
             );
           else

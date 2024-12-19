@@ -4,9 +4,9 @@ export const GET = async (
   request: Request,
   { params }: { params: Promise<{ hostId: string }> },
 ) => {
+  const hostId = (await params).hostId;
   try {
-    const hostId = (await params).hostId;
-    const host = await HostModel.find({ _id: hostId }).populate({
+    const host = await HostModel.findById({ _id: hostId }).populate({
       path: "propertyId",
     });
     return Response.json({ host });

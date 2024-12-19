@@ -20,5 +20,6 @@ module.exports = {
     AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET ?? "",
     GMAIL_USER: process.env.GMAIL_USER ?? "",
     GMAIL_PASSWORD: process.env.GMAIL_PASSWORD ?? "",
+    AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST ?? "",
   },
 };

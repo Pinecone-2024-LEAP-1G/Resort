@@ -17,16 +17,17 @@ export const FloorPlan = ({
   const [price, setPrice] = useState<number | string>();
   const [cleaningFee, setCleaningFee] = useState<string | number>();
   const [, setPhoneNumber] = useState<number>();
+
   return (
-    <div>
+    <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div className="mx-auto my-8 w-[630px] text-right">
         <div className="my-5 flex flex-col gap-5 text-left">
           <h1 className="text-[32px] font-semibold">
-            Share some basics about your place
+            Газрын талаарх үндсэн мэдээллийг оруулна уу
           </h1>
-          <span className="text-lg text-[#6a6a6a]">
-            You will add more details later, like bed types.
+          <span className="text-base text-[#6a6a6a]">
+            Мэдээллийг бөглөхдөө `тооцоолох орлого` хэсгийг нягталж харна уу
           </span>
         </div>
         <div className="flex h-16 flex-row justify-between border-b p-4">
@@ -58,7 +59,6 @@ export const FloorPlan = ({
                 }
               }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
-              disabled={guests < 1}
             >
               <Plus className="h-4 w-4 text-black" />
             </Button>
@@ -94,7 +94,6 @@ export const FloorPlan = ({
                 }
               }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
-              disabled={beds < 1}
             >
               <Plus className="h-4 w-4 text-black" />
             </Button>
@@ -130,7 +129,6 @@ export const FloorPlan = ({
                 }
               }}
               className="h-8 w-8 rounded-full border bg-white hover:border-black hover:bg-current"
-              disabled={bathrooms < 0.5}
             >
               <Plus className="h-4 w-4 text-black" />
             </Button>
@@ -142,7 +140,7 @@ export const FloorPlan = ({
             <input
               min={5}
               type="number"
-              className="bg-gray w-[150px] rounded-lg border p-1"
+              className="bg-gray w-[150px] rounded-lg border p-1 pl-4"
               placeholder="   Үнэ"
               onChange={(e) => {
                 const fee = parseFloat(e.target.value);
@@ -160,37 +158,39 @@ export const FloorPlan = ({
             </div>
           </div>
         </div>
-        <div className="flex h-16 flex-row justify-between border-b p-4">
-          <p className="text-xl font-normal">Түрээсийн үнэ</p>
-          <div className="flex items-center gap-3">
-            <input
-              min={5}
-              type="number"
-              className="bg-gray w-[150px] rounded-lg border p-1"
-              placeholder="   Үнэ"
-              onChange={(e) => {
-                const pri = parseFloat(e.target.value);
-                setPrice(pri);
-                handleChange({
-                  target: { name: "price", value: pri.toString() },
-                });
-              }}
-            />
-            <div className="w-[120px]">
-              {new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "MNT",
-              }).format(parseFloat(price?.toString() ?? "0"))}
-            </div>
+        <div className="border-b">
+          <div className="flex h-16 flex-row justify-between p-4">
+            <p className="text-xl font-normal">Түрээсийн үнэ</p>
+            <div className="flex items-center gap-3">
+              <input
+                min={5}
+                type="number"
+                className="bg-gray w-[150px] rounded-lg border p-1 pl-4"
+                placeholder="   Үнэ"
+                onChange={(e) => {
+                  const pri = parseFloat(e.target.value);
+                  setPrice(pri);
+                  handleChange({
+                    target: { name: "price", value: pri.toString() },
+                  });
+                }}
+              />
+              <div className="w-[120px]">
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "MNT",
+                }).format(parseFloat(price?.toString() ?? "0"))}
+              </div>
+            </div>{" "}
           </div>{" "}
-        </div>{" "}
-        <PriceFloor />
-        <div className="flex h-16 flex-row justify-between border-b p-4">
+          <PriceFloor />
+        </div>
+        <div className="flex h-16 flex-row gap-[184px] border-b p-4">
           <p className="text-xl font-normal">Утасны дугаар</p>
           <input
             min={8}
             type="number"
-            className="bg-gray w-[150px] rounded-lg border p-1"
+            className="bg-gray w-[150px] rounded-lg border p-1 pl-4"
             placeholder="   Дугаар"
             onChange={(e) => {
               const number = parseFloat(e.target.value);
@@ -217,7 +217,7 @@ export const FloorPlan = ({
           aria-label="Proceed to the next step"
           className="rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800"
         >
-          Дараагийх
+          Үргэлжүүлэх
         </Button>
       </div>
     </div>

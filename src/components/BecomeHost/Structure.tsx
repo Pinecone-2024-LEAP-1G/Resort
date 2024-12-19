@@ -3,6 +3,7 @@ import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
+import { Button } from "react-day-picker";
 
 type Category = {
   name: string;
@@ -16,6 +17,7 @@ export const Structure = ({
   handleChange,
 }: PropertyClick) => {
   const [categories, setCategories] = useState<Category[]>([]);
+
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -27,13 +29,14 @@ export const Structure = ({
     };
     getCategories();
   }, []);
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
       <div className="mx-auto w-[680px] px-4 py-8">
-        <h1 className="mb-6 text-[32px] font-semibold">
-          Which of these best describes your place?
-        </h1>
+        <p className="mb-12 text-[32px] font-semibold">
+          Эдгээрээс аль нь таны газрыг тодорхойлж байна вэ?
+        </p>
         <div className="grid w-[640px] grid-cols-3 gap-4 md:grid-cols-3 lg:grid-cols-3">
           {categories.map((category) => (
             <button
@@ -68,20 +71,19 @@ export const Structure = ({
           aria-label="Go back to the previous step"
           className="text-sm font-medium text-gray-800 underline hover:text-gray-600"
         >
-          Back
+          Буцах
         </button>
         <button
-          className={`rounded-md px-6 py-3 text-white transition-colors ${
+          className={`rounded-lg px-6 py-2 text-sm text-white transition-colors ${
             !value.categoryId
               ? "cursor-not-allowed bg-gray-300"
               : "bg-black hover:bg-gray-800"
           }`}
           disabled={!value.categoryId}
-          aria-disabled={!value.categoryId}
           aria-label="Proceed to the next step"
           onClick={handleNext}
         >
-          Next
+          Үргэлжүүлэх
         </button>
       </div>
     </div>

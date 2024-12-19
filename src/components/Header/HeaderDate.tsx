@@ -36,7 +36,7 @@ export function DatePickerWithRange({
           <div
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className={`flex w-[234px] flex-col items-center justify-center rounded-full px-6 py-3 ${
+            className={`flex w-[234px] cursor-pointer flex-col items-center justify-center rounded-full px-6 py-3 ${
               hover
             }`}
           >
