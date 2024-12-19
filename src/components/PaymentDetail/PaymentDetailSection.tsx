@@ -60,7 +60,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         checkOut: to,
         userId: userID,
         propertyId: propertyId,
-        guest: guest,
+        guests: guest,
         totalPrice: totalPrice,
       });
       setIsLoading(false);
@@ -91,7 +91,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
 
   if (!isLoading) {
     return (
-      <div className="">
+      <div>
         <MovingTrain />
       </div>
     );
