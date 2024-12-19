@@ -48,7 +48,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         if (response.data.reservation.length === 1 && checkReview === 0)
           return (
             setShowReview(true),
-            toast.message("Тухайн газарт төрсөн сэтгэгдэлээ үнэлнүү")
+            toast.message("Тухайн газарт төрсөн сэтгэгдэлээ үнэлнэ үү")
           );
       } catch (error) {
         console.log(error);

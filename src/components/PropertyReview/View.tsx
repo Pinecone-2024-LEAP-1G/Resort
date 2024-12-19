@@ -37,7 +37,6 @@ export function ReviewProperty({ propertyId }: Property) {
       setShow(true);
       setComment("");
       setRating(0);
-      console.log(response.data);
       if (response.data) toast.message("Үнэлгээ өгсөн танд баярлалаа");
     } catch (error) {
       console.log(error);
@@ -77,7 +76,7 @@ export function ReviewProperty({ propertyId }: Property) {
                         !session
                           ? (setRating(0),
                             toast.message(
-                              "Үнэлгээ өгөхийн тулд мэйлээрээ нэвтэрч орно уу",
+                              "Үнэлгээ өгөхийн тулд имэйлээрээ нэвтэрч орно уу",
                             ))
                           : setRating(star)
                       }
