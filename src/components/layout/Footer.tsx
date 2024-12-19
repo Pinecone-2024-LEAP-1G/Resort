@@ -1,30 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useQueryState } from "nuqs";
-import { PropertyType } from "../Review";
-import { toast } from "sonner";
 
 export const Footer = () => {
-  const [showAll, setShowAll] = useState(false);
-  const [, setFilter] = useState<PropertyType[]>();
-  const [address, setAdress] = useQueryState("address");
-
-  useEffect(() => {
-    const getaddressProperty = async () => {
-      try {
-        const response = await axios.get(
-          `/api/properties/address/?address=${address}`,
-        );
-
-        setFilter(response.data.properties);
-      } catch (error) {
-        toast.error("error");
-      }
-    };
-    getaddressProperty();
-  }, [address]);
+  const [, setAdress] = useQueryState("adress");
 
   const regions = [
     { name: "Aрхангай", id: "arhangai" },
@@ -42,8 +21,8 @@ export const Footer = () => {
     { name: "Завхан", id: "zavhan" },
     { name: "Хөвсгөл", id: "khuvsgul" },
     { name: "Өмнө-Говь", id: "omno-gobi" },
-    { name: "Багануур", id: "bagannur" },
     { name: "Сэлэнгэ", id: "selenge" },
+    { name: "Улаанбаатар", id: "ulaanbaatar" },
   ];
 
   return (
