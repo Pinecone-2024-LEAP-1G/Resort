@@ -34,7 +34,7 @@ const RootLayout = ({
                   </div>
                   <Toaster />
                   <div className="mx-5 px-20">
-                    {!BecomeHostPage && !GooglePage&& <Footer />}
+                    {!BecomeHostPage && !GooglePage && <Footer />}
                   </div>
                 </div>
               </main>
