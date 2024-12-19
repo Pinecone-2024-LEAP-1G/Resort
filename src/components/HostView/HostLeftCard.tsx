@@ -47,7 +47,7 @@ const HostLeftCard = ({ hostId }: { hostId?: string }) => {
   return (
     <div
       onClick={handleClick}
-      className="mr-auto mt-[100px] flex h-[230px] w-[320px] cursor-pointer rounded-2xl border-2 shadow-2xl"
+      className="mr-auto mt-[30px] flex h-[230px] w-[320px] cursor-pointer rounded-2xl border-2 shadow-2xl"
     >
       <div className="m-4 flex flex-col items-center justify-center text-center">
         <Avatar>

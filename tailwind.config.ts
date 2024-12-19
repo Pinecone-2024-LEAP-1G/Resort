@@ -17,7 +17,13 @@ module.exports = {
       },
       animation: {
         moveTrain: "moveTrain 4s linear infinite",
+        moveRightAndSpin: {
+          "0%": { transform: "translateX(0) rotate(0deg)" },
+          "100%": { transform: "translateX(300px) rotate(720deg)" },
+        },
+        spin: "moveRightAndSpin 2s linear infinite",
       },
+
       screens: {
         sm: "375px",
         md: "768px",

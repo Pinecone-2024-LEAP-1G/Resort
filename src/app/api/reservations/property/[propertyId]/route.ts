@@ -12,7 +12,6 @@ export const GET = async (
   },
 ) => {
   const propertyId = (await params).propertyId;
-
   try {
     const reservation = await ReservationModel.find({
       propertyId: propertyId,

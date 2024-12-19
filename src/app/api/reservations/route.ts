@@ -47,7 +47,6 @@ export const POST = async (request: NextRequest) => {
     const host = await UserModel.findById({ _id: userId });
 
     const hostEmail = host?.email;
-    console.log(guest);
 
     await nodeMailer({
       to: hostEmail,

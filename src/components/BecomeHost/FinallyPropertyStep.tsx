@@ -18,7 +18,6 @@ export const CreateProperty = ({ value, handleBack }: PropertyClick) => {
   const { data: session } = useSession();
   const text = value.categoryname;
   const icons = categoryIcon({ text });
-
   const createProperty = async () => {
     await axios
       .post(`/api/properties`, {

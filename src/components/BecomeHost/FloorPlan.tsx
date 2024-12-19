@@ -17,7 +17,6 @@ export const FloorPlan = ({
   const [price, setPrice] = useState<number | string>();
   const [cleaningFee, setCleaningFee] = useState<string | number>();
   const [, setPhoneNumber] = useState<number>();
-
   return (
     <div className="flex min-h-screen flex-col justify-between">
       <PropertyHeader />
@@ -35,10 +34,9 @@ export const FloorPlan = ({
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
-                if (guests > 1) {
+                if (guests > 0) {
                   const guest = guests - 1;
                   setGuests(guest);
-
                   handleChange({
                     target: { name: "guests", value: guest.toString() },
                   });
@@ -51,10 +49,11 @@ export const FloorPlan = ({
             <div className="w-6 text-center text-lg">{guests}</div>
             <Button
               onClick={() => {
-                if (guests < 15) {
-                  setGuests(guests + 1);
+                if (guests < 50) {
+                  const guest = guests + 1;
+                  setGuests(guest);
                   handleChange({
-                    target: { name: "guests", value: guests.toString() },
+                    target: { name: "guests", value: guest.toString() },
                   });
                 }
               }}
@@ -69,7 +68,7 @@ export const FloorPlan = ({
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
-                if (beds > 1) {
+                if (beds > 0) {
                   const bed = beds - 1;
                   setBeds(bed);
 
@@ -104,7 +103,7 @@ export const FloorPlan = ({
           <div className="flex items-center justify-center gap-2">
             <Button
               onClick={() => {
-                if (bathrooms > 1) {
+                if (bathrooms > 0) {
                   const rooms = bathrooms - 1;
                   setBathrooms(rooms);
                   handleChange({

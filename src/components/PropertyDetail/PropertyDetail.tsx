@@ -8,11 +8,15 @@ import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
 import HostViewCard from "../HostView/HostLeftCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ReviewProperty } from "../PropertyReview/View";
+import { toast } from "sonner";
 
 export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [loading, setLoading] = useState(true);
   const [property, setProperty] = useState<PropertyType>();
-
+  const [, setCheckOut] = useState();
+  const [showReview, setShowReview] = useState(false);
+  const [checkReview, setCheckReview] = useState();
   useEffect(() => {
     const getPropertyById = async () => {
       setLoading(true);
@@ -34,6 +38,38 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
 
   const propertyPictures = property?.propertyPictures;
 
+  useEffect(() => {
+    const getreservations = async () => {
+      try {
+        const response = await axios.get(
+          `/api/reservations/userCheckoutDay/${propertyId}`,
+        );
+        setCheckOut(response.data.reservation);
+        if (response.data.reservation.length === 1 && checkReview === 0)
+          return (
+            setShowReview(true),
+            toast.message("Тухайн газарт төрсөн сэтгэгдэлээ үнэлнэ үү")
+          );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getreservations();
+  }, [propertyId, checkReview]);
+  useEffect(() => {
+    const getReview = async () => {
+      try {
+        const response = await axios.get(
+          `/api/reviews/propertyAndUserid?propertyId=${propertyId}`,
+        );
+        if (response.data.length >= 0) setShowReview(false);
+        setCheckReview(response.data.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getReview();
+  }, [propertyId]);
   return (
     <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">
@@ -122,10 +158,12 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
               <p>~ {property?.totalBedrooms} унтлагын өрөө</p>
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
-            <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
+
+            <div className="mt-20 flex h-fit w-fit flex-col justify-between rounded-lg border-b border-t p-4">
+              {showReview && <ReviewProperty propertyId={propertyId} />}
               <HostViewCard hostId={property?.userId} />
             </div>
-            <div className="mt-24 h-[80px]"></div>
+            <div className="mt-24 h-[80px]"> </div>
           </div>
           <div className="sticky top-10 mr-auto flex flex-col items-center justify-start gap-8 p-5">
             <ReverseCart
@@ -136,7 +174,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
           </div>
         </div>
       </div>
-      <Review propertyId={propertyId} />
+      <Review property={property?.reviewId} />
       <div className="mt-20"></div>
     </div>
   );

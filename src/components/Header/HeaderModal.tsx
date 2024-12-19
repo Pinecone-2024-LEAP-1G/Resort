@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Profile from "../icons/Profile";
@@ -73,13 +73,10 @@ export function HeaderModal() {
                 Миний байшин
               </span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => signOut()}>
               <LogOut />
 
-              <button
-                className="ml-2 cursor-pointer text-sm font-normal"
-                onClick={() => signOut()}
-              >
+              <button className="ml-2 cursor-pointer text-sm font-normal">
                 Гарах
               </button>
             </DropdownMenuItem>
