@@ -17,6 +17,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [, setCheckOut] = useState();
   const [showReview, setShowReview] = useState(false);
   const [checkReview, setCheckReview] = useState();
+  console.log("ldnc");
   useEffect(() => {
     const getPropertyById = async () => {
       setLoading(true);
