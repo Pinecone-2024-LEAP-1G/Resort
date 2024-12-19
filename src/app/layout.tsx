@@ -37,15 +37,11 @@ const RootLayout = ({
                   </div>
                   <Toaster />
                   <div className="mx-5 px-20">
-<<<<<<< HEAD
                     {!BecomeHostPage &&
                       !GooglePage &&
                       !HostReservations &&
                       !hostProperty &&
                       !orderDetail && <Footer />}
-=======
-                    {!BecomeHostPage && !GooglePage && <Footer />}
->>>>>>> 925c063 (front update)
                   </div>
                 </div>
               </main>

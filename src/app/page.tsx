@@ -5,11 +5,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
 import { useSearchParams } from "next/navigation";
-<<<<<<< HEAD
+
 import { PropertyType } from "@/components/Review";
 import { toast } from "sonner";
-=======
->>>>>>> 925c063 (front update)
+
 import { SkeletonHomeCard } from "@/components/Skeletons/SkeletonHomeCard";
 
 const Home = () => {
@@ -78,7 +77,6 @@ const Home = () => {
 
   return (
     <div>
-<<<<<<< HEAD
       {adress ? (
         <div>
           <Categories
@@ -140,7 +138,7 @@ const Home = () => {
           </div>
         </div>
       )}
-=======
+
       <Categories
         onClick={(id) => changePropertyCategory(id)}
         allProperties={() => setFilterProperty(properties)}
@@ -168,7 +166,6 @@ const Home = () => {
                 );
             })}
       </div>
->>>>>>> 925c063 (front update)
     </div>
   );
 };
