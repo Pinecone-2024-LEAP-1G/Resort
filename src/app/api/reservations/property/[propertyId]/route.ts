@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
 import { NextRequest } from "next/server";
@@ -12,7 +13,6 @@ export const GET = async (
   },
 ) => {
   const propertyId = (await params).propertyId;
-
   try {
     const reservation = await ReservationModel.find({
       propertyId: propertyId,

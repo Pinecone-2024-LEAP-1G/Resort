@@ -9,11 +9,10 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-
 import { ReviewUser } from "./Star";
 
 type Property = {
@@ -22,8 +21,24 @@ type Property = {
 export function ReviewProperty({ propertyId }: Property) {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
+  const [checkOut, setCheckOut] = useState();
   const [comment, setComment] = useState<string>();
   const { data: session } = useSession();
+  const getreservations = async () => {
+    try {
+      const response = await axios.get(
+        `/api/reservations/userCheckoutDay/${propertyId}`,
+      );
+      setCheckOut(response.data.reservation);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getreservations();
+  }, []);
+
   if (comment?.length === 0) toast.message("Сэтгэгдэл бичнэ үү");
   const createHostView = async () => {
     try {
