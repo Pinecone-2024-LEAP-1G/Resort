@@ -1,11 +1,13 @@
 import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
-import { formatDate } from "date-fns";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
 
+const formatDate = (date: Date): string => {
+  return date.toISOString().split("T")[0];
+};
 export const GET = async (
   request: NextRequest,
   { params }: { params: Promise<{ propertyId: string }> },

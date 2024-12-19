@@ -9,11 +9,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReviewUser } from "./Star";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { GrEmoji } from "react-icons/gr";
 
 type Property = {
   propertyId?: string;
@@ -21,24 +23,9 @@ type Property = {
 export function ReviewProperty({ propertyId }: Property) {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
-  const [checkOut, setCheckOut] = useState();
   const [comment, setComment] = useState<string>();
+  const [show, setShow] = useState(false);
   const { data: session } = useSession();
-  const getreservations = async () => {
-    try {
-      const response = await axios.get(
-        `/api/reservations/userCheckoutDay/${propertyId}`,
-      );
-      setCheckOut(response.data.reservation);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getreservations();
-  }, []);
-
   if (comment?.length === 0) toast.message("Сэтгэгдэл бичнэ үү");
   const createHostView = async () => {
     try {
@@ -47,6 +34,7 @@ export function ReviewProperty({ propertyId }: Property) {
         comment: comment,
         propertyId: propertyId,
       });
+      setShow(true);
       if (response) toast.message("Үнэлгээ өгсөн танд баярлалаа");
     } catch (error) {
       console.log(error);
@@ -55,7 +43,19 @@ export function ReviewProperty({ propertyId }: Property) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        {!show && (
+          <div className="flex flex-col">
+            <p className="w-fit transform animate-spin text-xl transition-transform duration-1000">
+              😃
+            </p>
+            <Button
+              className="rounded-lg bg-green-500 p-5 py-2 font-bold text-white hover:bg-cyan-500"
+              variant="outline"
+            >
+              Үнэлгээ өгөх
+            </Button>
+          </div>
+        )}
       </DialogTrigger>
       <DialogContent>
         <div className="my-2 flex items-center justify-center">
@@ -94,12 +94,15 @@ export function ReviewProperty({ propertyId }: Property) {
                 />
               </div>
             </CardFooter>
-            <button
-              className="cursor-auto rounded-xl border-2 bg-green-500 px-10 py-3 text-white"
-              onClick={createHostView}
-            >
-              Илгээх
-            </button>
+            <DialogClose>
+              {" "}
+              <button
+                className="cursor-auto rounded-xl border-2 bg-green-500 px-10 py-3 text-white"
+                onClick={createHostView}
+              >
+                Илгээх
+              </button>
+            </DialogClose>
           </Card>
         </div>
       </DialogContent>
