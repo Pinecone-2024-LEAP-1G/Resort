@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { PropertyModel, ReviewModel } from "../../../lib/models";
 import { NextRequest } from "next/server";
 
@@ -13,8 +14,9 @@ export const GET = async (request: NextRequest) => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { propertyId, userId, rating, comment } = await request.json();
-
+  const { propertyId, rating, comment } = await request.json();
+  const session = await auth();
+  const userId = session?.user.id;
   try {
     const review = await ReviewModel.create({
       propertyId,

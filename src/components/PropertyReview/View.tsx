@@ -27,7 +27,7 @@ export function ReviewProperty({ propertyId }: Property) {
   if (comment?.length === 0) toast.message("Сэтгэгдэл бичнэ үү");
   const createHostView = async () => {
     try {
-      const response = await axios.post("/api/propertyReviews", {
+      const response = await axios.post("/api/reviews", {
         rating: rating,
         comment: comment,
         propertyId: propertyId,
