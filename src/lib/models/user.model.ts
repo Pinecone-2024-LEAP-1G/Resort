@@ -1,3 +1,4 @@
+import { PropertyType } from "@/components/Review";
 import mongoose, { Model, Schema, model, models } from "mongoose";
 
 type User = {
@@ -10,6 +11,10 @@ type User = {
   reservationId: mongoose.Schema.Types.ObjectId;
   role: "User" | "Admin";
   propertyId: mongoose.Schema.Types.ObjectId[];
+};
+
+export type HostTypePopulatedProperties = Omit<User, "propertyId"> & {
+  propertyId: PropertyType[];
 };
 
 const UserSchema = new Schema<User>(

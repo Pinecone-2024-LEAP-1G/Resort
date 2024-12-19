@@ -10,15 +10,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
 import { useSession } from "next-auth/react";
-import {
-  BouncingDots,
-  ContinuousTrainLoader,
-  MovingTrain,
-  MovingTrainLoader,
-  Pulse,
-  RealTrainLoader,
-  TrainLoader,
-} from "./Loading";
+import { MovingTrain } from "./Loading";
 
 export type Property = {
   _id: string;
@@ -60,7 +52,7 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
         checkOut: to,
         userId: userID,
         propertyId: propertyId,
-        guest: guest,
+        guests: guest,
         totalPrice: totalPrice,
       });
       setIsLoading(false);
@@ -91,15 +83,18 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
 
   if (!isLoading) {
     return (
-      <div className="">
+      <div>
         <MovingTrain />
       </div>
     );
   }
 
   return (
-    <div className="mx-40 grid w-full grid-cols-2 gap-4">
-      <div className="mx-auto w-full">
+    <div className="mx-40 mb-[200px] grid w-full grid-cols-2">
+      <div className="flex flex-col items-center justify-start gap-8 p-5">
+        <GetProperty propertyId={propertyId} />
+      </div>
+      <div className="mx-auto mt-[100px] w-full">
         <div className="mr-8 flex flex-row items-center">
           <ChevronLeft className="w-8 justify-center" />
           <h3 className="px-12 text-3xl font-medium">Захиалгын мэдээлэл</h3>
@@ -142,9 +137,6 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
             <div className="flex pt-20"></div>
           </div>
         </div>
-      </div>
-      <div className="mr-auto flex flex-col items-center justify-start gap-8 p-5">
-        <GetProperty propertyId={propertyId} />
       </div>
     </div>
   );

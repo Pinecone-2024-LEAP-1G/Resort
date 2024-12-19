@@ -3,18 +3,16 @@ import currency from "currency.js";
 
 export const GET = async (
   request: Request,
-  { params }: { params: Promise<{ hostId: string }> },
+  { params }: { params: Promise<{ userId: string }> },
 ) => {
-  const { hostId } = await params;
+  const { userId } = await params;
 
-  if (!hostId) {
+  if (!userId) {
     throw new Error("no host id");
   }
 
-  // const userId = new mongoose.Types.ObjectId("67583070e0fc9dc71e70e7ee");
-
   try {
-    const reviews = await ReviewModel.find<Review>({ userId: hostId });
+    const reviews = await ReviewModel.find<Review>({ userId: userId });
 
     const totalRating = reviews?.reduce((acc, curr) => {
       return currency(acc).add(curr.rating).value;

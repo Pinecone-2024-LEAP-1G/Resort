@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { HostTypePopulatedProperties } from "@/lib/models/host.model";
+import { HostTypePopulatedProperties } from "@/lib/models/user.model";
 import { GrStatusGood } from "react-icons/gr";
 
 type SecondProps = {
@@ -17,6 +17,10 @@ const HostLeftCardSecond = ({ hostData }: SecondProps) => {
       <div className="mt-[30px] flex">
         <GrStatusGood className="h-[30px] w-[30px]" />
         <p className="ml-3 text-[16px]">{hostData?.email}</p>
+      </div>
+      <div className="mt-[30px] flex">
+        <GrStatusGood className="h-[30px] w-[30px]" />
+        <p className="ml-3 text-[16px]">{hostData?.phoneNumber}</p>
       </div>
       <Button className="text-[13px]" variant="link"></Button>
     </div>
