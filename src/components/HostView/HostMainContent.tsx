@@ -95,7 +95,7 @@ const HostMainContent = ({ userId }: { userId: string }) => {
                 onclick={() => router.push(`/property/${propertyId}`)}
                 key={property._id}
                 image={property.propertyPictures[0]}
-                address={property.description}
+                address={property.address}
               />
             );
           })}
