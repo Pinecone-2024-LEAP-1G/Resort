@@ -49,7 +49,6 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
   const getReservation = async () => {
     try {
       const response = await axios.get(`/api/reservations/${userId}`);
-      // Sort reservations by createdAt (latest first)
       const sortedReservations = response.data.reservation.sort(
         (a: ReservationType, b: ReservationType) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
@@ -62,7 +61,7 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
   };
 
   useEffect(() => {
-    getReservation();
+    if (userId) getReservation();
   }, [userId]);
 
   const deleteReservation = async (reservationId: string) => {
