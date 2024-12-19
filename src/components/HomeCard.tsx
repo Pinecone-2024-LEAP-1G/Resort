@@ -5,7 +5,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Property } from "@/lib/models";
+import { PropertyType } from "./Review";
 
 type HomeCardProps = {
   propertyId?: string;
@@ -14,7 +14,7 @@ type HomeCardProps = {
   distance?: string;
   rating?: string;
   propertyPictures: [string[]];
-  property?: Property;
+  property?: PropertyType;
 };
 
 export default function HomeCard(props: HomeCardProps) {

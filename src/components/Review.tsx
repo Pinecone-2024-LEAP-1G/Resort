@@ -14,8 +14,8 @@ export type PropertyType = {
   totalBedrooms: string;
   totalBathrooms: string;
   cleaningFee: number;
-  email: string;
   userId: string;
+  length: number;
   reviewId: [
     {
       _id: string;

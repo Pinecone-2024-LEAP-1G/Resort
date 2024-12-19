@@ -32,13 +32,7 @@ export const HostReservations = ({ propertyId }: Props) => {
   return (
     <div className="mx-auto justify-center">
       <div className="mx-auto w-[100%] p-8">
-        {/* <button className="rounded-md border bg-cyan-500 p-2 text-white hover:bg-cyan-800">
-          Захиалгатай өдрүүд
-        </button> */}
-        <div className="flex gap-4 text-2xl font-bold">
-          {/* <p>Захиалагчийн мэдээлэл </p>
-          <p className="font-bold">Эхлэх өдөр </p> */}
-        </div>
+        <div className="flex gap-4 text-2xl font-bold"></div>
         <div>
           {reservations?.map((reserve) => (
             <div
