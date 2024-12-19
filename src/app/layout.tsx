@@ -17,6 +17,9 @@ const RootLayout = ({
   const pathName = usePathname();
   const BecomeHostPage = pathName.startsWith("/become-host");
   const GooglePage = pathName.startsWith("/signin");
+  const HostReservations = pathName.startsWith("/hostReservations");
+  const hostProperty = pathName.startsWith("/hostProperty");
+  const orderDetail = pathName.startsWith("/orderDetail");
   return (
     <Suspense>
       <SessionProvider>
@@ -34,7 +37,11 @@ const RootLayout = ({
                   </div>
                   <Toaster />
                   <div className="mx-5 px-20">
-                    {!BecomeHostPage && !GooglePage&& <Footer />}
+                    {!BecomeHostPage &&
+                      !GooglePage &&
+                      !HostReservations &&
+                      !hostProperty &&
+                      !orderDetail && <Footer />}
                   </div>
                 </div>
               </main>
