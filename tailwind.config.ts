@@ -16,7 +16,7 @@ module.exports = {
         },
       },
       animation: {
-        moveTrain: "moveTrain 4s linear infinite",
+        moveTrain: "moveTrain 1s linear infinite",
       },
       screens: {
         sm: "375px",

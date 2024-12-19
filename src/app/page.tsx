@@ -1,4 +1,5 @@
 "use client";
+
 import HomeCard from "@/components/HomeCard";
 import { Property } from "@/lib/models";
 import { useState, useEffect } from "react";
@@ -36,6 +37,7 @@ const Home = () => {
     );
     setFilterProperty(filterProperties);
   };
+
   const filteredAndSortedProperties = filterProperty
     .filter((filterProperty) => filterProperty.reviewId.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);

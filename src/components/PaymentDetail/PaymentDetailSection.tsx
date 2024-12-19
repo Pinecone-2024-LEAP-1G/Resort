@@ -10,15 +10,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import GetProperty from "./GetProperty";
 import { useSession } from "next-auth/react";
-import {
-  BouncingDots,
-  ContinuousTrainLoader,
-  MovingTrain,
-  MovingTrainLoader,
-  Pulse,
-  RealTrainLoader,
-  TrainLoader,
-} from "./Loading";
+import { MovingTrain } from "./Loading";
 
 export type Property = {
   _id: string;
