@@ -58,8 +58,6 @@ const Home = () => {
     getProperties();
   }, [guests, from, to, address, sliceCard]);
 
-  const slicee = filterProperty?.splice(sliceCard);
-
   const filteredAndSortedProperties = sliceProperty
     .filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
@@ -74,11 +72,10 @@ const Home = () => {
     );
     setFilterProperty(filterProperties || []);
   };
-  console.log(properties);
   return (
     <div className="mb-10 mt-10">
       {adress ? (
-        <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
           {footerP?.map((property, index) => {
             if (footerP.length === 0)
               return (
@@ -103,7 +100,7 @@ const Home = () => {
             onClick={(id) => changePropertyCategory(id)}
             allProperties={() => setFilterProperty(properties)}
           />
-          <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
             {loading
               ? Array(10)
                   .fill(null)

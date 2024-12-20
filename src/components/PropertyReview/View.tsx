@@ -51,7 +51,7 @@ export function ReviewProperty({ propertyId, getPropertyById }: Property) {
       <DialogTrigger asChild>
         {!show && (
           <div className="flex flex-col">
-            <p className="w-fit transform animate-moveTrain">😃</p>
+            <p className="transform animate-moveTrain">😃</p>
             <Button
               className="rounded-lg bg-green-500 p-5 py-2 font-bold text-white"
               variant="outline"
