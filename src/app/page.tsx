@@ -52,6 +52,7 @@ const Home = () => {
     };
     getProperties();
   }, [guests, from, to, address]);
+  console.log("dv");
 
   const changePropertyCategory = (id: string) => {
     const filterProperties = properties.filter(
