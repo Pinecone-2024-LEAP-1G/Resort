@@ -9,8 +9,7 @@ import { toast } from "sonner";
 const Page = () => {
   const searchParams = useSearchParams();
   const address = searchParams.get("adress");
-  const [filter, setFilter] = useState<PropertyType[] | undefined>();
-  console.log(filter);
+  const [, setFilter] = useState<PropertyType[] | undefined>();
 
   useEffect(() => {
     const getaddressProperty = async () => {
