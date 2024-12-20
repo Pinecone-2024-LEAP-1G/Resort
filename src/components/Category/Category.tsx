@@ -9,7 +9,6 @@ type Category = {
   onMouseLeave: () => void;
   hover: string;
   onClick: () => void;
-  className: string;
 };
 
 export const Category = ({
@@ -18,7 +17,6 @@ export const Category = ({
   onMouseLeave,
   hover,
   onClick,
-  className,
 }: Category) => {
   const icons = categoryIcon({ text });
   return (

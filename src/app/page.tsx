@@ -10,6 +10,7 @@ import { PropertyType } from "@/components/Review";
 import { toast } from "sonner";
 
 import { SkeletonHomeCard } from "@/components/Skeletons/SkeletonHomeCard";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
   const searchParams = useSearchParams();
@@ -74,6 +75,7 @@ const Home = () => {
     );
     setFilterProperty(filterProperties || []);
   };
+  console.log(properties);
   return (
     <div className="mb-10 mt-10">
       {adress ? (
@@ -125,6 +127,18 @@ const Home = () => {
                     );
                 })}
           </div>
+          {!hideButton && (
+            <div className="flex flex-col items-center justify-center">
+              <Button
+                onClick={more}
+                className="my-20 w-fit bg-cyan-500 p-4 px-20 text-white hover:bg-cyan-500"
+              >
+                {properties.length === 43
+                  ? `${setHideButton(true)}`
+                  : "Цааш үзэх"}
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>
