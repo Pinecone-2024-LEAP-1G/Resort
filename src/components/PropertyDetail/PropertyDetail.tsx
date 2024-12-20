@@ -63,7 +63,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
         const response = await axios.get(
           `/api/reviews/propertyAndUserid?propertyId=${propertyId}`,
         );
-        if (response.data.length > 0) setShowReview(false);
+        if (response.data.length >= 0) setShowReview(false);
         setCheckReview(response.data.length);
       } catch (error) {
         console.log(error);
@@ -159,8 +159,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
               <p>~ {property?.totalBedrooms} унтлагын өрөө</p>
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
-            <div className="mt-20 flex h-fit w-fit flex-col justify-between rounded-lg border-b border-t p-4">
-              {showReview && <ReviewProperty propertyId={propertyId} />}
+            <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
               <HostViewCard userId={property?.userId} />
             </div>
             <div className="mt-24 h-[80px]"> </div>
