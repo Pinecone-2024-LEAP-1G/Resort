@@ -36,7 +36,6 @@ export const POST = async (request: NextRequest) => {
       guests: guests,
       totalPrice,
     });
-    console.log(guests);
 
     const availableList = await AvailableListModel.create({
       propertyId: reservation.propertyId,

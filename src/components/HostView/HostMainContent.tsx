@@ -15,8 +15,9 @@ const HostMainContent = ({ userId }: { userId: string }) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [, setReviewCount] = useState<number>(0);
   const [, setAverageRating] = useState<number>(0);
-  const [hostReview, setHostReview] = useState();
+  const [, setHostReview] = useState();
   const router = useRouter();
+  console.log(reviews);
 
   useEffect(() => {
     const getHostData = async () => {
@@ -78,7 +79,7 @@ const HostMainContent = ({ userId }: { userId: string }) => {
           </div>
 
           <div className="mb-[64px] flex w-auto cursor-pointer flex-col">
-            <HostReviewCard reviews={hostReview} />
+            <HostReviewCard reviews={reviews} />
           </div>
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>

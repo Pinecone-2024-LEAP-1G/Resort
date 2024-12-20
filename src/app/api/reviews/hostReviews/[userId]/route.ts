@@ -14,7 +14,6 @@ export const GET = async (
   try {
     const properties = await PropertyModel.find({ userId: userId }).populate({
       path: "reviewId",
-      populate: { path: "userId" },
     });
 
     const review = properties.map((property) => {

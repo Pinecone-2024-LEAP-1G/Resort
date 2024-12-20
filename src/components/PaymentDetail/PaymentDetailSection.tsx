@@ -40,7 +40,6 @@ export const PaymentDetailSection = ({ propertyId }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
   const userID = session?.user?.id;
-  console.log(guest);
 
   const SubmitReservation = async () => {
     if (!guest) {

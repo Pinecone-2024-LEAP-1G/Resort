@@ -38,25 +38,21 @@ export const HostReviewCard = ({ reviews }: Props) => {
     <div>
       <Carousel className="w-full">
         <CarouselContent className="px-10">
-          {reviews?.map((review) =>
-            review.map((item) => {
-              return (
-                <CarouselItem>
-                  <Card className="p-5">
-                    <div>
-                      <p key={item._id}>{item.comment}</p>
-                    </div>
-                    <div className="mt-4 flex items-center gap-2">
-                      <div style={{ backgroundImage: `url(${""}})` }}></div>
-                      <div>
-                        <p className="font-semibold"></p>
-                      </div>
-                    </div>
-                  </Card>
-                </CarouselItem>
-              );
-            }),
-          )}
+          {reviews?.map((review) => (
+            <CarouselItem key={review._id}>
+              <Card className="p-5">
+                <div>
+                  <p>{review.comment}</p>
+                </div>
+                <div className="mt-4 flex items-center gap-2">
+                  <div style={{ backgroundImage: `url(${""}})` }}></div>
+                  <div>
+                    <p className="font-semibold"></p>
+                  </div>
+                </div>
+              </Card>
+            </CarouselItem>
+          ))}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
