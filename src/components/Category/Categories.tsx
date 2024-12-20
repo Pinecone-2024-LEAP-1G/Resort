@@ -21,11 +21,7 @@ type FilterCategory = {
 export const Categories = ({ onClick, allProperties }: FilterCategory) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [hover, setHover] = useState<string | number | null>(null);
-<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
-=======
-  const [selectedCategory, setSelectedCategory] = useState(null);
->>>>>>> 35d191b (duussan baih)
 
   useEffect(() => {
     const getCategories = async () => {
@@ -66,7 +62,9 @@ export const Categories = ({ onClick, allProperties }: FilterCategory) => {
                       onMouseEnter={() => setHover(index)}
                       onMouseLeave={() => setHover(null)}
                       hover={
-                        hover === index ? "text-gray-950 underline" : "text-gray-500"
+                        hover === index
+                          ? "text-gray-950 underline"
+                          : "text-gray-500"
                       }
                       key={index}
                       text={category.name}

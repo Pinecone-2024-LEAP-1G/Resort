@@ -8,7 +8,6 @@ import { useSearchParams } from "next/navigation";
 
 import { PropertyType } from "@/components/Review";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 
 import { SkeletonHomeCard } from "@/components/Skeletons/SkeletonHomeCard";
 
@@ -108,7 +107,7 @@ const Home = () => {
               ? Array(10)
                   .fill(null)
                   .map((_, index) => <SkeletonHomeCard key={index} />)
-              : filteredAndSortedProperties?.map((property, index) => {
+              : filterProperty?.map((property, index) => {
                   if (filterProperty.length <= 0)
                     return (
                       <div key={index} className="p-10 text-center">
