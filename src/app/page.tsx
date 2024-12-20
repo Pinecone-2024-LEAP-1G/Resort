@@ -5,10 +5,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Categories } from "@/components/Category/Categories";
 import { useSearchParams } from "next/navigation";
-
 import { PropertyType } from "@/components/Review";
 import { toast } from "sonner";
-
 import { SkeletonHomeCard } from "@/components/Skeletons/SkeletonHomeCard";
 import { Button } from "@/components/ui/button";
 
@@ -59,7 +57,9 @@ const Home = () => {
     };
     getProperties();
   }, [guests, from, to, address, sliceCard]);
+
   const slicee = filterProperty?.splice(sliceCard);
+
   const filteredAndSortedProperties = sliceProperty
     .filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
     .sort((a, b) => b.reviewId.length - a.reviewId.length);
@@ -68,9 +68,8 @@ const Home = () => {
     setSliceCard((prev) => prev + 8);
   };
 
-  const slicePro = filteredAndSortedProperties?.splice(sliceCard);
   const changePropertyCategory = (id: string) => {
-    const filterProperties = sliceProperty?.filter(
+    const filterProperties = filteredAndSortedProperties?.filter(
       (property) => property?.categoryId === id,
     );
     setFilterProperty(filterProperties || []);

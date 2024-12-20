@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Heart } from "lucide-react";
-import { TiStar } from "react-icons/ti";
 
 type PropertyProps = {
   image: string;
