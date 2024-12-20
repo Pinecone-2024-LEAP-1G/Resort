@@ -55,7 +55,7 @@ export function ReviewProperty({ propertyId, getPropertyById }: Property) {
               😃
             </p>
             <Button
-              className="rounded-lg bg-green-500 p-5 py-2 font-bold text-white hover:bg-cyan-500"
+              className="rounded-lg bg-green-500 p-5 py-2 font-bold text-white"
               variant="outline"
             >
               Үнэлгээ өгөх

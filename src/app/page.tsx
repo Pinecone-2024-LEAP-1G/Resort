@@ -25,7 +25,7 @@ const Home = () => {
   const [footerP, setFooterP] = useState<PropertyType[]>();
   const [sliceCard, setSliceCard] = useState(8);
   const [sliceProperty, setSliceProperty] = useState<PropertyType[]>([]);
-  // console.log(sliceCard);
+  const [hideButton, setHideButton] = useState(false);
   useEffect(() => {
     const getaddressProperty = async () => {
       try {
@@ -58,17 +58,23 @@ const Home = () => {
       }
     };
     getProperties();
-  }, [guests, from, to, address]);
-  console.log("dv");
+  }, [guests, from, to, address, sliceCard]);
+  const slicee = filterProperty?.splice(sliceCard);
+  const filteredAndSortedProperties = sliceProperty
+    .filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
+    .sort((a, b) => b.reviewId.length - a.reviewId.length);
 
-  const changePropertyCategory = (id: string) => {
-    const filterProperties = properties.filter(
-      (property) => property?.categoryId === id,
-    );
-
-    setFilterProperty(filterProperties);
+  const more = () => {
+    setSliceCard((prev) => prev + 8);
   };
 
+  const slicePro = filteredAndSortedProperties?.splice(sliceCard);
+  const changePropertyCategory = (id: string) => {
+    const filterProperties = sliceProperty?.filter(
+      (property) => property?.categoryId === id,
+    );
+    setFilterProperty(filterProperties || []);
+  };
   return (
     <div className="mb-10 mt-10">
       {adress ? (
@@ -94,7 +100,7 @@ const Home = () => {
       ) : (
         <div className="">
           <Categories
-            // onClick={(id) => changePropertyCategory(id)}
+            onClick={(id) => changePropertyCategory(id)}
             allProperties={() => setFilterProperty(properties)}
           />
           <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
