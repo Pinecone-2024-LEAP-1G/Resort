@@ -21,10 +21,11 @@ const Home = () => {
   const guests = searchParams.get("guests");
   const [properties, setProperties] = useState<PropertyType[] | []>([]);
   const [filterProperty, setFilterProperty] = useState<PropertyType[] | []>([]);
-
   const adress = searchParams.get("adress");
   const [footerP, setFooterP] = useState<PropertyType[]>();
-  const [sliceCard, setSliceCard] = useState(9);
+  const [sliceCard, setSliceCard] = useState(8);
+  const [sliceProperty, setSliceProperty] = useState<PropertyType[]>([]);
+  // console.log(sliceCard);
   useEffect(() => {
     const getaddressProperty = async () => {
       try {
@@ -41,7 +42,6 @@ const Home = () => {
     };
     getaddressProperty();
   }, [adress]);
-
   useEffect(() => {
     const getProperties = async () => {
       try {
@@ -51,6 +51,7 @@ const Home = () => {
         setFilterProperty(response?.data.property);
         setProperties(response?.data.property);
         setLoading(false);
+        setSliceProperty(response?.data.property);
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -68,16 +69,6 @@ const Home = () => {
     setFilterProperty(filterProperties);
   };
 
-  const filteredAndSortedProperties = filterProperty
-    .filter((filterProperty) => filterProperty?.reviewId?.length >= 0)
-    .sort((a, b) => b.reviewId.length - a.reviewId.length);
-  const more = () => {
-    if (0 < sliceCard) setSliceCard((prev) => prev - 4);
-  };
-  console.log(sliceCard);
-  const finalProperty = filteredAndSortedProperties?.slice(sliceCard);
-  const finalProperty2 = filterProperty2?.slice(sliceCard);
-  console.log(finalProperty);
   return (
     <div className="mb-10 mt-10">
       {adress ? (
@@ -103,7 +94,7 @@ const Home = () => {
       ) : (
         <div className="">
           <Categories
-            onClick={(id) => changePropertyCategory(id)}
+            // onClick={(id) => changePropertyCategory(id)}
             allProperties={() => setFilterProperty(properties)}
           />
           <div className="grid grow gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
