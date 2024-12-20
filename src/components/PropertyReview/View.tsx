@@ -51,11 +51,9 @@ export function ReviewProperty({ propertyId, getPropertyById }: Property) {
       <DialogTrigger asChild>
         {!show && (
           <div className="flex flex-col">
-            <p className="w-fit transform animate-spin cursor-pointer text-xl transition-transform duration-1000">
-              😃
-            </p>
+            <p className="w-fit transform animate-moveTrain">😃</p>
             <Button
-              className="rounded-lg bg-green-500 p-5 py-2 font-bold text-white hover:bg-cyan-500"
+              className="rounded-lg bg-green-500 p-5 py-2 font-bold text-white"
               variant="outline"
             >
               Үнэлгээ өгөх

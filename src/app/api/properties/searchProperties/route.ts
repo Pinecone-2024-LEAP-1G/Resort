@@ -10,7 +10,6 @@ export const GET = async (request: NextRequest) => {
   const guests = searchParams.get("guests");
   const guestNumber = Number(guests);
   if (!from || !to) return Response.json({ message: error });
-
   try {
     const checkinDate = new Date(from);
     const checkoutDate = new Date(to);

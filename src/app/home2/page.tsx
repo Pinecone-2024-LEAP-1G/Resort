@@ -10,7 +10,6 @@ const Page = () => {
   const searchParams = useSearchParams();
   const address = searchParams.get("adress");
   const [filter, setFilter] = useState<PropertyType[] | undefined>();
-  console.log(filter);
 
   useEffect(() => {
     const getaddressProperty = async () => {

@@ -169,7 +169,7 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       />
       <Button
         onClick={navigateToNextPage}
-        className="mt-4 h-10 w-[300px] bg-green-500 hover:bg-cyan-500 hover:text-black"
+        className="mt-4 h-10 w-[300px] bg-green-500 transition delay-150 duration-300 ease-in-out"
       >
         {text}
       </Button>
