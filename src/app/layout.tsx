@@ -36,7 +36,7 @@ const RootLayout = ({
                     {children}
                   </div>
                   <Toaster />
-                  <div className="mx-5 px-20">
+                  <div className="">
                     {!BecomeHostPage &&
                       !GooglePage &&
                       !HostReservations &&

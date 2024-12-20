@@ -40,10 +40,7 @@ export const PropertyCard = ({ image, address, onclick }: PropertyProps) => {
       </div>
       <div className="flex justify-between">
         <h2 className="w-auto font-bold">{address} </h2>
-        <div className="flex items-center">
-          <TiStar />
-          <p>5</p>
-        </div>
+        <div className="flex items-center"></div>
       </div>
     </div>
   );

@@ -33,7 +33,6 @@ const HostLeftCard = ({ userId }: { userId?: string }) => {
         console.error(error);
       }
     };
-
     getHostData();
   }, [userId]);
 
@@ -44,7 +43,7 @@ const HostLeftCard = ({ userId }: { userId?: string }) => {
   return (
     <div
       onClick={handleClick}
-      className="mr-auto mt-[100px] flex rounded-2xl border-2 p-10 shadow-2xl"
+      className="mr-auto mt-[30px] flex rounded-2xl border-2 p-10 shadow-2xl"
     >
       <div className="flex flex-col items-center justify-center gap-6 p-4 text-center">
         <div

@@ -15,6 +15,7 @@ const HostMainContent = ({ userId }: { userId: string }) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [, setReviewCount] = useState<number>(0);
   const [, setAverageRating] = useState<number>(0);
+  const [hostReview, setHostReview] = useState();
   const router = useRouter();
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const HostMainContent = ({ userId }: { userId: string }) => {
         }>(`http://localhost:3000/api/reviews/hostReviews/${userId}`);
 
         const reviewsData = data.reviews;
+        setHostReview(data.review);
         setReviews(reviewsData);
         setReviewCount(data.reviewCount);
 
@@ -76,13 +78,13 @@ const HostMainContent = ({ userId }: { userId: string }) => {
           </div>
 
           <div className="mb-[64px] flex w-auto cursor-pointer flex-col">
-            <HostReviewCard reviews={reviews} />
+            <HostReviewCard reviews={hostReview} />
           </div>
         </div>
         <div className="mb-[32px] border-b-2 border-black"></div>
         <div className="flex">
           <p className="text-[24px] font-bold">
-            {hostData?.name} Түрээслэж буй газрууд
+            {hostData?.name} Түрээслүүлж буй газрууд
           </p>
         </div>
         <div className="mt-[40px] flex gap-5">
@@ -93,7 +95,7 @@ const HostMainContent = ({ userId }: { userId: string }) => {
                 onclick={() => router.push(`/property/${propertyId}`)}
                 key={property._id}
                 image={property.propertyPictures[0]}
-                address={property.description}
+                address={property.address}
               />
             );
           })}

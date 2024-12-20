@@ -32,7 +32,7 @@ export const HostProperties = ({ userId }: HostProps) => {
 
   return (
     <div className="mx-auto w-[1074px]">
-      <h1 className="p-12 text-xl font-bold">{properties?.name} </h1>
+      <h1 className="p-12 text-xl font-bold">{properties?.name}-н эзэмшил</h1>
       <div className="grid grid-cols-3">
         {properties?.propertyId.map((property) => (
           <div key={property._id}>

@@ -1,4 +1,4 @@
-import { Review, ReviewModel } from "@/lib/models";
+import { PropertyModel, Review, ReviewModel } from "@/lib/models";
 import currency from "currency.js";
 
 export const GET = async (
@@ -12,6 +12,15 @@ export const GET = async (
   }
 
   try {
+    const properties = await PropertyModel.find({ userId: userId }).populate({
+      path: "reviewId",
+      populate: { path: "userId" },
+    });
+
+    const review = properties.map((property) => {
+      return property.reviewId;
+    });
+
     const reviews = await ReviewModel.find<Review>({ userId: userId });
 
     const totalRating = reviews?.reduce((acc, curr) => {
@@ -21,6 +30,7 @@ export const GET = async (
     const rating = currency(totalRating).divide(reviews.length).value;
 
     return Response.json({
+      review,
       reviews,
       rating: Math.floor(rating),
       reviewCount: reviews.length,

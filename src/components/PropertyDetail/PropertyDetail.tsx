@@ -17,23 +17,22 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [, setCheckOut] = useState();
   const [showReview, setShowReview] = useState(false);
   const [checkReview, setCheckReview] = useState();
-  console.log("ldnc");
+
+  const getPropertyById = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get<{ property: PropertyType }>(
+        `/api/properties/${propertyId}`,
+      );
+
+      setProperty(response.data.property);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const getPropertyById = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get<{ property: PropertyType }>(
-          `/api/properties/${propertyId}`,
-        );
-
-        setProperty(response.data.property);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     getPropertyById();
   }, [propertyId]);
 
@@ -57,6 +56,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
     };
     getreservations();
   }, [propertyId, checkReview]);
+
   useEffect(() => {
     const getReview = async () => {
       try {
@@ -71,20 +71,11 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
     };
     getReview();
   }, [propertyId]);
+
   return (
     <div className="mx-auto w-[1200px]">
       <div className="flex justify-between py-4">
         <h1 className="text-3xl font-semibold">{property?.address}</h1>
-        <div className="flex gap-2">
-          <div className="grid place-items-center rounded-full bg-white lg:flex lg:gap-2">
-            <LuShare />
-            <p className="hidden lg:block">share</p>
-          </div>
-          <div className="grid place-items-center rounded-full bg-white lg:flex lg:gap-2">
-            <FaRegHeart className="flex items-center justify-center" />
-            <p className="hidden lg:block">like</p>
-          </div>
-        </div>
       </div>
       <div className="mt-4">
         <div className="grid- gap-4">
@@ -159,7 +150,14 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
               <p>~ {property?.totalBedrooms} унтлагын өрөө</p>
               <p>~ {property?.totalBathrooms} угаалгын өрөө</p>
             </div>
-            <div className="mt-20 flex h-fit w-fit justify-between rounded-lg border-b border-t p-4">
+
+            <div className="mt-20 flex h-fit w-fit flex-col justify-between rounded-lg border-b border-t p-4">
+              {showReview && (
+                <ReviewProperty
+                  getPropertyById={getPropertyById}
+                  propertyId={propertyId}
+                />
+              )}
               <HostViewCard userId={property?.userId} />
             </div>
             <div className="mt-24 h-[80px]"> </div>
@@ -172,6 +170,10 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             />
           </div>
         </div>
+      </div>
+      <div className="w-[600px] border-b border-t p-6">
+        <h1 className="mb-4 text-xl font-bold">Давуу тал</h1>
+        <p>{property?.advantage}</p>
       </div>
       <Review property={property?.reviewId} />
       <div className="mt-20"></div>
