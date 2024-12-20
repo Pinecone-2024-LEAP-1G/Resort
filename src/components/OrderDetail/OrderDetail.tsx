@@ -102,7 +102,7 @@ export const OrderDetail = ({ userId }: OrderDetailProps) => {
             </div>
             <button
               onClick={() => deleteReservation(reservation._id)}
-              className="mb-10 mt-4 w-fit items-center justify-center rounded-lg bg-gray-700 p-2 text-white"
+              className="mb-10 mt-4 w-fit items-center justify-center rounded-lg bg-[#32a852] p-2 text-white hover:bg-[#369fc2]"
             >
               Захиалга цуцлах
             </button>

@@ -17,7 +17,7 @@ export const ReservationCancel = ({
 }: Props) => {
   return (
     <div className="mx-auto">
-      <div className="">
+      <div className="h-[415px] w-[290px] gap-5 rounded-xl shadow-2xl">
         <div
           style={{
             backgroundImage: `url(${image})`,
@@ -26,11 +26,11 @@ export const ReservationCancel = ({
           className="h-[300px] w-[290px] rounded-xl border-2 bg-cover"
         ></div>
         <div className="w-[380px]">
-          <p className="mt-[20px] text-[20px] font-bold">{address}</p>
-          <p className="mt-[10px] text-lg">
+          <p className="ml-[20px] mt-[10px] text-[20px] font-bold">{address}</p>
+          <p className="ml-[20px] mt-[5px] text-lg">
             {moment(checkIn).format("L")}-{moment(checkOut).format("L")}
           </p>
-          <p className="text-[17px] text-green-500">
+          <p className="ml-[20px] mt-[8px] text-[17px] text-green-500">
             {new Intl.NumberFormat().format(Number(price))}₮
           </p>
         </div>
