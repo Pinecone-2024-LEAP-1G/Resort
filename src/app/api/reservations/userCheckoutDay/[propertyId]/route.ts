@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
-import { ReservationModel, ReviewModel } from "@/lib/models";
+import { ReservationModel } from "@/lib/models";
 import { nodeMailer } from "@/util/nodemailer";
 import { NextRequest } from "next/server";
 
@@ -27,17 +27,13 @@ export const GET = async (
     const checkOutDay = reservations.filter(
       (reservation) => formatDate(new Date(reservation.checkOut)) === today,
     );
-    const checkReview = await ReviewModel.find({
-      userId: userId,
-      propertyId: propertyId,
-    });
-    if (checkReview.length === 0)
-      checkOutDay.map(async (user) => {
-        await nodeMailer({
-          to: user.userId.email,
-          text: "Таны түрээсийн хугацаа өнөөдөр дуусч байна. Та пэйж хуудсанд хандан түрээсэлсэн газартаа үнэлгээ өгөөрэй",
-        });
+
+    checkOutDay.map(async (user) => {
+      await nodeMailer({
+        to: user.userId.email,
+        text: "Таны түрээсийн хугацаа өнөөдөр дуусч байна. Та пэйж хуудсанд хандан түрээсэлсэн газартаа үнэлгээ өгөөрэй",
       });
+    });
     return Response.json({ reservation: checkOutDay });
   } catch (error) {
     return Response.json(error);
