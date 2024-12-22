@@ -18,9 +18,8 @@ import { DialogClose } from "@radix-ui/react-dialog";
 
 type Property = {
   propertyId?: string;
-  getPropertyById?: () => void;
 };
-export function ReviewProperty({ propertyId, getPropertyById }: Property) {
+export function ReviewProperty({ propertyId }: Property) {
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>();
@@ -39,7 +38,6 @@ export function ReviewProperty({ propertyId, getPropertyById }: Property) {
       setShow(true);
       setComment("");
       setRating(0);
-      getPropertyById();
       if (response.data) toast.message("Үнэлгээ өгсөн танд баярлалаа");
     } catch (error) {
       console.log(error);

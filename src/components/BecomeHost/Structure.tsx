@@ -3,7 +3,6 @@ import { PropertyHeader } from "./PropertyHeader";
 import { PropertyClick } from "@/app/become-host/page";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
-import { Button } from "react-day-picker";
 
 type Category = {
   name: string;

@@ -156,7 +156,9 @@ export const ReverseCart = ({ property, propertyId, text }: Props) => {
       <p className="mb-4">Үнэ: {new Intl.NumberFormat().format(price)}₮</p>
       <DatePickerWithRange
         selected={{ from, to }}
-        onSelect={setDate}
+        onSelect={(range) => {
+          if (range) setDate(range);
+        }}
         defaultMonth={from || new Date()}
         disabled={disabledRanges}
         date={{ from, to }}
