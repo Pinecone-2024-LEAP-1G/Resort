@@ -46,28 +46,26 @@ export type ReservationType = {
 export const OrderDetail = ({ userId }: OrderDetailProps) => {
   const [reservations, setReservations] = useState<ReservationType[]>();
   const router = useRouter();
-
-  const getReservation = async () => {
-    try {
-      const response = await axios.get(`/api/reservations/${userId}`);
-      const sortedReservations = response.data.reservation.sort(
-        (a: ReservationType, b: ReservationType) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      );
-      setReservations(sortedReservations);
-    } catch (error) {
-      console.log(error);
-      toast.error("error");
-    }
-  };
-
   useEffect(() => {
+    const getReservation = async () => {
+      try {
+        const response = await axios.get(`/api/reservations/${userId}`);
+        const sortedReservations = response.data.reservation.sort(
+          (a: ReservationType, b: ReservationType) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        );
+        setReservations(sortedReservations);
+      } catch (error) {
+        console.log(error);
+        toast.error("error");
+      }
+    };
+
     if (userId) getReservation();
   }, [userId]);
 
   const deleteReservation = async (reservationId: string) => {
     await axios.delete(`/api/reservations/delete/${reservationId}`);
-    getReservation();
   };
 
   if (reservations?.length === 0) {

@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { connectToMongoDB } from "@/lib/db";
 import { ReservationModel } from "@/lib/models";
-import { nodeMailer } from "@/util/nodemailer";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -18,24 +17,20 @@ export const GET = async (
 
   const session = await auth();
   const userId = session?.user.id;
+
   try {
     const reservations = await ReservationModel.find({
       propertyId: propertyId,
       userId: userId,
     }).populate("userId");
+
     const today = formatDate(new Date());
     const checkOutDay = reservations.filter(
       (reservation) =>
         formatDate(new Date(reservation.checkOut)) ===
-        formatDate(new Date("2024-12-19")),
+        formatDate(new Date(today)),
     );
 
-    checkOutDay.map(async (user) => {
-      await nodeMailer({
-        to: user.userId.email,
-        text: "Таны түрээсийн хугацаа өнөөдөр дуусч байна. Та пэйж хуудсанд хандан түрээсэлсэн газартаа үнэлгээ өгөөрэй",
-      });
-    });
     return Response.json({ reservation: checkOutDay });
   } catch (error) {
     return Response.json(error);

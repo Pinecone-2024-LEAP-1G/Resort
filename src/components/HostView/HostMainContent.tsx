@@ -3,19 +3,34 @@
 import { useEffect, useState } from "react";
 import HostLeftCard from "./HostLeftCard";
 import HostLeftCardSecond from "./HostLeftCardSecond";
-import { HostReviewCard, ReviewType } from "./HostReviewCard";
+import { HostReviewCard } from "./HostReviewCard";
 import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
 import { HostTypePopulatedProperties } from "@/lib/models/user.model";
 import { useRouter } from "next/navigation";
 import { PropertyType } from "../Review";
 
+type ReviewType = {
+  _id: string;
+  userId: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: 91212922;
+    avatar: "";
+    comment: string;
+  };
+  propertyId: string;
+  rating: number;
+  comment: string;
+};
+
 const HostMainContent = ({ userId }: { userId: string }) => {
   const [hostData, setHostdata] = useState<HostTypePopulatedProperties>();
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [, setReviewCount] = useState<number>(0);
   const [, setAverageRating] = useState<number>(0);
-  const [, setHostReview] = useState();
   const router = useRouter();
   console.log(reviews);
 
@@ -32,7 +47,6 @@ const HostMainContent = ({ userId }: { userId: string }) => {
         }>(`http://localhost:3000/api/reviews/hostReviews/${userId}`);
 
         const reviewsData = data.reviews;
-        setHostReview(data.review);
         setReviews(reviewsData);
         setReviewCount(data.reviewCount);
 

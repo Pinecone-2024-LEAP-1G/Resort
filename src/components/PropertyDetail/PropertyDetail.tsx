@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import { LuShare } from "react-icons/lu";
 import Review, { PropertyType } from "../Review";
 import { ReverseCart } from "./ReverseCart";
 import axios from "axios";
@@ -18,21 +16,22 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
   const [showReview, setShowReview] = useState(false);
   const [checkReview, setCheckReview] = useState();
 
-  const getPropertyById = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get<{ property: PropertyType }>(
-        `/api/properties/${propertyId}`,
-      );
-
-      setProperty(response.data.property);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
+    const getPropertyById = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get<{ property: PropertyType }>(
+          `/api/properties/${propertyId}`,
+        );
+
+        setProperty(response.data.property);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getPropertyById();
   }, [propertyId]);
 
@@ -152,12 +151,7 @@ export const PropertyDetail = ({ propertyId }: { propertyId: string }) => {
             </div>
 
             <div className="mt-20 flex h-fit w-fit flex-col justify-between rounded-lg border-b border-t p-4">
-              {showReview && (
-                <ReviewProperty
-                  getPropertyById={getPropertyById}
-                  propertyId={propertyId}
-                />
-              )}
+              {showReview && <ReviewProperty propertyId={propertyId} />}
               <HostViewCard userId={property?.userId} />
             </div>
             <div className="mt-24 h-[80px]"> </div>
