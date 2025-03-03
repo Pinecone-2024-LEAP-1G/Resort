@@ -1,5 +1,4 @@
 "use client";
-import { LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,7 +6,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Profile from "../icons/Profile";
@@ -72,13 +70,6 @@ export function HeaderModal() {
               <span onClick={() => router.push(`/hostProperty/${userId}`)}>
                 Миний байшин
               </span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => signOut()}>
-              <LogOut />
-
-              <button className="ml-2 cursor-pointer text-sm font-normal">
-                Гарах
-              </button>
             </DropdownMenuItem>
           </>
         )}
